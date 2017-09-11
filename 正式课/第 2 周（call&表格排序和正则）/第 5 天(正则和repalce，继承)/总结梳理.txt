@@ -1,0 +1,25 @@
+1 split用法 注意最后一个传参数可以是一个正则
+2 replace用法: str.replace(reg,function (){
+       arguments: [reg匹配,第二个..是什么取决于正则是否有分组,index,input]
+       return +arguments[n] 结合的时候怎么用
+       demo: 换数字
+})
+3 RegExp.$n   n = 1-9   => exec,match,replace 都会迭代$n属性=> 每次都是上一次正则执行完对应分组所捕获到的内容
+4 模板 {0}  /{(\d)}/g
+5 挑出出现最多的字符 for循环结合对象一起做计数 打字效果
+6 for in   hasOwnProperty  propertyIsEnumerable
+
+7 继承:  原型继承
+        call
+        冒充对象
+        组合
+        中间
+        ...
+
+下周: 18-65岁  //解析url字符串
+      考试： 表格排序  => 好好练习吧
+      js盒子模型
+      图片延迟加载
+      DOM/utils方法（28个）
+      ...
+

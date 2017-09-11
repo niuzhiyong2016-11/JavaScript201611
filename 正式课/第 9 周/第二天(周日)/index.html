@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>珠峰培训</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link type="icon/x-icon" rel="icon" href="img/icon-logo.png"/>
+
+    <!--import needed css-->
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <link rel="stylesheet/less" href="css/index.less"/>
+    <script src="js/less-2.5.3.min.js"></script>
+
+    <!--REM-->
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth / 640 * 100 + 'px';
+    </script>
+</head>
+<body>
+<!--HEADER-->
+<header class="header clear">
+    <h1 class="logo">腾讯体育</h1>
+    <a href="javascript:;" class="type">NBA</a>
+    <a href="javascript:;" class="menu" id="menu"></a>
+    <a href="javascript:;" class="login">登录</a>
+</header>
+
+<!--NAV-->
+<nav class="nav" id="nav">
+    <ul class="clear">
+        <li><a href="#">NBA</a></li>
+        <li><a href="#">CBA</a></li>
+        <li><a href="#">英超</a></li>
+        <li><a href="#">欧冠</a></li>
+        <li><a href="#">亚冠</a></li>
+        <li><a href="#">西甲</a></li>
+        <li><a href="#">意甲</a></li>
+        <li><a href="#">德甲</a></li>
+        <li><a href="#">法甲</a></li>
+        <li><a href="#">中超</a></li>
+        <li><a href="#">NFL</a></li>
+        <li><a href="#">综合</a></li>
+        <li><a href="#">欧洲</a></li>
+        <li><a href="#">社区</a></li>
+        <li><a href="#">下载</a></li>
+    </ul>
+</nav>
+
+<!--VIDEO-->
+<section class="video">
+    <video src="http://123.125.110.143/sports.tc.qq.com/c0022bpou04.mp4?vkey=DB45C21306EB134F7E5A85BE893225A5B5D76597DD85E1C35C3983DB6AC87C893DBFECC9B5FA64785635C408C0C5EC87CF3CA92CC45ED15D55BF2224BE571A84C139846552C61D9BEB11BE54FDAEE605A560CC6F59025B38&br=60&platform=2&fmt=auto&level=0&sdtfrom=v3010&guid=3cbccfa3afbabc96423508e76e6dd1b5&locid=682942ca-fcfa-45c5-be32-008c790b69b6&size=13484525&ocid=249438124"
+           controls preload="none" poster="img/poster.jpg"></video>
+    <!--
+       controls:是否使用浏览器自带的播放器来播放视频
+        preload:预加载 auto开始加载页面的时候就把视频加载了  metadata加载页面的时候只加载视频的基本信息 none加载页面的时候视频资源什么都不加载,播放的时候在加载
+        loop:循环播放
+        autoplay:自动播放
+        poster:封面图 VIDEO独有的属性
+    -->
+</section>
+
+<!--MATCH-->
+<section class="match" id="match">
+    <!--制作模板:在模板中我们假设后期传递给我的数据叫做matchInfo-->
+    <script type="text/template" id="matchTemplate">
+        <div class="top clear">
+            <div class="left">
+                <img src="<%=matchInfo.leftBadge%>" alt=""/>
+                <span><%=matchInfo.leftGoal%></span>
+            </div>
+            <div class="center"><%=matchInfo.startTime.formatTime('{1}月{2}日 {3}:{4}')%></div>
+            <div class="right">
+                <span><%=matchInfo.rightGoal%></span>
+                <img src="<%=matchInfo.rightBadge%>" alt=""/>
+            </div>
+        </div>
+        <div class="middle">
+            <%matchInfo.leftSupport=parseFloat(matchInfo.leftSupport);%>
+            <%matchInfo.rightSupport=parseFloat(matchInfo.rightSupport);%>
+            <%var per=matchInfo.leftSupport/(matchInfo.leftSupport+matchInfo.rightSupport);%>
+            <%per=per*100+'%';%>
+            <div class="progress" style="width:<%=per%>"></div>
+        </div>
+        <div class="bottom clear">
+            <div class="left support" data-type="1"><%=matchInfo.leftSupport%></div>
+            <div class="center"><%=matchInfo.matchDesc%></div>
+            <div class="right support" data-type="2"><%=matchInfo.rightSupport%></div>
+        </div>
+    </script>
+</section>
+
+<!--PLAYER-->
+<section class="player" id="player">
+    <ul class="clear">
+        <script type="text/template" id="playerTemplate">
+            <%$.each(playerList,function(index,item){%>
+            <li>
+                <div>
+                    <img src="<%=item.pic%>" alt=""/>
+                    <em><%=item.duration.formatTime('{1}:{2}')%></em>
+                </div>
+                <p><%=item.title%></p>
+            </li>
+            <%});%>
+        </script>
+    </ul>
+</section>
+
+<!--import needed js-->
+<script src="js/zepto.min.js"></script>
+<script src="js/iscroll-5.1.3.min.js"></script>
+<script src="js/ejs.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *    apply和call的方法作用都是用来修改this关键字的。
+    *    区别: apply的第一个参数也是用来修改调用apply那个函数中的this的
+    *          apply的第二个参数是一个数组，是把数组里的每一项当作参数分别传给调用apply的函数
+    *          ps: 其实就是传参的方式不同。call是一个个的，apply是一个数组
+    *
+    * */
+    function sum(num1, num2) {
+        console.log(this);
+        console.log(num1 + num2);
+    }
+
+    sum(100, 200); //window 300
+    sum.call(null, 100, 200); //window 300
+    sum.apply(document.body, [100, 200]); // body 300
+</script>
+</body>
+</html>

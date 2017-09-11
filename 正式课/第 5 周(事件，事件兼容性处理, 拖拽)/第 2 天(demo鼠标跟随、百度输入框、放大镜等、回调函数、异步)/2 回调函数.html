@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回调函数</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary = ['a','b','c','d'];
+    // for  for in
+    // forEach map
+   /* ary.forEach(function (item,index,ary){
+        console.log(item,index,ary);
+    });*/
+
+
+
+    Array.prototype.each = function (fn){
+        //debugger
+        for(var i=0; i<this.length; i++){
+            fn(this[i],i,this);
+        }
+    }
+
+    /*ary.each(function (item,index,ary){
+        console.log(item,index,ary);
+    });*/
+
+
+    var ary = ['a','b','c'];
+    var aryNew = ary.map(function (item,index,ary){
+        return item+index;  // 'a'+0
+    });
+    console.log(aryNew); //['a0','b1','c2']
+
+    ///////////////////////////////////////////////////////
+    Array.prototype.MAP = function (callback){
+        var ary = [];
+        for(var i=0; i<this.length; i++){
+            var val = callback(this[i],i,this);
+            ary.push(val);
+        }
+        return ary;
+    }
+    var aryNew = ary.MAP(function (item,index,ary){
+        return item + index;
+    });
+    console.log(aryNew); //['a0','b1','c2']
+
+
+
+
+
+
+
+
+
+</script>

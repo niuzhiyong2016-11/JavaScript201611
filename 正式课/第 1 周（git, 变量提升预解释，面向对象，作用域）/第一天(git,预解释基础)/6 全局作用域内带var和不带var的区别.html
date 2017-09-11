@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //全局作用域内的全局变量都可以理解为是全局window的一个属性
+    //console.log(num);
+    console.log(window.num);
+    var num = 10;
+    console.log(num); //10
+    console.log(window.num); //10
+
+
+
+
+
+    //console.log(total);
+    function fn(total){
+        total = 100; //如果这行要是不执行，在全局作用域内永远没有一个叫做total的全局变量
+        // ps: 这是一个赋值过程，在赋值过程中如果有私有变量那么直接赋值给自己的私有变量，如果没有那么去上一级去查找。如果查找到window也没有这个变量。就把值当作属性赋值给window
+    }
+    fn();
+    console.log(total);//
+
+
+
+    /*
+    *   区别: 1 在定义之前打印带var会预解释，否则不带var的直接报错了
+    *         2 functin () { total = 100 } 即使任何位置也没有定义过total那么默认也会把total添加给window当作一个属性。window的属性也可以理解是全局变量
+    *
+    * */
+    setTimeout()
+
+
+
+</script>

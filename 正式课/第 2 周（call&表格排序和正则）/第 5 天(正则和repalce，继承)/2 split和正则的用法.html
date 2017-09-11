@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   split结合正则表达式用法:
+    *       如果参数是一个正则，那么在把字符串拆分成数组的时候。就是按照这个正则能匹配到的字符串为分隔符拆分
+    * */
+    var str = 'abc&123xxx456yyy';
+    //var res = str.split('&');
+    //var res = str.split(/\d+/);
+    var res = str.split(/\s*/); //全部拆分
+    var res = str.split("");
+    console.log(res);
+</script>
+</body>
+</html>

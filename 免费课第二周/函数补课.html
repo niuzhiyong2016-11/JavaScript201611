@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   函数 :  function 函数名(){}
+    *       函数名字要有代表意义
+    *       封装当出现多次相同或雷同的操作，我们就可以想到写成一个函数这样可以多次使用减少冗余代码
+    *       函数执行： 函数名字()
+    *
+    *
+    * */
+    function sum(){
+        var a = 1;
+        var b = 2;
+        console.log(a+b);
+        console.log(1+2);
+    }
+    //不可能每次求1+2的和那能不能让这个1+2变化
+
+
+    //参数：参数的位置是放在小括号内的，也可以理解这是函数的入口,函数定义时候的参数是形参
+
+    //函数执行的时候，小伙号内的是实参。就是把实参赋值给对应的形参。
+
+    //形参在定义了但是在执行的时候没有传值就是undefined(重要)
+
+    function sum(num1,num2){
+        //console.log(num1,num2);
+        //我要判断num1和num2是不是undefined
+        var total = null;
+        
+        if(typeof num1 !== "undefined"){ }
+            if(!isNaN(num1)){
+                total += Number(num1);
+            }
+
+
+        if(typeof num2 !== "undefined"){}
+            if(!isNaN(num2)){
+                total += Number(num2);
+            }
+        console.log(total);
+    }
+    //sum(1,2);
+    //sum(1);
+    //sum(5,'6'); // 5 + '6'
+
+    // 到现在为止只能求出两个数的和,参数的个数没有办法定义了。引入一个叫做arguments的
+
+    //console.log(arguments);
+
+    // arugments: 是内置在函数体内的，只要函数声明就会有。当函数执行的时候arguments里面保存着所有传入函数内的实参
+
+    function sum(){
+        console.log(arguments); //
+        console.log(arguments.callee); //函数本身
+        // 只要把arguments里的每一项累加就可以了
+        var total = 0;
+        for(var i = 0; i < arguments.length; i++){
+
+            var num = Number(arguments[i]);
+
+            if(!isNaN(num)){
+                total += num;
+            }
+        }
+        //console.log(total);
+        return { total : total }
+        //return total;
+        alert(); //在return下面的代码就不执行啦
+    }
+
+    //无论什么函数只要查看函数运行结果就直接到函数体内看return后面是什么
+
+    //return可以理解为是函数出口
+
+    console.log(sum(1,2,"3",4,"adf"));
+
+    // 自运行函数的几种写法
+    ;(function (){
+        console.log(1);
+    })();
+
+    +function (){}();
+    -function (){}();
+    !function (){}();
+    ~function (){}();
+
+
+    // 实名函数和匿名函数，没有名字的函数就是匿名函数
+
+    function fn(){}  // 函数
+    var f = function (){} // 函数表达式
+
+
+    //5 && console.log(1); // 简单的if判断
+
+
+
+</script>

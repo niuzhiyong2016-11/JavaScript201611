@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var reg = /^1\d+$/;
+    /*
+    *  正则中常用的量词: => 量词都出现在元字符后面 \d+，限定出现在前面的元字符的次数
+    *       * : 出现0到多次 =>
+    *       + : 出现1到多次    => 至少出现1次
+    *       ? : 出现0次或者1次  => 可以出现可以不出现
+    *       {n} : 出现n次 => n是一个数字
+    *       {n,m}: 出现n到m次 => 最少n次，最多m次
+    *       {n,} : n到多次 => 至少n次
+    * */
+
+    var reg = /^1\d{10}$/; //限定\d出现10次
+    //console.log(reg.test(18800019819));
+
+    var reg = /\s*/; // \s出现多少次都符合规则
+
+    var reg = /^\s*$/; //匹配任意空(空字符串可以空格字符串也可以)
+
+    // 非空验证函数
+    function verify(inputValue) { //验证你输入是不是空
+        return !(/^\s*$/.test(inputValue)); // true/false
+    }
+
+    var res = verify(''); // ret: true/false => 当你传进来的字符串是空或者多个空格的时候是true
+
+    var reg = /\d+/; //
+    reg.test("abc1"); //
+
+    /*
+    *   正则中"或者"的使用：
+    *       x|y|z : x或者y或者z 或者的使用经常配合小括号一起使用。用来更改优先级问题
+    *       [xyz] : x|y|z中的一个
+    *
+    *       [^xyz] : 除了xyz 只要不是x或者y或者z都可以
+    *
+    *       ps: [xyz] 占位只占一个
+    *
+    *       [+-] : 加号或者减号中的一个
+    *
+    *       [.] : 点本身
+    *
+    *       [\d\w] : \d或者\w中的一个
+    *
+    *       [0-9] : 是0-9之间的一个,这个"-"是到的意思
+    *       [a-z] : 从a到z
+    *       [0-9a-zA-Z_] : \w
+    *
+    *       ps: [\\d] 在或者中\d如果只代表\或者d那么需要转义
+    *
+    * */
+    var reg = /^18|19$/; //  /18/  /19/
+    var str = 'adfasdfasdfa19';
+    var str = '18';
+    var str = '19';
+    var str = '181';
+    var str = '819';
+    var reg = /^(18|19)$/; // ^$
+    var str = '189';
+    var str = '119';
+    var str = '18';
+    var str = '19';
+    console.log(reg.test(str));
+
+    var reg = /[xyz]/; // /x/ /y/  /z/
+    console.log(reg.test('x123'));
+
+    var reg = /[^xyz]/;
+    console.log(reg.test('x8yz'));
+
+    var reg = /[+-]/;
+    console.log(reg.test('+'));
+    console.log(reg.test('-'));
+    console.log(reg.test('%'));
+    console.log(reg.test('+-'));
+
+    var reg = /[.]/;
+    console.log(reg.test('.'));
+
+    var reg = /[\d\w]/;
+    console.log(reg.test('6'));
+
+    var reg = /[\\d]/;
+    console.log(reg.test('6'));
+    console.log(reg.test('d'));
+    console.log(reg.test('\\')); //  \
+
+    //正则： 有效数字验证  让下面出现的这些情况全部都符合我制定的规则
+    // +1 -1  +100   .5  -12367.5  +13.35  -13.33335   14555
+
+    // 1 "+" "-"在前面出现只能出现一个。或者都不出现
+
+    var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?$/;
+    /*
+    *   \d : 0-9
+    *   \w : 0-9 a-z A-Z _
+    *   ^ : 以什么开
+    *   $ : 以什么结束
+    *   \n :
+    *    . :
+    *   \ :
+    *   \b :
+    *   \s :
+    *   \D :
+    *   \W :
+    *
+    *   + :
+    *   * :
+    *   ? :
+    *   {n} :
+    *   {n,} :
+    *   {n,m} :
+    *
+    *   x|y : x|y => 18|19
+    *   [xy] : x|y
+    *   [^xy] :
+    *   [0-9] : 0-9
+    *   [+-] :
+    *   [\d\w] : \d或者\w
+    *
+    * */
+</script>
+</body>
+</html>

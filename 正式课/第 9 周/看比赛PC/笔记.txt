@@ -1,0 +1,181 @@
+1、HTML5
+  ->新增加的构建页面语义化结构的标签:header、footer、main、article、figure、figcaption、nav、aside、section...
+    在IE6~8下不兼容,我们需要使用JS把新的标签替换为传统的标签=>html5.min.js
+    <!--[if lt IE 9]>
+       <script src='js/html5.min.js'></script>
+    <![endif]-->
+
+  ->对于传统的input表单新增加了一些类型:<input type='search/url/email/tel/number/range/color/time/date...'/>
+    在IE6~8下不兼容,我们也没办法处理,所以说新增加的类型我们只在移动端使用
+    1)新增加的类型自带一些验证方式
+      <input type='email' id='userEmail'/>
+      [css]
+      #userEmail:valid {
+          /*success*/
+          border-color: green;
+      }
+
+      #userEmail:invalid {
+          /*error*/
+          border-color: red;
+      }
+      局限性：只能通过INPUT新提供的两个验证的伪类来控制我们当前表单的样式,进而给用户提示操作
+
+      [js]
+      之前的JS验证
+      $userEmail.on('blur', function () {
+          var reg = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+          var val = $(this).val();
+          if (reg.test(val)) {
+             $spanEmail.css('display', 'none');
+          } else {
+             $spanEmail.css('display', 'block');
+          }
+      });
+
+      我们现在使用新的类型后的验证比这个简单
+      $userEmail.on('blur', function () {
+          if (this.checkValidity()) {
+              $spanEmail.css('display', 'none');
+          } else {
+              $spanEmail.css('display', 'block');
+          }
+      });
+
+    2)新增加placeholder="xxx"做文本框输入内容的提示，这个属性在IE下不兼容,我们需要使用JS的方式把它处理兼容了(原理：我们自己模拟这个属性)
+    课时170回去后自己研究=>这是一个常问的面试题
+
+    3)我们在移动端页面中使用不同的类型，当用户输入的时候可以调取出最符合用户操作的虚拟键盘，例如：如果类型我们写的是email，在调取出来的键盘中有我们需要的 . @ 英文 数字...
+
+    4)功能强大了
+      <input type="date">
+
+  课后回去后的扩展:
+    ->做一个完成的注册信息的表单验证
+      用户名:用户名仅支持中英文、数字和下划线,且不能为纯数字，最多14个英文或者7个汉字
+      真实姓名:2~4位中文汉字
+      年龄:18~65之间，必须是数字
+      电话或者手机:
+      性别:
+      邮箱:
+      密码:长度为6~14位，可以是数字、字母和特殊字符，不能是标点符号(要求至少是数字和字母组合的/要求必须要出现数字、小写字母、大写字母)
+      确认密码:
+      ...
+
+    ->可以搜集一些关于表单验证的插件:JQ->jQuery Validate ...
+
+
+  ->webStorage PK cookie
+
+  ->新兴的API，比如：获取地理位置信息
+
+  ->canvas
+
+  ->web socket 和 web works
+
+  ->audio 和 video
+
+2、CSS3(图解CSS3)
+  ->选择器
+      nth-child(1/odd/even/3n+1)
+      nth-of-type
+      :target
+      :not
+      ...
+
+  ->常用的一些样式属性:
+      border-radius
+      box-shadow
+      text-shadow
+      filter
+
+  ->background:
+       background-size:100% 100%、30px 30px、cover、contain...
+       background-clip:border-box、padding-box、content-box
+       background-origin
+       background:rgba(0,0,0,0.5)
+       background:-webkit-linear-gradient、-webkit-radial-gradient
+
+       传统
+       background-image
+       background-color
+       background-repeat
+       background-position (css sprite 雪碧图)
+       background-attachment:scroll、fixed...
+
+  ->transform变形
+       translate(X|Y|Z)
+       rotate(X|Y|Z)
+       scale
+       skew
+       matrix
+
+       [3D]
+       perspective视距
+       transform-style: preserve-3d;
+       transform-origin: center center 0;
+
+  ->transition过渡动画
+       transition-property:all;
+       transition-duration:1s;
+       transition-time-function:linear;
+       transition-delay:0s;
+
+  ->animation帧动画
+       @key-frames [name]{
+          0%{}
+          ...
+          100%{}
+       }
+       animation-name:;
+       animation-duration:;
+       animation-time-function:;
+       animation-delay:;
+       animation-count:infinite;
+       animation-fill-model:both/forwards/backwards...
+
+       animation.css 2D动画库
+
+  ->盒子模型
+       columns:多列布局(栅格布局)
+       box-sizing:border-box、padding-box、content-box 新的盒子模型
+       flexbox:伸缩盒子模型 http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
+  ->导入网络字体包
+       @font-face
+
+  ->SVG:一个新的图片,主要是用代码编辑出来的 目前市场上基本上都是用工具生成SVG图片
+
+  ->@media媒体查询
+
+3、移动端实战和优化以及JS处理
+  响应式布局：
+    viewport
+    DPI适配:屏幕像素密度比
+    流式布局(媒体查询)
+    REM响应式布局(等比缩放布局)->淘宝:flexible
+    webApp(hybrid:nativeApp和webApp混合开发模式)
+    微信的二次开发
+    微信小程序
+
+  项目优化:
+    减少HTTP请求次数
+    减少HTTP请求的大小
+
+  JS:
+    touch模型
+    gesture模型
+    Zepto
+    swiper
+    iscroll
+    vue
+    Angular
+    React
+    React Native
+    ...
+    gulp
+    webpack
+    git
+    ...
+    bootstrap
+    ...

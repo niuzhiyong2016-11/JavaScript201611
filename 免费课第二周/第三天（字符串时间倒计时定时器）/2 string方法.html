@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   String :
+    *       length : 字符串的长度
+    *       索引: 字符串也可以通过索引来获取具体的某一个字符
+    *
+    * */
+    var str = 'zhufengpeixun';
+    console.log(str.length);
+    console.log(str[0]); //z
+
+    /*for(var i=0; i<str.length; i++){
+        console.log(str[i]);
+    }*/
+
+    // 方法
+
+    /*
+    *   获取指定字符或者字符编码
+      * 1 charAt(n) 通过索引来获取字符  常用
+    *   2 charCodeAt(n) 通过索引来获取字符编码  ASCII
+    *
+    * */
+    var str = 'zhufengpeixun';
+    var res = str.charAt(0);
+    console.log(str.charCodeAt(0)); //z在ASCII表中的编码值 122
+    console.log(res);
+
+
+    /*
+    *   截取字符串
+    *   substr(n,m)  从索引n开始截取m个字符,如果m参数没写那么截取到末尾
+    *
+    *   substring(n,m) 从所以开始截取到索引m，但是不包含m。如果m参数没有那么默认截取到末尾
+    *
+    *   slice(n,m) 用法和substring大致相同。slice支持负数索引.在截取的时候默认在负数索引值身上累加length
+    *
+    * */
+    var str = 'zhufengpeixun';
+    //var res = str.substr(3,4);
+    //var res = str.substr(3);
+    var res = str.substring(3,7);
+    //var res = str.substring(7,3);
+    var res = str.slice(-3,-1); // 10,12
+    console.log(res);
+
+
+    // 转换大小写
+
+    /*
+    *   toUpperCase() 转化成大写
+    *   toLowerCase() 转化成小写
+    *
+    *
+    * */
+
+    var str = 'zhufengpeixun';
+    console.log(str.toUpperCase());
+
+    /*  全兼容
+    *   indexOf 查看字符是否在字符串中出现过，如果出现返回索引，否则返回-1
+    *   lastIndexOf 查看字符是否在字符串中出现过，如果出现返回最后一次索引，否则返回-1
+    *   ps: 可以判断一个单词 例如： Chrome
+    *   判断当前浏览器是什么浏览器:  window.navigator.userAgent保存的是浏览器对应的相关信息，其中chrome: Chrome   IE: MSIE 6/7/8  判断关键字是否在这个属性中出现过就可以判断浏览器
+    *   window.nagigator.userAgent.indexOf('MSIE 6') !== -1  是ie6 ==> 针对ie6做不同操作
+    * */
+
+    console.log(str.indexOf('feng')); //3
+
+
+    /*
+    *   split 把字符串拆分成数组，参数就是指定分隔符 和数组的join方法用法相反
+    *   split 的参数还可以是一个正则表达式
+    * */
+    var str = "aaa& bbb";
+    var res = str.split(" "); // ['aaa&','bbb']
+    var res = str.split(" "); // ['aaa&','bbb']
+    console.log(res);
+
+    //var reg = /^-?\d+(\.\d+)?(px|em|rem)?$/;  // -45px 45px   45.45px  34.5555rem
+
+
+    /*
+    *   replace: 是用来替换字符串的   replace(old,new) 跟replaceChild的参数位置是相反的
+    *   ps: 使用replace方法，并不是操作原有字符串而是返回新的替换好的字符串。把这个新字符串赋值给原有字符串  =>    str = str.replace(old,new);
+    *   ps: 如果第二个参数是函数，是使用这个函数的返回值(是返回值)来替换第一个参数所匹配到的字符
+    *
+    *   ps: 第二个参数函数还有三个形参： 1 item: 匹配到的字符串   2 ： index: 匹配字符串的索引位置  3 ： str 原有字符串
+    *
+    *   ps: 第一个参数还可以是一个正则表达式....
+    *
+    * */
+
+    var str = 'zhufengpeixun';
+    //var res = str.replace('feng','峰');
+    //str = str.replace('feng','峰');
+    //console.log(res);
+
+    //升级用法
+    str = str.replace('feng',function (item,index,str){
+        // item: 匹配到的字符串
+        // index: 是匹配到的字符串对应的索引
+        // str: 原有字符串
+        return '峰';
+    });
+
+
+    console.log(str);
+
+    // match() 的参数也是一个正则。。。暂时不讲
+
+
+
+
+</script>

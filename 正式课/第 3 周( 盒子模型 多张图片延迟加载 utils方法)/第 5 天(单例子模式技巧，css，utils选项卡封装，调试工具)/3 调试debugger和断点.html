@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    调试断点和debugger:
+        1 刷新页面并且保证控制台是打开状态
+        2 F11就是一行一行执行
+        3 F11是执行到这一行，如果是一个函数，那么F11会进入到这个函数中
+        4 如果遇到一个函数我并不想进入到这个函数中那么F10就可以
+        5 如果使用F11进入到了一个方法中但是我想立刻跳出这个方法，那么shift+F11
+        6 鼠标悬停在变量上可以直接获取当前的值,如果是一个等式或者其他也可以用鼠标选中会计算出选中部分的运行结果
+        7 选中变量右键还可以add to watch(添加监控) => 在watch这个tab下就可以实时查看这个变量的值的变化，只要你想监控的都可以添加
+        8 scope : 作用域  local: 私有  global : 全局  this
+          scope只是监控的是当前代码运行的那个作用域。
+        9 在调试过程中还可以选中变量或者属性右键 Evaluate in console 输出到控制台,然后就可以在控制台中查看,dom元素调试。
+        10 当断点停在哪个作用域内，还可以在控制台直接输入js表达式并且执行。就相当于在当前作用域内直接填入代码执行
+        常见错误：can not read property  'xxx' of undefined 不能读取某某的xxx属性
+                    null.innerHTML 报错： 不能读取null的innerHTML属性.这样的报错永远都是跟属性没关系。一定是yy.属性这个yy有问题。
+
+                not a function : 说明不是一个函数，但是却被执行了 => 去查看函数
+                not defined : 未定义
+                token : 语法有问题
+
+
+
+        不使用debugger如何断点:  控制台 sources 当前这个网页需要的文件
+                               找到需要调试的文件然后会显示行号
+                              点击行号变蓝色之后就是一个断点，这个断点不用了把断点恢复
+                              可以在行号内加多个断点，F8就是逐个断点调试
+                              还可以在断点处右键编辑断点(添加条件,i==5)只有符合条件的时候才断点
+
+
+</body>
+</html>
+<script>
+    var num = 10;
+    function fn(){
+        var total = 0;
+        num += 5;
+    }
+    function foo(){
+        //debugger;
+        var body = document.body; //获取body元素
+        fn();
+        for(var i=0; i<10; i++){
+            console.log(i);
+        }
+
+    }
+    foo();
+</script>

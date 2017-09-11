@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+    模板引擎 ： juice  es6内置
+-->
+<script>
+    // str这个字符串其实就是一个模板
+    var str = 'My name is {0}, I am {1} years old. My hometown is {2}';
+    var person1 = ['田喜', 30, 'LiaoNing'];
+    var person2 = ['guoyu', 16, 'ShanXi'];
+    var reg = /{(\d)}/g;
+    str = str.replace(reg, function () {
+        // arguments[1] 每次捕获到的第一个分组的内容 0 1 2
+        return '<span style="color: red">' + person1[arguments[1]] + '</span>'; //
+    });
+    document.body.innerHTML = str;
+
+    //时间格式字符串
+
+    //"2016年10月16日12点37分";
+
+    var template = "{0}年{1}月{2}日{3}点{4}分";
+
+    var str = '2016-10-16 12:40';
+    //str拆分成数组 [2016,10,16,12,40]
+    //    var ary = str.split(' '); //['2016-10-16','12:40']
+    //    ary = ary[0].split('-').concat(ary[1].split(':'))   ; // [2016,10,16] [12,40]
+    var ary = str.split(/[-\s:]/);
+    var ary = str.split(/-|:|\s/);
+    console.log(ary); //["2016", "10", "16", "12", "40"]
+    var reg = /{(\d)}/g;
+    template = template.replace(reg, function (bigReg, group1) {
+        console.log(arguments); //["{0}","0"]
+        return ary[group1];
+    });
+    console.log(template);
+
+    // ?= , ?!   正则中的正向预查 和 负向预查
+</script>
+</body>
+</html>

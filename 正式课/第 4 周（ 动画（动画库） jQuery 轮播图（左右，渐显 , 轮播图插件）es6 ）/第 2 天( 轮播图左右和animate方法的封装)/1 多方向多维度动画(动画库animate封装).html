@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+//    var div1 = document.getElementById('div1');
+//    var time = 0; //花费的时间是0
+//    var duration = 1000;
+//    // left
+//    var beginLeft = utils.css(div1,'left'); //起点left值
+//    var targetLeft = utils.win('clientWidth') - div1.offsetWidth;; // 终点left值
+//    var changeLeft = targetLeft - beginLeft; //终点-起点 => 改变的距离
+//    // width
+//    var beginWidth = utils.css(div1,'width');
+//    var targetWidth = 50;
+//    var changeWidth = targetWidth - beginWidth; // 50 - 100 = -50
+//
+//
+//    var interval = 10;
+//    div1.tiemr = window.setInterval(function (){
+//        time += interval; //花费的时间会随着定时器执行不断增加
+//        if(time >= duration){
+//            window.clearInterval(div1.tiemr);
+//            utils.css(div1,'left',targetLeft);
+//            utils.css(div1,'width',targetWidth);
+//            return;
+//        }
+//        var curPosition = linear(time,beginLeft,changeLeft,duration);
+//        var curWidth = linear(time,beginWidth,changeWidth,duration);
+//        utils.css(div1,'left',curPosition);
+//        utils.css(div1,'width',curWidth);
+//
+//    },interval);
+
+
+// 如果超过3个方向（维度）去动画，那么代码就变得特别臃肿了。
+    var div1 = document.getElementById('div1');
+    //debugger;
+    var time = 0;
+    var duration = 2000;
+    var target = {
+        width: 100,
+        height : 50,
+        opacity : 0.4,
+        left : 600
+    };
+    var begin = {};
+    var change = {};
+    for(var key in target){
+        begin[key] = utils.css(div1,key);
+        //begin['width'] = utils.css(div1,'width');
+        //begin.width = utils.css(div1,'width');
+        change[key] = target[key] - begin[key];
+        //change['width'] = target['width'] - begin['width'];
+    }
+
+//    var begin = {
+//        width : utils.css(div1,'width'),
+//        height : utils.css(div1,'height'),
+//        opacity : utils.css(div1,'opacity'),
+//        left : utils.css(div1,'left')
+//    };
+//    var change = {
+//        width : target.width - begin.width,
+//        height : target.height - begin.height,
+//        opacity : target.opacity - begin.opacity,
+//        left : target.left - begin.left
+//    };
+    div1.timer = window.setInterval(function (){
+        time += 10;
+        //var curWidth = linear(time,begin.width,change.width,duration);
+        if(time >= duration){
+            window.clearInterval(div1.timer);
+            utils.css(div1,target); // target是一个对象，但是css方法会处理第二个参数是对象的问题，setGroupCss => setCss
+            return;
+        }
+        for(var key in change){ // {width:0,height:-50....}
+
+            // key : width,height,opacity,left
+            if(change[key]){ // 判断每一个维度改变的值。如果在这个维度上没有改变。那么就没有必要去设置了
+                var val = linear(time,begin[key],change[key],duration);
+                utils.css(div1,key,val);
+            }
+        }
+    },10);
+
+    /**
+     * ele要在duration时间内运动到target
+     * @param ele  是要运动的元素
+     * @param target 运动终点
+     * @param duration 在多长时间内完成运动
+     */
+    function animate(ele,target,duration){
+        var effect = {
+            Linear : function (t,b,c,d){
+                return b + t/d*c;
+            }
+        };
+        duration = duration || 2000;
+        var time = 0;
+        var begin = {},change = {};
+        for(var key in target){ //根据传进来的target向begin和change中添加对应target的属性和属性值
+            begin[key] = utils.css(ele,key);
+            change[key] = target[key] - begin[key];
+        }
+        var interval = 10; // 这个值不能特别大，否则动画看起来就很顿挫
+        if(ele.timer){ //这个清的是上一次运动留下来的定时器。无论是否已经到达终点都需要把上一次的定时器清空
+            window.clearInterval(ele.timer);
+        }
+        ele.timer = window.setInterval(function (){
+            time += interval;
+            if(time >= duration){
+                window.clearInterval(ele.timer);
+                utils.css(ele,target);
+                return;
+            }
+            for(var key in change){
+                if(change[key]){
+                    var val = effect.Linear(time,begin[key],change[key],duration);
+                    utils.css(ele,key,val);
+                }
+            }
+
+        },interval);
+    }
+
+
+//    document.body.onclick = function (){
+//        animate(div1,{left:800,top:600,width:300,height:300});
+//    }
+
+
+
+
+
+
+    function linear(t,b,c,d){
+        return b + t/d*c;
+    }
+
+</script>

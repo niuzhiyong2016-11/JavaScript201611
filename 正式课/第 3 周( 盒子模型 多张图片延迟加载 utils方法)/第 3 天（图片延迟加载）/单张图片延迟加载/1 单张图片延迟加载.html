@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 300px;
+            height: 200px;
+            border: 10px solid blue;
+            margin: 2000px auto;
+            background: url("images/load.jpg") no-repeat ;
+        }
+        #box img{
+            width: 100%;
+            height: 100%;
+            border: none;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"><img src="" realSrc="images/2.jpg" /></div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    /*
+    *   img的src属性刚开始是没有值的，当把整张图片已经滚动到完全进入到浏览器的可视窗口内再去加载。其实也就是当图片完全进入后再给img的src属性赋值。
+    *   src属性: 就是负责去加载图片资源的。只要src属性有值那么就会去加载。
+    * */
+    var box = document.getElementById('box');
+    var img = box.getElementsByTagName('img')[0];
+    //当浏览器滚动条滚动的时候，判断图片是否已经完全进入到窗口内？？
+    window.onscroll = function (){ //滚动事件
+        var _a = utils.win('scrollTop') + utils.win('clientHeight');
+        // _a : 窗口滚出去的高度和窗口本身的高度，就是浏览器底边那个页面位置距离body最顶部的距离
+        var _b = utils.offset(box).top + box.offsetHeight;
+        // _b : 图片盒子box距离body的上偏移和box本身自己带边框的的高度，就是box底边距离body最顶部的距离
+        if(_a > _b){ // 图片盒子box完全进入窗口
+            console.log('图片已经进入');
+            if(img.isLoaded){ // 如果加载过就是true，如果没有加载过就是undefined
+                // 加载过就没有必要再加载一次了
+                return;
+            }
+            // 只要符合条件就把存储在realSrc属性上的真实图片资源字符串，赋值给src属性。让src去加载这个资源
+            //img.src = img.getAttribute('realSrc'); //如果这个图片资源是无效资源那么就加载失败了。在页面就会出现加载失败的图标。所以我们要做图片资源有效性验证。
+            // 有效性验证: 真实的img标签暂时先不去加载，创建一个临时的图片，让这个临时的图片去加载。如果临时图片加载成功，那么真实的图片再去加载。
+            var tempImg = document.createElement('img');
+            // var tempImg = new Image(); //这个也可以
+            tempImg.src = img.getAttribute('realSrc');  //临时图片的src去加载真实图片realSrc保存的资源路径
+            tempImg.onload = function (){ // 只要图片加载成功就会触发这个onload事件
+                // 临时图片成功加载之后
+                img.src = this.src; // this就是临时图片
+            }
+            img.isLoaded = true; // 用isLoaded这个自定义属性记录img已经被加载过了。那么无论还是失败都只加载一次就可以了。如果失败那么下次也不用再去加载了。
+        }
+    }
+
+    /*
+    *   本地缓存: 对于浏览器已经加载过的资源，都会在浏览器本地保存一份。304 network，如果页面刷新又去获取这个资源。那么优先从本地缓存读取，如果本地没有再去服务器去获取这个资源。读取本地缓存相当于读取本地文件。
+    *   tempImg先去加载的资源，如果成功了就会在本地有一个份本地缓存。然后img再去加载的时候，由于是同一个资源(只要加载路径是一样那么就是同一个资源，地址，url),优先读取本地缓存，所以虽然做了两个加载请求，但是其中一次是从304获取的。
+    *
+    * */
+    /*
+    *   图片延迟加载步骤:
+    *       1 判断图片是否完全进入
+    *       2 创建一个临时图片
+    *       3 让这个临时图片的src去加载真实图片的src。
+    *       4 监听加载成功onload事件。成功之后再让真实的图片去加载这个资源
+    *       5 自定义属性去保存这个图片是否加载过
+    * */
+
+
+
+
+</script>

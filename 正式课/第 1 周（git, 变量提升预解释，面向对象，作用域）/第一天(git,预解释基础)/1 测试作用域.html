@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*
+    var i = 3; // 6  7   14  15  16  32 33
+    function fn() {
+        i *= 2; // 这个i不是私有变量，只要用到i无论谁用都是修改的全局变量
+        return function (n) {
+            console.log(n * (++i))
+        }
+    }
+    var f = fn();
+    f(3); //21
+
+    fn()(3); //45
+
+    f(4); // 64
+
+    fn()(3); // 99i
+
+    /////////////////////////////////////////////////////////////
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+    var name = '珠峰'; // window.name
+    var age = 500; // window.age
+
+    name = (function (name, age) {
+        arguments[0] = '珠峰培训';
+        age = age || window.age;
+        console.log(name, age);
+    })(name);
+    console.log(name, age);
+*/
+
+    // 珠峰培训 500  undefined 500
+
+    ////////////////////////////////////////////////////////
+
+    var ary = [100,200]; // 把这个数组的地址赋值给ary这个全局变量
+
+    function fn(ary){ // 仅仅是fn的一个形参，也可以说是fn这个函数内部的一个私有变量
+        // 把实参的ary所代表的地址赋值给形参(私有变量)ary一份. 那么形参ary和全局的ary共用一个堆内存地址 => 操作的也都是同一个
+
+        ary[ary.length] = 300; // 私有变量通过地址在数组的末尾添加了300,现在这个数组变成[100,200,300]
+        //ary = []; // 从这一行开始私有的ary就代表这个新的空数组的地址了
+        ary = ary.slice();
+        ary[ary.length] = 400; // 像刚刚代表的这个空数组的末尾添加400
+        console.log(ary); // [400]
+    }
+
+    fn(ary); // 这个ary是全局变量ary所代表的那个数组的堆内存地址
+
+    console.log(ary); // [100,200,300]
+
+
+    // [400],[100,200,300]
+    // [400],[100,200,300]
+
+
+
+
+
+</script>

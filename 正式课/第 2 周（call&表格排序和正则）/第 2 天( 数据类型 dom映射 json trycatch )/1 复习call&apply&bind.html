@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    'use strict';
+
+    function sum(num1, num2) {
+        console.log(this); //null
+        console.log(num1 + num2);
+    }
+
+    sum(100, 200); // 300
+    sum.call(null, 300, 400, 500); // => sum函数的this修改成call的第一个参数300
+    /*
+    *   call : Function.prototype => call bind apply 都是定义在Function这个类的原型上的方法 => 只要是Function这个类的实例就可以直接调用 => 什么数据类型才是Function这个类的实例? => 任何函数都是Function这个类的实例 => Array(function Array(){})    [].push  setInterval window.setInterval也是Function的实例  =>
+    *
+    *   call的作用： 修改this关键字的
+    *       1 函数实例先找到call方法  通过__proto__属性找到自己所属类的原型
+    *       2 把这个函数实例(其实也就是call前面的函数)中的this修改成call的第一个参数
+    *       3 把这个修改过this的函数实例还要执行
+    *
+    * */
+
+    function fn1() {
+        this(); // fn2
+        //console.log(1);
+    }
+
+    function fn2() {
+        console.log(2);
+    }
+
+    fn1.call(fn2); //把fn1中的this修改成fn2，然后fn1再执行
+    fn1.call.call.call(fn2); //这个到最后是call的第一个参数执行
+    var fn = fn1.call.apply.call;
+
+    fn.apply(fn2); //就是把fn中的this修改成fn2
+
+    /*
+    *   apply方法也是修改this关键字的，和call区别就是传参的方式的不同
+    *       apply的第二个参数是一个数组。分别把数组里的每一项当作参数传给前面的函数实例
+    * */
+    sum.apply(null, [300, 400, 500]);
+
+
+    /*
+    *   bind: call和apply都是已经把函数实例执行了。但是如果我不想执行函数，只想修改this。那么使用bind就可以了
+    *   bind返回的是一个处理好this的新函数
+    *   既然返回一个函数那么就可以执行
+    *   bind只处理this，参数在执行bind的返回值的时候再传
+    *   不兼容 => 后期我们自己处理写一个兼容的
+    *
+    * */
+    function sum(num1, num2) {
+        console.log(this); //null
+        console.log(num1 + num2);
+    }
+
+    var res = sum.bind(document.body);
+    console.log(res === sum); //虽然和sum长的一样，但是不是同一个函数
+    //bind返回的是一个处理好this的新函数
+    res(200, 900);
+
+    // 链式写法 => 函数运行结束的返回值(运行结果)仍然是这个类的实例
+    // 13.plus() => 13
+    // 7.plus(8) => 在js中不一个基本数据类型能调用原型上的方法
+
+    var n = new Number(6); // n.plus()
+    Number.prototype.plus = function (n) {
+        return this + n; //13
+    }
+
+    //[].slice().concat(3).reverse().sort().push(5);
+</script>
+</body>
+</html>

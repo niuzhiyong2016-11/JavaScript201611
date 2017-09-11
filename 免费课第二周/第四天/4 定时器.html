@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; background: red; position: absolute; left: 0; "></div>
+</body>
+</html>
+<script>
+    // setTimeout(fn,2000) 2000ms之后执行fn函数。执行一次就结束
+    var timer1 = window.setTimeout(function(){
+        console.log('setTimeout');
+    },2000);
+
+    // setInterval(fn,2000) 每间隔2000ms都会执行fn，并且一直执行下去
+    var timer2 = window.setInterval(function (){
+        console.log('setInterval');
+    },500);
+
+    console.log(timer1); // 1  我是页面中的第一个定时器
+    console.log(timer2); // 2  我是页面中的第二个定时器
+
+    // 定时器的返回值是数字，代表的是我是第几个定时器。
+
+    // 清除定时器的方法：
+    window.clearTimeout(1); //  代表的是要清除页面中的第一个定时器
+    window.clearInterval(2); // 清除页面中的第二个定时器
+
+    // 清除定时器只是清除定时器需要执行的任务，但是定时器还是存在的。只不过定时器不再执行函数了
+
+    var timer3 = window.setTimeout(function (){},1000);
+    console.log(timer3);
+
+
+
+
+
+
+    console.log('洗澡');
+    /*
+    *   同步和异步: 同步是阻塞代码运行的。异步就是不阻塞代码从上往下运行。
+    * */
+</script>

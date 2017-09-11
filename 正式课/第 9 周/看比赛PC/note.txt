@@ -1,0 +1,139 @@
+1、论程序员的基本编程素质
+  ->写页面前，首先在HEAD中增加几个META标签
+    <meta name='viewport' content='...'/>
+
+  ->设置页面的title
+    <title>腾讯体育项目实战开发-珠峰培训</title>
+
+  ->设置页面的关键词和描述
+    <meta name="keywords" content="javascript培训,js培训,HTML5培训,css培训,前端开发培训,node.js培训,nodeJS培训,移动端培训,北京珠峰培训"/>
+    <meta name="description" content="珠峰培训是中国前端开发知名品牌，七年JS前端培训，以专注立身；70%的同学来自老学员推荐，以诚信立业。先学习考试通过后交学费；四周内可无条件退学费；工资不到9千退学费。我们专注的特色培训有：javascript培训,node.JS培训,前端开发培训,HTML5培训,移动端培训"/>
+
+    SEO推广优化:我们在页面中设置一些关键词(HEAD中的keywords和BODY中的内容)，百度或者谷歌等搜索引擎会定期派出它们的小蜘蛛(爬虫)来我们网站上检索，把一些关键词和内容收录到百度谷歌等搜索引擎的数据库中；当用户使用百度或者谷歌搜索内容的时候，会输入一个关键词，百度等公司会到自己的数据库中把所有和输入的关键词匹配的网站提前展示...
+
+    SEM百度竞价:我们可以设定一些关键词(可能跟我们没关系)，谁给百度的钱多，谁的就靠前
+
+  ->设置标题区域的图标
+    <link rel="icon" href="img/icon.png" type="image/x-icon"/>
+
+2、一个页面中的H1只能出现一次,而且它的权重非常的高,在这里写的文字百度非常爱抓取(SEO)，所以我们即使设置了背景图，背景图上已经存在了需要展示的文字，但是我们还是会加一点文字进来，目的是给百度的小蜘蛛看的
+
+3、LESS叫做CSS预处理器：我们按照LESS的语法(和JS类似是面向对象编程的，在LESS中存在变量、函数、继承、作用域等内容)编写需要的样式，但是浏览器不能直接的渲染这些代码，需要我们把写好的LESS代码转换为标准的CSS代码才可以
+   [编译]
+     ->在开发过程中，使用JS解析处理即可
+       <link rel="stylesheet/less" href="css/index.less"/>
+       <script src="js/less-2.5.3.min.js"></script>
+
+     ->在产品上线后，我们直接的使用NODE或者编译工具把LESS转换为CSS，以后线上的项目直接使用编译过的CSS即可，不用向第一种方案一样，每当刷新一次页面都需要重新的编译(耗性能)
+
+     <!--[if lt IE 9]>
+       <script src="js/html5.min.js"></script>
+     <![endif]-->
+
+4、MENU区域的HASH值
+  <a href="#nba" data-id="100000" class="bg">
+      NBA
+      <i class="arrow"></i>
+  </a>
+  当点击每一个选项的时候，除了控制右侧的内容跟着改变，而且还在当前页面的URL地址栏中增加了对应的HASH值:http://kbs.sports.qq.com/#nba
+  以后当页面刷新或者重新的加载的时候，我们首先获取URL中的HASH值，然后判断哪一个选项默认的被选中
+
+  data-id="100000"每一场赛事都有一个自己对应的赛事类型ID(不冲突)，主要目的就是控制右侧内容跟着改变的
+
+5、实现三角箭头的方式
+  ->切图:由于需要加载图片,所以相对来说耗一些性能,尤其对于移动端开发,我们是能不用图片的绝对不用
+
+  ->直接用 &lt; &gt; 大于号和小于号实现
+    弊端:不好操控大小，而且如果需要调节角度的话，我们需要使用特殊的字体，这样导致很多的浏览器不支持这个字体就识别不了对应的样式
+
+  ->把一个只有两个边框的盒子进行旋转
+    弊端：虽然足够简单和吊炸天，但是就是不兼容，所以只在移动端使用
+
+  ->我们制作两个三角形,然后让两个三角形叠加,其中一个的颜色和区域的背景保持一致，这样就会生成一个箭头
+
+6、使用ISCROLL实现局部滚动
+  menuExample = new IScroll('#menu', {
+      scrollbars: true,//->显示滚动条
+      mouseWheel: true,//->开启鼠标滚轮来控制滚动
+      bounce: false//->禁用到达边界的缓冲效果
+  });
+
+  原理：类似于轮播图，它首先通过第一个参数获取到需要局部滚动的区域，然后在获取到这个区域中的第一个子元素(它认为这个元素就是我们即将实现滚动的元素) =>在项目中，我们需要把所有需要滚动的内容都放在当前区域的第一个子元素中
+
+  找到需要滚动的那一个元素，在用户操作的时候(鼠标滚动，拖动)，我们控制这个元素在MENU这个区域中来回的运动(上下：控制的是TOP值 左右：控制的是LEFT值 在最新的ISCROLL版本中(我们当前的版本第五版本就是最新的),控制的是TRANSFORM)  =>这样的话首先必须保证MENU区域有固定的宽高，里面真实的内容宽高是大于MENU区域的，这样才需要左右或者上下滚动看
+
+  如果需要禁用CSS3处理
+  menuExample = new IScroll('#menu', {
+      useTransform: false,
+      useTransition: false//->禁用CSS动画和变形,使用传统的JS来实现操作
+  });
+  此时还需要保证UL是相对于MENU定位的
+  .menu {
+    position: relative;
+
+    ul {
+      position: absolute;
+    }
+  }
+
+  默认是不显示滚动条的，但是如果需要显示的话，我们需要配置scrollbars: true，配置完成后，ISCROLL会向MENU区域的末尾追加一个新的元素
+  <div class='iScrollVerticalScrollbar iScrollLoneScrollbar' style='position: absolute...'>
+    <div class="iScrollIndicator" style="..."></div>
+  </div>
+  最外层DIV是滚动条滚动的区域,里层DIV就是当前的那个滚动条,滚动条那个区域默认是position: absolute定位的，所以想让滚动条在MENU区域中，需要给MENU加position: relative;
+  我们还可以自定义滚动条的样式
+  .iScrollIndicator {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+  }
+
+  menuExample = new IScroll('#menu', {
+      scrollbars: true,//->显示滚动条
+      mouseWheel: true,//->开启鼠标滚轮来控制滚动
+      bounce: false,//->禁用到达边界的缓冲效果
+      useTransform: false,
+      useTransition: false,//->禁用CSS动画和变形,使用传统的JS来实现操作
+      fadeScrollbars: true,//->控制操作的过程中在显示滚动条
+      scrollX: false,
+      scrollY: true,//->控制是横向滚动还是竖向滚动
+      click: true//->如果列表中的内容需要绑定点击事件的话,我们需要开启这个配置
+  });
+
+  menuExample.refresh();//->刷新:当MENU区域中的内容改变的时候,我们需要重新的计算滚动条的高度和滚动的相关信息,此时执行这个方法即可
+  menuExample.scrollTo([x], [y], [time]);//->滚动到具体的位置(X|Y),[TIME]设定的是时间
+  menuExample.scrollToElement([ELE],[TIME]);//->滚动到具体元素的位置
+
+  ==>扩展知识：
+  ISCROLL有好多的版本
+    5版本是不兼容IE低版本浏览器,一般应用于移动端的开发
+    PC端用的一般都是第一版本和第二版本(兼容的)，但是这两个版本的配置参数的名字和五版本有几个不太一样，自己回去搜搜总结一下
+    开发者版本,相对于其它的版本提供了更加强大的处理，使用开发者版本可以实现，下拉加载和上拉刷新的效果，自己回去后可以把这个效果实现了
+
+
+7、jQuery
+  ->通过JQ选择器获取的结果都是JQ的实例,也是一个类数组集合
+    $links[0]
+    $links.get(0):前两个都是获取类数组集合中索引为0这一项,返回的结果是一个DOM原生对象
+    $links.eq(0):虽然也是获取第一个,但是获取到的结果依然还是JQ对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

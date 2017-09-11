@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    function foo(n) {
+        this.x = this.y = n; // f.x = 100
+    }
+
+    //console.dir(foo);
+    //foo.prototype.constructor === foo; // true
+    foo.prototype = {
+        x: 20,
+        sum: function () {
+            console.log(this.x + this.y);
+        }
+    };
+    var f = new foo(10);
+
+    console.dir(f);
+    //f.__proto__ === foo.prototype
+</script>
+</body>
+</html>

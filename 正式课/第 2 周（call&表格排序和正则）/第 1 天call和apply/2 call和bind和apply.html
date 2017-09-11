@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>call、apply和bind</title>
+</head>
+<body>
+
+<script>
+    'use strict'; //从这行代码开始下面的js代码使用严格模式解析
+
+    // call和apply和bind都是定义在Function.prototype的方法。任何一个函数都可以直接调用。比如:  Array => 虽然是一个内置类但是也是一个函数 function Array(){ } [1,2].push这也是一个函数，这是定义在Array的prototype上的内置函数
+
+    /*
+    *   call的作用: 强制改变函数中的this的
+    *       1 先找到call方法 => 只有函数才能找到call方法 => 找到call
+    *       2 并且把调用call这个函数中的this修改成call的第一个参数 => 改this
+    *       3 调用call方法的那个函数执行 => 这个函数中this已经被修改过了
+    *       ps: fn.call()其实fn这个函数已经执行了
+    *       ps: call方法的第一个参数永远都是用来修改前面函数中的this的。从第二个参数开始才是真正传给调用call的函数实例的参数 比如:  sum.call(null,1,2) null是用来修改sum中的this的。而1和2这两个参数才是分别传给sum当实参的
+    *
+    *
+    * */
+    function fn() {
+        console.log(this); // obj
+    }
+
+    //fn(); // fn中的this是window
+
+    var obj = {
+        name: 'zhufeng',
+        fn: fn
+    };
+
+    fn.call(obj);
+    //obj.fn(); //这样执行函数中的this就是obj
+
+    //obj.fn instanceof Function;
+    obj.fn.call(Array);
+
+
+    //举例说明
+    function sum(num1, num2) {
+        //debugger;
+        console.log(this);
+        console.log(num1 + num2);
+    }
+
+    //sum(100,200); // 300
+
+    sum.call();
+    /*
+    *   js中有严格模式和非严格模式区别 'use strict'
+    *       1 call方法中的this如果严格模式下即使是null和undefined那么也直接使用,非严格模式下都是window
+    *       2 如果call没有写参数，严格模式下是undefined，非严格模式下是window
+    *
+    *       3 在严格模式下自运行函数中的this是undefined,非严格模式下是window
+    *       4 在严格模式下函数执行时候如果"."前面没有，那么this就undefined
+    *
+    * */
+    (function () {
+        console.log(this); //在严格模式下是undefined
+    })();
+
+    function foo() {
+        console.log(this);
+    }
+
+    foo(); //在严格模式下是undefined
+</script>
+</body>
+</html>

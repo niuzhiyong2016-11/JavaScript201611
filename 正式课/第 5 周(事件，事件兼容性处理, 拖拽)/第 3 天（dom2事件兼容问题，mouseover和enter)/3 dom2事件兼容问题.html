@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom2事件兼容问题</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+
+//    div1.addEventListener('click',fn1,false);
+//    //div1.addEventListener('click',fn1,false);
+//    div1.addEventListener('click',fn2,false);
+//    div1.addEventListener('click',fn3,false);
+//    div1.addEventListener('click',fn4,false);
+//    div1.addEventListener('click',fn5,false);
+//    div1.addEventListener('click',fn6,false);
+//    div1.addEventListener('click',fn7,false);
+//    div1.addEventListener('click',fn8,false);
+//    div1.addEventListener('click',fn9,false);
+//    div1.addEventListener('click',fn10,false);
+//    div1.addEventListener('keyup',fn10,false);
+    div1.attachEvent('onclick',fn1);
+    //div1.attachEvent('onclick',fn1);
+    div1.attachEvent('onclick',fn2);
+    div1.attachEvent('onclick',fn3);
+    div1.attachEvent('onclick',fn4);
+    div1.attachEvent('onclick',fn5);
+    div1.attachEvent('onclick',fn6);
+    div1.attachEvent('onclick',fn7);
+    div1.attachEvent('onclick',fn8);
+    div1.attachEvent('onclick',fn9);
+    div1.attachEvent('onclick',fn10);
+    // 移除
+    div1.detachEvent('onclick',fn5);
+    function fn1(){  console.log(1); console.log(this == window); }
+    function fn2(){  console.log(2) }
+    function fn3(){  console.log(3) }
+    function fn4(){  console.log(4) }
+    function fn5(){  console.log(5) }
+    function fn6(){  console.log(6) }
+    function fn7(){  console.log(7) }
+    function fn8(){  console.log(8) }
+    function fn9(){  console.log(9) }
+    function fn10(){  console.log(10) }
+    //  addEventListener   removeEventListener
+    //  attachEvent    detachEvent
+
+    /*
+    *   在ie6-8中所遇到的问题：
+    *       1 同一个事件类型同一个函数可以重复绑定
+    *       2 同一个事件绑定多个函数，当事件触发执行顺序问题
+    *       3 当事件触发的时候，函数中的this是window。this应该是绑定的那个元素
+    *
+    *       4 事件类型需要前面加 'on'
+    *       5 attachEvent并且不支持捕获
+    *
+    * */
+</script>

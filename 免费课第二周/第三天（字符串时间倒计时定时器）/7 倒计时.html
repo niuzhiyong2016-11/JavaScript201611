@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 600px;
+            height: 40px;
+            margin: 30px auto;
+            text-align: center;
+            line-height: 40px;
+            font-size: 26px;
+            font-weight: bold;
+            border: 2px dashed darkred;
+            background: lightcyan;
+        }
+        .box span{
+            padding-left: 10px;
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">距离下课还有:<span>01:01:30</span></div>
+</body>
+</html>
+<script>
+    var span = document.getElementsByClassName('box')[0].getElementsByTagName('span')[0];
+
+    var timer = window.setInterval(record,1000);
+
+
+    function record(){
+        var curDate = new Date(); //获取当前的时间
+        var targetDate = new Date('2016/09/22 18:14:00'); //目标时间，先转化成时间格式的对象才能使用getTime()方法
+        var curDate1970 = curDate.getTime(); //当前时间距离1970的ms数
+        var targetDate1970 = targetDate.getTime(); //目标距离1970的ms
+        var time = targetDate1970 - curDate1970; //时间差
+        //换算单位把time换算成h/m/s
+        //先换算成小时
+        var h = Math.floor( time/(1000*60*60) ); // 向下取整
+        // 换算分钟  => 需要把h小时所占用的ms数减去，然后再换算分钟
+
+        var m = Math.floor( (time - h*60*60*1000)/(1000*60) );
+
+        // 换算s  => 把小时和分钟所占用的ms数都减去，然后再换算成s
+
+        var s = Math.floor( (time - h*60*60*1000 - m*60*1000)/1000 );
+        if(h + m + s <= 0 ){
+            window.clearInterval(timer);
+            span.innerHTML = "00:00:00"
+            return;
+        }
+
+        span.innerHTML = addZero(h) + ":" + addZero(m) + ":" + addZero(s);
+
+    }
+
+
+    // 找个人帮我1s钟执行一次recond这个函数...
+
+
+    function addZero(n){ //给不足10的数前面添加一个0
+        return n < 10 ? '0' + n : n;
+    }
+
+</script>

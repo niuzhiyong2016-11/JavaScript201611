@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   /* var i = 0;
+    i++;
+    console.log(i); // 1*/
+
+    var k = 0;
+    //++k;
+    console.log(2 + ++k); //
+
+
+
+    // 1 如果 i++ 和 ++i 独占一行效果一样都是自身累加1
+    // 2 如果和其他值做运算的时候： 2 + i++    => 这个是先用i和2去累加，运算之后再去把i自身累加1 。    2 + ++i => 先把自身累加1, 然后再去和2去运算
+
+
+    var j = 2; // 3 4 5 6
+    console.log(1 + ++j/*4*/ + j++/*7*/ + ++j/*12*/ + j++); //17
+    console.log(j); //6
+
+
+    var m = 3; // 4 5 6 7 8
+    console.log(3 + m++/*6*/ + ++m /*11*/+ ++m/*17*/ + m++ /*23*/+ ++m); //31
+
+
+</script>

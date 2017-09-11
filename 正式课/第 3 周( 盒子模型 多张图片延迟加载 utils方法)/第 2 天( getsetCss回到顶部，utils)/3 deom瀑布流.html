@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        html,body{
+            width: 100%;
+        }
+        ul{
+            width: 30%;
+            float: left;
+            _height: 300px;
+        }
+        /*css3属性第二个ul*/
+        ul:nth-child(1){
+            _background: lightblue;
+        }
+        ul:nth-child(2){
+            margin: 0 5%;
+            _background: deeppink;
+        }
+        ul:nth-child(3){
+            _background: darkslategray;
+        }
+    </style>
+</head>
+
+<body>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</body>
+</html>
+<script>
+    var uls = document.getElementsByTagName('ul'); // 类数组[ul,ul,ul]
+    // 向这3个ul中动态添加li标签 => create => append
+    var ulsAry = listToArray(uls); //类数组转化成数组只要一次就可以了。由于dom的映射关系所以数组中的ul和页面中的ul是联系在一起的。
+    //向页面中动态添加50个li
+    function appendLiToUl(){
+        for(var i=0; i<50; i++){
+            var li = liFactory(); // 每次函数执行完都会留下li。
+            // 问题又来了？？ 把li添加到哪个ul中？ 就添加到最矮的ul中？
+            //var ulsAry = listToArray(uls); // 为了排序先转数组[ul,ul,ul]，只要转一次数组就可以了。在这里转化了50次。
+            ulsAry.sort(function (ul1,ul2){
+                return ul1.clientHeight - ul2.clientHeight;
+            });
+            var shortUl = ulsAry[0]; // 最矮
+            shortUl.appendChild(li); // 添加到最矮的ul中
+        }
+    }
+    appendLiToUl();
+
+    window.onscroll = function (){
+        // 只要滚动条滚动就会触发这个事件, 滚动的时候需要判断滚出去的高度的值是否超出了内容的高度减去一个值。如果超出了那么需要继续创建50个。然后添加到页面中
+        var scrollTop = win('scrollTop'); //每次滚动的时候都需要重新获取已经浏览器滚出去的高度
+        if(scrollTop > document.body.scrollHeight - 1000 ){
+        //如果滚出去的高度超出了一个临界点，那么就再创建50个li
+            //body.scrollHeight就是body内容区域的高度。
+            appendLiToUl(); //
+        }
+    }
+
+
+    function liFactory(){ // 创建li的方法
+        var li = document.createElement('li'); //创建
+        li.style.height = getRandom(100,200)+'px'; //随机高度每次都是100-200
+        li.style.backgroundColor = "rgb("+ getRandom(0,255) + "," + getRandom(0,255) + "," + getRandom(0,255) + ")"; // 随机背景色
+        return li; // 返回li
+    }
+
+
+    function win(attr,val){
+        if(typeof val != 'undefined'){
+            document.documentElement[attr] = val;
+            document.body[attr] = val;
+        }
+        return document.documentElement[attr] || document.body[attr];
+    }
+
+    function getRandom(n,m){ // 获取n到m之间的随机数
+        n = Number(n);
+        m = Number(m);
+        if(isNaN(n) || isNaN(m)){
+            return Math.random();
+        }
+        if(n>m){
+            var temp = n;
+            n = m;
+            m = temp;
+        }
+        return Math.round(Math.random()*(m-n)+n);
+    }
+
+    function listToArray(likeAry){
+        try{
+            return Array.prototype.slice.call(likeAry);
+        }catch(e){
+            var ary = [];
+            for(var i=0; i<likeAry.length; i++){
+                ary.push(likeAry[i]);
+            }
+            return ary;
+        }
+    }
+
+
+</script>

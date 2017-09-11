@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // extend
+    /*
+    *   继承: 子类继承父类的方法或者属性
+    *
+    * */
+
+    /*
+    *   1 原型继承: 子类的原型指向父类的实例   B.prototype = new A();
+    *            父类的私有和公有方法都是子类的公有方法
+    *            无论是定义在父类实例上的还是原型上的方法，相对于子类来说都是公有方法
+    *
+    * */
+    function A() {
+        this.x = 100;
+        this.getY = function () {
+        }
+    }
+
+    A.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function B() {
+        //this.x = 200;
+    }
+
+    B.prototype = new A(); //核心代码
+    B.prototype.constructor = B;
+
+    var a = new A();
+
+    var b = new B();
+
+    b.getX(); //100
+    console.dir(b);
+
+    /*
+    *  2  call继承 ： 在子类的构造函数中执行 C.call(this)
+    *                               父类.call(this)
+    *              把父类的私有方法变成子类的私有方法
+    *
+    * */
+    function C() {
+        this.x = 100; // d.x = 100;
+    }
+
+    C.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function D() {
+        C.call(this); //核心代码 把C父类函数中的this修改成当前的this(当前实例),相当于把C父类构造函数中的私有属性添加给d实例一份
+    }
+
+    var d = new D();
+    console.log(d); // x : 100
+
+    /*
+    *  3 冒充对象继承 : 在子类的构造函数中遍历父类的一个实例。并且把所有遍历出的属性和方法，分别添加给子类实例。
+    *       如果在遍历过程中不使用hasOwnProperty等方法过滤出公有属性，那么就是把父类的私有和公有方法都变成子类的私有方法,都是添加到子类实例上的方法
+    *
+    * */
+
+    function E() {
+        this.x = 100;
+    }
+
+    E.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function F() {
+        var e = new E(); //父类一个实例
+        for (var key in e) { //
+            //console.log(key); // x : 100, getX : FN??
+
+            this[key] = e[key]; // f.x = e.x   f.getX = e.getX;
+        }
+    }
+
+    var f = new F();
+    console.log(f); //
+
+    /*
+    *  4 组合继承  原型继承+call继承
+    *       由于原型继承是把私有+公有全部都变成了子类的公有,call继承就是把私有变成私有. 组合在一起就子类的公有方法中多了一套父类的私有方法。但是调用时优先使用私有方法.即使公有上还有一个相同的，那么也不会出现问题
+    * */
+    function G() {
+        this.x = 100;
+    }
+
+    G.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function H() {
+        G.call(this); // call继承实现
+    }
+
+    H.prototype = new G(); //原型继承实现
+    H.prototype.constructor = H;
+    var h = new H();
+    console.log(h);
+
+    /*
+    *   5 中间件继承    __proto__这个属性在低版本ie中是不可以使用的。
+    *       子类的原型上__proto__属性本来应该是指向Object.prototype的。但是现在却指向父类的原型。所以就可以继承父类原型上的方法。但是由于父类的原型也存在__proto__属性，所以并不会破坏原来的只想。只不过是多了一个中间项。
+    *       把父类的公有方法变成子类的公有方法
+    *
+    * */
+
+    function J() {
+        this.x = 100;
+    }
+
+    J.prototype.getX = function () {
+    };
+
+    function K() {
+
+    }
+
+    K.prototype.__proto__ = J.prototype; // 核心代码
+    var k = new K();
+    console.log(k);
+
+
+    /*
+    *  6 : Object.xxx  Object.prototype.xxx 不兼容
+    *      Object.create(obj); 作用: Object.create本身是一个方法，需要一个对象(obj)参数。 返回一个类的实例，并且这个类的原型是传进来的obj参数
+    * */
+
+    function M() {
+        this.x = 100;
+    }
+
+    M.prototype.getX = function () {
+    };
+
+    function N() {
+
+    }
+
+    //N.prototype = Object.create(M.prototype);  // a
+    N.prototype = Create(M.prototype);  // a
+    // a.prototype = M.prototype
+    var n = new N();
+    console.log(n);
+
+
+    //作用: 需要一个对象(obj)参数。 返回一个类的实例，并且这个类的原型是传进来的obj参数
+    function Create(obj) {
+        function Class() {
+        }
+
+        Class.prototype = obj;
+        return new Class();
+        // new Class.__proto__ == obj   true
+    }
+</script>
+</body>
+</html>

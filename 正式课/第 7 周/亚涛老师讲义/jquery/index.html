@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>
+    <script>
+        $(function () {
+
+        });
+        // jquery的ready事件
+        // 当html中的DOM结构加载完成时执行该事件
+        $(document).ready(function () {
+            console.log('jquery ready事件')
+        });
+        // window的onload事件
+        // 当html中的所有资源（图片、css、js以及其他所有资源）加载完成时执行该事件
+        $(window).load(function () {
+            console.log('onload事件')
+        });
+
+        var ready = function (callback) {
+            // 如果html现在已经全部加载完成，则DOMContentLoaded和onreadystatechange事件不会被执行
+            // 所以为了防止在html已经加载完成时去执行ready方法，不会触发回调函数的bug
+            // 执行ready方法之前，先判断下html是否加载完成，如果已经加载完成直接执行callback，否则注册DOMContentLoaded或者onreadystatechange事件。
+            if (document.readyState === 'complete') {
+                callback();
+                return;
+            }
+            // 标准浏览器 注册DOMContentLoaded事件
+            if (window.addEventListener) {
+                window.addEventListener('DOMContentLoaded', function () {
+                    callback();
+                }, false);
+            } else {
+                // ie浏览器 给document注册onreadystatechange事件
+                document.onreadystatechange = function () {
+                    // 因为在html文档特别小的情况下，interactive有可能不会出现，所以为了避免情况引起的bug，这里判断两个属性。
+                    if (/^interactive|complete$/.test(document.readyState)) {
+                        callback();
+                        // 为了防止callback执行两遍
+                        document.onreadystatechange = null;
+                    }
+                };
+                // document.readyState
+                /**
+                 * 该属性标识html文档加载的状态
+                 * loading 正在加载html文档
+                 * interactive html中的DOM加载完成，但是其他资源还未加载
+                 * complete html中的所有资源加载完成
+                 */
+            }
+
+        };
+
+        ready(function () {
+            console.log('my ready');
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

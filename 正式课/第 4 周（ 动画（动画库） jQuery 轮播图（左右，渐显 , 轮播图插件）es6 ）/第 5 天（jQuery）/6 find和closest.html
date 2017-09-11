@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>find&closest</title>
+</head>
+<body>
+<div id="div">
+        <!--<div id="div1"> </div>-->
+        <ul>
+            <li>
+                <span id="span"></span>
+            </li>
+            <li>
+                <p id="p"></p>
+            </li>
+        </ul>
+
+</div>
+
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    // find: 查找后代元素
+    $('#div1 span');
+    $('#div1 p');
+    $('#div1 li');
+    // parent()
+    var $div1 = $('#div1');
+    $div1.find('span');
+    $div1.find('p');
+    $div1.find('li');
+
+    // closest : 获取距离元素最近的在指定选择器的祖先元素
+    var $div = $('#p').closest('div');
+    console.log($div);
+</script>

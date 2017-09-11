@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--
+        1 Function.prototype.
+        2 box.index
+        3 box.timer
+        4 $.ajax
+        5 任何一个引用数据类型都可以在它身上添加属性，ele['AAA'+click]
+        break; continue;
+        oDiv.onclick = function (){}
+        oDiv.onclick = (function (){
+            return function (){}
+        })
+        oDiv.onclick = fn; // null
+        number string boolean null undefined
+        null: 空
+            window.onscroll = null; DOM 0 事件移除
+            frg = null;
+            获取不到的元素
+            exec捕获不到结果
+            ele.previousSibling => previousElementsSibling(6-8) => while
+            while(条件){
+                exec返回结果到最后总会是null
+                prev = prev.previousSibling
+            }
+
+         undefined :
+            1 获取一个不存在的属性
+            2 形参定义没有传
+            3 函数没写return默认返回undefined
+            4 变量在预解释阶段都是undefined
+            5 typeof   'number'  'string'  'boolean' 'object' 'undefined' 'function'
+         自身false :  [] == 0
+             0 NaN ''  null undefined
+            6 判断数据类型
+                typeof  instanceof constructor Object.prototype.toString.call()
+            7  string方法
+                charAt(index)
+                charCodeAt(index)
+                substr(n,m) 从索引n开始截取m个
+                substring(n,m) 从索引n截取到m-1
+                slice(n,m) 支持负数索引
+                toUpperCase
+                toLowerCase
+                indexOf 判断字符或者单词是否在字符串出现过  返回索引  -1
+                lastIndexOf 最后一次出现
+
+                split('')  reg  把字符串拆分成数组
+                replace(reg,function (最大正则捕获，$1,$2...,index,input){
+
+                })；
+                replace(reg,'$1'); // 用第一个分组
+                match(reg) exec  [2015,2016,2017] 要求正则需要有g
+        Date
+            getFullYear()  getMonth() getDate() getDay() getHours() getMinutes() getSeconds() getMilliSeconds()     getTime()  距离1970 ms数  电商网站必备
+            new Date('')
+        RegExp
+            \d \w \s \b \n \ \. . ^ $
+            + ? * {n} {1,2} {n,}
+             |  ^(18|19)$  [xyz] [^xyz] [\d] [+-] [.]
+             ? +?  ?:  (?=6) (?!) zero-width-lookahead 不占宽度
+             /^\s*$/   /[+-]?(\d+(?:\.\d+)?)/   /(\w)\1/  aabb  abab
+             千分符
+             模板{1}  正则教材不妨也看看
+             //去单位getCss   14  14.5  -14.5px
+             /-?\d+(\.\d+)?(px|pt)?/  '0.8'  0.010.01  fadeIn
+        Math
+            Math.atan2(y,x) => 通过坐标返回弧度   => 1弧度 = 180/Math.PI 角度 拉钩效果
+            Math.abs();
+            Math.floor();
+            Math.ceil();
+            Math.round()
+            Math.random()
+            Math.max()
+            Math.min()
+            Math.round(Math.random()*(m-n)+n) 随机背景色 随机....
+            Math.pow(2,3) => 8
+            ....
+        Object
+            {}.xxx = 5;
+            var obj = {};
+            obj['xxx'] = [];  for in   ele['AAA'+type] = [];     //关联数组
+            delete
+
+        Array
+            push()  ary[ary.length] = x;  length++  splice(length,0,x)
+            pop() length--
+            unshift() splice(0,0,x)
+            shift()
+            splice(n,m) 删除项的时候需要注意塌陷问题   run....
+            slice(n,m) Array.prototype.slice.call(likeArray,0)
+                Array.prototype.slice.call(arguments,1) utils.css(ele) setCss set...
+
+            reverse()
+            sort()  sort(function (a,b){return a-b})  a.cells[n].inner'HTML  localeCompare
+            join()  split() eval()
+            concat() 拼接数组  ary.concat()
+
+            indexof
+            lastIndexof
+            forEach => 处理过
+            map => 处理过
+            Array.prototype.forEach = function (callback){
+                this;
+                for(var i=0; i<this.length; i++){
+                    callback(this[i],i,this);
+                }
+            }
+
+            ['a','b','c'].forEach(function (item,index,ary){
+
+            });
+    -->
+<!--
+    第一周：
+        git clone 地址
+        git pull origin master    branch
+
+        git init
+        git remote add xxx 地址
+        git remote -v
+
+        git add -A
+        git commit -m"xxx"
+        git push origin master  git bush xxx 分支名字
+
+        var function 带var只声明没有赋值默认undefined  function已经赋值结束
+
+        var obj = {
+            name : 'zhufeng',
+            school : obj.name   can not read property name of undefined
+        }
+        // 这种错误经常报，box innerTHML  对象有问题
+
+        var fn = function xxx(){}
+        if(false){  function yyy(){} }
+        (function xxxx(){})()
+         function xxx(){
+            return (function (){
+                //return 666;
+            })()
+            return function yyy(){}
+            function zzz(){}
+         }
+         function fn(){}
+         var fn = 5;
+         function fn(){}
+
+         作用域释放:
+            var a = (function (n){
+                var num == 100; 201
+                return function (){
+                    n++;
+                }
+            })(200)
+            a();
+            a(); .....
+
+
+            box.onclick = (function (){
+                return function (){}
+            })();
+
+            (function (){
+                box.onclick = function (){}
+
+            })()
+
+            function fn(){
+                return function (){}
+            }
+            fn()()
+
+            fn(1)(6)
+
+
+         this用法:
+              1 事件中的this  绑定给谁谁就是this
+              2 函数执行之后的this  看谁调用函数
+              3 自运行函数中的this  usestrict
+              4 构造函数中的this 实例
+              5 call & apply  bind
+              6 定时器中的this
+              7 回调函数中的this也是window
+
+         面向对象
+             1 单例模式  {}
+             2  工厂模式  function
+             3 构造函数模式  类  实例 对象
+             function Banner(x,y){
+                var x = x;
+                this.x = x;
+                this.y = y;
+             }
+             4 原型模式
+                Banner.prototype.constructor = Banner;
+                new Banner.__proto__ === Banner.prototype;
+             继承
+                B.prototype = new A();
+                function A(){
+                    this; //b
+
+                }
+                function B(){
+                    A.call(this)
+                    var a = new A();
+                    for(var key in a){
+                        if(hasOwnProperty)
+                        this[key] = a[key]
+                    }
+                }
+
+-->
+
+<!--
+    表格排序:
+        ajax ： 1 new XMLHttpRequest()  2 xhr.open('get',url,true/false)  3 xhr.onreadystatechange  4 xhr.send()  5 xhr.abort() 停止掉这个请求
+        bindData ： 把数据添加到页面中
+        document.createElement('p')
+        dom回流 frg document.createDocumentFragment();
+        frg = null;
+
+        如何把点击表头中this一步一步该表到sort方法中   call
+
+        JSON: 属性名字双引号  字符串双引号
+        JSON.parse   JSON.stringify    eval    utils.jsonParse()
+
+        'JSON' in window
+        window.JSON
+        /MSIE 6|7|8/
+        try catch
+        throw new Error  e.message
+
+        call 和 apply bind
+
+-->
+
+<!--
+    盒子模型：
+        clientWidth  Height  Left Top
+        offsetWidth  Height  Left Top
+        scrollWidth Height   Left Top
+        offsetParent
+        回到顶部
+    utils.hasClass  /'(^| +)' +  c1 + "?=( +|$)" /
+     addClass
+     removeClass :  ?=
+     getElesByClass  => * 假设都符合条件   只要有一个没有匹配上就不符合条件
+     getCss
+     setCss
+     setGroupCss => {}   只有{}.toString() == '[object Object]'
+     utils.win
+     css => 根据参数不同来调用不同的方法
+     图片延迟加载
+        meta:vp     name='viewport'   device-width  scale  ... 移动端
+        320 iphone5
+        375 iphone6
+        414 iphone6 plus
+
+        1 var tempImg = new Image()
+        2 tempImg.src = img.getAttribute('realSrc')
+        3 tempImg.onload = function (){
+        }
+        4 tempImg.isLoaded = true;
+
+        fadeIn
+        定时器 =>
+-->
+
+<!--
+    第四周
+        1 动画  匀速动画   b+t/d*c;
+        2 animate
+        function animate(ele,target,duration,callback){
+             var begin  = {}
+             var change = {};
+             for(var key in target){
+                 begin[key] = utils.css(ele,key);
+                 change[key] = target[key] - begin[key];
+             }
+             window.clearInterval(ele.timer);
+             ele.timer = window.setInterval(function (){
+                time += 10;
+                if(time >= duration){
+                    window.clearInterval(ele.timer);
+                    utils.css(ele,target);
+                    //如果结束运动还想做什么
+                    typeof callback == 'function' && callback.call(ele)
+                    return;
+                }
+
+                for(var key in change){
+                    if(change[key]){
+                        ....如果有改变才计算新的位置并且赋值
+                    }
+                }
+
+             },10)
+        }
+
+        渐显轮播 ：
+            1 利用层级关系和透明度来实现
+            2 默认zIndex都是0 透明度都是0
+            3 在图片延迟加载的时候，把第一张层级提高，并且透明度动画到1
+            4 当切换图片，让新图片的层级为1，把其他的层级设置0. 新图片还要立刻透明度动画到1 ，当动画到1之后再其他的图片的透明度设置成0.
+            5 图片加载的时候需要闭包。只要事件和循环嵌套一起就需要处理i的问题。循环绑定事件的时候
+       jQuery :
+            $('#id p').css({width:100,height:200})
+            [].slice().splice().concat().reverse().push()
+            $.ajax()
+            $.extend({}) 直接拓展到jQuery这个方法上了
+            $.fn.extend({}) 添加到原型上的
+            $('div1').banner('data.txt');
+-->
+
+    <!--
+        第五周
+            ele.addEventListener(type,fn,false); //  click 冒泡还是捕获阶段
+            ele.attachEvent(type,fn); // onclick
+
+            问题:
+                1 重复绑定
+                2 顺序问题
+                3 this问题
+    -->
+
+</body>
+</html>
+<script>
+    // div1.AAAclick
+    function on(ele,type,fn){
+        if(ele.addEventListener){
+            ele.addEventListener(type,fn,false);
+            return;
+        }
+        if(!ele['AAA'+type]){
+            ele['AAA'+type] = [];
+            ele.attachEvent('on'+type,function (){
+                run.call(ele);
+            });
+            //ele.attachEvent('on'+type,run.bind(ele));
+        }
+        var a = ele['AAA'+type];
+        for(var i=0; i<a.length; i++){
+            if(a[i] === fn){
+                return;
+            }
+        }
+        a.push(fn);
+    }
+</script>

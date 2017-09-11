@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom2事件兼容问题</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
+<script src="event-1.0.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+
+    bind(div1,'click',fn1);
+    //bind(div1,'click',fn2);
+    //bind(div1,'keyup',fn1);
+    //bind(div1,'keyup',fn2);
+    //unbind(div1,'click',fn1);
+   // unbind(div1,'keyup',fn1);
+    unBind(div1,'click',fn1);
+
+
+    function fn1(){
+        console.log(1);
+        console.log(this === div1); // true
+    }
+    function fn2(){
+        console.log(2);
+    }
+
+</script>

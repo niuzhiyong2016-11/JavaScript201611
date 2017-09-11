@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="font-size: 100px;">
+    距离考试还有<span> 00:24:00</span>
+</body>
+</html>
+<script>
+    window.setInterval(function (){
+        var curDate = new Date();
+        var tarDate = new Date('2016/09/24 17:00:00');
+        var time = tarDate.getTime() - curDate.getTime();
+        //把time转化成hour minute seconds
+        var h = Math.floor(time/(1000*3600));
+
+        var m = Math.floor( (time - h*3600*1000)/(1000*60) )  ;
+
+        var s = Math.floor( (time - h*3600*1000 - m*60*1000)/1000 );
+
+        document.body.children[0].innerHTML =   h + ':' + m + ":" + s;
+    },1000);
+
+</script>

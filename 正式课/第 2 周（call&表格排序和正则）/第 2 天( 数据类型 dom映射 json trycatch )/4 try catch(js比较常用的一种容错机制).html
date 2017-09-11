@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    try {
+        // 先尝试使用try这个花括号内的代码，如果报错那么就去运行catch里面的代码
+        var divs = document.getElementsByClassName('.c1');
+    } catch (e) {
+        // Error
+        //console.log(e.message); //e.message能捕获到try代码块中抛出的错误信息
+    }
+
+    function listToArray(likeAry) {
+        try { // ie6-8不能这样是call。'this' 不是 JavaScript 对象
+            return Array.prototype.slice.call(likeAry, 0);
+            //throw new Error("哈，这是我自己玩的");
+        } catch (e) {
+            // e能捕获到try代码中报的错误
+            console.log(e.message);
+            var ary = [];
+            for (var i = 0; i < likeAry.length; i++) {
+                ary.push(likeAry[i]);
+            }
+            return ary;
+        }
+    }
+
+    listToArray(document);
+</script>
+</body>
+</html>

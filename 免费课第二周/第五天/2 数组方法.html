@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   length: length属性是数组长度。
+    *   length-- : 删除数组的最后一项
+    *   length++ : 了解   就是在数组末尾增加一项。但是没有说明增加什么，默认增加一个undefined
+    *   索引: 最后一项的索引永远都是length-1,并且还可以通过索引来获取数组的某一项，或者给某一项赋值。如果给一个不存在的索引赋值那么就是增加项了。
+    *   比如： ary[ary.length] = 123;   在数组的末尾增加一项
+    *
+    *
+    *   // 方法：
+    *       1 push 向数组末尾增加一项，返回数组的新长度
+    *       2 pop 删除数组的末尾项 ，返回删除的那一项
+    *       3 unshift 向数组开头增加一项，返回数组的新长度
+    *       4 shift 删除数组的开头项，返回删除的那一项
+    *       5 splice(n,m) 从索引n开始删除m个，返回删除的项组成的新数组
+    *         splice(n)  从索引n开始删除到末尾
+    *         splice(n,m,x) 从索引n开始删除m个，然后把x插入到删除的位置
+    *         splice(n,0,x) 删除的个数为0的时候，那么默认把x插入到n索引的前面
+    *         ps: splice的返回值永远是一个数组，如果删了项那么数组里就是这些项，如果没有删那么就是空数组
+    *        6 slice(n,m) 从索引n开始复制到索引m，不包含m
+    *          slice(n)  从索引n开始复制到末尾
+    *          slice()   复制整个数组
+    *          ps: slice方法的返回值永远都是一个新数组。如果没有复制到那么就是一个空数组
+    *
+    *        7 ary1.concat(ary2) 拼接数组，返回ary1和ary2拼接好的新数组
+    *          ary1.concat(5) 参数如果不是数组那么就是把这个参数当作数组项拼接在一起
+    *
+    *        8 join('$')  把数组的项目拼接成字符串,数组的每一项用$隔开
+    *          eval("alert()")  把这个字符串当作js表达式运行 => 去引号
+    *
+    *        9 reverse() 把数组倒序过来，返回倒序过后的原有数组
+    *
+    *
+    *        10 sort   升序:   sort( function(a,b){ return a-b } )
+    *                  降序:   sort( function(a,b){ return b-a } )
+    *
+    *
+    *        11 indexOf   判断这个项是否出现在数组中，如果出现返回对应的索引位置，如果没有出现返回-1
+    *
+    *        12 lastIndexOf 和indexOf用法基本相同，这个是最后一次出现的索引位置
+    *
+    *        13 forEach  遍历数组  也需要一个函数参数。 item,index,ary形参. forEach没有返回值
+    *
+    *           forEach(function (item,index,ary){
+    *               // item代表的是循环时候的每一项。每次都是代表不同的
+    *               // index 是item的索引
+    *               // ary 是遍历的数组
+    *           });
+    *
+    *        14 map  和forEach最大的区别就是有返回值，并且返回值是一个数组。这个数组的长度取决于原数组有多少项。数组里的每一项是函数的每次执行的返回值
+    *           map(function (item,index,ary){
+    *
+    *               // return的值是否使用item或index都可以。return什么就把什么添加到map的返回值那个数组中
+    *               return item+index
+    *           })
+    *
+    * */
+    var ary = [5,3,1,2,4];
+
+    ary.sort(function (a,b){
+        // a,b代表就是比较时候的两项
+        return a-b; // 这才是是否换位置的根本，如果这个差是大于0那么就是换位置，否则就是原地不动
+    });
+    console.log(ary);
+
+    var ary = [1,2,3];
+    var res = ary.map(function (item,index,ary){
+       return item*100;
+    });
+    console.log(res); //[100,200,300]
+
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 30px; background: lightblue;text-align: center; line-height: 30px; font-weight: bold; font-size: 26px; ">0</div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    var n = 0;
+    var timer = null; //只要你启动了一个定时器timer就被重新赋值了。不管是第几个定时器不是null。
+    div1.onclick = function (){
+        //无论哪次点击都是从这里开始执行代码的
+        if(timer == null){ //没有定时器在工作
+            timer = window.setInterval(function (){
+                n++;
+                div1.innerHTML = n;
+            },1000);
+        }else{ // 由于上一次点击的时候启动了一个定时器所以timer的值不是null了，而是代表定时器返回值的那个数字。所以代码第二次点击的时候会执行到这个条件内
+            //只要存在一个定时器就需要清空
+            window.clearInterval(timer); //但是清空定时器也只是把定时器里需要执行函数的任务停掉。timer的值还是那个定时器的返回值数字。那么保证下次点击的时候是启动定时器，所以要符合timer == null的条件。那么需要主动把timer的值赋值为null
+            timer = null;
+        }
+    }
+</script>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应用发布订阅模式完成弹性势能动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1,#div2,#div3{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" style="background: red; top: 100px;"></div>
+    <div id="div2" style="background: green; top: 300px;"></div>
+    <div id="div3" style="background: blue; top: 500px;"></div>
+</body>
+</html>
+<!--<script src="event-4.0.js"></script>-->
+<script src="event-4.1.js"></script>
+<script src="drag.js"></script>
+<script>
+//    var div1 = document.getElementById('div1');
+//    var div2 = document.getElementById('div2');
+//    var div3 = document.getElementById('div3');
+//    on(div1,'mousedown',down);
+//    on(div2,'mousedown',down);
+//    on(div3,'mousedown',down);
+    // 上面的代码只是完成了拖拽
+    // 1 我在刚开始拖拽的时候要做什么 clearEffect
+    // 2 我在拖拽的过程中要做什么  getSpeed
+    // 3 我在拖拽结束的时候要做什么   fly drop
+    var divs = document.getElementsByTagName('div'); // div1,div2,div3
+    for(var i=0; i<divs.length; i++){
+        on(divs[i],'mousedown',down); // 每个盒子都可以拖拽了
+        on(divs[i],'selfdragstart',increaseIndex); // 增加层级
+        on(divs[i],'selfdragstart',clearEffectTimer); // 增加层级
+        on(divs[i],'selfdraging',getSpeed);
+        on(divs[i],'selfdragend',fly);
+        on(divs[i],'selfdragend',drop);
+    }
+    function increaseIndex(e){
+        for(var i=0; i<divs.length; i++){
+            divs[i].style.zIndex = 0;
+        }
+        this.style.zIndex = 1;
+    }
+    function getSpeed(e){
+        if(this.prevPosi){
+            //this.prevPosi = e.pageX;
+            this.speed = e.pageX - this.prevPosi;
+        }
+        this.prevPosi = e.pageX;
+
+    }
+    function fly(e){
+        this.speed *= 0.98;
+        var curL = this.offsetLeft;
+        curL += this.speed;
+        var minL = 0, maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        if(curL < minL){
+            curL = minL;
+            this.speed *= -1;
+        }
+        if(curL > maxL){
+            curL = maxL;
+            this.speed *= -1;
+        }
+        this.style.left = curL + 'px';
+        //var that = this;
+        if(Math.abs(this.speed) > 0.5){
+            this.flyTimer = window.setTimeout(processThis(fly,this),10);
+        }
+    }
+    function clearEffectTimer(){
+        window.clearTimeout(this.flyTimer);
+        window.clearTimeout(this.dropTimer);
+    }
+    function drop(e){
+        this.dropSpeed = !this.dropSpeed ? 9.8 : this.dropSpeed + 9.8;
+        this.dropSpeed *= 0.98;
+        var curT = this.offsetTop;
+        curT += this.dropSpeed;
+        var maxT = (document.documentElement.clientHeight||document.body.clientHeight) - this.offsetHeight;
+        if(curT > maxT){ // 到底了
+            this.style.top = maxT + 'px';
+            this.dropSpeed *= -1;
+            this.dropFlag++;
+        }else{
+            this.style.top = curT + 'px';
+            this.dropFlag = 0;
+        }
+
+        if(this.dropFlag < 2){
+            this.dropTimer = window.setTimeout(processThis(drop,this),10);
+        }
+    }
+
+    //new Drag(div1);
+
+</script>

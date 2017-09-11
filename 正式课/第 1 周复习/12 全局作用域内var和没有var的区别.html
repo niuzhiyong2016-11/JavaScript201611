@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    console.log(num); //undefiend
+    console.log(n); //Error
+    var num = 10; //window.num = 10
+    n = 100; //window.num = 100
+    console.log(num,n); //10,100
+    //区别： 是否会被预解释,无论是否会被预先解释，都是全局window的一个属性
+
+    (function (){
+        var m; //在查找过程中如果遇到了m那么就直接赋值给这个m了
+        ~function (){
+            m = 1000; //这个m如果一直查找到全局都没有m变量那么就赋值给window.num了
+        }()
+    })()
+
+</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多级菜单</title>
+    <style>
+        html,body,div,ul,li,span,em{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .list{
+            list-style: none;
+            width: 300px;
+            padding: 10px;
+            background: -webkit-linear-gradient(top,lightpink,lightblue);
+            _background: lightpink;
+            overflow: hidden;
+            font-size: 14px;
+            color: #999;
+            font-family: "Microsoft YaHei UI";
+        }
+        .list li{
+            line-height: 20px;
+            position: relative;
+        }
+        .list li span{
+            display: inline-block;
+            margin-left: 24px;
+            -webkit-user-select: none;
+        }
+        .list li em{
+            display: block;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            background: url("icon.png") no-repeat -58px -27px;
+            cursor: pointer;
+        }
+        .list li em.open{
+            background-position: -40px -27px;
+        }
+        .first{
+            margin-left: 0px;
+        }
+        .second{
+            margin-left: 20px;
+            display: none;
+        }
+        .third{
+            display: none;
+            margin-left: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <ul class="list first">
+        <li>
+            <!--这个em是给能展开的菜单的+或者-号做准备的-->
+            <em></em><span>第一级第一个</span>
+            <ul class="second">
+                <li><span>第二级第一个</span></li>
+                <li><span>第二级第二个</span></li>
+                <li>
+                    <em></em><span>第二级第三个</span>
+                    <ul class="third">
+                        <li><span>第三级第一个</span></li>
+                        <li><span>第三级第二个</span></li>
+                        <li><span>第三级第三个</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><span>第一级第一个</span></li>
+    </ul>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    /*var title = document.getElementsByTagName('title')[0]
+    window.setInterval(function (){
+        ++title.innerHTML
+    },1000);*/
+    //不是所有的span标签都需要添加手型样式，span存在一个em元素哥哥才添加这个样式
+    var list = utils.getElesByClass('list',document)[0];
+    var spans = list.getElementsByTagName('span');
+    for(var i=0; i<spans.length; i++){
+        //循环所有span标签，把前面有em的添加一个手型样式
+        var curSpan = spans[i];
+        var em = utils.prev(curSpan); // 获取上一个元素哥哥节点
+        if(em && em.nodeName.toLowerCase() == 'em'){
+            // em存在并且em的节点名称是em
+            utils.css(curSpan,'cursor','pointer');
+        }
+    }
+    // 利用事件委托把所有的点击事件全部委托给最外层list去处理
+    // 我要判断这个点击事件的事件源是否来自em或者span
+    // 不是点击所有的span我都要展开或者关闭列表
+    list.onclick = function (e){
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if(target.nodeName == 'EM' || target.nodeName == 'SPAN'){
+            // 这个判断如果成立那么肯定是点击的em或者span标签上。
+            var parent = target.parentNode; //无论em还是span我先获取到它们的父节点元素li
+            // 如果parent的ul孩子存在那么就可以操作这个ul了
+            var ul = utils.children(parent,'ul')[0]; // 别忘记这个索引0
+
+            if(ul){ // 如果ul存在我继续向下判断了
+                // 如果ul是展开的block那么就关闭，如果是node那么就打开
+                // 判断这个ul是关闭还是展开的就是判断ul的已经生效的display样式是不是block
+                //var em = utils.children(parent,'em')[0]; //我只获取parent下面的第一个em。
+                var uls = parent.getElementsByTagName('ul');
+                var ems = parent.getElementsByTagName('em');
+                var isBlock = utils.css(ul,'display') === 'block';
+                if(isBlock){ // 展开
+                    for(var i=0; i<uls.length; i++){
+                        utils.css(uls[i],'display','none');
+                        utils.removeClass(ems[i],'open');
+                    }
+                }else{ // 关闭
+                    utils.css(ul,'display','block');
+                    utils.addClass(ems[0],'open'); // 增加减号样式
+                }
+            }
+        }
+
+    }
+
+
+</script>

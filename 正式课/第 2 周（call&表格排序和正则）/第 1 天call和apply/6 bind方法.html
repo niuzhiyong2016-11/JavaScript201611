@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   bind方法的作用也是用来修改this关键字的。
+    *   区别： bind方法修改完this之后并不执行。只是返回了一个已经修改过this的新函数
+    *   bind方法的兼容性是有问题的
+    *   思想: bind方法只是先处理了this然后返回了一个新函数。预处理思想
+    *
+    * */
+    function sum(num1, num2) {
+        console.log(this);
+        console.log(num1 + num2);
+    }
+
+    //sum.call(null,100,200); //300 => 函数执行已经结束了
+    //sum.apply(null,[100,200]); // 300 也执行结束了
+
+    // call和apply再修改this的同时，也把函数执行了。但是我只想改this不想执行函数?
+    var res = sum.bind(document.body, 100, 200);
+    var res = sum.bind(document.body);
+    console.log(res === sum); // false res就是修改过this的新函数
+    res(300, 400); // 700
+</script>
+</body>
+</html>

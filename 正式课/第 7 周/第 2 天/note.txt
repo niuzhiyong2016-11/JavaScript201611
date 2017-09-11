@@ -1,0 +1,168 @@
+一、毕业项目建议:
+   1、按照田喜老师发的那个复习大纲，“整理笔记”然后慢慢的复习(笔记做好之后，我们按照笔记每天晚上睡觉之前拿出半个小时到一个小时时间，从头到尾看一遍)
+
+   2、PC端的项目尽快做，先把HTML+CSS+JS效果做出来，第七周AJAX结束，自己开始着手数据的绑定，等到C模块进行到一半的时候，使用Express搭建自己PC网站的后台程序，在做一个CMS内容发布系统(Angular、bootstrap...)
+
+   3、移动端的个人简历(B模块第八周结束)
+
+   4、在C模块中学完Angular后自己最好搭建一个个人的博客，把自己总结的笔记写成文章发布上去
+
+   5、你们还可以使用学到的React做一个移动端的小程序
+
+二、NODE中的内置模块
+  1、HTTP:创建服务、监听端口、接收客户端请求、给客户端返回对应的内容...
+
+  2、URL:提供了一些方法,用来解析URL地址中的每一部分信息的
+
+  3、FS:提供了一些方法供我们进行I/O操作
+
+    fs.readFileSync([pathname],[encode]):同步读取文件中的内容  fs.readFile:异步读取文件中的内容
+    ->[pathname]:要读取文件的目录地址
+    ->[encode]:读取内容的编码格式,我们一般都用'utf-8'
+    读取出来的内容都是字符串
+
+    fs.writeFileSync([pathname],[content],[encode]):同步向一个文件中写入内容
+    ->[content]:我需要写入的内容,也必须是字符串格式的数据
+    这个写入方法是覆盖式写入
+
+    sync:同步
+    async:异步
+
+
+三、MIME类型
+  每一个资源文件(HTML/CSS/JS...)都有自己对应的类型,这个类型就叫做MIME类型
+  HTML -> text/html
+  CSS  -> text/css
+  JS   -> text/javascript
+  TXT  -> text/plain
+  JSON -> application/json
+  PNG  -> image/png
+  ...
+  MIME一览表：http://www.w3school.com.cn/media/media_mimeref.asp
+
+
+四、AJAX
+
+  1、什么是AJAX和AJAX是干什么的?
+     async javascript and xml
+     异步的JS:页面中某一个区域内容的局部刷新(所以有人把AJAX的作用称之为:实现页面局部刷新的)
+     XML:可扩展的标记语言(XHTML中的标签都是W3C规范的,但是XML中的标签基本上都是自己定义的),我们平时可能会使用XML来存储数据,这样的数据结构化比较强...
+
+     HTML:超文本标记语言
+     XHTML:更加严谨的HTML(我们现在用的其实都是XHTML)
+
+
+     AJAX是干什么的?
+     客户端的浏览器也可以向服务器端发送请求,把所需要的资源文件中的原代码获取到,这些请求是不需要使用AJAX的；我们平时使用AJAX也是向服务器端发送请求，但是获取到的内容一般都是数据(JSON格式的数据->JSON格式的字符串)，客户端拿到数据后把数据展示在页面中即可.
+
+  2、使用AJAX
+     var xhr=new XMLHttpRequest; //->创建一个AJAX实例(AJAX对象)  回去后看课时137：AJAX兼容处理及惰性思想,学习惰性编程思想
+
+     //->xhr.open:打开一个请求的URL,并且配置一些基本的参数
+     xhr.open([HTTP METHOD],[Request URL],[SYNC/ASYNC],[USER NAME],[USER PASS]);
+
+     xhr.onreadystatechange=function(){//->onreadystatechange:AJAX状态发生改变的时候会触发这个事件,因此把后面的函数执行
+         //->xhr.readyState:AJAX状态
+         //->xhr.status:服务器响应的状态码
+         if(xhr.readyState===4 && /^2\d{2}$/.test(xhr.status)){
+             ->xhr.responseText:获取服务器返回的内容(响应主体中的内容)
+         }
+     }
+
+     //->发送AJAX请求(此时AJAX请求这件事情算是开始了,直到服务器把需要的内容给我才算结束)
+     xhr.send([POST DATA]);
+
+
+  3、HTTP METHOD:AJAX请求方式
+     在前后端交互模型中(客户端和服务器端的交互模型)，客户端既可以给服务器发送请求，也可以在发送请求的时候把一些内容传递给服务器；服务器端接收到请求后，以及拿到客户端传递进来的内容后，会把需要的东西给客户端返回。
+
+     客户端如何把信息传递给服务器:
+        ->问号传参：在请求的URL地址后面加?的方式
+        ->通过请求头把信息传递给服务器
+        ->通过请求主体把信息传递给服务器
+
+     服务器端把信息返回给客户端:
+        ->通过响应头
+        ->通过响应主体
+
+     [GET系列]
+        GET:(获取)一般应用于给服务器端的少,从服务器端获取的多
+        DELETE:(删)在服务器上删除一个文件
+        HEAD:(头)只获取服务器返回的响应头信息,响应主体信息不获取
+
+     [POST系列]
+        POST:(推送)给的多,拿的少
+        PUT:(放)在服务器上放一个文件
+
+     GET PK POST:
+        GET系列传递给服务器内容的方式采用问号传参的方式
+          xhr.open('get','/getAll?name=zf&age=8');
+          xhr.send(null);
+
+        POST系列传递给服务器内容的方式采用请求主体
+          xhr.open('post','/getAll');
+          xhr.send('{"name":"zf","age":8}');
+
+        1、传递内容大小问题
+          GET请求使用的是问号传参方式,POST使用的是请求主体方式;
+          GET请求传递给服务器的内容比较少(因为：如果传递的内容比较多，那么在请求URL后面拼接的内容就要很多，每个浏览器对于URL长度都有限制，谷歌限制8KB，狐火限制7KB，IE限制2KB，超过限定的部分会被浏览器截取，这样传给服务器的内容就不完整了)
+          POST是放在请求主体中传递给服务器的，理论上没大小的限制(实际项目中为了保证传输的速度，我们会限制大小)
+
+        2、缓存问题
+          GET请求容易出现缓存(这个缓存我们一般不要,因为是浏览器和服务器之间私下做的猫腻,我们不可控;如果需要缓存的话我们需要使用特殊的技术来处理才可以)
+          POST请求是不会出现缓存的
+
+          避免ＧＥＴ请求出现缓存:保证每一次请求的URL地址和问号传参不完全一致，这样就不会出现缓存了(在请求的URL后面追加随机数)
+          xhr.open('get','/getMoney?time=1116&_='+Math.random());
+
+        3、安全问题
+          GET请求不安全，POST相对来说比较安全。
+
+     以上内容都是市场上大家开发的时候约定俗称的规范。
+
+  4、[SYNC/ASYNC]
+    sync：同步
+    async：异步
+    第三个参数不写默认是async异步的，写true是异步，写false才是同步
+
+  5、[USER NAME],[USER PASS]
+    基本上这两个参数没用，两个参数的意思是向服务器发送请求的时候提供可以进入服务器的用户名和密码
+
+  6、xhr.readyState：AJAX状态
+    0 UNSENT 未发送(AJAX开始创建) 开始new XMLHttpRequest成功后状态就已经是0
+    1 OPENED 以打开 已经执行了xhr.open
+    2 HEADERS_RECEIVED  AJAX已经发送,并且响应头信息已经接收
+    3 LOADING 响应主体内容正在加载
+    4 DONE 响应主体内容已经接收完成
+
+    在响应头当中有一写信息还是比较有用的:Date (存储的是服务器的时间,服务器即将把头部信息返回的时候对应的时间)
+
+    发请求 -> 服务器接收请求 -> 服务器返回头部信息(10:00) -> 客户端接收到头部信息(此时已经10:01了，但是我们从响应头中获取的时间是10:00，这样导致了一分钟的误差) -> 服务器继续返回主体信息 -> 客户端接收到主体信息(请求结束，此时10:05，如果这在里还是获取响应头的信息，拿到的时间还是10:00，这样误差更大)
+
+    var xhr=new XMLHttpRequest;
+    xhr.open('head','/getServerTime?_='+Math.random(),true);
+    xhr.onreadystatechange=function(){
+       if(/^2\d{2}$/.test(xhr.status)){
+          if(xhr.readyState===2){
+             //->获取响应头信息,获取服务器的时间:获取到的时间是一个格林尼治时间(GMT+0000) 北京时间是(GMT+0800)
+             var serverTime=xhr.getResponseHeader('Date');
+             serverTime=new Date(serverTime); //->把一个指定时间格式的字符串转换为标准的北京时间
+          }
+       }
+    }
+    xhr.send(null);
+
+
+    看138最后一部分，服务器响应的网络状态码及它的作用 200 301 302 304 400 401 404 500 ...
+    预习139~140
+
+
+
+
+
+
+
+
+
+
+

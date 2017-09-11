@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mouseenter和mouseover</title>
+    <style>
+        .box{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: lightskyblue;
+            margin: 50px auto;
+        }
+        #innerBox{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+</div>
+</body>
+</html>
+<script>
+    /*
+    *   300*300正方形盒子，
+    *       当鼠标进入的时候创建一个100*100的盒子。
+    *       鼠标移动的时候让这个创建的盒子跟随鼠标移动
+    *       鼠标离开的时候删除这个创建的盒子 （删除）
+    *       盒子在鼠标右下角5px的位置
+    *
+    * */
+    var box=document.getElementsByClassName('box')[0];
+    box.onmouseenter = function(){ // onmouseover
+        console.log('mouseover');
+        var div = document.createElement('div');
+
+        div.id = 'innerBox';
+        box.appendChild(div);
+    };
+    box.onmousemove = function (e) {
+        e = e || window.event;
+        var l = e.clientX - box.offsetLeft + 5;
+        var t = e.clientY - box.offsetTop + 5;
+        innerBox.style.left = l + 'px';
+        innerBox.style.top = t + 'px';
+        console.log('mousemove');
+    };
+    box.onmouseleave = function(){ // onmouseout
+        console.log('mouseout');
+        this.removeChild(innerBox);
+    }
+
+    /*
+    *   当使用onmouseover的时候，如果涉及到鼠标跟随动作那么会触发子元素的onmouseover和onmouseout事件。由于时间传播也会不断处罚祖先元素的onmouseover和onmouseou事件。我们需要使用onmouseenter和onmouseleave处理
+    *
+    * */
+
+
+
+</script>

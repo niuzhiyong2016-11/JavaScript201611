@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var reg = /\d+/g; // 如果没有这个g就是死循环，原因???
+    var str = 'zhufeng2015peixun2016guoyu2017';
+    // ['2015',index: 7, input: str]
+    // ['2016',index: 17, input: str]
+    // ['2017', index: 26, input: str]
+
+    var res = reg.exec(str); // res就是每次捕获回来的结果,只要这个结果存在那么下次就还去捕获
+    var ary = []; //我要把捕获回来的结果放到ary中。我只需要捕获这个数组的第一项
+    while (res) { //只要res能捕获到结果，只要不是null那么就把第一项放到数组中
+        ary.push(res[0]);
+        res = reg.exec(str); // 捕获结束还要继续捕获，然后不断的更新迭代res这个变量。知道res变成null(捕获不到)为止
+    }
+    console.log(ary); //['2015','2016','2017']
+</script>
+</body>
+</html>

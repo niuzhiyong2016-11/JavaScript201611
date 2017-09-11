@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件委托</title>
+</head>
+<body>
+    <p style="width: 300px; height: 100px; background: pink;"></p>
+    <div class="green" style="width: 200px; height: 80px; background: green;"></div>
+    <div style="width: 200px; height: 80px; background: yellow;"></div>
+</body>
+</html>
+<script>
+    // 事件委托: 比如： 把div和p的点击事件处理全部委托给body来处理。利用事件的冒泡传播来处理
+    var body = document.body;
+    body.onclick = function (e){
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        //我要根据e.target的不同来处理，p和div的点击处理方式不同
+        console.log(e.target);
+        if(e.target.nodeName.toLowerCase() == 'div' && e.target.className =='green'){
+            // 当点击是div要怎么样
+            alert('green');
+            //confirm('aaa');
+            //prompt('bbb');
+        }else if(e.target.nodeName == 'P'){
+            // p
+            alert('p');
+        }
+    }
+</script>

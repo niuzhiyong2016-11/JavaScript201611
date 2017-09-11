@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{ margin: 0; padding: 0; }
+        .tab{
+            width: 360px;
+            margin: 30px auto;
+        }
+        .tab ul{
+            list-style: none;
+        }
+        .tab ul:after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        .tab ul li{
+            float: left;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #ccc;
+            margin-right: 10px;
+        }
+        .tab ul li.selected{
+            background: lightpink;
+        }
+        .tab div{
+            display: none;
+            width: 360px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            background: lightpink;
+        }
+        .tab div.selected{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    var tabBoxs = utils.getElesByClass('J-tab'); //[tab,tab,tab]
+    for(var i=0; i<tabBoxs.length; i++){
+        tab(tabBoxs[i],1);
+    }
+    function tab(wrapBox,defaultLiIndex){
+        //var tab = utils.getElesByClass('J-tab2')[0];
+        var lis = wrapBox.getElementsByTagName('li');
+        defaultLiIndex = defaultLiIndex || 0;
+        lis[defaultLiIndex].className = 'selected';
+        var divs = utils.children(wrapBox,'div');
+        divs[defaultLiIndex].className = 'selected';
+        for(var i=0; i<lis.length; i++){
+            lis[i].onmouseover = function (){
+                var siblings = utils.siblings(this); //除了当前划过这个li的其他两外两个li
+                for(var j = 0; j<siblings.length; j++ ){
+                    // 除了this的其他li移除选中样式
+                    utils.removeClass(siblings[j],'selected');
+                }
+                utils.addClass(this,'selected'); //给当前划过的这个添加选中样式
+                //从这行代码开始处理内容区域
+                var index = utils.index(this); //这是获取当前滑过这个li的索引
+                // var divs = utils.nextAll(this.parentNode);
+                for(var j = 0; j<divs.length; j++){
+                    // 循环内容区域的三个div
+                    j === index ? utils.addClass(divs[j],'selected') : utils.removeClass(divs[j],'selected');
+                }
+            }
+        }
+    }
+
+
+</script>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1"></div><!--zhufeng='peixun'-->
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    div1.setAttribute('school','zhufengpeixun'); //把这一组属性设置到div1这个元素行内
+    console.log(div1.getAttribute('school')); // 'zhufengpeixun'
+    div1.removeAttribute('school'); //移除属性
+    div1.removeAttribute('id'); //我们一般不使用这个方法来操作id等原生属性
+    // ps: 使用getAttribute去获取一个不存在属性返回null.
+</script>

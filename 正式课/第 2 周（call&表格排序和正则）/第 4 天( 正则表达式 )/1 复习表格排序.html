@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   1 获取表格中可能要操作到元素 =>
+    *   2 表格是空的 => 获取数据 => ajax
+    *       1 xhr = new XML...
+    *       2 xhr.open('get/post',url,false);
+    *       3 xhr.onreadystatechange => xhr.readyState == 4, xhr.status ==200
+    *           utils.jsonParse
+    *       4 xhr.send(null)
+    *    3 绑定数据  => 利用获取到的数据动态创建元素
+    *          for(data) => 只要data里有一项就要创建一行tr
+    *          只要data[i]（对象） => 只要这里有一个属性我就创建一列  td
+    *          每次别忘记添加    文档碎片
+    *          JSON position => data1.txt =>
+    *    4 隔行变色
+    *
+    *    5 点击的时候才开始排序(按照对应点击的那一列去排序)
+    *
+    *    6 给每一个表头都绑定一个点击事件 cursor => 事件发生的时候就该按照当前点击的表头(this)去排序
+    *
+    *    7 我该写sort排序这个方法了 => 当事件发生的时候执行这个方法
+    *          1 utils.listToArray => 要排序tbody的是tr。 获取完之后是一个类数组 => 从类数组转化成数组然后才能排序
+    *          2 sort(function (a,b){}) => a?  b?  就是tbody里的行
+    *          3 a.cells[对应你点击那一列表头的索引].innerHTML => 这个innerHTML是不是数字   localeCompare
+    *          4 排序之后还需要把排序好的回填到页面中   appendChild
+    *          ps: 倒序 this.sortFlag => 标识变量
+    *          ps: 点击这一列的时候，把除了this这一列其他列的sortFlag都恢复成默认
+    *          ps: 如何把绑定事件函数中的this => sort方法中的this => that
+    * */
+</script>
+</body>
+</html>

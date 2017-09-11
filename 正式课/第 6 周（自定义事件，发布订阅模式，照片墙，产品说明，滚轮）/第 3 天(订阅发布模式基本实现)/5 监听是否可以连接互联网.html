@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <img id="img" src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png" alt="">
+</body>
+</html>
+<script>
+    /*
+    *   需求：判断你当前的pc是否可以上网
+    *
+    * */
+    /*var img = document.getElementById('img');
+    img.onload = function (){
+        console.log('可以上网');
+    }
+    img.onerror = function (){
+        console.log('不可以上网');
+    }*/
+    /*window.setInterval(function (){ // 实时监控现在联网状态
+        var tempImg = new Image();
+        tempImg.src = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png?_='+Math.random();
+        tempImg.onload = function (){
+            console.log('可以上网');
+        }
+        tempImg.onerror = function (){
+            console.log('不可以上网');
+        }
+    },1000);
+*/
+    //
+    window.addEventListener('online',function (){
+        console.log('ok');
+    })
+    window.addEventListener('offline',function (){
+        console.log('不ok');
+    })
+
+
+</script>

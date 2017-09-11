@@ -1,0 +1,43 @@
+1 \d
+   \w
+    \s
+     \b
+      \n
+       \
+        \.
+         \D
+          \W
+           .
+            ^
+             $
+2 ?
+  +
+  *
+  {n}
+  {n,m}
+  {n,}
+
+3 |
+  [xyz]
+  [^xyz]
+  [.]
+  [\d]
+  [\\d]
+  [+-]
+4 正则两种创建方式的区别
+5 img ignoreCase multiline global
+6 test
+7 exec
+    返回值
+    g
+    lastIndx
+    分组
+    null
+8 分组 分组引用
+9 match str.match => exec => g  如果exec模拟match
+10 问号用法
+11 小括号
+12 懒惰贪婪
+
+tomorrow: replace用法 demo(正则引用)   继承
+

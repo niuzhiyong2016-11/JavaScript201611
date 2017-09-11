@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div1">
+    <ul id="ul1">
+        <!--<li></li>-->
+        <!--li-->
+        <li id="li2"></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<div id="div2"></div>
+</body>
+</html>
+<script>
+    // node： 节点的意思, 所有的元素，换行，注释，文本等都可以叫做节点
+    // parentNode: 父节点
+    // childNodes: 所有的子节点（有可能有注释，换行，文本，元素只是其中的一部分）
+    var li2 = document.getElementById('li2');
+    var ul1 = document.getElementById('ul1');
+
+    console.log(li2.parentNode); //父节点
+    console.log(ul1.childNodes); // 所有的子节点
+    console.log(ul1.children); // 所有的元素(是元素)子节点, 不兼容
+
+    function children(ele) { //我是要获取这个ele的所有元素子节点
+        var childNodes = ele.childNodes; //先获取所有的子节点
+        //然后在子节点里面挑是元素的，也就是节点类型是1的  nodeType == 1
+        var ary = []; //空数组容器，是用来装载符合条件的元素节点
+        for (var i = 0; i < childNodes.length; i++) {
+            var curNode = childNodes[i]; //每次循环的时候由于i不同分别代表不同的节点
+            if (curNode.nodeType == 1) { //如果节点类型是1就是元素，这既是判断依据
+                //符合条件我得装起来
+                ary.push(curNode); //push添加到末尾
+            }
+        }
+        // 代码运行到这循环结束，符合条件都已经添加到ary中，需要把ary留下来
+        return ary;
+    }
+
+    var res = children(ul1);
+    console.log(res);
+
+    /*
+     *                      元素div1       文本         注释       document
+     *
+     * nodeType(节点类型)     1          3           8             9
+     *
+     * nodeName(节点名称)   大写标签名   #text      #comment     #document
+     *
+     * nodeValue(节点值)     null      文本内容     注释内容       null
+     *
+     *
+     * */
+
+    // previousSibling  上一个哥哥节点(是节点)
+    // previousElementSibling 上一个元素(是元素)哥哥节点  不兼容
+
+    // nextSibling  下一个弟弟节点 (是节点)
+    // nextElementSibling 下一个元素弟弟节点(是元素) 不兼容
+
+    // firstChild 第一个子节点(是节点)
+    // firstElementChild 第一个元素子节点(是元素) 不兼容
+
+    // lastChild 最后一个子节点(节点)
+    // lastElementChild 最后一个元素子节点(是元素) 不兼容
+
+    //PS: 如果一个元素不存在previousSibling / previousElementSibling 那么返回值是null，null可以作为一个false条件
+
+    console.log(li2.previousElementSibling);
+
+    function prevEleSibling(ele) { //获取上一个元素哥哥节点,有可能不存在
+        var prev = ele.previousSibling; //先获取到ele的哥哥节点（可不一定是元素）
+        //我要判断这个prev是不是元素，如果是那么我就结束了。如果不是我还要继续向上找
+        while( prev && prev.nodeType !== 1){ // 这个while循环执行下去的条件是拿到了哥哥并且哥哥不是元素，才会继续向上去查找。
+            prev = prev.previousSibling; //更换条件否则就是一直在判断第一个哥哥。那么就是死循环了。所以需要每次把prev向上查找一次知道找不到为止
+        }
+        return prev;
+    }
+    /*
+    *   使用while循环需要注意的几点:
+    *       1 循环的条件一定要注意，千万别写成死循环
+    *       2 在写循环的时候循环的条件注意更换或者迭代。保证循环的条件在不断迭代的过程中的终点值会出现false，而模拟prevEleSibling的时候，利用的是previousSibling总有一个时刻是null
+    * */
+
+
+
+
+
+
+</script>

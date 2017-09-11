@@ -1,0 +1,22 @@
+Drag这个产品如何使用:
+    1 var drag1 = new Drag(ele) ele=> 要拖拽的那个元素
+    2 drag1.on('selfdragstart',fn)  在拖拽开始的时候要执行fn
+    3 drag1.on('selfdraging',fn) 拖拽过程中fn
+    4 drag1.on('selfdragend',fn) 拖拽结束执行fn
+
+Drag产品有三个接口:  利用了设计模式在down方法中的最后selfrun。就是在刚开始准备拖拽的时候提供给外界的接口。也就是和外边其他函数衔接. 其实也就是通知其他一直都在监听拖拽开始的事件的函数执行
+
+       selfdragstart
+
+       selfdraging
+
+       selfdragend
+
+       new Drag().on('selfdraging',fn); //使用方法
+
+Drag还可以升级：
+    最后添加了一个限制范围的函数。
+
+    new Drag().on('selfdraging',function (){ //在拖拽的时候限制范围  });
+
+    new Drag().range({left : 300, top : 400}); // 把绑定draging这个自定义事件放到range这个函数去做了

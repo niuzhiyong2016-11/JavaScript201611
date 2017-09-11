@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>遍历</title>
+</head>
+<body>
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+    </ul>
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    var ary = ['a','b','c'];
+    // $.each(遍历的对象，遍历执行的函数);
+    $.each(ary,function (index,item){ // 和数组的forEach方法的参数顺序相反
+        //console.log(index,item);
+    });
+
+    var $lis = $('li'); // jQuery对象
+    //$.each($lis,function (){})
+    $lis.each(function (index,item){
+        //console.log(index,item);
+        console.log(this); // 遍历方法中的this就是遍历的对象
+    });
+    // 总结： 这两个each方法定义的位置不同。一个是直接正在$.each $.prototype.each
+    // 以下工具类是提高开发效率的
+    //$.toArray();
+    $.trim("  ab  "); //去首尾空格
+    $.isArray(); //判断是否是数组  true/false
+    $.isEmptyObject({}); // true
+    $.isPlainObject({}); // 是不是花括号对象  true/false
+
+
+
+
+
+
+
+
+
+</script>

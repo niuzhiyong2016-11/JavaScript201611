@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+     *   str.match(reg): 和exec的用法基本相同
+     *   match的返回值:
+     *      1 返回值是一个数组
+     *      2 如果有全文g那么match会一次性把所有符合条件的全部捕获，并且添加到这个数组，如果用exec来达到同样效果需要执行多次
+     *      3 如果没有全文g，那么match和exec的捕获结果是相同的
+     * */
+    var reg = /\d+/;
+    var str = 'zhufeng2015peixun2016';
+
+    var ary = [];
+
+    var res = reg.exec(str);
+    console.log(res);
+    ary.push(res[0]);
+    //['2015',index:7,input:str]
+
+    var res = reg.exec(str);
+    ary.push(res[0]);
+    //['2016',index:17,input:str]
+
+    var res = reg.exec(str);
+    // null
+    //console.log(ary); //['2015','2016']
+
+    var result = str.match(reg);  // reg.exec(str);
+    console.log(result);
+</script>
+</body>
+</html>

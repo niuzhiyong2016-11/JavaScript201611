@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   正则的分组：
+    *       1 只要正则中出现了小括号那么就会形成一份分组
+    *       2 只要有分组，exec捕获的结果就会发生改变
+    *       3 捕获结果从数组的第二项开始，依次是分组捕获到的内容
+    *       4 如果不想捕获那么就在分组前添加?:来取消分组
+    *       5 到捕获的结果中通过索引就可以获取到分组捕获到的内容 => 比如在获取身份证号码中的年，那么就需要把匹配年那一小段正则用括号包起来
+    *
+    * */
+    var reg = /(\d+)/g;
+    var str = 'zhufeng2015peixun2016';
+    var res = reg.exec(str); // ['2015','2015',index: input: ]
+    console.log(res);
+
+    /*
+    * 分组的引用 :
+    *   1 只要在正则中出现了括号就会形成一个分组
+    *   2 那么可以通过\n (n是数字代表的是第几个分组) 来引用这个分组
+    *   3 \n匹配那个字符只有分组生效的那一刻才知道
+    * */
+
+    var reg = /(?:\w)\1(\w)\1/;
+    var str = 'dcbb';
+    //var str = 'abcd';
+    console.log(reg.test(str));
+
+    var reg = /(68)\1/;
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择器</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="div1">
+        <h3></h3>
+        <p id="p1">珠峰</p>
+        <p id="p2"></p>
+        <p id="p3">
+            <span class="span"></span>
+        </p>
+    </div>
+    <div id="div2"></div>
+
+    <div class="div1"></div>
+    <div class="div1"></div>
+    <div></div>
+
+    <input type="text" id="text">
+    <input type="radio" id="radio1" name="sex">
+    <input type="radio" id="radio3" name="sexy">
+    <input type="radio" id="dadio2" name="gender">
+    <input type="checkbox" id="checkbox" checked>
+    <input type="file">
+</body>
+
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    //var div1 = document.querySelector('#div1');
+    var $div = jQuery('#div1'); // 通过id获取元素
+    var $div = jQuery('.div1'); // 通过类获取
+    var $div = jQuery('div'); // 通过标签获取
+    console.log($div);
+    console.log(jQuery === $); // true那么jQuery可以用$符号代替
+    //
+    var $res = $('#div1,#div2'); //一次性可以获取多个，然后用逗号隔开
+    console.log($res);
+    // 如何自己实现呢？
+    function jQ(selector){ // selector是字符串  #div1
+        var ary = [];
+        ary.selector = selector;
+        var reg = /#(\w+)/;
+        if(reg.test(selector)){ //说明选择包含#,那么就需要通过id来获取
+            var val = reg.exec(selector)[1]; // [restult,1]
+            var ele = document.getElementById(val);
+            ary.push(ele);
+        }
+        return ary;
+    }
+    console.log(jQ('#div1'));
+    // 层级
+    console.log($('#div1 p')); // 获取的是#div1 下的p标签
+    console.log($('#div1>p')); // 只获取子集瓶标签
+    console.log($('#div1+')); // 弟弟
+    console.log($('#div1~')); // 弟弟们
+
+    // 筛选
+    // first  last  not even odd lt  gt eq
+    console.log($('#div1 p:first'));
+    console.log($('#div1 p:even')); // 偶数索引
+    console.log($('#div1 p:gt(1)')); //大于或者小于不包含自己
+    console.log($('#div1 p:eq(1)')); //只获取索引1
+    console.log($('#div1 p:not(#p2)')); //除了#p2
+
+    // 内容选择器  contains 包括  empty空的   has有
+    console.log($('#div1 p:contains(珠峰)')); //
+    console.log($('#div1 p:empty')); //
+    console.log($('#div1 p:has(.span)')); //
+
+    //属性 属性过滤
+    console.log($('input[type=radio][name=sex]')); // input里type为text的并且name为sex的
+    console.log($('input[checked]')); // 包含这个属性
+    console.log($('input:text')); // 直接获取的text
+    console.log($('input[name!=sex]')); // 属性名字以sex开头
+    console.log($('input[name^=sex]')); // 属性名以sex结尾
+    console.log($('input[name*=sex]')); // 属性包含sex就可以
+
+    // 子元素
+    // first-child  last-child  nth-child  nth-of-type
+    console.log($('#div1 p:last-child')); // 最后一个
+
+    // 表单元素过滤  根据type的类型
+    console.log($('input:text'));
+    console.log($('input:radio'));
+    console.log($('input:file'));
+    console.log($('input:button'));
+
+
+
+
+
+
+
+
+
+</script>

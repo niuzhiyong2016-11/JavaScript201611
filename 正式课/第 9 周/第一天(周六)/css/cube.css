@@ -1,0 +1,69 @@
+html {
+    font-size: 100px; /*640PX 1REM=100PX*/
+}
+
+html, body, .cube {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cube {
+    position: relative;
+    background: url("../img/zf_cubeBg.jpg") no-repeat center center;
+    background-size: cover;
+
+    perspective: 1000px;
+}
+
+.cube .cubeBox, .cube .cubeBox li {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -2.55rem 0 0 -2.55rem;
+    width: 5.1rem;
+    height: 5.1rem;
+}
+
+.cube .cubeBox {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    -webkit-transform: scale(0.6) rotateX(-30deg) rotateY(45deg);
+    transform: scale(0.6) rotateX(-30deg) rotateY(45deg);
+}
+
+.cube .cubeBox li img {
+    width: 100%;
+    height: 100%;
+}
+
+.cube .cubeBox li:nth-child(1) {
+    -webkit-transform: translateZ(2.55rem);
+    transform: translateZ(2.55rem);
+}
+
+.cube .cubeBox li:nth-child(2) {
+    -webkit-transform: translateZ(-2.55rem) rotateY(180deg);
+    transform: translateZ(-2.55rem) rotateY(180deg);
+}
+
+.cube .cubeBox li:nth-child(3) {
+    -webkit-transform: translateX(-2.55rem) rotateY(-90deg);
+    transform: translateX(-2.55rem) rotateY(-90deg);
+}
+
+.cube .cubeBox li:nth-child(4) {
+    -webkit-transform: translateX(2.55rem) rotateY(90deg);
+    transform: translateX(2.55rem) rotateY(90deg);
+}
+
+.cube .cubeBox li:nth-child(5) {
+    -webkit-transform: translateY(-2.55rem) rotateX(90deg);
+    transform: translateY(-2.55rem) rotateX(90deg);
+}
+
+.cube .cubeBox li:nth-child(6) {
+    -webkit-transform: translateY(2.55rem) rotateX(-90deg);
+    transform: translateY(2.55rem) rotateX(-90deg);
+}

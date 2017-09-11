@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="event-3.0.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+
+    on(div1,'click',fn1);
+    //on(div1,'click',fn1);
+    on(div1,'click',fn2);
+    on(div1,'click',fn3);
+
+    function fn1(e){
+        console.log(this == div1);
+        console.log(e.pageX);
+        console.log(1);
+    }
+    function fn2(){
+        console.log(2);
+    }
+    function fn3(){
+        console.log(3);
+    }
+</script>

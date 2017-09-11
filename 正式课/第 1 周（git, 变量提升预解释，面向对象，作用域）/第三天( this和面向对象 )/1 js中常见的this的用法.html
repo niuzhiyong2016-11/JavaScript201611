@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px; background: red;"></div>
+</body>
+</html>
+<script>
+    /*
+    *   this的第一种用法： 事件绑定函数中的this就是事件被触发的时候那个元素,其实也就是绑定给谁this就是谁
+    *
+    * */
+    var div1 = document.getElementById('div1');
+    div1.onclick = function (){
+        console.log(this);
+    }
+
+    /*
+    *   this的第二种用法: 函数中的this是谁，在定义的时候根本就不知道。在函数执行的时候，函数中的this(函数中)就是调用这个函数的行为主体,其实就是看函数前面的"."，"."前面是谁那么函数中的this就是谁。如果没有"."那么this就是window
+    *
+    *
+    * */
+    function fn(){
+        console.log(this);
+    }
+    //console.log(window.fn); // 定义在全局作用域内的函数也是window的一个属性
+
+    var obj = {
+        name : 'tianxi',
+        fn : fn
+    };
+    obj.fn(); // this => obj
+    fn(); // this => wind
+
+    ///////////////////////////////////////////////////////////////////////////////
+
+    function foo(){
+        console.log(this);
+    }
+    var oo = {
+        name : 'tianxi',
+        fn : function (){
+            console.log(this); //oo
+            foo(); // window
+        }
+    };
+    oo.fn(); // this =>  oo
+
+    /*
+    *   this的第三种用法：自运行函数中的this永远是window
+    * */
+    ;(function (){
+        console.log(this);
+    })();
+    var num = 10;
+    var obj = {
+        fn : (function (num){ // 这个自运行函数的作用域是不会被释放，因为返回值的匿名函数被obj.fn占用了
+            var num = 100; //这个100是不丢的。因为这个作用域没有被释放
+            console.log(this);
+            return function (){ // 这个函数就是自运行函数的运行结果，运行结束后是要赋值给obj.fn当作属性值的
+                console.log(111);
+            }
+        })(num)
+    };
+    console.log(obj.fn); //打印出来的是undefined => 说明在给对象赋值的过程中，如果属性值是一个自运行后函数，那么要等这个自运行函数的运行结果再赋值给属性 => 先运行后赋值
+
+    /*
+    *   4 构造函数中的this是当前实例
+    *   5 call和apply都可以强制改变this
+    *   6 定时器中的this都是window
+    *   7 回调函数中的this一般也都是window
+    * */
+
+
+
+
+
+
+
+
+
+
+</script>

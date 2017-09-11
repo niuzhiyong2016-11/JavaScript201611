@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件基础</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #div1{
+            _margin: 1000px 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+
+        }
+        #link{
+            width: 100px;
+            height: 40px;
+            display: block;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <a id="link" class="link" href="http://www.baidu.com">链接</a>
+</body>
+</html>
+<script>
+    /*
+    *   事件对象 ： eg当绑定一个点击事件click,当事件触发的时候。打印函数中的arguments[0],结果是叫MouseEvent的对象。我们叫做(鼠标)事件对象
+    *   ps: 这个事件对象在ie6-8中是有兼容问题
+    *   标准: 形参e或者arguments[0]
+    *   IE6-8:  window.event
+    * */
+
+    var div1 = document.getElementById('div1');
+    div1.onclick = function (e){
+        //console.log(arguments); //[MouseEvent]
+        //console.log(arguments[0]); // MouseEvent
+        console.log(window.event);
+        //console.log(e); // MouseEvent
+        e = e || window.event; // 事件对象的兼容性处理
+        console.log(e.clientX);
+        console.log(e.clientY);
+        // 处理e.pageX在ie6-8中的兼容问题,当前点击距离浏览器左上角的位置+已经滚出去的宽度或者高度就可以了
+        e.pageX = e.pageX || (document.documentElement.scrollLeft||document.body.scrollLeft)+e.clientX;
+        e.pageY = e.pageY || (document.documentElement.scrollTop||document.body.scrollTop)+e.clientY;
+        console.log(e.pageX); // 在ie中的事件对象不存在这个属性 undefined
+        console.log(e.pageY);
+
+        //
+        console.log(e.type); // 事件类型
+
+    }
+    /*
+     *  事件对象包含哪些信息: e
+     *
+     *      e.clientX: 当前鼠标点击位置距离(浏览器)左上角的x轴坐标
+     *      e.clientY: 当前鼠标点击位置距离(浏览器)左上角的y轴坐标
+     *
+     *      e.pageX :  当前鼠标点击位置距离(页面body)左上角的x轴坐标
+     *      e.pageY :  当前鼠标点击位置距离(页面body)左上角的y轴坐标
+     *      ps: e.pageX和e.pageY在ie6-8中是不存在的
+     *      e.pageX = e.clientX + (document.documentElement.scrollLeft||document.body.scrollLeft);
+     *
+     *      e.type : 事件类型  点击事件：'click' 没有'on'
+     *
+     *      e.preventDefault()  阻止默认行为
+     *      e.returnValue = false; ie6-8阻止默认行为
+     *      e.target 事件源： 真正触发事件的那个元素，比如：给body绑定一个事件。那么点击任何一个body内的后代元素都会触发body的click事件。而e.target就是保存的就是真正点击的元素
+     *      e.srcElement 在ie6-8中的事件源   window.event.target
+     *      e.target = e.target || e.srcElement
+     *      e.stopPropagation() 阻止事件传播
+     *      e.cancelBubble = true; 在ie6-8中阻止事件冒泡传播
+     *      冒泡传播 ： 从子元素传播到祖先元素
+     *
+     * */
+    var link = document.getElementById('link');
+    link.onclick = function (e){
+        e = e||window.event;
+        console.log(e);
+        e.preventDefault = e.preventDefault || function (){ e.returnValue = false; }
+        e.preventDefault(); // 阻止默认行为,这是一个方法
+        //e.returnValue = false; // 在ie6-8这是给属性赋值
+        //return false; // 这个就可以在所有浏览器里直接阻止默认行为
+        //e.stopPropagation(); //阻止事件传播,比如点击link的时候，link的祖先元素并不会触发点击事件
+        //e.cancelBubble = true; // ie6-8组织事件冒泡传播
+        e.stopPropagation = e.stopPropagation || function (){ e.cancelBubble = true; }
+        e.stopPropagation();
+    }
+
+
+    document.body.onclick = function (e){
+        //console.log('body');
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        console.log(e.target); //打印的是事件源
+        //console.log(e.srcElement); // ie6-8中的事件源
+
+    }
+
+    // e = e || window.event;
+    // e.target = e.target || e.srcElement;
+    // e.type    'click'
+    // e.clientX  e.clientY
+    // e.pageX e.pageY   兼容问题
+    // e.preventDefault    e.returnValue = false     return false
+    // e.stopPropagation   e.cancelBubble = true
+
+    // 鼠标事件对象的原型链结构:  MouseEvent => UIEvent => Event => Object
+</script>

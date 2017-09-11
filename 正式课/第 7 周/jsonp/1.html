@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--<script>
+    function aa(result) {
+        console.log(result);
+    }
+</script>
+<script src="http://localhost:999/getInfo?cb=aa"></script>-->
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+    //->JQ的AJAX请求
+    //    $.ajax({
+    //        url: 'http://localhost:999/getInfo',
+    //        type: 'get',
+    //        dataType: 'json',
+    //        success: function (result) {
+    //            console.log(result);
+    //        }
+    //    });
+
+    //->JQ的跨域请求
+    //->?callback=jQuery111308405816609147012_1479648027690&_=1479648027691
+    function aaa(result) {
+        console.log(result);
+    }
+    $.ajax({
+        url: 'http://localhost:999/getInfo',
+        type: 'get',
+        dataType: 'jsonp',
+        jsonp: 'cb',//->把默认的callback改为cb
+        jsonpCallback: 'aaa'//->把默认生成的函数名改为aaa
+    });
+</script>
+</body>
+</html>

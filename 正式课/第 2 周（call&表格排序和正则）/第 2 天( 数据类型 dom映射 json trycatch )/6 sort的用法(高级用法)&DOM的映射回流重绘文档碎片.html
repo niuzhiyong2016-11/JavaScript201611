@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul {
+            list-style: none;
+            width: 300px;
+            margin: 30px auto;
+        }
+
+        ul li {
+            height: 30px;
+            background: lightgreen;
+            line-height: 30px;
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>5</li>
+    <li>4</li>
+</ul>
+<script>
+    /*
+    *   sort的参数函数中的return的值才是排序的时候是否换位置的决定性因素
+    *   sort的参数函数总的形参a,b就是数组排序时候的相邻比较的两项
+    * */
+    var ary = [6, 5, 4, 1, 2];
+    ary.sort(function (a, b) {
+        //console.log(a,b); //a,b都是两两比较的数组项
+        return 1;
+        return -1; // a-b这个位置的值是一个恆小于0，如果按照升序排序a-b<0,那么就是说明a<b,如果按照升序就不用换位置了
+        return a - b; // a-b差才是是否换位置的决定性因素
+    });
+    console.log(ary);
+
+    var a = [
+        {name: 'guoyu', age: 20},
+        {name: 'lihaijun', age: 16},
+        {name: 'tianxi', age: 30},
+        {name: 'jiaozhuangfei', age: 24}
+    ];
+    // 按照年龄的升序排序
+    a.sort(function (a, b) {
+        // a,b ??  a和b分别是数组里的对象，我们是按照这个对象的age属性去排序
+        return a.age - b.age;
+    });
+    console.log(a);
+
+    //按照姓名排序 => 名字是字符串。而字符串是不能使用‘-’排序.
+    // 字符串的排序方法 a.localeCompare(b);
+    a.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+    });
+    console.log(a);
+
+    /*&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&*/
+
+    // 给页面内的li去排序
+    var ul = document.getElementsByTagName('ul')[0];
+    var lis = ul.getElementsByTagName('li'); // DOM
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].onmouseover = function () {
+            this.style.backgroundColor = 'pink';
+        }
+        lis[i].onmouseout = function () {
+            this.style.backgroundColor = 'lightgreen';
+        }
+    }
+    // lis [0:li,1:li,2:li ....]
+    //lis是类数组 => 把类数组转化成数组
+    var lisAry = Array.prototype.slice.call(lis, 0);
+    var lisAry = [].slice.call(lis, 0); //任何一个数组实例都可以找到数组原型上的slice方法
+    console.log(lisAry);
+
+    lisAry.sort(function (a, b) {
+        // a,b分别都是li元素，按照li的innerHTML去比较
+        return a.innerHTML - b.innerHTML;
+    });
+    console.log(lisAry);
+    for (var i = 0; i < lisAry.length; i++) { // 把已经排好序的li回填到页面
+        //debugger
+        ul.appendChild(lisAry[i]); // 引起多次回流
+    }
+    //我还想在ul下添加3个li.
+    // 方式1 通过appendChild的方式
+
+    for (var i = 6; i <= 8; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = i;
+        ul.appendChild(li);
+        // 后通过appendChild的方式追加的元素，并不会影响已经存在元素属性
+    }
+
+    // 方式2 通过innerHTIM在ul的尾部上追加3个li标签
+    var str = ''; //先准备一个空字符串，然后把li累加到str上
+    for (var i = 9; i <= 10; i++) {
+        str += '<li>' + i + '</li>';
+    }
+    ul.innerHTML = ul.innerHTML + str; //把ul.innerHTML重新赋值。原来存在的li也已经被重新覆盖并且重新渲染。所以绑定原来li上的事件也消失了。通过这种只引起一次回流，一次性添加多个li
+    //ul.innerHTML += str;
+
+    // 方式3 文档碎片 => 就是临时存储dom对象的一个容器。创建一个标签元素之后，可以暂时先不添加到页面中。而是添加到这个临时的文档碎片中。最后把这个文档碎片一次性添加到页面中。这样就只会引起一次回流，还不会影响已经存在的元素
+
+    var frg = document.createDocumentFragment(); // 文档碎片
+    for (var i = 11; i < 14; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = i;
+        frg.appendChild(li);
+    }
+    ul.appendChild(frg);
+    frg = null; // frg没用了，主动释放
+
+
+    /*  高级程序设计3
+
+    *   DOM映射: 通过DOM的方式获取到的文档内的元素，把这些放到一个类数组。无论是经过排序还是其他等操作仍然和页面内的元素紧紧绑定在一起。我们把这种关系叫做DOM映射
+    *   ps: 利用appendChild回填通过dom方式获取回来的类数组，是重新更换位置。
+    *   DOM回流： 页面内元素的增加，删除，位置的改变都会引起DOM回流操作.DOM回流是比较浪费性能的.
+    *   DOM重绘: 元素样式的改变就会引起DOM的重绘.
+    *
+    * */
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        // 兼容性： ie7+ chrome firefox safari opera
+        //        var xhr = new XMLHttpRequest();
+
+        // ie
+        //        var xhrInIE = new ActiveXObject('Microsoft.XMLHTTP');
+        // ie的第二版
+        //        var xhrInIEv2 = new ActiveXObject('Msxml2.XMLHTTP');
+        // ie的第三版
+        //        var xhrInIEv3 = new ActiveXObject('Msxml3.XMLHTTP');
+
+        /**
+         * 根据用户的浏览器自动返回ajax对象
+         */
+        function getXHR() {
+            if (window.XMLHttpRequest) {
+                console.log('当前浏览器为高级浏览器');
+                return new XMLHttpRequest;
+            }
+            console.log('当前浏览器为ie');
+            return new ActiveXObject('Microsoft.XMLHTTP');
+        }
+
+        /**
+         * 利用惰性函数，减少重复冗余的计算
+         * @return {Object} ajax对象
+         */
+        function getXHR2() {
+            var xhr;
+            if (window.XMLHttpRequest) {
+//                console.log('高级浏览器');
+                xhr = function () {
+                    return new XMLHttpRequest;
+                }
+            } else {
+//                console.log('ie');
+                xhr = function () {
+                    return new ActiveXObject('Microsoft.XMLHTTP');
+                }
+            }
+            return (getXHR2 = xhr)();
+        }
+
+        /**
+         * 同样也是惰性函数，利用自执行函数实现。
+         */
+        var getXHR3 = (function () {
+            if (window.XMLHttpRequest) {
+                return function () {
+                    return new XMLHttpRequest();
+                }
+            }
+            return function () {
+                return new ActiveXObject('Microsoft.XMLHTTP');
+            }
+        }());
+
+
+        var getXHR4 = (function () {
+            // 按照优雅降级的顺序 将ajax对象放入数组中。
+            var list = [function () {
+                return new XMLHttpRequest();
+            }, function () {
+                return new ActiveXObject('Microsot.XMLHTTP');
+            }, function () {
+                return new ActiveXObject('Msxml2.XMLHTTP');
+            }, function () {
+                return new ActiveXObject('Msxml3.XMLHTTP');
+            }], xhr;
+            while (xhr = list.shift()) {
+                // 如果xhr不报错，说明当前浏览器支持xhr函数里的那个对象。
+                try {
+                    // 如果执行xhr不报错，直接return该方法
+                    // 如果执行xhr报错，则进行下一次循环。
+                    xhr();
+                    return xhr;
+                } catch (ex) {}
+            }
+            // 如果代码执行到该处，说明当前浏览器不支持ajax功能。
+            throw new ReferenceError('当前浏览器不支持ajax功能');
+        })();
+
+        for (var i = 0, xhr; i < 2; i++) {
+            console.log('第', (i + 1), '次 getXHR2方法为：\n', getXHR3);
+            xhr = getXHR3();
+            console.log(xhr);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    function listToArray(likeAry) {
+        try {
+            return Array.prototype.slice.call(likeAry);
+        } catch (e) {
+            var ary = [];
+            for (var i = 0; i < likeAry.length; i++) {
+                ary.push(likeAry[i]);
+            }
+            return ary;
+        }
+    }
+</script>
+</body>
+</html>

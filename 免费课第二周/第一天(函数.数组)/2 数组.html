@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    /*
+    *   length属性 ： 数组天生自带的属性，记录的是当前这个数组里有多少项
+    *   length--: 可以把数组的最后一项删除
+    *   length++: 从来不用，但是却可以在末尾添加一个undefined
+    *   ary[ary.length] : 向数组的末尾添加一项
+    * */
+    // Array 数组
+    var ary = ['a','b','c']; //声明一个数组  ES5
+    //let ary = []; // ES6声明一个数组
+    //console.dir(ary);
+    //ary.length--;
+    //ary.length++;
+    ary[ary.length-1] = 'cc'; // ary[2] = 'cc';
+    ary[ary.length] = 'dd'; // 向数组的末尾增加一项 => 就是一个赋值过程
+    ary[7] = 'tt'; // 这种跳跃式添加中间缺少的项是用undefined补齐的
+    console.dir(ary);
+
+    /*
+    *   如何记忆数组的方法：
+    *       1 方法的作用(方法是干嘛的)
+    *       2 方法的参数 (方法运行的时候需要的值或者变量)
+    *       3 方法的返回值(方法执行完留下了什么)
+    *       4 是否的改变原有数组(会不会破坏原有数组)
+    * */
+
+    //  增删改查
+
+    // push
+    // 1  向数组末尾添加项
+    // 2 参数就是要增加的项
+    // 3 返回值是数组的新长度
+    // 4 原有数组改变(增加了项目)
+    // ps: 如果在末尾增加多项那么就在参数位置用逗号隔开
+    var ary = ['a','b','c'];
+    var res = ary.push('d','e'); //我要把d添加到ary数组的末尾
+    console.log(ary);
+    console.log(res); //我查看push方法运行结束之后的结果
+
+    // unshift
+    // 1 向数组的开头增加项
+    // 2 参数是要增加的数组项目，如果是多个用","隔开
+    // 3 数组的新长度
+    // 4 原有数组改变
+    var ary = [1,2,3];
+    var res = ary.unshift(-1,0);
+    console.log(ary);
+    console.log(res); // 查看返回值
+
+    //pop
+    // 1 删除数组的末尾项
+    // 2 不用参数，就是删除最后一个
+    // 3 返回值是删除的最后一项(可不是新长度)
+    // 4 原有数组改变
+    var ary = ['x','y','z'];
+    var res = ary.pop();
+    console.log(ary);
+    console.log(res);
+
+    //shift
+    // 1 删除数组的开头项
+    // 2 不用参数
+    // 3 返回值是删除的第一项
+    // 4 原有数组改变
+
+    var ary = ['l','m','n'];
+    var res = ary.shift();
+    console.log(ary);
+    console.log(res);
+
+    //splice
+    // 1 删除数组项可以指定具体的哪些项
+    // 2 splice(n,m) 从索引n开始删除m个
+    //   splice(n) 如果第二个参数没有写那么就是从n索引开始删除到末尾
+    //   splice(0)  从第一项开始删一直到末尾
+    //   splice(n,m,x,y) 从索引n开始删除m个，然后用x,y去顶替删除的位置,从第三个参数开始都是用来填补删除的项目位置的
+    // pop => splice(ary.length-1,1); 从最后一项的索引开始删除1个
+    // shift => splice(0,1) 从索引0开始删除1个
+    // unshift => splice(0,0,'tianxi') 从索引0开始一个都不删，然后把'tianxi'字符串添加到第一个索引0的前面
+    // push => splice(ary.length,0,'tianxi')
+    // 3 返回值是删除的数组项目组合成新数组
+    // 4 原有数组改变
+    var ary = ['a','b','c','d'];
+    //删除之后留下a和d
+    //var res = ary.splice(1,2);
+    //var res = ary.splice(1,0);
+    //var res = ary.splice(0); //可以达到克隆数组的目的，但是利用却是返回值
+    //var res = ary.splice(1,2,'zhufeng','peixun','tianxi');
+    //var res = ary.splice(1,0,'tianxi'); //从索引1开始没有删除项，然后添加"tianxi"字符串，添加的位置是索引之前.
+    //var res = ary.splice(0,0,'tianxi');
+    var res = ary.splice(ary.length,0,'tianxi'); //模拟push由于splice的添加从操作是默认添加到前面的。所以模拟push需要把索引+1。也就是ary.length
+    console.log(ary); //
+    console.log(res); //
+    //console.log(ary === res); // false
+
+    //slice
+    // 1 用来复制数组
+    // 2  slice(n,m) 从索引n开始复制到索引m，但是不包含m(其实也就是复制到m-1)
+    //    slice(n)   从索引n开始复制到末尾
+    //    slice(0)   从开头复制到末尾  克隆数组
+    //    slice()    从开头复制到末尾 克隆数组
+    // 3 返回值是新复制的数组
+    // 4 原有数组不改变
+
+    var ary = ['a','b','c','d','e'];
+    //要求复制['b','c','d']
+    //var res = ary.slice(1,4);
+    //var res = ary.slice(0);
+    var res = ary.slice();
+    console.log(ary);
+    console.log(res);
+    console.log(ary == res);
+    //如何查看数组到底有多少个方法
+    console.log(Array.prototype);
+    var ary = [1,2,3,4,5,6];
+    //我要数组的第2项到第5项
+    //ary.slice(1,5);
+    //ary[ary.length] = 4;
+    //var res = ary.push(4); //4
+    //ary.splice(ary.length,0,4);
+    ary.unshift(0);
+    ary.shift();
+    ary.splice(1,2);
+
+    // 拼接
+    // concat
+    /*
+    *   1 把两个或者两个以上的数组拼接在一起
+    *   2 参数: 你要拼接的数组或者数组项目，如果是多个请用","隔开
+    *   3 返回值: 拼接好的新数组
+    *   4 原有数组不变
+    *
+    * */
+    var ary1 = [1,2];
+    var ary2 = [3,4];
+    //var res = ary1.concat(ary2,[5,6],7,8,true);
+    var res = ary1.concat(); //如果concat没有参数或者参数是空数组也可以达到克隆数组的目的
+    console.log(res);
+    console.log(ary1);
+    console.log(ary2);
+
+    // join
+    /*
+    *   1 把数组里的每一项按照指定的分隔符拼接成字符串
+    *   2 参数就是指定的分隔符,如果没有指定参数那么默认就是逗号
+    *   3 返回值是拼接好的字符串
+    *   4 原有数组不变
+    *   eval: 可以把字符串当做js代码运行 ,去掉引号的作用   eval('1+2+3') => 6
+    *
+    * */
+    var ary  = [1,2,3];
+    //ary.toString(); //"1,2,3"
+    //var res = ary.join(",");
+    //var res = ary.join(" "); // "1 2 3"
+    var res = ary.join(""); // "123"
+    //var res = ary.join();
+    var res = ary.join("+");
+    console.log(eval(res)); //  eval("alert()") 弹窗出来
+
+    // 排序
+    // reverse
+    /*
+    *   1 倒序数组
+    *   2 不用参数
+    *   3 返回值是经过倒序过后的原有数组(记住是原有数组)
+    *   4 原有数组顺序改变
+    * */
+    var ary = [5,4,3,2,1];
+    var res = ary.reverse();
+    console.log(res);
+    console.log(ary);
+    console.log(res === ary);
+
+
+    //sort
+    /*
+    *   1 是把数组按照指定规则去排序  规则： 升序 降序
+    *   2 参数就是规则：这个规则是一个函数 => sort的参数是一个函数
+    *     ps: 如果不加参数只能排序10以内的
+    *   3 返回值:排好序的原有数组
+    *   4 原有数组顺序改变
+    *
+    * */
+    var ary = [4,10,30,2,5];
+    var res = ary.sort( function(a,b){ //冒泡排序的思想
+        console.log(a,b); //分别都是代表数组里的项目
+        return a-b;
+    } ); //升序
+    //var res = ary.sort( function (a,b){ return b-a; }); //降序
+    console.log(res);
+    console.log(ary);
+    console.log(res === ary);
+
+    // 4个有兼容性问题的
+
+    // indexOf/lastIndexOf
+    /*
+    *   1 判断一个项是否在数组中出现过=> 数组中是否包含这个项
+    *   2 参数：需要判断是否在数组出现的那个项
+    *   3 返回值: 如果出现过那么就返回出现的位置(索引值),如果没有出现过那么就返回-1
+    *   4 原有数组不变
+    *
+    * */
+    var ary = ['a','b','c','c'];
+    var res = ary.indexOf('c'); // indexOf是第一次出现的索引位置
+    var res = ary.lastIndexOf('c'); // lastIndexOf是最后一次出现的索引位置
+    //var res = ary.indexOf('d');
+    console.log(res);
+    console.log(ary);
+
+    // forEach
+    /*
+    *  1 循环遍历数组的每一项的
+    *  2  参数也是一个函数: 这个函数还有三个形参分别是item,index,ary，其中item是循环的时候的每一项，index是每一项的索引，ary是原有数组
+    *  3 返回值是undefined。只是遍历数组没有必要返回任何值
+    *  4 原有数组不变
+    * */
+    var ary = ['x','y','z'];
+    var res = ary.forEach(function (item,index,ary){
+        //console.log(item);
+        //console.log(index);
+        //ary[index]
+        console.log(arguments); // ['x',0,['x','y','z']]
+    });
+    console.log(res);
+
+    // map
+    /*
+    *   1 作用和forEach的用法基本相同，都是遍历数组。但是map有返回值
+    *   2 参数: 参数仍然是一个函数，并且还有形参item,index,ary代表的意思和forEach也是一样的。
+    *   3 返回值: 是一个数组，并且这个数组和原有数组的长度是相同的，但是数组里的每一项是传进来函数参数每次运行的返回值。也就是return后面的值。其实也就是参数每次执行的结果
+    *   4 原有数组不变
+    * */
+
+    var ary = ['a','b','c'];
+    var res = ary.map(function (item,index,ary){
+         //传进来的这个参数函数执行的次数和数组的长度是相同的
+        return 100
+        return item+index;
+        //      'a' + 0  => "a0"
+        //      'b' + 1 => 'b1'
+        //      'c' + 2 => 'c2'
+    });
+    console.log(res); //['a0','b1','c2']
+
+    for(var i=0; i<ary.length; i++){ //for
+        console.log(ary[i]);
+    }
+    for(var key in ary){ // for in也可以遍历数组
+        console.log(ary[key]);
+    }
+
+
+
+
+
+
+
+</script>

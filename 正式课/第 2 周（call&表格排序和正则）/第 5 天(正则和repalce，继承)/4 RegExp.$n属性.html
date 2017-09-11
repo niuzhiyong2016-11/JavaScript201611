@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   RegExp.$n属性保存的是每次正则在执行完捕获等操作之后的第n分组的内容
+    *   n: 1-9  RegExp.$n是不兼容
+    *   ps: exec,match,replace类似于只有有捕获操作的就可以不断的给RegExp这个类的$n属性赋值
+    *
+    * */
+    var reg = /(\d)(\w)/g;
+    var str = '6a&&& 7m%%%';
+    //    console.log(RegExp.$1); //$1这个属性默认值是""空字符串
+    //    console.log(RegExp.$2); //$1这个属性默认值是""空字符串
+    //    var res1 = reg.exec(str); //['6a','6','a',index: input: ]
+    //    //console.log(res1,reg.lastIndex);
+    //    console.log(RegExp.$1); // '6'  第一个分组捕获到的内容
+    //    console.log(RegExp.$2); // 'a'  第二个分组捕获到的内容
+
+    //    var res2 = reg.exec(str); //
+    //    console.log(RegExp.$1); // '7'
+    //    console.log(RegExp.$2); // 'm'
+
+    //reg.__proto__.constructor.$2 = reg.exec(str)[1];
+
+    // match执行之后也可以更改RegExp.$n的分组
+    //    var reg = /(\d)(\w)/g;
+    //    var str = '6a&&& 7m%%%';
+    //    var res1 = str.match(reg);
+    //    console.log(RegExp.$1);
+    //    console.log(RegExp.$2);
+
+    // replace是否可以修改RegExp.$n ??
+    var reg = /(\d)(\w)/;
+    var str = '6a&&& 7m%%%';
+
+    str = str.replace(reg, function () {
+        console.log(RegExp.$1, RegExp.$2); //6,a
+    });
+
+    str = str.replace(reg, function () {
+        console.log(RegExp.$1, RegExp.$2); //6,a
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+1、跨域(非同源) PK 同源
+
+  第一个地址：当前页面URL地址栏中的地址 (宿主页面地址)
+      http://localhost:6688/index.html
+
+  第二个地址：在当前页面加载完成后，我们从服务器获取需要绑定的数据的那个地址(API文档中数据接口的地址)
+      http://localhost:6688/getAllList
+
+   比较三个维度：协议、域名、端口号，三者一样为同源，三者有一个不一样即为跨域
+
+   在跨域环境下请求数据，使用AJAX请求不能成功，报错:XMLHttpRequest cannot load http://localhost:6688/getAllList. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:63342' is therefore not allowed access.
+
+   跨域下想要请求数据我们需要使用其它的方案：JSONP (自己回家查询除了JSONP以外的其它跨域方式)
+
+
+2、JSONP
+  在HTML中的SCRIPT、LINK、IMG、IFRAME...这些标签老霸道了，它们想要引入那个资源，直接放到自己的SRC或者HREF中即可，不管别人是否知道或者是否同意(它们不存在跨域的限制)
+
+  JSONP利用了script的这个特点,把我们需要请求的数据地址(不是自己的)放到src中，这样当加载到这个script标签的时候，就会向地址所在的服务器(例如腾讯的)发送一个请求,并且传递一个函数,这个函数是我们当前页面中定义的函数(?callback=fn)
+
+
+
+
+

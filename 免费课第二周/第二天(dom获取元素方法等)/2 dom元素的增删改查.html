@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input type="text"/>
+    <div id="div1" class="c1" style=""  tian="xi" >
+        <!--span-->
+        <ul id="ul1">
+            <li>1</li>
+            <li id="li2">2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+
+    </div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1'); // 把div1获取到
+    var ul1 = document.getElementById('ul1');
+
+    // 通过js方式创建一个p元素   document.createElement('标签名字')
+    var p = document.createElement('p'); // 它并不在页面中，需要人为添加
+
+    //向页面内添加元素有且只有这么两个方法 1 appendChild  2 insertBefore
+    // 1 appendChild   父级元素.appendChild(子集元素) 并且默认添加到末尾
+    div1.appendChild(p); //把刚刚创建的p标签添加到div1中,p是div1的最后一个子元素
+
+    // 2 insertBefore(要插入的元素,要插入到哪个元素的前面)
+    var span = document.createElement('span');
+    div1.insertBefore(span,ul1); //把刚刚创建的span标签插入到ul1前面，并且只能是父级元素div1来执行
+
+    //删除页面内的dom元素   removeChild
+    //div1.removeChild(ul1); //在div1内把ul移除掉
+
+    //替换页面内的dom元素  replaceChild(新元素,替换哪个元素)
+    var img = document.createElement('img');
+    div1.replaceChild(img,ul1);
+
+    // 克隆节点   要克隆的元素.cloneNode(true) 如果参数是true意思是把所有的子孙后代都带着一起克隆
+    // 克隆一个div1并且添加到body的末尾
+    var newDiv1 = div1.cloneNode(true); //克隆了一份div1
+    document.body.appendChild(newDiv1); //把刚刚克隆的div1添加到body末尾
+
+
+    /*
+    *   document.createElement('div')   常用
+    *   父亲.appendChild(孩子) 常用
+    *
+    *   父亲.insertBefore(newChild,插入到哪个元素前面)
+    *   父亲.replaceChild(newChild,oldChild) 替换
+    *   父亲.removeChild(孩子)
+    *   需要克隆的元素.cloneNode(true)
+    * */
+
+
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>随机同学</title>
+    <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: "microsoft yahei";
+        }
+        #div1{
+            width: 600px;
+            height: 300px;
+            line-height: 300px;
+            border: 5px solid #999999;
+            color: white;
+            background: lightblue;
+            text-align: center;
+            font-size: 100px;
+            font-weight: bolder;
+            margin: 50px auto;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div id="div1">
+    start
+</div>
+</body>
+</html>
+<script>
+    var ary = [
+        ['赵传祥','陈哓伟','周迅','郭宝杰','王诗朝'],
+        ['孔艳','王晓娜','袁奇','姜福林','张利斌','姚力晓'],
+        ['李海军','郭煜','焦壮飞','杜宝霞','靳程光','王晓宁'],
+        ['周吉刚','马强','张义','郭志远','田坤'],
+        ['王文蓓','孙一鸣','李鹏程','杨国平','黄强','曹嘉兴'],
+        ['吕先雷','李维娜','牛志勇','李亚康','侯继忠'],
+        ['谈兵','魏帅林','林楠','楚东洋'],
+        ['刘单','曹莉莉','马子良','黄波'],
+        ['赵飞','简洁','张峰','文鸿','周跃','申肖云'],
+        ['秦园园','齐艳蕤rui','罗美净']
+    ];
+    var div1 = document.getElementById('div1');
+    div1.timer = null;
+    function change(){
+        div1.timer = window.setInterval(function (){
+            var ran1 = Math.round(Math.random()*(ary.length-1));
+            var ranGroupAry = ary[ran1]; //获取一个随机的组
+            var ran2 = Math.round(Math.random()*(ranGroupAry.length-1));
+            var ranStudent = ranGroupAry[ran2];
+            div1.innerHTML = (ranStudent);
+        },20);
+    }
+
+    div1.onclick = function (){
+        // 免费课定时器课件有这个代码，如果定时器是启动着的。那么点击清定时器。如果定时器是停止的那么点击的时候启动。eg: 时钟。点击开始或者停止(免费课定时器课件)
+        if(div1.timer){
+            window.clearInterval(div1.timer);
+            div1.timer = null;
+        }else{
+            change();
+        }
+    }
+
+</script>

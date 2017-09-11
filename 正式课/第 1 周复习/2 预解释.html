@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   预解释(变量提升)=>变量提前声明，在代码执行之前就声明过了。在代码执行之前把带var和function的都会提前声明。var和function的区别： 带var的会提前声明但是却不会赋值。会默认赋值一个undefined。而function不仅声明并且还会赋值,就是这个函数的引用地址
+    *
+    * */
+    console.log(num);
+    console.log(obj);
+    console.log(fn);
+
+    var num = 10;
+    var obj = {name:'zhufeng'};
+
+    function fn(){
+        console.log('ok');
+    }
+
+
+
+</script>

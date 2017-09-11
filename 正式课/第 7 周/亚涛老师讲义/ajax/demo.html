@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('get', './readme.txt', true, 'zhangyatao', '123456789');
+
+        // 自定义请求首部,该方法只可以放到open方法之后
+        xhr.setRequestHeader('abc', '123');
+        xhr.setRequestHeader('abc', '456');
+
+        //        xhr.onreadystatechange = function () {
+        //            if (xhr.readyState === 4 && xhr.status === 200) {
+        //                console.log('received data');
+        //                document.writeln(xhr.responseText);
+        //            }
+        //        };
+
+        console.log('before send');
+
+        //        setTimeout(function () {
+        xhr.send();
+        //        }, 0);
+
+
+        xhr.addEventListener('readystatechange', function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log('received data');
+                document.writeln(xhr.responseText);
+
+                // 获取服务器时间
+                console.log(new Date(xhr.getResponseHeader('date')));
+
+                // 获取所有的响应首部
+                console.log(xhr.getAllResponseHeaders());
+            }
+        }, false);
+        console.log('after send');
+    </script>
+</head>
+<body>
+
+</body>
+</html>

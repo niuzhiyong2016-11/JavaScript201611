@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" class="a b c"></div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    console.dir(div1);
+    // ie9以下不兼容 移动端开发随便用
+    div1.classList.add('d'); //增加类的方法  utils.addClass
+    div1.classList.remove('a'); //移除类方法  utils.removeClass
+    div1.classList.toggle('e'); // 如果没有就添加，如果有就移除
+    console.log(div1.classList.contains('b')); //是否包含b这个类  hasClass
+    // ajax   方法?
+    // 我想看div1原型链结构?
+    // DOM元素的原型链结构 => 在这个原型链上的属性和方法，div1都可以直接调用
+    // HTMLDivElement => HTMLElement => Element => Node => EventTarget => Object
+</script>

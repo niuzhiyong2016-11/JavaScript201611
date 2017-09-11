@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>烧水</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   下班回家我要烧开水，水开了之后(之后)我要泡面，泡茶，泡脚;
+    *   烧水 6s
+    *   水开了 =>  1 泡面
+    *              2 泡茶
+    *              3 泡脚
+    *
+    *
+    * */
+
+    ;(function boiling(){ //烧水的方法,回家要立刻执行烧水这件事
+        window.setTimeout(function (){
+            console.log('水开了'); // 水开了，这是广播通知。至于谁关心这个水开这件事这个boiling方法不在乎.
+            // 当水开了，找一个人来通知所有关心水开的函数执行
+            /*noodles();
+            tea();
+            foot();
+            swimming(); *///以前水开之后如果想继续做什么都需要把函数名字放在这
+
+            run(person,'boiling'); // 以前水开了是让noodles还有tea和foot执行。现在直接通知一下别人水开了。 run负责执行看看谁订阅过水开了这个事件
+
+        },6000);
+    })();
+
+
+    function noodles(){
+        console.log('泡面');
+    }
+    function tea(){
+        console.log('泡茶');
+    }
+    function foot(){
+        console.log('洗脚');
+    }
+
+    function swimming(){
+        console.log('游泳');
+    }
+
+    var person = {};
+    on(person,'boiling',noodles); // 水开了之后我要泡面
+    on(person,'boiling',tea); //
+    on(person,'boiling',foot);
+    on(person,'boiling',swimming);
+    on(person,'boiling',function (){
+        console.log('haha');
+    });
+
+
+    function on(ele,type,fn){ //person,'boiling',noodles
+        if(!ele[type]){ // 如果没有一个叫做水开的数组   !person.boiling
+            ele[type] = [];  // person.boiling = [];
+        }
+        var a = ele[type];
+        for(var i=0; i<a.length; i++){
+            if(a[i] === fn){
+                return;
+            }
+        }
+        a.push(fn);
+    }
+    function run(ele,type){
+        var a = ele[type]; // person['boiling'] => person.boiling => [noodle,tea,foot]
+        if(a){
+            for(var i=0; i<a.length; i++){
+                a[i].call(ele);
+            }
+        }
+    }
+    function off(ele,type,fn){
+        var a = ele[type];
+        if(a){
+            for(var i = 0; i<a.length; i++){
+                if(a[i] === fn){
+                    a[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+
+
+
+</script>

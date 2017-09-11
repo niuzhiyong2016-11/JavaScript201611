@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>漂流瓶</title>
+    <script src="../ajax/ajax.js"></script>
+</head>
+<body>
+<label>请填写您要扔出去的内容：
+    <textarea id="content"></textarea>
+</label>
+<br/>
+<input type="button" id="throwBottle" value="扔一个">
+<input type="button" id="getBottle" value="捞捞看">
+</body>
+</html>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var content = $('content');
+    var throwBottle = $('throwBottle');
+    var getBottle = $('getBottle');
+
+    // 扔一个
+    throwBottle.onclick = function () {
+        var letter = content.value;
+        if (!letter) {
+            return;
+        }
+        ajax({
+            url: '/throwBottle',
+            cache: false,
+            async: true,
+            data: {'content': letter},
+            method: 'post',
+            success: function (data) {
+                content.value = '';
+                if (data.code === 0) {
+                    alert('您的瓶子已经飘向远方');
+                } else {
+                    alert('再试试看');
+                }
+            },
+            dataType: 'json'
+        });
+    };
+
+    getBottle.onclick = function () {
+        ajax({
+            url: '/getBottle',
+            dataType: 'json',
+            method: 'get',
+            success: function (data) {
+                if (data.code === 0) {
+                    alert('恭喜您捞到瓶子：\n' + data.data.content);
+                } else {
+                    alert('在捞捞看');
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        // step 1 获取ajax对象
+        var getXHR = (function () {
+            // 按照优雅降级的顺序 将ajax对象放入数组中。
+            var list = [function () {
+                return new XMLHttpRequest();
+            }, function () {
+                return new ActiveXObject('Microsot.XMLHTTP');
+            }, function () {
+                return new ActiveXObject('Msxml2.XMLHTTP');
+            }, function () {
+                return new ActiveXObject('Msxml3.XMLHTTP');
+            }], xhr;
+            while (xhr = list.shift()) {
+                // 如果xhr不报错，说明当前浏览器支持xhr函数里的那个对象。
+                try {
+                    // 如果执行xhr不报错，直接return该方法
+                    // 如果执行xhr报错，则进行下一次循环。
+                    xhr();
+                    return xhr;
+                } catch (ex) {
+                }
+            }
+            // 如果代码执行到该处，说明当前浏览器不支持ajax功能。
+            throw new ReferenceError('当前浏览器不支持ajax功能');
+        })();
+        var xhr = getXHR();
+
+        // step 2 打开http请求
+        /**
+         * @param1 http方法。不区分大小写，支持get、post、delete、head、put
+         * @param2 请求地址 可以传相对路径(以“./”或者“../”开头)也可以传绝对路径(以“/”开头)
+         * @param3 是否为异步请求 默认为true
+         * @param4 用户名，放在url中 默认值为undefined
+         * @param5 密码 放在url中 默认值为undefined
+         */
+        xhr.open('http method', 'request URI', 'is async', 'username', 'password');
+
+        // step 3 接收服务器响应
+        // 注册一个事件，每当xhr对象的readyState属性改变一次，该事件就会执行一次。
+        xhr.onreadystatechange = function () {
+            // 判断http事务是否完成
+            if (xhr.readyState === 4) {
+                // 判断服务器状态码是否成功
+                if (/^2\d{2}$/.test(xhr.status) || xhr.status === 304) {
+                    // 获取响应主体,共有3中方法
+
+                    // type 1 将响应主体格式化为字符串格式并返回
+                    var responseText = xhr.responseText;
+
+                    // type 2 将响应主体格式化为xml文档并返回
+                    var response2 = xhr.responseXML;
+
+                    // type 3 不对响应主体做任何处理，直接返回
+                    // 注意兼容性 ie10+
+                    var response3 = xhr.response;
+                } else if (/^(4|5)\d{2}$/.test(xhr.status)) {
+
+                }
+            }
+        };
+
+        // xhr对象的readyState属性
+        // 作用：标识xhr对象执行的状态，一共有5个值
+        /**
+         * 0 默认值 ajax对象刚刚实例化完成，还未做任何操作。
+         * 1 执行完成open方法之后，readyState自动变为1
+         * 2 开始接收服务器返回的响应首部，readyState自动变2
+         * 3 开始接收响应主体。readyState自动变为3
+         * 4 http事务完成，自动变为4
+         */
+
+
+        // step 4 发送http请求
+        /**
+         * 该方法可以传一下集中参数 null、undefined、string、arraybuffer、bolb、FormData
+         * 注意事项：该方法会把参数放到请求主体中。
+         */
+        xhr.send();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

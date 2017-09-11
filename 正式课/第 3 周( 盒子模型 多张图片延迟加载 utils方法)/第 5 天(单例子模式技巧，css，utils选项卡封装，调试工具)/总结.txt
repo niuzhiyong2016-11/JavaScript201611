@@ -1,0 +1,6 @@
+1 utils方法 25个左右
+2 addClass hasClass removeClass getElesByClass getCss setCss setGroupCss css offset listToArray win children
+3 函数方法中的this
+4 如何把选项卡一步一步改造的
+5 考试: 多张图片延迟加载(要求：最外层的ul需要用getElesByClass获取)
+6 考试的时候出了问题使用调试争取把问题找出来

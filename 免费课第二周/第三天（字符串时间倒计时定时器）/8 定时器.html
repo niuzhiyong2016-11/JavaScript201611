@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 定时器： js中负责在单位的时间间隔内重复执行1次多次函数
+
+    /*
+    * 定时器1 ： var timer1 = window.setTimeout(function (){ console.log('setTimeout')  },1000);
+    *           1000ms之后执行第一个函数,1s中之后打印setTimeout字符串
+    *           ps: setTimeout定时器只执行一次
+    *
+    * 定时器2 ： var timer2 = window.setInterval(function (){},1000)
+    *           1000ms之后还是执行函数，并且执行多次
+    *
+    * 定时器的返回值: timer1 = 1 ：代表的是我是页面内的第一个定时器
+    *                timer2 = 2 : 代表的是我是页面内的第二个定时器
+    *                ps: 定时器的返回值就是一个数字
+    *
+    * 清定时器:  1 window.clearTimeout(1);
+    *           2 window.clearInterval(2);
+    *           ps: 清定时器就是把定时器每次执行函数的任务(是任务)给停掉。并不是把这个定时器从页面中删除。定时器还是那个定时器，只不过现在这个定时器里没有任务执行而已。
+    *
+    *   定时器特性： 1 定时器不会阻塞代码从上向下运行. 比如： 在页面最尾部写一个循环，那么要等循环执行结束之后才开始倒计时执行定时器
+    *               2 页面内的多个定时器是同时开始计时的，哪个定时器先到达时间就先执行。不会区分你是第几个定时器
+    *
+    *
+    * */
+    var timer1 = window.setTimeout(function (){
+        console.log('setTimeout');
+    },500);
+
+    var timer2 = window.setInterval(function (){
+        console.log('setInterval');
+    },1000);
+
+    var timer3 = window.setTimeout(function (){
+
+    },2000);
+
+    //window.clearTimeout(timer1); //这个可以清空第一个定时器
+    //window.clearInterval(2); // 可以清掉第二个定时器
+    //timer3 = null; // 这行代码代码只能说明timer3不再代表原来的那个定时器的返回值数字3。而现在是null了
+
+    //console.log(timer1); // 1
+    //console.log(timer2); // 2
+    //console.log(timer3); // 3
+
+    for(var i=0; i<100000; i++){
+        console.log(i);
+    }
+
+
+</script>

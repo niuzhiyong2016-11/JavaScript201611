@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        document.writeln('当前宿主页面的域为：\n'
+                + location.origin);
+        //                + '\n 请求ajax的域为：\n'
+        //                + 'http://127.0.0.1:8080');
+
+        //        var xhr = new XMLHttpRequest();
+        //        xhr.open('get', 'http://127.0.0.1:8080/corssOrigin');
+        //        xhr.onreadystatechange = function () {
+        //            if (xhr.readyState === 4 && xhr.status === 200) {
+        //                console.log(xhr.responseText)
+        //            }
+        //        };
+        //        xhr.send();
+    </script>
+</head>
+<body>
+<script>
+    var d = 1;
+    //    console.log(xxx);
+    //    (function () {
+    function xxx(data) {
+        console.log('成功获取数据：', data);
+    }
+    //    })();
+
+</script>
+<script src="http://127.0.0.1:8080/crossOrigin?key=xxx"></script>
+<!--<img src="http://127.0.0.1:8080/crossOrigin">-->
+<!--<iframe src="inner.html">-->
+<!--<iframe src="http://127.0.0.1:8080/crossOrigin">-->
+
+<!--</iframe>-->
+
+</body>
+</html>

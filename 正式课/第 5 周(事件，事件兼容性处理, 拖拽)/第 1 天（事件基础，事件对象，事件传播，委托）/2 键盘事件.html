@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" id="input" value="" placeholder="请输入">
+</body>
+</html>
+<script>
+    // 事件对象： 只在真正绑定给事件的函数才有
+
+    var input = document.getElementById('input');
+    //input.onkeydown = function (){}
+    function fn(e){
+        b(e);
+        function b(a){
+            console.log(a);
+        }
+    }
+    input.onkeyup = fn;
+    input.onkeyup = function (e){
+        //cossole.log(e);
+        //fn(e);
+        e = e||window.event;
+        console.log(e.keyCode);
+        // 13回车
+        if(e.keyCode == 13){
+            window.location.reload(); //刷新页面
+            window.location.href = 'http://www.baidu.com'; //跳转
+        }
+    }
+    //  比如： 点击下载按钮的时候一直在跳转广告。。。
+
+    /*
+    *   keyBoardEvent: 键盘事件对象
+    *       type: 'keyup' 事件类型
+    *       keyCode : 按键编码
+    *       Enter : 13
+    *       0-9 : 48-57
+    *       left : 37
+    *       up : 38
+    *       right : 39
+    *       down : 40
+    *       space : 32
+    *       backSpace : 8
+    *
+    *
+    * */
+</script>

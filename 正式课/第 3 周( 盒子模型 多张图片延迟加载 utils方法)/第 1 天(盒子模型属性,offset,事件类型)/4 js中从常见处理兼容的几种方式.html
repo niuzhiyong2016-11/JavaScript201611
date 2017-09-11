@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *  1 try catch(e)  listToArray
+    *  2 'JSON' in window  in就是用来判断一个属性是否属于一个对象   if(window.data)
+    *           if(window.setInterval)
+    *  3 window.navigator.userAgent => "MSIE 6"，"MSIE 7"，"MSIE 8" "Chrome" ...  /MSIE 6|7|8/ 可以通过正则来处理不同浏览器之间的差异。甚至相同浏览器不同版本之间的差异
+    *
+    * */
+    if (window.navigator.userAgent.indexOf('MSIE 8') === -1) {
+        //说明MSIE 8 这个字符串在window.navigator.userAgent里没有出现过。不是ie8
+    }
+
+    var reg = /MSIE 6|7|8/;
+    if (reg.test(window.navigator.userAgent)) {
+        // ie 6 7 8
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+实现漂流瓶逻辑的接口文档
+
+1、扔瓶子
+路径: /throwBottle
+方法：post
+参数：{'content':'xxxx'}
+服务器返回:{code:0||1} // 0 -> 成功  1 -> 失败
+
+2、捞瓶子
+路径：/getBottle
+方法：get
+参数：无
+服务器返回：{code:0||1,data:{content:'xxxxx'}}

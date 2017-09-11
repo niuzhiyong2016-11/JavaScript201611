@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: lightpink;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // currying 预先处理的思想
+    // 我们只是想处理下bind这个方法。 ie6-8
+    // bind
+
+    var obj = {
+        name: 'zhufeng'
+    };
+    function fn(num1, num2,e) {
+        console.log(this, num1, num2,e);
+    }
+    /*var newFn = fn.bind(obj);
+    newFn(100, 200);
+    /!*var newFn = fn.bind(obj); // 返回了一个处理好this的新函数
+     newFn();*!/
+    Function.prototype.mybind = function (context) { //
+        // 把this/!*fn*!/中的this处理成context
+        var that = this;
+        return function () {
+            var innerArgu = Array.prototype.slice.call(arguments, 0);
+            that.apply(context, innerArgu);
+        }
+    }
+
+    var newFn = fn.mybind(obj);
+    newFn(100, 200);
+
+    function bind(callback, context) { // callback是处理这个函数中的this，context把callback函数中的this处理成context。
+        return function () {
+            callback.call(context);
+        }
+    }*/
+
+   /* document.body.onclick = fn.bind(obj);
+    function fn(num1, num2) {
+        console.log(this, num1, num2);
+    }*/
+
+
+    Function.prototype.mybind = function (context) {
+        var argu = Array.prototype.slice.call(arguments,1); // 300 400
+        var that = this;
+        return function () {
+            var innerArgu = Array.prototype.slice.call(arguments, 0);
+            that.apply(context, argu.concat(innerArgu));
+        }
+    }
+    document.body.onclick = fn.mybind(obj,300,400);
+
+
+
+
+
+
+
+
+
+</script>

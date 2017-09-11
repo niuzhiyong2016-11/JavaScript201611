@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            left: 550px;
+            top : 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div style="margin-left: 557px; margin-top: 135px;">
+        <input id="left" type="button" value="左"/>
+        <input id="right" type="button" value="右"/>
+    </div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+    var left = document.getElementById('left');
+    var right = document.getElementById('right');
+    var minLeft = 0;
+    var maxLeft = utils.win('clientWidth') - div1.offsetWidth;
+    left.onclick = function (){
+        // 点击左按钮让盒子向左运动
+        move(minLeft,arrivalLeft); // 向左运动传一个目标最小值0
+    }
+    right.onclick = function (){
+        // 点击右按钮让盒子向右运动
+        move(maxLeft);
+    }
+
+    function move(target,fn){
+        // 每次点击都会执行这个move函数，根据target参数的不同。来判断向左还是向右
+        if(div1.timer){ // 只要曾经设置过定时器，那么div1.timer必然是一个大于等于1的数字，判断一个属性或者一个方法甚至是一个元素是否存在我们经常会用到这样的判断
+            window.clearInterval(div1.timer);
+        }
+        var speed = 5;
+        // 判断运动的终点和自己现在的位置，如果小于当前位置那么向左，否则向右
+        div1.timer = window.setInterval(function (){
+            var curPosition = utils.css(div1,'left');
+            if(target > curPosition){ // 向右运动
+                curPosition += 5;
+                if(curPosition + speed >= maxLeft ){ // 到达终点之后
+                    window.clearInterval(div1.timer);
+                    utils.css(div1,'left',maxLeft);
+                    //utils.css(div1,'borderRadius','50%'); // 到达终点之后让盒子变成圆形
+                    if(typeof fn == 'function'){
+                        fn();
+                    }
+                    return;
+                }
+                utils.css(div1,'left',curPosition);
+            }else if(target < curPosition){ // 向左
+                curPosition -= 5;
+                if(curPosition  - speed <= minLeft){ //过界判断加步长,如果是利用时间公式那么就需要判断花费的时间是否超过规定的时间
+                    window.clearInterval(div1.timer);
+                    utils.css(div1,'left',minLeft);
+                    //utils.css(div1,'backgroundColor','red');
+                    if(typeof fn == 'function'){
+                        fn();
+                    }
+                    return;
+                }
+                utils.css(div1,'left',curPosition);
+            }else{
+                return;
+            }
+        },10);
+
+    }
+    //
+    function arrivalRight(){ // 到达右侧之后我要执行的函数
+        utils.css(div1,'backgroundColor','blue');
+        div1.innerHTML = '到达右侧';
+        console.log(this);
+    }
+    function arrivalLeft(){
+        console.log(this);
+        utils.css(div1,'backgroundColor','red');
+        div1.innerHTML = '到达左侧';
+    }
+    // 回调函数 ： 向函数中传函数，如果不强制改变this一般是window
+    // [].forEach(function (item,index){});  [].map(function (item,index){});
+</script>

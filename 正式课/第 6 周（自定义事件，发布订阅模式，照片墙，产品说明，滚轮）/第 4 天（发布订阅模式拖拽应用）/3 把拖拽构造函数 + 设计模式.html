@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1,#div2,#div3{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" style="background: red; top: 100px;"></div>
+<div id="div2" style="background: green; top: 300px;"></div>
+<div id="div3" style="background: blue; top: 500px;"></div>
+</body>
+</html>
+<script src="event-4.1.js"></script> <!--在on和off和run的基础上多了对slef事件类型的处理-->
+<script src="Emitter.js"></script><!--这个是给自定义事件selfdragstart用的-->
+<script src="DragClass.js"></script>
+<script>
+    var divs = document.getElementsByTagName('div');
+
+    var drag1 = new Drag(divs[0]); // => 我让div1可以拖拽 => 如果想拖拽必须先绑定mousedown方法。在new Drag结束之后就应该执行完了
+    var drag2 = new Drag(divs[1]); // => 我让div1可以拖拽 => 如果想拖拽必须先绑定mousedown方法。在new Drag结束之后就应该执行完了
+    //var drag3 = new Drag(divs[2]); // => 我让div1可以拖拽 => 如果想拖拽必须先绑定mousedown方法。在new Drag结束之后就应该执行完了
+    //console.dir(drag1);
+   /* for(var i=0; i<divs.length; i++){
+        new Drag(divs[i]).on('selfdragstart',increaseIndex).on('selfdragstart',function (){
+            console.log(1);
+        });
+    }*/
+
+    var drag1 = new Drag(div1);
+    // 实例.range()
+    drag1.range({left : 300, top : 300});
+
+    var drag2 = new Drag(div2).range({ left : 500, top : 500});
+
+    var drag3 = new Drag(div3).on('selfdragend',function (){
+        console.log('div3结束拖拽了')
+    });
+    drag3.on('selfdraging',function (){
+        // 在拖拽的过程中如果想限定范围也可以在这里做
+    });
+    function increaseIndex(){
+        //this; // drag1   drag1.ele
+        for(var i=0; i<divs.length; i++){
+            divs[i].style.zIndex = 0;
+        }
+        this.ele.style.zIndex = 1;
+    }
+
+    //  如何让div3自己弹起运动....
+
+
+   /* function $(ele){
+        return new Drag(ele);
+    }
+*/
+
+
+</script>
+
+
+

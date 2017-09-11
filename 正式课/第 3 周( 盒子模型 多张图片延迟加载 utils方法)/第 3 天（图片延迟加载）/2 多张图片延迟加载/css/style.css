@@ -1,0 +1,58 @@
+html,body,div,ul,li,h2,p,img{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+/*reset.css*/
+.newsList{
+    padding: 10px;
+    font-family: "microsoft yahei";
+}
+.newsList li{
+    height: 70px;
+    position: relative;
+    border-bottom: 1px dashed #ccc;/*transparent透明*/
+    margin-bottom: 10px;
+}
+/*第一个div*/
+.newsList li div:nth-child(1){
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: url("../images/default.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.newsList li div:nth-child(1) img{
+    display: none;/*刚开始图片不用显示，图片延迟加载之后并且成功在显示*/
+    width: 100%;
+    height: 100%;
+    border: none;
+    vertical-align: top;
+    opacity: 0;
+}
+/*第二个div*/
+.newsList li div:nth-child(2){
+    height: 60px;
+    margin-left: 75px;/*把左边的盒子的位置让出来*/
+}
+.newsList li div:nth-child(2) h2{
+    font-size: 16px;
+    /*超出部分省略号*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.newsList li div:nth-child(2) p{
+    color: #999;
+    margin-top: 5px;
+    font-size: 14px;
+    line-height: 14px;
+    height: 28px;
+    overflow: hidden;
+    /*在指定的行数上尾部添加省略号*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2
+}

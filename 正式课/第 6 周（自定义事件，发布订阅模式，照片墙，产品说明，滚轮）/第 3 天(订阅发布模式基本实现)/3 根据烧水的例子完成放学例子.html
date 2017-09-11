@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放学</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    /*
+    *   需求：  再过5s钟之后放学，
+    *          放学后： 1 请田老师吃饭  2 请田老师按摩  3 请田老师K歌
+    *          使用发布订阅模式去完成
+    *          订阅方法on
+    *          解除订阅方法off
+    *          通知方法run
+    * */
+    var person = {};
+    on(person,'leaveSchool',eat); // person.on('leaveSchool,eat);
+    on(person,'leaveSchool',anmo); // kettle.on
+    on(person,'leaveSchool',KTV); //
+
+    function eat(){
+        // this
+        console.log('eat');
+    }
+    function anmo(){
+        console.log('anmo');
+    }
+    function KTV(){
+        console.log('KTV');
+        console.log(this);
+    }
+
+    (function classOver(){
+        window.setTimeout(function (){
+            console.log('放学啦');
+            run(person,'leaveSchool'); //发布放学这个事件
+        },3000);
+    })();
+
+
+
+
+    function on(ele,type,fn){  // person.leaveSchool : [eat,anmo,ktv]
+        if(!ele[type]){
+            ele[type]=[];
+        }
+        var a=ele[type];
+        for (var i=0;i<a.length;i++){
+            if(a[i] === fn){
+                return;
+            }
+        }
+        a.push(fn);
+    }
+    function off(ele,type,fn){
+        var a=ele[type];
+        for (var i=0;i<a.length;i++){
+            if(a[i]===fn){
+                a[i]=null;
+                break;
+            }
+        }
+    }
+    function run(ele,type){
+        var a=ele[type];
+        for (var i=0;i<a.length;i++){
+            a[i].call(ele);
+        }
+    }
+
+</script>

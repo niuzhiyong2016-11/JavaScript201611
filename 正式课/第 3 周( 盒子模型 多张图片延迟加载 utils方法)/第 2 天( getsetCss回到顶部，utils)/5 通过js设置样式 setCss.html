@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1" style="width: 150px; height: 150px; background: red; opacity: 0.6; filter: alpha(opacity=60); position: absolute; left: 100px; top: 100px;"></div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+
+    //div1.style.backgroundColor = 'green';
+    //div2.style.width = '300px';
+    /**
+     * 设置元素的样式
+     * @param ele 元素
+     * @param attr 设置ele的attr属性  eg: width backgroundColor..
+     * @param val 设置ele的attr属性值为val  eg: 100px  red ..
+     */
+    function setCss(ele,attr,val){
+        if(attr == 'opacity'){ // 设置透明度的，需要处理在ie6-8中的filter问题
+            //不用判断浏览器，因为设置两套都会都一套生效
+            ele.style.opacity = val;
+            ele.style.filter = 'alpha(opacity='+val*100+')'; // alpha(opacity=30)
+            return; //下面的代码不用执行了
+        }
+        // 浮动float
+        if(attr == 'float'){
+            ele.style.cssFloat = val; // 标准
+            ele.style.styleFloat = val; // ie
+            return;
+        }
+        // width,height,margin,padding,left,top,right,bottom,margin-left,padding-right
+        // marginLeft
+        var reg = /width|height|left|top|right|bottom|(margin|padding)(Left|Top|Right|Bottom)?/; //不是所有的属性都需要处理单位
+        if(reg.test(attr)){ // 如果验证通过，说明属性名一定是正则中的一种
+            if(!isNaN(val)){ // 如果没有带单位才给添加个px
+                val += 'px';
+            }
+        }
+        ele.style[attr] = val;
+    }
+    setCss(div1,'width',300); // px需要setCss方法给我加上
+    setCss(div1,'height','300px'); // 如果带着px单位来的就别加了
+    setCss(div1,'display','block'); // 不是所有的属性都需要单位？ eg: display
+    setCss(div1,'opacity',0.5); //  在ie6-8中的透明度??
+
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    Array.prototype.myPush = function (n){
+        console.log(this);
+        this[this.length] = n;
+        return this;
+    }
+
+    var ary1 = [1,2,3,4];
+    ary1.myPush(5).myPush(6).myPush(7).myPush(8)// this => ary1
+    var ary2 = [1,2];
+    ary2.myPush(3); // this => ary2
+
+    // 数组去重
+    Array.prototype.quchong = function (){
+        console.log(this); //?? => this就是要去重的那个数组
+        for(var i=0; i<this.length-1; i++){
+            for(var j=i+1; j<this.length; j++){
+                if(this[i] === this[j]){
+                    this.splice(j,1);
+                    j--;
+                }
+            }
+        }
+        return this;
+    }
+    var a = [1,2,3,4,3,2,1];
+    var res = a.quchong(); // => 留下去重之后的数组
+    console.log(res);
+    var b = [7,8,9,8,7];
+    b.quchong();
+
+    // slice(n,m)
+
+    Array.prototype.mySlice = function (n,m){ // 2,4
+        this; // [1,2,3,4,5]
+        var ary = [];
+        for(var i=n; i<m; i++){ // 2 3
+            ary.push(this[i]); // ary.push(this[2]) => 3
+        }
+        return ary;
+
+    }
+    var c = [1,2,3,4,5];
+    c.slice(2,4); // [3,4]
+</script>

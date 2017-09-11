@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #F4F4F4;
+        }
+
+        #box {
+            /*position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -50px 0 0 -50px;*/
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+            /*使用FLEXBOX-CSS3伸缩盒子模型实现居中*/
+
+            width: 100px;
+            height: 100px;
+            background: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var oBox = document.getElementById('box');
+    oBox.addEventListener('touchstart', function (e) {
+        //console.log(e);
+        //->e:TouchEvent手指事件对象
+        //->changedTouches
+        //->targetTouches
+        //->touches：手指相关信息(X|Y轴坐标)的集合(会记录每一个手指的信息)，但是我们一般只需要一个手指信息即可，所以我们只需要获取集合中索引为0那一项的值即可；一般情况下三者存储的值是一样的，但是当手指离开屏幕，touches中的信息就没有，此时我们在想知道离开的时候手指的坐标的话需要从changedTouches中获取
+        var point = e.touches[0];
+        this.strX = point.pageX;
+        this.strY = point.pageY;
+        this.isMove = false;
+    }, false);
+
+    oBox.addEventListener('touchmove', function (e) {
+        var point = e.touches[0];
+        this.changeX = point.pageX - this.strX;
+        this.changeY = point.pageY - this.strY;
+        //->为了防止误操作,我们移动的距离只要小于10PX,就不算移动
+        if (Math.abs(this.changeX) > 10 || Math.abs(this.changeY) > 10) {
+            this.isMove = true;
+        }
+    }, false);
+
+    oBox.addEventListener('touchend', function (e) {
+        var isMove = this.isMove;
+        if (!isMove) {
+            //->点击
+            this.style.background = 'green';
+            return;
+        }
+        //->滑动
+        this.style.background = 'black';
+    }, false);
+
+
+    //->JS实现居中
+    /*oBox.style.position = 'absolute';
+     oBox.style.top = (document.documentElement.clientHeight - oBox.offsetHeight) / 2 + 'px';
+     oBox.style.left = (document.documentElement.clientWidth - oBox.offsetWidth) / 2 + 'px';*/
+</script>
+</body>
+</html>

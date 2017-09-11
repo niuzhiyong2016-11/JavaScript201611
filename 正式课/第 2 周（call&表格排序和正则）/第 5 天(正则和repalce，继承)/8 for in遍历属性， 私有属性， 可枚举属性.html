@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   for in 遍历实例： 把实例的私有属性 和 实例所属类原型上的自定义属性(自己后添加的属性)遍历出来。=> 所有在原型链上的自定义属性都可以遍历出来
+    *   hasOwnProperty : 这是定义在Object.prototype上的方法。定义在基类原型上的方法，所有的引用数据类型都可以直接调用
+    *       作用: 判断属性是不是私有属性
+    *   propertyIsEnumerable : 也是定义在Object.prototype和hasOwnProperty用法基本相同 => 可枚举属性
+    *
+    *
+    * */
+    Object.prototype.z = 300;
+
+    function A() {
+        this.x = 100;
+        this.y = 200;
+    }
+
+    A.prototype.getX = function () {
+
+    };
+
+    var a = new A();
+
+    for (var key in a) {
+        if (key in a) {
+
+        }
+        if (a.hasOwnProperty(key)) {
+
+        }
+        if (a.propertyIsEnumerable(key)) {
+
+        }
+        console.log(key); // x,y
+
+        //console.log(key); // x,y,getX
+    }
+</script>
+</body>
+</html>

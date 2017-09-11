@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css等常用方法</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            border: 5px solid #ccc;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰</div>
+    <div class="div1">珠峰</div>
+    <div class="div1">珠峰</div>
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    // css方法： 设置样式
+    $('#div1').css({width:1000});
+    $('#div1').css('width',2000);
+    $('.div1').css({width:200,height:200,background:'green'});
+    // width() height(1000)
+    console.log($('#div1').width());
+    $('#div1').height(); //如果有参数就是设置高度，如果没有就是获取
+    // scrollLeft(100)   scrollTop()  如果有参数就是设置，没有就是获取
+    // innerHeight()   innerWidth()
+    console.log($('#div1').innerHeight()); //  clientHeight
+    console.log($('#div1').outerHeight()); //  offsetHeight
+    // outerHeigth()
+    // offset()  utils.offset()
+    console.log($('#div1').offset()); //   utils.offset() 相同
+    //  position() 元素相对于父元素的偏移和offset()方法区分好
+
+
+
+
+
+
+</script>

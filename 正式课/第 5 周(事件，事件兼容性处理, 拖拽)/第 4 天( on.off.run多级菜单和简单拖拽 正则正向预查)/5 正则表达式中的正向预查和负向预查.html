@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+正则表达式中的正向预查和负向预查
+<div id="div1" class="c6 c5 c6"></div>
+</body>
+</html>
+<script>
+    var reg = /\d?/; // \d出现0-1次
+    var reg = /\d+?/; //
+    var reg = /(\d+(?:\.\d+)?)/; //匹配不捕获 exec  破坏分组了
+    var str = '12.34';
+    var res = reg.exec(str); //?? [12.34,12.34,.34]
+    console.log(res);
+    //分组的顺序只关心左边括号是哪一组先出现的
+    //
+    var reg = /windows(?=(7|8|$))/;
+    var reg = /windows(?=(7|8))/; // ?=相当于必须是什么，然后并不占宽度。
+    var reg = /windows(?!(7|8))/; // ?! 相当于一个否定的条件
+    //var reg = /windows/;
+    var str = '11111111111windows7';
+    console.log(reg.exec(str));
+    //  <div class = 'c6 c5 c6'> </div>
+    // ' c6 c5 '  'c6  c5' [c6,c5]
+    function removeClass(ele, strClass) {
+        var ary = strClass.replace(/^ +| +$/g, '').split(/ +/);
+        for (var i = 0; i < ary.length; i++) {
+            var reg = new RegExp('(^| )' + ary[i] + '(?=( |$))', 'g');
+            ele.className = ele.className.replace(reg, ' ');
+        }
+    }
+    var div1 = document.getElementById('div1');
+    removeClass(div1, 'c5 c6');
+
+
+</script>

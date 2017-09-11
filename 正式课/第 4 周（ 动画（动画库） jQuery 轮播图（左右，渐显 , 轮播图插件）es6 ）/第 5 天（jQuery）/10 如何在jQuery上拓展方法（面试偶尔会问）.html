@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    //$.each(); // 直接定义在$(jQuery)这个类上的方法，不依赖jQuery对象
+    //$().each(); // 定义在$的类的原型上的方法，因为通过实例才能调用
+    // 拓展也只能站在这两个位置添加
+    //$.extend(); // 直接拓展在jQuery类上的
+    //$.fn.extend(); //  $.fn就是jQuery.prototype  直接拓展在jQuery的prototype上的
+
+    function foo(){
+        console.log('ok');
+    }
+
+    $.extend({ // 直接拓展到jQ上
+        foo : foo
+    });
+
+    $.fn.extend({ // 直接拓展到jQ原型上
+        foo : foo
+    });
+
+</script>

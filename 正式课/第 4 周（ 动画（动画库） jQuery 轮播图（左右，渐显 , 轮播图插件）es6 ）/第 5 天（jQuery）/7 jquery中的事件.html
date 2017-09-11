@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    var $div1 = $('#div1');
+
+    $div1.click(function (){
+        $(this).css({width:200}).html('haha').hide(300).show(200);
+    });
+
+    // jquery绑定事件是把匿名函数传入当参数了
+    // on 绑定事件  同一个事件可以绑定多个函数
+    // off是移除事件 移除事件可以单个移除 绑定多个函数可以移除其中的几个
+    // trigger方法是主动触发事件
+    $div1.on('click',function (){
+       console.log(1);
+    });
+    $div1.on('click',function (){
+       console.log(2);
+    }).on('click',function (){
+        console.log(3);
+    }).on('click',function (){
+        console.log(4);
+    }).trigger('dblclick').off('click');
+
+</script>

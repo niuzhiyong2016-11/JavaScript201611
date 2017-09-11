@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{ margin: 0; padding: 0; }
+        .tab{
+            width: 360px;
+            margin: 30px auto;
+        }
+        .tab ul{
+            list-style: none;
+        }
+        .tab ul:after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        .tab ul li{
+            float: left;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #ccc;
+            margin-right: 10px;
+        }
+        .tab ul li.selected{
+            background: lightpink;
+        }
+        .tab div{
+            display: none;
+            width: 360px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            background: lightpink;
+        }
+        .tab div.selected{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tab">
+    <ul>
+        <li class="selected">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="selected">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+</body>
+</html>
+<script>
+    var tab = document.getElementsByClassName('tab')[0];
+    var lis = tab.getElementsByTagName('li');
+    var divs = tab.getElementsByTagName('div');
+    for(var i=0; i<lis.length; i++){ // 3
+        (function (i){
+            //var i = 1;
+            lis[i].onclick = function (){
+                for(var j = 0; j<lis.length; j++ ){
+                    lis[j].className = '';
+                    divs[j].className = '';
+                }
+                lis[i].className = 'selected';
+                divs[i].className = 'selected';
+            }
+        })(i)
+    }
+
+    //console.log(i); //3 全局变量
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="a c"></div>
+<div id="div1">
+    <p class="a b c d"></p> a c        i = 0   /^| +d+|$/
+    <span class="a c"></span> a c
+    <i class=" a b d"></i> a c
+    <h2 class="a b c"></h2> a c
+</div>
+</body>
+</html>
+<script>
+    //var res = div1.getElementsByClassName(' a c d'); // 同时包含a和c这两个类的
+    //console.log(res);
+    getElesByClass('a c'); // document内获取
+
+    res =  getElesByClass('a c',div1);
+    console.log(res);
+    function getElesByClass(strClass, context) { //通过类名获取元素
+        // ul.getElementsByClassName('bb')
+        //document.getElementsByClassName('aa');
+        // getElesByClass('bb',ul);
+        context = context || document; // 如果context没有传，那么至少保证一个document
+/*
+        if (context.getElementsByClassName) {
+            return context.getElementsByClassName(strClass);
+        }
+*/
+        // 在i6-8中处理
+        var tags = context.getElementsByTagName('*'); //获取context范围内所有的标签
+        // 从这些标签中挑出包含strClass这些类的元素   ' a c  ' => 'a c'
+        var strClassAry = strClass.replace(/^ +| +$/g,'').split(/ +/); //['a','c'] 就是传进来的字符串已经处理成数组了。数组里的每一项就是我们获取元素必须要包含的这些类
+        var ary = []; //容器数组，把符合条件的标签都放到这个数组内
+        for(var i=0; i<tags.length; i++){ // 循环所有标签，看是否包含我数组内所有的类
+            var curTag = tags[i]; //curTag就是当前正在比对的那个标签
+            //var curTagOk = true; //假设当前这个标签是符合条件(包含我传进来的这些类，那么只要有一个类验证没有通过，那么这个条件立刻赋值为false)。假设不成立我就不要了。每次循环一个 标签都会重新设置为true
+            for(var j=0; j<strClassAry.length; j++){ //是从你传来的类的字符串拆分成数组之后。['a','c']需要循环创建动态正则来判断a或者c这两个类是否出现在curTag当前正在比对的这个标签的className中
+                var curClass = strClassAry[j]; //正在比对的当前类 'a'  'c'
+                var reg = new RegExp('(^| +)'+ curClass + '( +|$)'); // ^| +a +|$
+                if(!reg.test(curTag.className)){
+                    // 只要有一个类验证没有通过，那么直接把假设条件破坏。假设不成立
+                    //curTagOk = false;
+                    break; //只要有一个不符合条件那么下面的类就不用继续验证了
+                }
+                if(j == strClassAry.length-1 ){
+                    ary.push(curTag);
+                }
+            }
+           /* if(curTagOk){
+                ary.push(curTag);
+            }*/
+        }
+        return ary;
+    }
+</script>

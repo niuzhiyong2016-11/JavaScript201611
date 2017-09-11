@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 3px solid red;
+            background: lightblue;
+            margin: 30px auto;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+
+        #div1 span {
+            font-weight: bolder;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    认为js很简单请点赞
+    <span>0</span>
+</div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    var span = div1.getElementsByTagName('span')[0];
+
+
+    //    var total = 0; //
+    //    div1.onclick = function (){
+    //        total++;
+    //        span.innerHTML = total;
+    //    }
+
+
+    //把全局变量total变成私有变量，让这个total更安全 => 闭包
+//    (function () {
+//        var total = 0; //1 2 3 4
+//        div1.onclick = function () {
+//            total++;
+//            span.innerHTML = total;
+//        }
+//    })();
+
+//    div1.onclick = (function (){
+//        var total = 0;
+//        return function (){
+//            //total++;
+//            span.innerHTML = ++total;
+//        }
+//    })();
+
+    //window.setInterval(div1.onclick,1000);
+/*
+    for(var i=0; i<50; i++){
+        div1.onclick();
+    }
+*/
+
+    // 3 利用自定义属性的方式来存这个count点击次数的
+    div1.count = 0;
+    div1.onclick = function (){
+        //console.log(++this.count); // this => div1 那么我在div1上存的属性在这里通过this就可以获取到
+        //span.innerHTML = ++this.count;
+        //this.getElementsByTagName('span')[0].innerHTML = ++this.count;
+        //this.children[0].innerHTML = ++this.count;
+        this.firstElementChild.innerHTML = ++this.count;
+    }
+
+    // 4
+    div1.onclick = function (){
+        //span.innerHTML = Number(span.innerHTML) + 1; // '0' => 0
+        //span.innerHTML = span.innerHTML/1 + 1; // '0' => 0
+        ++span.innerHTML; // ++i运算会强制把其他数据类型转化为Number
+    }
+
+
+
+</script>

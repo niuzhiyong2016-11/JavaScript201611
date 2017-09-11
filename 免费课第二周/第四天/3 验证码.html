@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="font-size: 100px">
+    Ab78
+</body>
+</html>
+<script>
+    /*
+    *   Math:
+    *       Math.abs();
+    *       Math.ceil(); 向上取整
+    *       Math.floor(); 向下取整
+    *       Math.round(); 四舍五入   Math.round(-5.5) = -5  Math.round(-5.6) = -6
+    *       Math.random();
+    *       保留两位有效数字:  0.3134566666.toFixed(2) 参数就是要保留的位数
+    *       Math.max(1,2,3,4,5); => 5最大值
+    *       Math.min(1,2,3,4,5); => 1最小值
+    *
+    *       n到m之间的随机整数，包含n和m
+    *
+    *       Math.round( Math.random()*(m-n)+n ) 要求记住
+    *       Math.PI;
+    *
+    *       console.log(Math);
+    *
+    *
+    *
+    *       //字符串方法
+    *       length属性:  标记这个字符串有多少个字符  str[0]
+    *       方法:
+    *
+    *           1 charAt(index)  通过索引获取字符
+    *           2 charCodeAt(索引) 通过这个索引来获取指定字符编码 ASCII
+    *
+    *           截取
+    *
+    *           4 substr(n,m个数) 从索引n开始截取m个  如果m没写那么截取到末尾
+    *           5 substring(n,m索引) 从索引n开始截取到索引m。但是不包含m
+    *           6 slice(n,m) 和substring的参数的用法是相同的。但是这个可以支持负数索引.在截取的时候如果是负数那么累加个length
+    *
+    *           大小写转换
+    *           7 toLowerCase() 转小写
+    *           8 toUpperCase() 转大写
+    *
+    *           判断字符在字符串是否出现
+    *           9 "abc".indexOf('&') 返回值是-1说明这个字符没有在字符串中出现过.否则返回第一次出现的索引值
+    *           9 lastIndexOf 返回最后一次出现的索引值。其他相同
+    *           window.navigator.userAgent => 返回带有浏览器信息的字符串。
+    *           比如: Chrome  MSIE 7   MSIE 8/9
+    *           window.navigator.userAgent.indexOf('Chrome') !== -1 说明就是chrome浏览器
+    *
+    *           10 split 把字符串拆分成数组   => 它的参数还可以是一个正则
+    *
+    *           11 replace(old,new) => 并不会操作原有字符串，是返回一个已经替换好的新字符串.如果把这个返回值再赋值给自己。那么也相当于操作字符串本身,第一个参数还可以是一个正则
+    *              replace(old,function (){
+    *                   return 'aaa'
+    *              });
+    *
+    *            12 match  正则时候在说
+    * */
+    var str = 'zhufengpeixun';
+    console.log(str.charAt(0)); // z
+    console.log(str.substr(0,3));
+    console.log(str.split(" ")); //
+
+    //var res = str.replace('feng','峰');
+    //str = str.replace('feng','峰');
+    str = str.replace('feng',function (item,index,str){
+        // item 第一个参数在原有字符串中匹配到的字符
+        // index 匹配到的字符的索引位置
+        // str 原有字符串
+        console.log(arguments);
+        return '峰';
+    });
+    console.log(str);
+
+    //  2016-09-24 12:21:30 => 2016年09月24日 12时21分30秒
+    var str = '2016-09-24 12:21:30';
+    var res = str.split(' '); // ['2016-09-24','12:21:30']
+    var res1 = res[0]/*2016-09-24*/.split("-");
+    var res2 = res[1]/*12:21:30*/.split(":");
+    res = res1.concat(res2); //["2016", "09", "24", "12", "21", "30"]
+    // 学正则的时候是可以做到一次替换的
+    function code(){
+        // 规定范围
+        var strRange = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'; // 62
+        // 需要0-61的随机数  Math.round(Math.random()*(m-n)+n);
+        var str = ""; // 0ab    A
+
+        while(str.length<4){
+            var ran = getRandom(0,61);
+            var ranChar = strRange.charAt(ran);
+            if(  str.toUpperCase().indexOf(ranChar.toUpperCase()) === -1  ){
+                str += ranChar;
+            }
+            console.log(1);
+
+        }
+        //console.log(str);
+        document.body.innerHTML = str;
+    }
+    code(); //保证刷新页面的
+
+
+    document.body.onclick = code;
+
+
+
+
+
+    function getRandom(n,m){ // 获取随机数的函数
+        //保证一下n和m是有效数字，先枪强制转化成数字,要么是有效数字要么是NaN
+        n = Number(n);
+        m = Number(m);
+        if(isNaN(n) || isNaN(m)){ //这是一个或者条件，只要满足一个就可以。只要n和m有一个是非有效数字。
+            return Math.random(); //
+        }
+        //只要代码能运行到这说明n和m都是有效数字
+
+        if(n>m){
+            var temp = m;
+            m = n;
+            n = temp;
+        }
+        return Math.round( Math.random()*(m-n)+n );
+    }
+
+
+
+
+
+
+</script>

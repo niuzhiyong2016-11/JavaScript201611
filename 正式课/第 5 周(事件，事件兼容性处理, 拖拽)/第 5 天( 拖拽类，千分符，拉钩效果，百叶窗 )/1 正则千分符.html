@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则千分符</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   \d(?=a)
+    *   ?!
+    * */
+    // 12,345,678
+
+    // 123456789
+
+/*
+    var str = '123456789';
+    // [1,2,3,4,5,6,7,8] => [8,7,6,5,4,3,2,1] => '987,654,321,'
+    var res = str.split('').reverse().join(""); // 987654321
+    var reg = /(\d{3})(?!$)/g;
+    res = res.replace(reg,function (){
+        console.log(arguments); //["876", "876", 0, "87654321"]
+        return arguments[1]+',';
+    }).split("").reverse().join("");
+    console.log(res);
+    // 1
+    var str = '12345678';
+    str = str.split("").reverse().join("").replace(/(\d{3})(?!$)/g,"$1,").split("").reverse().join("");
+    console.log(str);
+*/
+
+    // 2
+    var str = '12,345,678,555,000';
+    //var reg = /\d+(\d{3})+/g;
+    //         01234567
+    // 思路就是造这个索引1和4，让这个1索引和4索引符合条件。这两个索引用(自己+，)来替换自己，其他的不符合条件的索引用自己替换自己
+    var reg = /\d(?!$)/g; // 最后一个不能符合条件,用?!把最后一个排除
+    str = str.replace(reg,function (item,index){
+        if((str.length - 1 -index)%3 === 0){
+            return item + ',';
+        }else{
+            return item;
+        }
+        //console.log(index);
+    });
+    //console.log(str);
+
+    // 非空验证  /^\s*$/  有效数字  邮箱  数字和字母组合  .......
+
+
+
+    // 3  后面数字出现的次数必须是3个连续数字的正整数倍,但是必须是到包括结尾
+    var str = '123 456 123 456';
+    var reg = /(\d{1,2})(?=(\d{3})+$)/g; // zero-width-lookahead
+    str = str.replace(reg,"$1,");  // zero-width-lookbehind
+    console.log(str);
+
+    // 4 任何语言都会有匹配字符串操作。
+
+
+
+
+</script>

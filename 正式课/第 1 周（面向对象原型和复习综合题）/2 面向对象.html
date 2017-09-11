@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    /*
+     *   1 单例模式 这就是一个对象 => 命名空间  => nameSpace => 比较常用
+     *   作用：就是把描述同一个事物的方法或者属性放到同一个对象里。防止多人同时编辑同一个文件的命名冲突问题。
+     *   ps: 单例模式属性和属性之间的方法调用通过this就可以
+     * */
+    var guoyu = {
+        banner : function (){
+            //this.tab();
+        },
+        tab : function (){
+            this.banner(); // 因为tab这个函数执行guoyu.tab()所以tab中的this就是guoyu。this.banner()其实也就是guoyu.banner();
+        }
+    };
+
+    guoyu.tab();
+
+
+
+
+
+
+    var lihaijun = {
+        banner : function (){},
+        tab : function (){}
+    };
+
+    var tianxi = {};
+    var lixiaowei = {};
+
+
+    guoyu.banner();
+    lihaijun.banner();
+
+
+    var utils = { // 工具
+        children : function (ele){
+            var childs = ele.childNodes; // 1 3 8
+            var ary = [];
+            for(var i=0; i<childs.length; i++){
+                if(childs[i].nodeType == 1){
+                    ary.push(childs[i]);
+                }
+            }
+            return ary;
+        },
+        getRandom : function (n,m){
+            n  = Number(n);
+            m = Number(m);
+            if(isNaN(n) || isNaN(m)){
+                return Math.random();
+            }
+            return Math.round(Math.random()*(m-n)+n);
+        }
+    };
+    //utils.children();
+    //function children(){}
+
+
+    /*
+    *   2 工厂模式 工厂模式解决的就是批量生产的问题。 由于单例模式每次还需要创建一个对象，然后在对象中还需要增加属性和方法。那么工厂模式就是每次运行之后自动给我创建一个对象。
+    *   ps: 工厂模式其实就是一个函数
+    *
+    * */
+    function Factory(x,y){
+        var obj = {};
+        //obj.x = 100;
+        //obj.y = 200;
+        obj.x = x;
+        obj.y = y;
+        obj.fn = function (){
+            console.log(this.x);
+        };
+        return obj;
+    }
+    var a = Factory(1,2); // a =>
+    var b = Factory(3,4); // b =>
+    a.fn(); // a => a.x
+    b.fn(); // b => b.x
+
+    //console.log(a,b);
+    //console.log(a.fn===b.fn);
+
+    /*
+    *  3 构造函数模式 => 类
+    *       内置类: Array String Number Boolean Object RegExp Date ...
+    *       构造类: function FE(){}
+    *       ps: 是类还是函数在定义的时候根本就不知道，只要在执行的时候才能区分。如果是使用new的方式去执行的。那么就是当作一个类。如果是直接FE()的方式执行的。那么就是一个普通函数
+    *       实例: 就是具体到这个类其中的一个的。比如：每个人都是人类一个实例
+    *       对象：万物皆对象
+    *       ps: 即使是使用new的方式，那么类里的代码也是和普通函数一样执行。
+    *       ps: 使用实例的创建方式，会默认返回一个对象。普通函数执行需要写return
+    *       ps: 在构造函数中，如果return一个引用数据类型，会破坏默认的实例返回动作。return一个基本数据类型没有影响。
+    *       ps: 构造函数中的私有变量和实例没有关系。只有this才会影响实例
+    * */
+    function FE(pc,money){ // front engineer   FED
+        var x = 1000; // 当作构造函数(类)来执行的时候这个私有变量是不会影响实例的
+        this.pc = pc;
+        this.money = money;
+        this.code = function (){
+            //这个方法每个实例都会自带一个。虽然不是同一个方法，但是却是相同的功能，那么我们如何把这个相同的方法，从每个实例中拿出来变成公有方法？
+        }
+        return this; // 由于这个this就是当前实例，那么用实例来破坏默认的返回实例的动作并不会影响。
+    }
+    var fe = FE(); // fe这个变量在接收FE()执行的返回值结果
+    var fe1 = new FE('dell','5k'); // fe1这个变量在接收实例方式运行的结果
+    var fe2 = new FE('apple','20k');
+    ///console.log( fe); // 'undefined'
+    console.log(fe1); // 'object'
+    console.log(fe2); //
+    console.log(fe1.code === fe2.code)
+
+
+    /*
+    *   4 原型模式  => 就是为了解决把每个实例相同作用的私有方法，抽象出来一个公有方法。让实例天生自带这个方法。比如：吃这个方法不用给每个人来添加，添加给人类就可以
+    *       1 任何一个函数只要声明结束就会天生自带(天生自带)一个属性叫prototype(原型),这个属性的值仍然是一个对象数据类型的。
+    *       2 函数的原型(Human.prototype)也天生自带两个属性，一个是constructor，值是这个函数(类)本身。
+    *       Human.prototype.constructor === Human 真
+    *       3 任何一个实例都天生自带一个属性叫做__proto__，这个属性的值就是自己所属类的原型   person1.__proto__ === Human.prototype,每个实例也都可以通过__proto__属性都能查找到所属类的原型。那么这个原型相对于每个实例来说是一个公共的空间，在这个公共空间添加的方法都是公有方法。
+    *       ps: 添加公有方法直接添加到类的原型上就可以
+    *       4 任何一个引用数据类型都是Object的一个实例. 比如：window/document.body/Human.prototype/person1...
+    *       5 任何引用数据类型都有__proto__属性,而这个属性就是负责去上一级的原型去查找
+    *
+    * */
+    Object.prototype.drink = function (){  console.log('drink'); }
+    function Human(name,weight){
+        this.name = name;
+        this.weight = weight;
+        this.eat = function (){}
+    }
+    //Human.tianxi = 30;
+    Human.prototype.eat = function (){}
+    console.dir(Human);
+    var person1 = new Human('zhangsan','3kg');
+    var person2 = new Human('lisi','4kg');
+    console.dir(person1);
+    //console.log(person2);
+
+    console.log(Human.prototype === person1.__proto__);
+    console.log(person1.__proto__.eat === Human.prototype.eat);
+    console.log(person1.__proto__.eat === person2.__proto__.eat);
+    console.log(person1.eat === person2.eat);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 500px;
+            height: 40px;
+            border: 5px solid darkred;
+            background: -webkit-linear-gradient(top right, lightpink , lightblue);
+            margin: 30px auto;
+            text-align: center;
+            line-height: 40px;
+            font-size: 30px;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+        #box span{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box">认为田老师很帅的请点赞<span></span></div>
+</body>
+</html>
+<script>
+    var box = document.getElementById('box');
+    var span = box.getElementsByTagName('span')[0];
+
+
+
+//    var n = 0; // 1
+//    box.onclick = function (){
+//        //n++;
+//        //span.innerHTML = n;
+//        span.innerHTML = ++n;
+//    }
+
+    // 认为的去制造闭包，为了保护这个私有变量n不受外界的干扰。在自己主动构建闭包的过程我们应该提供一个函数的执行。
+    (function (n){
+        //var n = 0; // 1
+        box.onclick = function (){
+            //n++;
+            //span.innerHTML = n;
+            span.innerHTML = ++n;
+        }
+    })(0);
+
+//    box.onclick = (function (){
+//        var n = 0;
+//        return function (){
+//            span.innerHTML = ++n;
+//        }
+//    })();
+
+    // 根本思想就是能把n存下来就可以了
+//    box.n = 0;
+//    box.onclick = function (){
+//        //console.log(this); //box
+//        //this.n += 1; // this.n++
+//        //span.innerHTML = this.n;
+//        this.children[0].innerHTML = ++this.n;
+//    }
+
+    box.onclick = function (){
+        //span.innerHTML = span.innerHTML*1 + 1;
+        ++span.innerHTML; // ++i的操作有强制转化为数字的效果
+    }
+
+
+
+
+</script>

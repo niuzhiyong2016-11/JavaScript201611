@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>把烧水的例子面向对象写法</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 因为on和off还有run方法在不同的类和场景下经常会被使用。那么就把这三个方法封装到一个类上。无论哪个其他的类想用，那么请先继承这个类
+    function Emitter(){}
+    // var Emitter = function (){}; 这样也可以
+    Emitter.prototype.on = function (type,fn){
+        // person.on('leaveSchool',eat)  this => person
+
+        if(!(this[type])){
+            this[type] = [];
+        }
+        var a = this[type];
+        for(var i=0; i<a.length; i++){
+            if(a[i] === fn){
+                return;
+            }
+        }
+        a.push(fn);
+    }
+    Emitter.prototype.run = function (type){
+        var a = this[type]; // k1.boiling => k1.__proto__.boiling
+        if(a){
+            for(var i=0; i<a.length; i++){
+                if(typeof a[i] === 'function'){
+                    a[i].call(this);
+                }else{
+                    a.splice(i,1);
+                    i--;
+                }
+            }
+        }
+    }
+    Emitter.prototype.off = function (type,fn){
+        var a = this[type];
+        if(a){
+            for(var i=0; i<a.length; i++){
+                if(a[i] === fn){
+                    a[i] = null;
+                    // 如果移除事件绑定使用的是赋值为null，那么就要考虑到在run执行的时候要判断下是不是函数。不是函数我就删掉了。
+                    break;
+                }
+            }
+        }
+    }
+
+    // 这三个on,off,run方法已经封装到Emitter这个类的原型上了，如果谁想用这个方法就直接来继承就可以。如果想继承那么只有类和类之间才能发生
+    function Kettle(){
+        this.width = 100;
+    }
+    Kettle.prototype = new Emitter();
+    Kettle.prototype.constructor = Kettle;
+    // 通过继承了Emitter方法之后任何一个Kettle类实例都能调用on和off和run方法
+    // var k1 = new Kettle();
+
+    Kettle.prototype.boiling = function (){//每个水壶都有烧水的功能
+        // this
+        var that = this; //这里的this一定是Kettle这个类的实例。然后由于Kettle类继承Emitter类on,off,run。 这个位置通过this.run就能调用run方法
+        window.setTimeout(function (){
+            console.log('水开了');
+            that.run('boiled'); // 这里用不用that.run.call(that,'boiling')
+        },5000);
+    }
+    var k1 = new Kettle();
+    // k1在订阅boiling这个事件，当这个事件发生的时候，我才执行绑定的noodle,tea,foot,swimming等方法
+    //debugger;
+    k1.on('boiled',noodle);
+    k1.on('boiled',tea);
+    k1.on('boiled',foot);
+    k1.on('boiled',swimming);
+    // 上面的代码都是约定的是水开之后要做什么，那么应该先烧水，然后才有水开这个事件
+    k1.boiling(); //执行烧水这个动作，那么一会水开了就执行其他和水开了约定好的事件
+
+    function noodle(){
+        console.log('面条');
+    }
+    function tea(){
+        console.log('喝茶');
+    }
+    function foot(){
+        console.log('泡脚');
+    }
+    function swimming(){
+        console.log('洗澡');
+    }
+
+
+
+
+
+</script>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title id="title">数组</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    var title = document.getElementById('title');
+    var n = 0;
+    window.setInterval(function (){
+        n++;
+        title.innerHTML = n;
+    },1000);
+
+
+    /*
+    *   数组:
+    *       length: 天生自带的属性，数组有多少项,也就是数组的长度
+    *       length--可以删除数组的最后一项
+    *       length++ 其实是在末尾添加一个undefiend
+    *       a[ary.length+5] = 'x'; 中间被跳过的项目是undefined
+    * */
+    var a = [1,2,3,4];
+    //console.dir(a);
+    //a.length = a.length - 1;
+    //a.length -= 1;
+    //a.length--;
+    //console.log(a);
+
+    //增加 删除  修改  复制
+
+    /*
+    *   push: 向数组的末尾增加一项,如果是多个使用","隔开。返回数组的新长度
+    * */
+    var ary = [1,2,3];
+    var res = ary.push(4);
+    console.log(res); //数组的新长度
+
+    /*
+    *  pop: 删除数组的最后一项， 返回删除的数组项
+    *
+    * */
+    var ary = [1,2,3];
+    var res = ary.pop(); //[1,2]
+    console.log(res); //3
+
+    /*
+    *  unshift: 向数组开头增加一项，返回数组的新长度
+    * */
+
+    var ary = [1,2,3];
+    var res = ary.unshift(0); //[0,1,2,3]
+    console.log(res); // 4
+
+    /*
+    *   shift: 删除数组的开头项, 返回删除的开头项
+    * */
+    var ary = [1,2,3];
+    var res = ary.shift();
+    console.log(res); // 1
+
+    /*
+    * splice: splice(n,m) 从索引n开始删除m个。返回删除项组成新数组。
+    *         splice(n) 从索引n开始删除到末尾
+    *         splice(n,m,x) 从索引n开始删除m个，并且把x插入到删除的位置
+    *         splice(n,0,x) 把x插入到索引n的前面
+    *
+    *         push: splice(ary.length,0,x)
+    *         unshift: splice(0,0,x)
+    *         shift: splice(0,1)
+    *         pop: splice(ary.length-1,1)
+    *
+    * */
+
+    /*
+    *  slice: slice(n,m) 从索引n开始复制到索引m，但是不包含m，返回一个复制好的新数组
+    *         slice(n)  从索引n开始复制到末尾
+    *         slice()   从开头复制到末尾
+    * */
+
+    // 拼接
+    /*
+    *   concat: ary1.concat(ary2,x,[]) 拼接数组，参数可以是数组可以是项，拼接多个用逗号隔开，返回拼接好的新数组
+    *   join: 把数组里的项拼接成字符串，参数是间隔符。返回拼接好的字符串
+    *   eval : 这个不是数组方法，把字符串当作js表达式来执行。也就是去掉引号
+    *
+    * */
+    var ary = [1,2,3];
+    var res = ary.join("+"); //'1+2+3'
+    console.log(eval(res)); //6
+
+    //排序
+    /*
+    *   reverse: 倒序数组，返回已经倒序后的原有数组
+    * */
+    var ary = [1,2,3];
+    ary.reverse(); // [3,2,1]
+
+    /*
+    *  sort: 升序  ary.sort(function (a,b){ return a-b })
+    *        降序  ary.sort(function (a,b){ return b-a })
+    * */
+
+    var ary = [4,2,1,3,5];
+             //[2,4,1,3,5]
+    ary.sort(function (a,b){
+        //console.log(a,b);
+        //console.log(a-b);
+        return a-b; //return的这个值是是否换位置的依据
+    });
+    console.log(ary);
+
+    // 几个兼容性不好的方法
+
+    /*
+    *   indexOf : 查看数组项是否属于这个数组，如果属于那么返回对应的索引位置(第一次), 如果没有就返回-1
+    *   lastIndexOf : ps 最后一次出现的索引 其他和indexOf用法完全相同
+    * */
+
+    /*
+    *   forEach : 遍历数组.参数是一个函数，函数执行次数取决于数组的长度
+    *   map : 遍历数组,比forEach强大。map的返回值是参数函数的每次return的值组成的新数组
+    * */
+
+    var ary = ['a','b','c'];
+    ary.forEach(function (item,index,ary){
+         // item循环时候的每一项
+        // index 对应每一项的索引
+        // ary 原有数组
+    });
+
+    var res = ary.map(function (item,index,ary){
+        return item+index;
+    });
+    console.log(res); //['a0','b1','c2']
+
+    /*
+    *   冒泡排序
+    *
+    *
+    * */
+    var ary = [2,1,3,4,5];
+
+    var ary = [5,4,3,2,1];
+    //第一轮   0               4次
+    //         4 5 3 2 1
+    //         4 3 5 2 1
+    //         4 3 2 5 1
+    //         4 3 2 1 5
+    //第二轮   1              3次
+    //         3 4 2 1 5
+    //         3 2 4 1 5
+    //         3 2 1 4 5
+    //第三轮    2             2次
+    //         2 3 1 4 5
+    //         2 1 3 4 5
+    //第四轮    3             1次
+    //         1 2 3 4 5
+
+    //代表轮数(i)的索引和每轮比较次数(j)加起来是length-1   i+j = length-1 => j = length - 1 - i
+
+
+
+    //经过一轮两两比较之后把这一轮的最大值放到末尾去了，如果把4(length-1)个最大值放到末尾排序就结束了
+    function bubbleSort(ary){
+        for(var i=0; i<ary.length-1; i++){
+            var flag = false;
+            for(var j=0; j<ary.length -1 -i; j++){
+                if(ary[j] > ary[j+1]){ //只要这个条件成立过就说明有位置变化
+                    // 1 2
+                    flag = true; // 说明有位置变化
+                    var temp = ary[j];
+                    ary[j] = ary[j+1];
+                    ary[j+1] = temp;
+                }
+            }
+            if(flag){ //说明上一轮有位置变化，那么下一轮继续
+                flag = false;
+            }else{ // 上一轮都没有位置变化说明排序已经好了。那么循环也不用继续了
+                break;
+            }
+        }
+        return ary;
+    }
+
+    console.log(bubbleSort(ary));
+
+
+
+
+
+
+
+
+
+
+</script>

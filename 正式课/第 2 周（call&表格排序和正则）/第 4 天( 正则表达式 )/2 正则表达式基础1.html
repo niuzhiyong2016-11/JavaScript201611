@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   RegExp正则表达式类(这两种创建方式有区别)
+    *
+    *       1 字面量 /a/
+    *       2 实例 new RegExp
+    *
+    *   正则的作用: 和字符串是息息相关的，正则就是一个规则，是一个模式。正则是制定规则的，1 验证字符串是否符合正则制定的规则  2 捕获符合条件的字符串
+    *
+    *   正则方法：
+    *       1  reg.test(str) test方法就是用来验证字符串是否符合正则 true/false
+    *       2  reg.exec(str) exec方法就是用来捕获符合规则的字符串
+    *
+    * */
+    var reg = /a/; //这就是一个最简单的正则
+    //var reg = new RegExp();
+    var str = '1ab';
+    console.log(reg.test(str));
+
+    var reg = /6/; //只要字符串中包含一个6就符合这个规则
+    var res = reg.test('12345678');
+    console.log(res);
+
+    //只要字符串中包含一个数字就可以  => 那么没有办法来规定这个数字是0-9之间哪一个
+    /*
+    *   正则中有特殊意义的元字符:
+    *       \d : 0-9之间的任意一个数字 => 所以\d只占一个位置
+    *       \w : 数字，字母 ，下划线  0-9 a-z A-Z _
+    *       \D : 除了\d
+    *       \W : 除了\w
+    *        . : 除了\n之外的任意一个字符
+    *        \ : 转义字符 => \. => 把本来代表任意字符的.转义成"."本身
+    *       \s : 空格或者空白等
+    *       \n : 匹配换行符
+    *       \b : 匹配边界 字符串的开头和结尾 空格的两边都是边界 => 不占用字符串位数
+    *        ^ : 以什么开始 => 是一个限定条件本身是不占位的
+    *        $ : 以什么结束 => 也是一个限定条件本身也是不占位的
+    *
+    *        /^\d\d$/ => 只有"67"这样的字符串才符合规则。 ^$如果同时出现，那么是限定字符串的个数的。 如果不是同时出现那么字符串中的一部分符合正则就可以。如果同时出现就必须是整个字符串和正则匹配
+    *
+    * */
+    var reg = /\d/; //只要0-9之间的数字在字符串中出现过一次就符合规则
+    reg.test('1');
+    reg.test('abc1');
+
+    var reg = /\d \w/; // \d\w需要连续出现
+    var str = '1%2&3 u';
+    console.log(reg.test(str)); // true
+
+    var reg = /./;
+    var reg = /\./; //转义字符
+    console.log(reg.test('.'));
+
+    //\b
+    var reg = /\b\w\b\s\b\d\b/;
+    var str = '2 3';
+    console.log(reg.test(str));
+
+    // ^ $
+    var reg = /^\d\d$/;
+    var str = '9';
+    console.log(reg.test(str));
+
+    //匹配一个手机号? =>
+    var reg = /^1\d\d\d\d\d\d\d\d\d\d$/;
+    console.log(reg.test('18800019819'));
+</script>
+</body>
+</html>

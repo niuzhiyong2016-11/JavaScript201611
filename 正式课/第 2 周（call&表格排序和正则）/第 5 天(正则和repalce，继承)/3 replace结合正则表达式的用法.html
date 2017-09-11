@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   replace第一个参数是正则用法:
+    *       str.replace(reg,function (){})
+    *       1 第二个参数函数执行多少次，取决于正则能成功在字符串匹配多少次
+    *       2 每次用函数的返回值return，来替换正则所匹配到内容
+    *       3 函数执行的时候打印arguments =>
+    *        [正则匹配到的内容,分组1，分组2...    index,input]
+    *              0                      length-2,length-1
+    *
+    * */
+    var reg = /(\d+)/g;
+    var reg = /(\d+?)/g;
+    var str = 'zhufeng2015peixun2016789';  //zhufeng贰零壹伍peixun贰零壹陆
+    //str = str.replace('2015','贰零壹伍');
+    //str = str.replace('2016','贰零壹陆');
+    //console.log(str);
+    var chineseChar = '零壹贰叁肆伍陆柒捌玖';
+    str = str.replace(reg, function (str, index, input) {
+        //console.log('ok'); //ok打印的次数和正则匹配成功次数相同
+        //["2", 7, "zhufeng2015peixun2016"]
+        //console.log(arguments); // 函数执行一次就会打印一次
+        return chineseChar.charAt(arguments[1]); //只要正则中存在了分组，那么arguments[1]对应的就是第一个分组的内容
+        return chineseChar[str]; //str就是每次捕获到的单个数字，然后利用自己本身当作索引值去chineseChar中获取汉字
+        // str => 2 0 1 5 2 0 1 6
+        return input.charAt(index);
+    });
+    console.log(str);
+</script>
+</body>
+</html>

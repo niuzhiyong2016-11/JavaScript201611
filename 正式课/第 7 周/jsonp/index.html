@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+哈哈哈，赵飞被人打屁屁了
+<script src="js/ajax.js"></script>
+<script>
+    //->在当前页面(63342)中通过AJAX请求6688服务下的数据
+    //    ajax({
+    //        url: 'http://localhost:6688/getAllList',
+    //        type: 'get',
+    //        dataType: 'json',
+    //        success: function (result) {
+    //            console.log(result);
+    //        }
+    //    });
+
+    //->http://matchweb.sports.qq.com/kbs/hotMatchList
+    function fn(result) {
+        console.log(result);
+    }
+</script>
+<script src="http://matchweb.sports.qq.com/kbs/hotMatchList?callback=fn"></script>
+
+<!--<script src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/js/lib/jquery-1.10.2_d88366fd.js"></script>-->
+</body>
+</html>

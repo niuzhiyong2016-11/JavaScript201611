@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    // 盒子本身的边框或者内容
+    clientWidth 盒子内部/内容区域/windth+padding
+    clientHeight 垂直
+    clientLeft 盒子的左边框
+    clientTop 盒子上边框
+
+    offsetWidth clientWidth+border
+    offsetHeight 垂直方向
+    offsetLeft 跟盒子本身的大小没什么关系，这是距离offsetParent的水平偏移量
+    本身盒子的外边框距离offsetParent内边框的偏移，offsetParent取决于祖先元素是否有定位属性relative absolute fixed   body.offsetParent =null;
+    offsetTop 垂直方向
+
+    scrollWidth : clientWidth 内容溢出: padding-Left + 内容(超出的部分也是)
+    scrollHeight : 垂直方向
+    scrollLeft : 存在滚动条的,(overflow:auto;滚动条),滚出去的宽度
+    scrollTop :  垂直， 滚出去的高度
+
+</body>
+</html>
+<script>
+    function offset(ele){ //获取ele距离页面的偏移
+        var l = null;
+        var t = null;
+        l += ele.offsetLeft;
+        t += ele.offsetTop;
+        var par = ele.offsetParent;
+        while(par){
+            if(window.navigator.userAgent.indexOf('MSIE 8') === -1){
+                // 符合这个条件就是非IE8，那么需要累加边框。在IE8中边框已经被累加到offsetLeft  IETester(集成ie所有版本的模拟器)
+                l += par.clientLeft;
+                t += par.clientTop;
+            }
+
+            l += par.offsetLeft;
+            t += par.offsetTop;
+
+            par = par.offsetParent;
+        }
+        return {left : l, top : t};
+    }
+
+</script>

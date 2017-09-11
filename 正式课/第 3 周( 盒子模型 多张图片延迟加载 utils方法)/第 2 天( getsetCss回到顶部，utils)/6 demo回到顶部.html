@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 300%;
+            background: -webkit-linear-gradient(top,lightblue,lightsalmon,darkslategray);
+        }
+        #link{
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            display: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 5px solid #000;
+            line-height: 80px;
+            text-align: center;
+            text-decoration: none;
+            color: #000;
+            font-size: 50px;
+            opacity: 0.6;
+        }
+        #link:hover{
+            opacity: 1;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <a id="link" href="javascript: void 0">顶</a><!--阻止a的默认跳转行为-->
+</body>
+</html>
+<script>
+    var link = document.getElementById('link');
+    //var step = 15; //没一步运动5像素
+    var timer = null;
+    var duration = 1000;
+    var speed = null;
+    link.onclick = function(){
+        window.clearInterval(timer); //这个清空定时器的动作，是防止多次点击启动多个定时器的定时器累加问题。每次点击都会把上一次定时器清掉。不管是否已经到达终点
+        timer = window.setInterval(function (){
+            var curScrollTop = document.documentElement.scrollTop||document.body.scrollTop; //每次获取当前滚出去的高度
+            //如果使用curScrollTop这个变量来求速度就是越来越小的
+            speed = curScrollTop/duration*10;
+            if(curScrollTop <= 0){ //说明已经到达顶部
+                window.clearInterval(timer); //清空定时器
+                window.onscroll = showBtn; //当由于在点击的时候移除了这个事件，所以运动到达终点的时刻还需要重新绑定这个事件。为了下次还能在滚动的时刻显示按钮
+                return; // 已经到达顶部就不需要执行下面的代码了
+            }
+            //curScrollTop -= step; //在当前的基础上减去步长
+            curScrollTop -= speed;
+            //把减掉步长之后的值重新赋值。然后才能生效。下次重新获取已经是这个生效的scrollTop了
+            document.documentElement.scrollTop = curScrollTop;
+            document.body.scrollTop = curScrollTop;
+            //console.log(curScrollTop)
+        },10);
+        //debugger;
+        this.style.display = 'none'; //点击按钮让这个按钮立刻消失
+        window.onscroll = null; //由于点击按钮之后在回到顶部的过程中又触发了window.onscroll事件。而这个事件又把按钮显示了。所以在点击完之后就立刻把这个事件移除。
+    }
+
+    // 刚开始的时候回到的顶部的按钮是不出现的，当滚出去的高度超过了一屏的高度的时候再出现
+    var winHeight = document.documentElement.clientHeight || document.body.clientHeight; //可视窗口的高度
+
+    window.onscroll = showBtn;
+    function showBtn(){ //滚动的时候我要时刻判断当前是否已经滚出去超过一个屏幕
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop; //滚出去的高度
+        if(scrollTop > winHeight){ //滚出的高度大于窗口的高度，我就让按钮显示
+            link.style.display = 'block';
+        }else{
+            link.style.display = 'none';
+        }
+    }
+</script>

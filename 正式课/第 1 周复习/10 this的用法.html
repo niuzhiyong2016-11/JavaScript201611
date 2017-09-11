@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px; background: red;"></div>
+</body>
+</html>
+<script>
+    /*
+    *   this的用法：
+    *       1 绑定事件：当事件被触发的时候，函数中(函数中)的this就是触发事件的那个元素 => 把事件绑定给谁this就是谁
+    *       2 函数中的this是谁，就看再执行的时候调用这个函数的主体。=> 其实就看函数在执行的时候"."前面是谁。如果没有"."就是window。
+    *       3 自运行函数中的this永远是window
+    *       
+    *       4 构造函数中的this是当前实例
+    *       5 call和apply可以强制改变this
+    *       6 定时器中的this永远是window，回调函数中的this一般也是window
+    *
+    * */
+    //1 事件中的this
+
+    var div1 = document.getElementById('div1');
+    div1.onclick = function (){
+        console.log(this); // div1
+    }
+    //div1.onclick();
+
+
+    // 2 函数执行中的this
+    function fn(){
+        console.log(this);
+    }
+    var obj = {
+        name : 'zhufeng',
+        fn : fn
+    };
+    fn(); // window
+    obj.fn(); // obj
+
+    window.setInterval(obj.fn,1000); // obj.fn中的this不是obj却是window
+
+    var oo = {
+        fn : function (){
+            console.log(this); // 这个this是oo.fn中的
+            //fn(); // fn中的this是window
+            //obj.fn(); // obj
+        }
+    }
+    oo.fn(); // oo
+
+    // 3 自运行函数中的this
+    (function (){
+        console.log(this); //window
+    })()
+
+    //
+
+
+</script>

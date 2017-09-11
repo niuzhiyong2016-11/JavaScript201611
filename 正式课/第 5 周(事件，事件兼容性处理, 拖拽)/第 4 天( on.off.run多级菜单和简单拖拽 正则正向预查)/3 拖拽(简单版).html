@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag</title>
+    <style>
+        #div1,#div2{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            left: 100px;
+            top: 100px;
+        }
+        #div1 img,#div2 img{
+            width: 100%;
+            height: 100%;
+            vertical-align: top;
+            border: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1"><img src="https://www.baidu.com/img/bd_logo1.png" ></div>
+    <div id="div2" style="left: 100px; top: 200px; background: green"><img src="https://www.baidu.com/img/bd_logo1.png" ></div>
+</body>
+</html>
+<script>
+    /*
+    *   div1.setCapture()   div1.releaseCapture()
+    * */
+    var div1 = document.getElementById('div1');
+    div1.onmousedown = function (e){
+        e = e || window.event;
+        e.pageX = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+        e.pageY = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+        this.l = e.pageX - this.offsetLeft;/*offsetLeft需要使用offset*/
+        this.t = e.pageY - this.offsetTop;
+        div1.setCapture ? div1.setCapture() : void 0;
+        //让鼠标和盒子之间产生一个连接关系，并且甩不掉，只有在ie里才支持。chrome并没有
+        document.onmousemove = function (e){
+            // 盒子的left和top的值一直随着鼠标在不断变化
+            e = e||window.event;
+            e.pageX = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+            e.pageY = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+            var l = e.pageX - div1.l; // 这个l的值是要生效的left的值
+            var t = e.pageY - div1.t;
+            div1.style.left = l +'px'; // 把计算好的left值重新赋值
+            div1.style.top = t + 'px';
+            e.preventDefault();
+        }
+        document.onmouseup = function (e){
+            div1.releaseCapture ? div1.releaseCapture() : void 0; //相当于把这个绳索解开
+            // 当鼠标弹起的时候盒子的left值和top的值就不要在随着鼠标移动继续变化了。其实就是让onmousemove事件失效
+            this.onmousemove = null;
+            this.onmouseup = null;
+        }
+    }
+    /*
+    *  在chrome中并没有setCapture这样的方法。然后在鼠标移动过快的时候，就会丢失盒子。只要鼠标从盒子脱离那么就没有办法出发div1.onmousemove事件了。然后由于事件传播documen的onmousemove事件只要有鼠标移动就会被触发。那么就让document事件触发的时候去操作div1的left和top的值
+    *
+    *
+    * */
+
+    var div2 = document.getElementById('div2');
+    div2.onmousedown = function (e){
+        e = e || window.event;
+        e.pageX = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+        e.pageY = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+        this.l = e.pageX - this.offsetLeft;/*offsetLeft需要使用offset*/
+        this.t = e.pageY - this.offsetTop;
+        div2.setCapture ? div2.setCapture() : void 0;
+        //让鼠标和盒子之间产生一个连接关系，并且甩不掉，只有在ie里才支持。chrome并没有
+        document.onmousemove = function (e){
+            // 盒子的left和top的值一直随着鼠标在不断变化
+            e = e||window.event;
+            e.pageX = e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+            e.pageY = e.clientY + (document.documentElement.scrollTop || document.body.scrollTop);
+            var l = e.pageX - div2.l; // 这个l的值是要生效的left的值
+            var t = e.pageY - div2.t;
+            div2.style.left = l +'px'; // 把计算好的left值重新赋值
+            div2.style.top = t + 'px';
+            e.preventDefault(); //在onmousemove事件中需要添加一行阻止默认行为的代码。需要拖拽多个元素的时候有问题
+        }
+        //把事件绑定给document就是为了处理在chrome中的兼容问题
+        document.onmouseup = function (e){
+            div2.releaseCapture ? div2.releaseCapture() : void 0; //相当于把这个绳索解开
+            // 当鼠标弹起的时候盒子的left值和top的值就不要在随着鼠标移动继续变化了。其实就是让onmousemove事件失效
+            this.onmousemove = null;
+            this.onmouseup = null;
+        }
+    }
+
+    /*
+    *   在H5中是可以直接使用drag等事件
+    *   不兼容的
+    *
+    * */
+
+  /*  new Banner(ele,dataUrl,2000);
+
+    new Drag(div1);*/
+
+
+</script>

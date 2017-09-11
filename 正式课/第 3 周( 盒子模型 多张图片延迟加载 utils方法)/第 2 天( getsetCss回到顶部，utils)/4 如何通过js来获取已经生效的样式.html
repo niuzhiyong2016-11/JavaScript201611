@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body,div{ margin: 0; padding: 0; }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: absolute;
+            top: 0;
+            left: 200px ;
+            opacity: 0.8; /*可以写，但是在ie6-8中不生效。还能获取*/
+            filter: alpha(opacity=30);
+            haha : 'xixi';/*只要写了就会存下来，但是真的不生效*/
+        }
+        #div1:before{
+            content: '我是before';
+            display: block;
+            background: yellow;
+        }
+        #div1:after{
+            content: '我是after';
+            display: block;
+            background: red;
+        }
+        #div1 p{
+            height: 30px;
+            background: green;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="div1" style="width: 300px;">
+        <p>我是P</p>
+    </div>
+</body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    //div1.style.width = '300px';
+    //console.log(div1.style.width); // 但是只能获取写在行内的样式
+    /*
+    *  通过js来获取已经经过计算过后的样式:
+    *     1 window.getComputedStyle(div1) => div1经过计算过后的样式。返回值是一个对象。
+    *       window.getComputedStyle(div1,'before') => 获取div1的伪类样式 => before参数是一个字符串.
+    *
+    *     2  IE 6-8
+    *     div1.currentStyle => 返回也是包含着n组样式属性的对象
+    *
+    * */
+    //var res = window.getComputedStyle(div1);
+    //console.log(res); //包含所有已经生效的样式
+    //console.log(res.width); //
+    //console.log(res.opacity); //透明度是默认1,但是返回的确是"1"
+    //获取伪类样式
+    //var res1 = window.getComputedStyle(div1,'before'); //第二个参数就是来获取div1的before样式的
+    //console.log(res1.content);
+
+
+    /**
+     * getCss是用来获取元素经过计算过后的样式
+     * @param ele 就是要获取样式的元素   body div
+     * @param attr 就获取ele的attr样式   ps: width height opacity
+     */
+    function getCss(ele,attr){ //用来获取元素的样式  getComputedStyle/currentStyle
+        var val = null;
+        if(window.getComputedStyle){ // 要么是一个函数，要么是一个undefined
+            val =  window.getComputedStyle(ele,null)/*对象*/[attr]/*属性值*/;
+        }else{  // ie6-8
+            if(attr == 'opacity'){ // 获取透明度 => 如果代码能运行到这，那么说明这是在ie6-8中来获取透明度
+                // 在这里需要获取透明度的filter样式
+                val = ele.currentStyle.filter; //"alpha(opacity=30.5)"
+                var reg = /alpha\(opacity=(\d+(?:\.\d+)?)\)/;
+                // 如果这个正则验证没有通过，那么说明在ie6-8没有写过filter透明度样式,那么默认的透明度应该是1
+                val = reg.test(val) ? reg.exec(val)[1]/100  : 1;
+            }else{ //除了透明度在ie6-8中需要单独处理，其他的属性不用单独处理
+                val = ele.currentStyle[attr];
+            }
+        }
+        // 在标准浏览器ele是getComputedStyle的参数，ie6-8中currentStyle是ele的属性
+        //300px   'block'   '#aaabbb' '0.8'   'left'   '1s'这些值都有可能是我获取回来的返回值。取决于获取的是哪个属性  我想把300px这样的值单位去掉
+        var reg = /-?\d+(\.\d+)?(px|pt|em|rem|deg)?/; //300px 300deg 300pt 300em 300rem -300px -300.55px
+        if(reg.test(val)){ //只有符合这个正则的值我才去单位,比如"block"类型的值我不做修改
+            val = parseFloat(val);
+        }
+        return val;
+    }
+
+    console.log(getCss(div1,'width')); //
+    console.log(getCss(div1,'opacity')); //来获取div1的透明度，传opacity本意就是来获取透明度。但是在ie6-8中透明度需要filter
+
+
+    function getCss(ele,attr){
+        var val = null;
+        if(window.getComputedStyle){
+            val = window.getComputedStyle(ele,null)[attr];
+        }else{
+            if(attr == 'opacity'){
+                val = ele.currentStyle.filter; // alpha(opacity=30)  /(\d+)/
+                var reg = /alpha\(opacity=(\d+(?:\.\d+)?)\)/;
+                val = reg.test(val) ? reg.exec(val)[1]/100 : 1;
+            }else{
+                val = ele.currentStyle[attr];
+            }
+        }
+        var reg = /-?\d+(\.\d+)?(px|em|rem|deg|pt)?/; // 300px -303.5px
+        if(reg.test(val)){
+            val = parseFloat(val);
+        }
+        return val;
+    }
+
+
+
+
+
+</script>

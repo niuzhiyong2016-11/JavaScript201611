@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css"/>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #F4F4F4;
+        }
+
+        #box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            background: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+
+<script src="js/zepto.min.js"></script>
+<script>
+    var $box = $('#box');
+    //    $box.tap(function () {
+    //        $(this).css('background', 'green');
+    //    }).singleTap(function () {
+    //        $(this).css('background', 'orange');
+    //    }).doubleTap(function () {
+    //        $(this).css('background', 'blue');
+    //    }).longTap(function () {
+    //        $(this).css('background', 'black');
+    //    });
+
+    $box.swipeLeft(function () {
+        //->$(this).stop() Uncaught TypeError: $(...).stop is not a function
+        $(this).animate({
+            rotate: '-360deg'
+        }, 1000, function () {
+            $(this).css('transform', 'rotate(0deg)');
+        });
+    });
+</script>
+</body>
+</html>

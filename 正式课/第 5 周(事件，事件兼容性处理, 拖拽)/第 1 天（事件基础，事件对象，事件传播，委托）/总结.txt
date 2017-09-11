@@ -1,0 +1,15 @@
+1 事件: MouseEvent : e window.event
+                    e.clientX
+                    e.clientY
+                    e.pageX
+                    e.pageY
+                    e.type
+                    e.target e.srcElement
+                    e.stopPropagation()  e.cancelBubble()
+                    e.preventDefault()   e.returnValue = false   return false   void 0
+2 KeyboardEvent :  keyCode  Enter : 13   48-57 0-9
+3 MouseEvent => UIEvent => Event => Object
+4 事件委托 => e.target
+5 冒泡捕获  dom0 dom2  addEventListener('click',fn,false/true);
+6 事件触发顺序： 先捕获 target 冒泡
+                   

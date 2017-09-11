@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 50%;
+            top : 50%;
+            margin-left:  -50px;
+            margin-top: -50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" class="div1"></div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    //var div1 = document.getElementById('div1');
+    var div1 = utils.getElesByClass('div1')[0]; //
+/*
+    utils.setCss(div1,'width',200);
+    utils.setCss(div1,'height',200);
+    utils.setCss(div1,'opacity',0.7);
+    utils.setCss(div1,'left',50);
+*/
+    utils.css(div1,{width: 200,height:200,opacity:0.7});
+    utils.css(div1,'width',300);
+    console.log(utils.css(div1,'width'));
+
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body style="font-size: 100px; -webkit-user-select: none;">
+    15:48:35
+</body>
+</html>
+<script>
+    // 递归： 函数自己调用自己执行
+    var timer = null; // false
+    document.body.onclick = function (){
+        // 在body里显示当前的时间 => 就是一个时钟
+        if(timer == null){
+            timer = window.setInterval(function (){
+                var date = new Date();
+                document.body.innerHTML = addZero(date.getHours()) + ":" + addZero(date.getMinutes()) + ':' + addZero(date.getSeconds());
+            },1000);
+        }else{
+            window.clearInterval(timer);
+            timer = null;
+        }
+    }
+
+
+
+
+    function addZero(n){
+        return n < 10 ? '0' + n : n;
+    }
+
+
+
+
+</script>

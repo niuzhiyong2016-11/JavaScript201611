@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    function Emitter(){}
+    // on(person,'boiled',noodle); => kettle.on('boiled',noodle);
+    // k1 = new Kettle();
+    // on(k1,'boiled',noodle);
+    // k1.on('bilded',noodle);
+    Emitter.prototype.on = function (type,fn){
+        if(!this[type]){
+            this[type] = [];
+        }
+        var a = this[type];
+        for(var i=0; i<a.length; i++){
+            if(a[i] === fn){
+                return;
+            }
+        }
+        a.push(fn);
+    }
+    Emitter.prototype.off = function (type,fn){
+        var a = this[type];
+        if(a){
+            for(var i=0; i<a.length; i++){
+                if(a[i] === fn){
+                    a[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+    Emitter.prototype.run = function (type,e){
+        var a = this[type];
+        if(a){
+            for(var i=0; i<a.length; i++){
+                if(typeof a[i] === 'function'){
+                    a[i].call(this,e);
+                }
+            }
+        }
+    }
+
+    function Kettle(){}
+    Kettle.prototype = new Emitter();
+    Kettle.prototype.constructor = Kettle;
+    Kettle.prototype.boiling = function (){
+        var that = this;
+        window.setTimeout(function (){
+            alert('水开了');
+            that.run('boiled');
+        },5000);
+    }
+
+    var k1 = new Kettle();
+    k1.on('boiled',noodles);
+    k1.on('boiled',tea);
+    k1.on('boiled',foot);
+
+    k1.boiling(); // 开始烧水
+    function noodles(){
+        console.log('水终于开了，我可以吃面了');
+    }
+
+    function tea(){
+        console.log('喝茶');
+    }
+
+    function foot(){
+        console.log('洗脚');
+    }
+
+
+
+
+
+
+
+
+</script>

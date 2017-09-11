@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟搜索框效果</title>
+    <style>
+        html,body,div,input,ul,li,a{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 500px;
+            margin: 30px auto;
+            font-family: "Microsoft YaHei UI";
+            font-size: 20px;
+        }
+        #wrap input{
+            width: 478px;
+            height: 30px;
+            line-height: 30px;
+            outline: none;
+            padding: 0 10px;
+            font-size: 20px;
+        }
+        #wrap ul{
+            display: none;
+            position: relative;
+            top : -1px;
+            width: 100%;
+            list-style: none;
+            border: 1px solid #ccc;
+        }
+        #wrap ul li{
+            height: 30px;
+            line-height: 30px;
+        }
+        #wrap ul li a{
+            padding: 0 10px;
+            box-sizing: border-box;
+            display: block;
+            text-decoration: none;
+            color: #000;
+        }
+        #wrap ul li a:hover{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <input type="text" id="input">
+    <ul>
+        <li><a href="javascript:void 0">珠峰培训</a></li>
+        <li><a href="javascript:void 0">珠峰H5</a></li>
+        <li><a href="javascript:void 0">珠峰JS</a></li>
+        <li><a href="javascript:void 0">珠峰Node</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+<script>
+    var wrap = document.getElementById('wrap');
+    var input = wrap.getElementsByTagName('input')[0];
+    var ul = wrap.getElementsByTagName('ul')[0];
+    var lis = ul.getElementsByTagName('li');
+    input.onfocus = fn;
+    input.onkeyup = fn;
+    function fn(){
+        //console.log(this.value); // 判断这个value是不是空字符串
+        var reg = /^\s*$/; //匹配所有的空
+        if(reg.test(this.value)){ // 如果输入的是空或者多个空格那么列表不必显示。
+            ul.style.display = 'none';
+            return;
+        }
+        ul.style.display = 'block';
+    }
+    ul.onclick = function (e){
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        if(e.target.nodeName == 'A'){ //说面点击的就是那个链接
+            input.value = e.target.innerHTML; // 这是把a链接的内容赋值给表单输入框的value
+            this.style.display = 'none';
+        }
+    }
+
+</script>

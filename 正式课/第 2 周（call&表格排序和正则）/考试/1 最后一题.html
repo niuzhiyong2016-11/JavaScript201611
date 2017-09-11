@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button"/> // index : 0
+<input type="button"/> // index : 1
+<input type="button"/> // index : 2
+<script>
+    var inputs = document.getElementsByTagName('input');
+    var ary = ['red', 'green', 'orange'];
+
+    //    for(var i = 0; i < inputs.length; i++){
+    //        inputs[i].index = i;
+    //        inputs[i].onmouseover = function (){
+    //            document.body.style.backgroundColor = ary[this.index];
+    //        }
+    //    }
+
+    for (var i = 0; i < inputs.length; i++) {
+        (function (k) {
+            inputs[k].onmouseover = function () {
+                document.body.style.backgroundColor = ary[k];
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px ;background: red;"></div>
+</body>
+</html>
+<script src="event-1.0.js"></script><!--bind-->
+<script src="event-2.0.js"></script><!--on-->
+<script>
+    var div1 = document.getElementById('div1');
+    // 我就想用on绑定事件
+    on(div1,'click',fn1);
+    //on(div1,'click',fn1);
+    on(div1,'click',fn2);
+    on(div1,'click',fn3);
+    on(div1,'click',fn4);
+    on(div1,'click',fn5);
+    on(div1,'click',fn6);
+
+
+    function fn1(){ console.log(1); console.log(this === div1); }
+    function fn2(){ console.log(2) }
+    function fn3(){ console.log(3) }
+    //
+    //on(div1,'mouseover',fn4);
+    //on(div1,'mouseover',fn5);
+    //on(div1,'mouseover',fn6);
+    function fn4(){
+        console.log(4);
+        off(div1,'click',fn1);
+    }
+    function fn5(){ console.log(5) }
+    function fn6(){ console.log(6) }
+
+    //off(div1,'click',fn3);
+
+</script>

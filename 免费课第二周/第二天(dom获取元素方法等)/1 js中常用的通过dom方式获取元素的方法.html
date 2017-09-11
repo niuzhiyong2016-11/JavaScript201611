@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+
+        }
+        #div1 p{
+
+        }
+        .ul{
+
+        }
+        div{
+
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <ul class="ul">
+            <li></li>
+            <li id="li2"></li>
+            <li></li>
+            <li></li>
+            <a href=""></a>
+        </ul>
+    </div>
+    <!--shift+enter直接换到下一行并且另起-->
+    <input type="text" name="name"/>
+    <input type="radio" name="sex"/>
+    <input type="checkbox" name="hobby"/>
+    <input type="checkbox" name="a"/>
+    <div id="div2" name="name">
+        <p></p>
+        <span></span>
+    </div>
+</body>
+</html>
+<script>
+    /*
+        通过dom的方式获取回来的元素都是一个对象数据类型的.（不是只有{}才是对象，只要是一个对象数据类型甚至是引用数据类型都可以在身上添加属性。比如：在写选项卡的时候一定添加自定义属性并且保存着索引值  oLis[i].index = i ）
+
+
+    *   1通过id获取元素:
+    *       1 只能通过document.getElementById来调用，其他的任何dom元素都不行
+    *       2 如果页面内不存在这个id默认获取回来的null
+    *       3 如果页面内存在两个相同的id那么默认获取第一个
+    *       4 在某些低版本ie浏览器name可能会当做id来用,name属性和id不要写成一样的
+    *       5 尽量不要写大小写不同的id
+    * */
+    var div1 = document.getElementById('div1'); //没有div2这个id所以返回null
+    console.log(typeof div1); // object
+    if(div1){ //判断这个元素是否存在
+        //如果元素存在我要怎么样。。。。
+    }
+    var li2 = document.getElementById('li2'); //
+    console.log(div1); //
+    //console.log(div1.getElementById); //undefined div1没有这个属性，只有document有
+
+
+    /*
+    *    通过标签名字获取元素   getElementsByTagName('标签名')
+    *       1 通过标签获取元素获取回来的是一组元素,即使这一组元素中只有一个li。也不会默认选中第一个，如果想获取通过索引值0来拿
+    *       2  这个方法是可以规定范围的，也就是在具体的某个范围内获取。比如div1.getElementsByTagName就是在div1这个范围内获取
+    *
+    * */
+    var div1 = document.getElementById('div1'); //先获取到最外层的div1
+    var lis = div1.getElementsByTagName('li'); //获取div1这个范围内所有的li标签,div1可以理解为一个范围
+    console.log(lis); // 类数组：有length属性，有索引
+
+
+    /*
+    *  通过类名获取元素  不兼容在IE6-8
+    *     1  和标签名一样类名字也可以出现多次，所以回来的也是一组元素。和标签一样也可以给规定范围，比如div1.getElementsByClassName('ul') 获取div1这个范围内所有类名为ul的。和其他没有关系
+    * */
+
+    var uls = div1.getElementsByClassName('ul')[0]; //[ul]这才是拿到一组中的一个
+    console.log(uls);
+
+
+    /*
+    *   通过name获取元素
+    *       1 一般应用于表单元素  input
+    *       2 在标准浏览器内给div添加了一个name属性虽然没用，但是可以通过name来获取元素，在ie9以下就不可以
+    *
+    * */
+    var names = document.getElementsByName('name');
+    console.log(names.length);
+
+    /*
+    *  获取html和body的方式： 都是标签可以通过标签名字来获取。麻烦
+    *       html:  document.documentElement就是html
+    *       body:  document.body 就是body
+    *
+    * */
+    /*
+    *   获取浏览器可视窗口的宽度和高度： 重要 必须要记住
+    *       顺序不能变，或者必须写，缺一不可
+    *       document.documentElement.clientWidth||document.body.clientWidth  "||"或者的意思
+    *       document.documentElement.clientHeight||document.body.clientHeight
+    *
+    * */
+    var a = null || 8; //或者这个运算符保证这个变量至少有一个值
+    function fn(x){
+
+        x =   x || 1;
+        console.log(x);
+    }
+    fn(7);
+
+    /*
+    *
+    *   一般应用于移动端开发 , 用法类似于jquery,甚至和css3选择有有相同的
+    *   document.querySelector() // 获取一个
+    *   document.querySelectorAll() //获取全部
+    *
+    * */
+    var  div1 =  document.querySelector('#div1');
+    console.log(div1);
+    var div1 = document.querySelectorAll('#div1 li');
+    console.log(div1);
+    var input = document.querySelectorAll('input[type=checkbox][name=hobby]');
+    console.log(input);
+
+
+
+
+
+
+
+</script>

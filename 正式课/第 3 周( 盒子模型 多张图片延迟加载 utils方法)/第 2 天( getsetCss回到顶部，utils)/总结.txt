@@ -1,0 +1,7 @@
+ 1、win方法  win（attr,val）  如果val没有传
+ 2、瀑布流
+ 3、如何获取已经生效的样式  getComputedStyle   ele.currentStyle
+ 4、getCss(ele.attr)  reg  去单位 (去获取到的值的单位，判断是值的格式)
+ 5、设置样式 setCss(ele.attr,val)  float  opacity  加单位 => 先判断属性
+ 6、回到顶部 如何处理事件的移除和重新绑定？速度如何算的？ 减速运动
+

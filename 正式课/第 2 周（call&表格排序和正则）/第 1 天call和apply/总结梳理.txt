@@ -1,0 +1,21 @@
+﻿函数的三种角色： 1 普通函数 2 构造函数 3 本身也是Function这个类的一个实例
+Function.prototype: 1 匿名空函数
+                    2 定义着call  apply   bind   toSting 等方法
+                    3 只要是一个函数就可以调用这里的方法 Array  [].push Math.max
+
+call方法： 1 通过实例函数找到call方法
+           2 把实例函数中的this修改成call的第一个参数。
+           3 函数实例执行
+           ps: 从call的第二个参数开始是传给函数实例的
+           ps: call本身也是一个函数
+
+严格模式:   'use strict'
+            1 在call方法使用，如果第一个参数是null/undefined 严格模式下就是null/undefined，在非严格模式下是window
+            2 call没有参数，严格模式下：undefined  非严格: window
+            3 自运行函数中的this 严格： undefined  非严格: window
+            4 函数运行时的this:  如果"."前面没有对象  严格: undefined 非严格： window
+apply: 和call的区别就是传参的方式不同,apply第二个参数是一个数组，把数组中每一项当作参数
+
+bind: bind和call&apply的区别就是bind返回一个处理好this的新函数，并没有执行。而call和apply是立刻就已经执行过了
+
+原型上函数方法中的this一般是实例,链式写法 => 函数执行结束后还能继续调用定义在原型上的方法

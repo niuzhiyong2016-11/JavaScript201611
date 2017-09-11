@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 内存释放其实就是内存没有被占用的时候，浏览器就会主动回收
+    var obj = {};
+    var obj2 = obj; // obj2和obj同时占用一个堆内存
+    obj = null; // 现在obj不占用，但是obj2还是占用的
+    obj2 = null; // 现在就没有变量占用这个堆内存了，那么浏览器就会主动释放掉这个内存
+
+    // 栈内存的释放
+    /*
+    *   1 函数执行的时候(只有执行函数才有作用域),函数中*的某一部分(引用数据类型)被函数外的变量或者对象的属性(对象不一定是{}可以任意一个引用数据类型)，那么函数运行所产生的作用域就不会被释放。导致这个作用域内的私有变量也不会被释放 => 上一次被修改的值，下一次运算还是会拿到。而不是重新赋值的
+    *   ps: 每次形成的私有作用域都是相对独立的，里面的私有变量也是独立的。
+    *
+    *
+    *
+    * */
+    function fn(n){
+         //var n = 5;
+        return function (){
+            console.log(++n);
+        }
+    }
+    var f1 = fn(5);
+    var f2 = fn(5);
+    f1(); // 6
+    f1(); // 7
+    f1(); //8
+    //console.log(f);
+    f2(); //6
+    f2(); // 7
+    var f3 = f2;
+    f3(); // 8
+    var f4 = f1;
+    f1(); //9
+
+
+
+    // 2 内存不释放的第二种
+    var body = document.body;
+
+   /* body.onclick = (function (){
+        var m = 0;
+        return function (){
+            console.log(++m);
+        }
+    })()
+*/
+    //for(var i=0; i<3; i++){ }
+
+
+    (function (i) {
+        //var i = 0; //全局变量 => 任何一个函数都能访问到。所以不安全
+        body.onclick = function () {
+            console.log(++i);
+        }
+    })(0);
+
+    // 3 内存暂时不释放
+    /*
+    *  函数执行的结果仍然是一个函数，但是这个函数立刻执行就符合暂时不释放的条件
+    *  fn()()
+    *
+    * */
+
+    function foo(){
+        var i = 98;
+        return function (){
+            //console.log(++i);
+            return function (){
+                console.log(++i);
+            }
+        }
+    }
+    var res = foo()(); // 99
+    res();
+
+</script>

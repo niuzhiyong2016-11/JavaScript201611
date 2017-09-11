@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{ margin: 0; padding: 0; }
+        .tab{
+            width: 360px;
+            margin: 30px auto;
+        }
+        .tab ul{
+            list-style: none;
+        }
+        .tab ul:after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        .tab ul li{
+            float: left;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #ccc;
+            margin-right: 10px;
+        }
+        .tab ul li.selected{
+            background: lightpink;
+        }
+        .tab div{
+            display: none;
+            width: 360px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            background: lightpink;
+        }
+        .tab div.selected{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div id="div1" style="width: 100px; height: 100px; background: red; position: absolute; left: 0; top: 0;"></div>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+<div class="tab J-tab">
+    <ul>
+        <li class="">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
+
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    function tab(box,eventType,defaultSelect){
+        //var box = utils.getElesByClass('J-tab')[1];
+        eventType = eventType || 'onmouseover';
+        defaultSelect = defaultSelect || 0;
+        var lis = box.getElementsByTagName('li');
+        lis[defaultSelect].className = 'selected';
+        var divs = utils.children(box,'div');
+        divs[defaultSelect].className = 'selected';
+        for(var i=0; i<lis.length; i++){
+            lis[i][eventType] = function (){
+                this//?
+                var siblings = utils.siblings(this);
+                for(var i=0; i<siblings.length; i++){
+                    utils.removeClass(siblings[i],'selected');
+                }
+                utils.addClass(this,'selected');
+                var divs = utils.nextAll(this.parentNode);
+                var thisIndex = utils.index(this);
+                for(i = 0; i<divs.length; i++){
+                    i === thisIndex ? utils.addClass(divs[i],'selected') : utils.removeClass(divs[i],'selected');
+                }
+            }
+        }
+    }
+
+    //tab(utils.getElesByClass('J-tab')[0]);
+    //tab(utils.getElesByClass('J-tab')[1]);
+    //tab(utils.getElesByClass('J-tab')[2]);
+
+    var boxs = utils.getElesByClass('J-tab'); //[box,box,box]
+    var ary = ['onclick','onmouseover','ondblclick'];
+    for(var i=0; i<boxs.length; i++){
+        tab(boxs[i]/*,ary[i],i*/);
+    }
+
+    // 学完事件之后只绑定一遍就可以完成
+    var obj = {name : 'zhufeng'};
+    obj.name = 'tian';
+    obj['name'] = 'guo';
+
+//    utils.css(ele,'width',1000);
+//    div.css('width',1000);
+//    span.css();
+//    p.css();
+    // div => HTMLDivElement => HTMLElement => Element => Node => EventTarget => Object
+    Element.prototype.setCss = function (attr,val){
+        this.style[attr] = val;
+    }
+    Object.prototype.tab = function (){
+        // ?????
+    }
+    var div1 = document.getElementById('div1');
+
+    div1.setCss('width','300px'); // 比utils更方便
+
+</script>

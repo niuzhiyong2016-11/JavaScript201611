@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>exec</title>
+</head>
+<body>
+
+<script>
+    var reg = /\d+/g; // g: 全局全文在捕获的时候比较多，如果没有这个g那么每次都会从字符串的开头(索引0)的位置开始捕获。那么如果存在多个符合条件的字符串那么第二个永远捕获不到。如果添加全文g，那么第一次捕获第一个，再去捕获第二次的时候那么就会向下查找去捕获第二个.出现了这个g才是捕获之后lastIndex被修改的原因。如果没有这个g，每次捕获都是从lastIndex=0的位置开始。所以每次都是获取到的2015
+    var str = 'zhufeng2015peixun2016haha2017';
+
+    // 第一次捕获
+    //reg.lastIndex = 100;
+    var res = reg.exec(str);
+    console.log(res); // ['2015',index:7,input:str]
+    console.log(reg.lastIndex); //lastIndex
+    /*
+    *   exec方法的返回值:
+    *       1 返回一个数组 ['2015']
+    *       2 index:7 捕获开始的位置的索引
+    *       3 input: 原有被捕获的整个字符串
+    *       4 如果exec没有捕获到字符串那么返回null
+    *       ps: 正则存在一个lastIndex属性,这个属性记录的就是下一次捕获从哪个索引开始。如果当前次捕获结果为null。那么lastIndex的值会被修改为0.下次从头开始捕获。并且这个lastIndex属性还支持人为赋值。
+    *
+    * */
+    // 第二次捕获
+    var res = reg.exec(str);
+    console.log(res);
+    console.log(reg.lastIndex); //
+
+    //第三次捕获
+    var res = reg.exec(str);
+    console.log(res);
+    console.log(reg.lastIndex); //
+
+    //第四次
+    var res = reg.exec(str);
+    console.log(res);
+    console.log(reg.lastIndex); //
+
+    //第五次
+    var res = reg.exec(str);
+    console.log(res);
+    console.log(reg.lastIndex); //
+</script>
+</body>
+</html>

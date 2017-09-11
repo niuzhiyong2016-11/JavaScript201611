@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    /*
+    *  var date = new Date(); 时间只能通过实例创建方式
+    * */
+    //var ary = []; //字面量方式
+    //var ary = new Array(); //实例创建方式 => 是new出来的  Array是一个类
+    var date = new Date(); //当前系统时间
+    console.log(typeof date); //包含着当前所有关于时间的信息的对象。这不是字符串是一个时间对象 => 只要使用new的方式(实例创建方式)都是对象
+
+    // Monday Tuesday Wednesday Thursday Friday Saturday Sunday
+    // January February March April May June July August September October November December
+
+    var date = new Date(); //当前系统时间
+    var date1 = new Date("1970/01/01 08:00:00"); //把时间格式的字符串转化成一个时间格式的对象，转化成对象之后才能获取具体的其他属性值。比如年，月，日
+    console.log(date.getFullYear()); //年 2016
+    console.log(date.getMonth()); // 月  [0-11] 比实际的月份少1
+    console.log(date.getDate()); // 日 22
+    console.log(date.getDay()); // 星期  [0-6]  0是星期日
+    console.log(date.getHours()); // 小时
+    console.log(date.getMinutes()); // 分
+    console.log(date.getSeconds()); // 秒
+    console.log(date.getMilliseconds()); //毫秒
+    console.log(date.getTime()); // 获取的是date所代表的时间距离1970年1月1日上午8点的毫秒数
+    console.log(date1.getTime()); //
+
+
+
+</script>

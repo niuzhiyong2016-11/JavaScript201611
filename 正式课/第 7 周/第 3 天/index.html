@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/ajax.js"></script>
+<script>
+    $.ajax({
+        url: 'json/data.json',
+        type: 'get',
+        dataType: 'json',
+        cache: false,
+        success: function (result) {
+            console.log(result);//->我从服务器获取的结果
+        }
+    });
+
+    /*var xhr = new XMLHttpRequest;
+     xhr.open('get', 'json/data.json?_=' + Math.random());
+     /!*xhr.setRequestHeader('name', 'zhufeng');//->设置请求头
+     xhr.timeout = 3000;//->设置请求的超时时间,当超过3000MS,还没有把内容请求回来,当前任务会终止
+     xhr.abort();//->强制终止当前的任务
+     xhr.onabort=function(){}
+     *!/
+     xhr.onreadystatechange = function () {
+     if (xhr.status === 200) {
+     //->获取服务器的时间
+     if (xhr.readyState === 2) {
+     console.log(xhr.getResponseHeader('Date'));
+     }
+
+     //->获取服务器响应的主体信息
+     if (xhr.readyState === 4) {
+     console.log(xhr.responseText);
+     }
+     }
+     };
+     xhr.send(null);
+
+
+     var xhr2 = new XMLHttpRequest;
+     xhr2.open('post', 'json/student.json', false);
+     xhr2.onreadystatechange = function () {
+     if (xhr2.status === 200 && xhr2.readyState === 4) {
+     console.log(JSON.parse(xhr2.responseText));
+     }
+     };
+     xhr2.send('hello world');*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 300%;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="input1"/>
+<select name="province" id="province">
+    <option value="1">沈阳</option>
+    <option value="2">大连</option>
+    <option value="3">鞍山</option>
+    <option value="4">抚顺</option>
+    <option value="5">本溪</option>
+</select>
+<select name="area" id="area">
+    <option value="1">和平区</option>
+</select>
+<img src="images/1.jpg" alt=""/>
+<textarea name="" id="" cols="30" rows="10"></textarea>
+<script>
+    //  html.clientWidth || .body.clientWidth clientHeight clientLeft  clientTop
+    // offsetWidth offsetHeight offsetParent body.offsetParent = null  parentNode
+
+    var input1 = document.getElementById('input1');
+    input1.onblur = function () {
+        var reg = /^\s*$/;
+        if (reg.test(this.value)) { //正则匹配所有的空或者空字符串
+            //如果验证通缩说明this.value空 => 你什么都没有输入
+            //this.value => 就是你在表单中输入的文本
+            alert('输入不能为空');
+            return; //有拦截代码的动作。
+        }
+        console.log(this.value); //
+    }
+    input1.onfocus = function () {
+        //console.log('恭喜你成为焦点了');
+        console.log('congratulations you become focus man');
+    }
+    input1.oninput = function () {
+        console.log(this.value);
+    }
+
+    var province = document.getElementById('province');
+    province.onchange = function () {
+        console.log(this.value); //虽然事件监听的是select但是this.value却是获取的option的value的值
+    }
+
+    window.onresize = function () { // 当浏览器窗口大小改变的时候
+        console.log('我是reresize事件触发的')
+    }
+
+    window.onscroll = function () {
+        console.log('我是onscroll事件触发的');
+    }
+
+
+    /*
+    *   onblur : 表单元素失去焦点的时候触发
+    *   onfocus : 表单元素获得焦点的时候触发
+    *   oncanplay : h5标签 video audio 可以播放的时候
+    *   onchange : select option
+    *   ondblclick : 双击的时候 => 单位时间内连续点击两次让认为是双击 dbl => double
+    *   // h5事件 存在兼容性问题 => 第五周我们自己写拖拽
+    *   ondragstart : 拖拽开始的时候
+    *   ondragend : 拖拽结束的时候
+    *
+    *   onload : 加载成功的时候  img.src属性就是负责去加载图片资源
+    *   onerror : 加载失败
+    *
+    *   oninput : 表单元素在输入的时候, 一般应用于在输入的过程中来做某事。比如： 在注册12306等用户名的时候，是不可以使用重复的
+    *
+    *
+    *   onkeydown : 当键盘按下
+    *   onkeypress :
+    *   onkeyup : 当键盘弹起  => 我们捕捉到当前弹起的键是哪个键 => 按回车键的时候有默认提交操作的就是利用这个原理
+    *
+    *   onmousedown : 鼠标按下的时候
+    *   onmouseup : 鼠标弹起
+    *   onmousewheel : 滚轮
+    *   onmouseover : 悬停
+    *   onmouseout : 离开
+    *   onmousemove :鼠标移动
+    *   onmouseenter :  鼠标进入  onmouseover
+    *   onmouseleave :  鼠标离开  onmouseout
+    *
+    *   onpause :  暂停 video audio H5
+    *   onplaying :
+    *   oncanplay :
+    *   onprogress : 加载过程中会触发   =>  进度条  资源加载百分比就是进度条的宽度
+    *   onresize :  大小改变的时候 => 浏览器窗口大小改变的时候  window.onresize
+    *   onscroll : 滚动条滚动的时候 => window.onscroll
+    *   onsubmit : 表单提交触发 form表单
+    *
+    *   onvolumechange : H5音量
+    *
+    *   xhr.onreadystatechange
+    *
+    * */
+</script>
+</body>
+</html>

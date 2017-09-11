@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="ajax.js"></script>
+    <script>
+        var data = JSON.stringify({a: 1, b: 2, 中文: '北京'});
+        ajax({
+            // ajax的请求地址
+            url: './readme.txt',
+            // 发送的数据
+            data: data,
+            headers: {
+                'test': 123,
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            // HTTP 方法
+            method: 'get',
+            // 是否为异步请求 默认为true
+            async: true,
+            // 是否缓存该请求
+            cache: false,
+            // ajax成功时执行的函数
+            success: function (data) {
+                console.log(data);
+            },
+            // ajax失败时执行的函数
+            error: function (err) {
+                console.log(err);
+            },
+            // 将响应主体格式化为指定数据
+            // json 把响应主体格式化json对象
+            dataType: 'json'
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

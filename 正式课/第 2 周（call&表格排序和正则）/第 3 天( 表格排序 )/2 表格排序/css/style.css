@@ -1,0 +1,39 @@
+html,body,div,table,thead,tr,th,td{
+    margin: 0;
+    padding: 0;
+}
+.table{
+    width: 500px;
+    padding: 20px;
+    margin: 30px auto;
+   /* box-sizing: border-box;*//*属性可以直接填充到内部*/
+    border: 3px solid rgba(0,0,0,0.8);
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px #000;
+    font-family: "microsoft yahei";
+}
+.table thead{
+    background: lightblue;
+    -webkit-user-select: none;/*点击不选中文字*/
+}
+.table thead th{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.table tbody td{
+    /*width: 100px;*/
+    height: 35px;
+   /* line-height: 35px;*/
+    text-align: center;
+}
+.c0{
+    background: yellow;
+}
+.c1{
+    background: green;
+}
+.cursor{
+    cursor: pointer;
+}

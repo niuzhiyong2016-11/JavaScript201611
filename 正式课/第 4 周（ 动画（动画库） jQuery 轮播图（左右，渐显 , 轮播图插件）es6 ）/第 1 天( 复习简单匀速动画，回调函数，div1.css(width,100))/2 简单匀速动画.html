@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id='div1'></div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script>
+    /*
+    * 动画原理: 就是使用定时器不断去改变一个属性的值 fadeIn
+    *
+    * */
+    // 匀速1
+    // var div1 = document.getElementById('div1');
+    // 最大的left值就是用浏览器的宽度-本身盒子带边框的宽度
+/*
+    var maxLeft = utils.win('clientWidth') - div1.offsetWidth;
+    var speed = 1;
+    var speed = 10;
+    div1.timer = window.setInterval(function (){
+        // 先获取当前的left值
+        var left = utils.css(div1,'left');
+        // 做这个过界判断的时候把步长累加上。这样可以防止越过边界然后再设置回来的问题
+        if(left+speed >= maxLeft){ //过界判断
+            window.clearInterval(div1.timer);
+            utils.css(div1,{left: maxLeft}); //主动设置终点
+            return;
+        }
+        left += speed;
+        utils.css(div1,'left',left);
+    },10); // 10定时器间隔
+*/
+
+    // 匀速2
+/*
+    var distance = utils.win('clientWidth') - div1.offsetWidth; //盒子要运动的距离，从0开始到最大的left值
+    var duration = 3000; // 规定一个时间
+    var speed = Math.ceil(distance/duration); // 1
+*/
+
+
+    // 匀速3  利用的等比关系  花费的时间/规定的时间 = 运动距离/总距离
+    var div1 = document.getElementById('div1');
+    var time = 0; //当前的花费的时间是0
+    var duration = 1000; //规定1000ms内完成动画
+    var begin = utils.css(div1,'left'); //获取盒子当前的开始位置
+    var target = utils.win('clientWidth') - div1.offsetWidth; //终点
+    var change = target - begin; //我要改变的距离
+    div1.tiemr = window.setInterval(function (){
+        time += 10; // 每次执行定时器都会引起花费时间的增加，导致距离的改变
+        // 计算出多花费了10ms之后应该到达的位置
+        if(time>=duration){ //如果花费的时间大于规定的时间。那么就认为是到达终点
+            window.clearInterval(div1.tiemr);
+            utils.css(div1,'left',target); //主动设置到终点
+            return; // 到达终点之后下面的代码就没有必要执行了
+        }
+        var curPosition = begin + time/duration*change; //计算出的位置
+        var curPosition = linear(time,begin,change,duration);
+        utils.css(div1,'left',curPosition); //让盒子的left的值赋值为应该到达的位置
+    },10);
+
+    function linear(time,begin,change,duration){ // 匀速运动公式
+        return begin + time/duration*change;
+    }
+    /**
+     * 匀速计算公式
+     * @param t 花费的时间
+     * @param b 开始位置
+     * @param c 改变位置 = 终点 - 起点 target - begin;
+     * @param d 规定的时间
+     * @returns {*} 返回应该到达的位置
+     */
+    function linear(t,b,c,d){
+        return b + t/d*c;
+    }
+
+
+
+
+
+
+    // 减速?  把求速度的代码放到定时器中
+
+</script>

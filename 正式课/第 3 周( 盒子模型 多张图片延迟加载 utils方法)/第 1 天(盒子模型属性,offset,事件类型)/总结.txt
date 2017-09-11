@@ -1,0 +1,60 @@
+1 clientWidth  width + 左右padding
+  clientHeight  height + 上下padding
+  clientTop
+  clientLeft
+
+  offsetWidth   clientWidth + 左右border
+  offsetHeight  clientHeight + 上下border
+  offsetLeft 距离offsetParent的左偏移
+  offsetTop 距离offsetParent的上偏移
+  offsetParent : 取决于祖先元素的定位属性，如果都没有是body
+  body.offsetParent = null;
+
+  scrollWidth ： 如果内容超出，那么就是内容的宽度+左padding，如果没有超出和clientWidth
+  scrollHeight :
+  scrollLeft : 滚出的宽度
+  scrollTop : 滚出去的高度
+
+
+2 事件类型
+  onclick
+  ondblclick
+  onfocus
+  onblur
+  oninput
+  onchange select
+  onkeydown
+  onkeypress
+  onkeyup
+  onresize
+  onscroll
+  onmousedown
+  onmousemove
+  onmouseup
+  onmouseover
+  onmouseout
+  onmouseenter
+  onmouseleave
+  ondrag
+  ondragstart
+  ondragend
+  ondragenter
+  ondragleave
+  oncanplay
+  onplaying
+  onpause
+  onvolumechange
+  onload
+  onerror
+  ...
+  onreadtstatechange
+  ...
+  h5事件
+
+
+3 offset方法
+4 js中处理兼容性
+
+5 作业: 每个同学写一张盒子模型属性
+
+

@@ -1,0 +1,153 @@
+1、截止到明天晚上之前，重听的和有事回家的(不跟下一期NODE的)，找我单聊；重听的学员需要重新缴纳800元考试费；
+
+2、考试安排
+  AJAX分页：最晚截止到C模块结束，但是如果C模块已经进行了第三周了，那么考试的内容需要使用Angular+bootstrap+node+express来做
+  移动端简历+PC项目:最晚截止到C模块结束，由各组的组长把本组每一个人的项目地址统计好后发给我
+  每一组都考过在发考试费
+
+3、进入到C模块之后的学习建议
+   Angular、React、gulp、git团队之间如何的配合...
+   Node+Express
+   ->自己毕业后的简历是走真实的路线还是虚假的路线(建议真实)，如果走真实的路线需要的是自己有拿的出手的项目
+   1)移动端个人简历
+   2)个人主页或者个人博客 Angular+bootstrap+node+express+gulp+git =>把自己之前学习整理的文档都以文章的形式放到自己的个人博客上
+   3)做一个移动端的个人小东西 React+phoneGap...
+   4)把自己之前的PC端对应的后台使用NODE搭建起来,数据实现动态绑定
+   ...
+
+4、使用gitHub发布项目
+  ->what's gitHub
+    https://github.com/
+    gitHub是全世界知名的代码托管平台(基于GIT仓库管理的平台)，我们听过的前端框架在gitHub上都有托管
+
+    要求：回去后把自己知道的，而且想要去了解的框架都FORK到自己的仓库一份，写完自己的项目后，把代码也放在gitHub上托管
+    修改自己的个人信息、账号信息、邮箱、密码等,都改成自己常用的,gitHub值的自己拿很多的经历去完善和维护
+    Settings->Profile、Email、Account...
+
+  ->publish pages
+    1)新建一个仓库
+      New repository
+      创建完成后会有一个叫做MASTER的分支(主分支),我们当前面仓库托管的原代码都在这个分支下
+
+    2)基于这个仓库发布自己的个人博客/个人主页
+      (repository) Settings -> Options -> GitHub Pages -> Launch Automatic page generator -> (New project site)不需要管任何的东西,直接的点击下面的Continue to layouts即可 -> 选择自己喜欢的博客模板(如果你想发布的是移动端的简历,就不需要选择模板了),如果不选的话,直接的点击Publish page即可
+
+      结果：
+        ->页面中多了一个提示:Your project page has been created at http://zhouxiaotian.github.io/resume/ ...
+        说明我们的页面已经发布了,外网访问的地址: http://zhouxiaotian.github.io/resume/  (http://用户名.github.io/仓库名/，其实它默认访问的是index.html,只不过省略了而已,如果我们访问的页面是根目录下的index.html我们可以不写,但是访问的是其它页面就必须写上具体的文件名称)
+
+        ->我们仓库的分支中除了MASTER以外多了一个gh-pages的分支，这个分支下的代码就是我们当前访问页面的原代码，换句话说，我们需要展示给别人访问的页面项目，最后是放在gh-pages分支下管理的而不是master
+
+    3)我们把当前的项目默认分支从master改为gh-pages,这样的话以后方便我们的操作和管理(因为项目的源代码都应该放在gh-pages分支下)
+      Settings -> Branches -> Default branch -> 把默认分支改为gh-pages
+
+    4)把自己的项目原代码上传到本仓库的gh-pages分支下
+      ->先把仓库克隆到本地
+        $ git clone https://github.com/zhouxiaotian/resume.git(仓库的地址)
+
+        默认生成的原代码是没有用的,我们在克隆下来的本地文件夹中把默认生成的代码删除掉即可(.git文件不能删除)
+
+        然后把自己写的项目原代码COPY到这个文件夹下
+
+      ->把本地最新的代码上传到仓库的gh-pages分支下即可
+        $ git add -A
+        $ git commit -m'备注信息'   =>如果执行这一步出现Please tell me who you are?说明需要让你自己在电脑的git上注册一下自己的信息才可以 它下面提示的是 git config ....(有两句话) 分别的把这两句话执行一遍(邮箱和用户名都是github账号的邮箱用户名即可)，两句话执行完成后从新执行commit操作即可
+        $ git push origin gh-pages =>重点记住是gh-pages而不是master
+
+    5)把自己的地址生成一个二维码
+      http://cli.im/
+
+
+
+5、hybrid模式：混合模式开发 NativeApp+webApp
+  [NativeApp]
+    IOS开发和安卓开发->NativeApp或者叫做原生App,手机上安装的应用
+    IOS:object-c
+    安卓:java-native
+  弊端:
+    不能跨平台，需要两伙人开发，两个不同的产品，这样不仅开发成本太高了，而且版本之间的统一也麻烦
+    IOS商店上传APP，有七天的审核期，审核很严格
+    升级需要用户自主性选择，导致一个新的产品，不能及时的传达给用户
+
+  [webApp]
+    H5页面,在浏览器中运行,在移动端我们的H5页面还可以运行在NativeApp的webview中(我们可以把webView理解为嵌入在App中的一个浏览器,IOS和安卓的webView都是webkit内核的)
+  优势:
+    可以跨平台,开发成本低
+    不需要用户自主性选择升级,因为我们的页面在服务器上,我们更新只需要把服务器上的更新了，用户下一次在访问的时候永远看到的是最新的版本
+  弊端:
+    NativeApp是直接的运行在手机的操作系统中的，可以操作手机内部的软件和硬件；但是H5是运行在手机的某一个浏览器(或者应用)中的，我们想操作系统中的软件和硬件，需要先发请求给浏览器，浏览器同意，在由浏览器去实现相关的功能...
+    H5很难调取手机内部的软件和硬件操作的,虽然现在有一些JS组件(native.js),但是很多功能依然操作不了,浏览器兼容也很差,即使兼容了性能也不好，例如：调取摄像头拍照、读取短信和通讯录、调取手机的重力感应...
+
+
+  [hybrid]混合开发模式
+    结合nativeApp和webApp的优势，开发一款既有nativeApp，也有H5的应用；nativeApp一般指用来搭建一个框架壳子，里面展示的内容都是由H5来做的，如果需要调取手机内部的功能，先由nativeApp把功能实现了，再由H5调取使用
+
+
+    有些功能需要NativeApp来做(例如:微信二次开发的时候，很多功能需要微信来做[获取微信账号信息、微信支付等]),我们的H5需要调取微信中实现的方法,目前市场上有以下两种办法：
+
+    ->jsBridge (微信) 安卓和IOS都可以使用这种方式,也是目前最常用的H5和nativeApp通信的方式
+      原理：微信往运行的webView中注入一个新的对象wx,然后把需要供H5调取的方法都写在这个对象中
+      var wx={
+         init:function...,
+         config:function...,
+         ...
+      }
+      H5是运行在这个webView中的，那么我们就可以调取这些方法了(就和调取浏览器window下的方法一样),但是在调取之前需要引入微信提供的一个JS(微信开放平台中提供了导入的JS以及供H5调取的方法说明[JS-SDK] https://mp.weixin.qq.com/wiki)
+      wx.config(function(){
+         //->H5的JS中我们可以把一个函数当做回调函数传递给微信,微信接收到函数后,不经可以把这个函数执行，还可以给这个函数传递参数(可以理解为把一些内容给H5了)
+      });
+
+
+    ->在IOS中还有一种方式:伪URL(假的URL)
+      [H5]
+      function fn(result){
+        //->result就是我拿到的照片地址
+      }
+      window.location.href='phone://qq.com?callback=fn'
+
+      [App]
+      拦截H5的全部URL请求，找到协议为phone的(事先商定好的),解析出callback后的fn方法，然后调取摄像头拍照，把照片得到，然后返回给H5 : 'fn("照片地址")'
+
+      其实就是JSONP的原理,只适合IOS平台，在安卓平台不安全
+
+
+正则实战应用技巧：格式化时间字符串
+http://old.zhufengpeixun.cn/qianduanjishuziliao/javaScriptzhuanti/2016-07-02/481.html
+
+正则实战应用技巧：获取URL地址栏的参数
+http://old.zhufengpeixun.cn/qianduanjishuziliao/javaScriptzhuanti/2016-07-02/482.html
+
+一些你不知道的JavaScript Console调试命令
+http://old.zhufengpeixun.cn/qianduanjishuziliao/javaScriptzhuanti/2016-07-09/500.html
+
+使用EJS(模板引擎)动态绑定页面中的数据
+http://old.zhufengpeixun.cn/qianduanjishuziliao/javaScriptzhuanti/2016-07-31/542.html
+
+移动端横竖屏的检测
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-08-14/581.html
+
+LESS学习:了解LESS和编译LESS
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-07-22/527.html
+
+LESS学习:LESS的基础语法
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-07-22/528.html
+
+一篇文章，让你快速了解Hybrid App开发模式
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-07-15/511.html
+
+检测浏览器的类型(PC端还是移动端)
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-07-15/510.html
+
+
+移动端基础知识第一发：常用的META标签
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-06-29/457.html
+
+移动端基础知识第二发：常用的META标签(移动端)
+http://old.zhufengpeixun.cn/qianduanjishuziliao/mobileDevelopment/2016-07-02/480.html
+
+
+
+
+
+
+

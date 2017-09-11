@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var num = 2; // window.num = 2; => 3 => 4
+    var obj = { num : 3}; // obj.num = 3 => 4
+    obj.fn = (function (num){
+        this.num++; // window.num++ => window.num = window.num + 1
+        num += 2;
+        var num = 5; // num = 5 6 7
+        return function (n){
+            this.num += 1; // obj.num += 1;
+            num += 1;
+            //console.log(n + num);
+            return function (){
+                this.num += 1;
+                num += 1;
+                console.log(num);
+            }
+        }
+    })(obj.num);
+    var f = obj.fn;
+    f(4)();
+    obj.fn(5)();
+    // f和obj.fn是同一个函数，那么它们上一级作用域是相同的，由于执行方式不同那么就this不同而已
+    console.log(window.num,obj.num);
+
+
+</script>

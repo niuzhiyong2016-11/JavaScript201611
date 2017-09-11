@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图渐显</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="bannerInner">
+            <!--<div><img src="images/banner1.jpg"></div>-->
+            <!--<div><img src="images/banner2.jpg"></div>-->
+            <!--<div><img src="images/banner3.jpg"></div>-->
+            <!--<div><img src="images/banner4.jpg"></div>-->
+        </div>
+        <ul class="focusList">
+            <!--<li class="selected"></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+        </ul>
+        <a class="left" href="javascript:void 0"></a>
+        <a class="right" href="javascript:void 0"></a>
+    </div>
+    <div class="banner">
+        <div class="bannerInner">
+            <!--<div><img src="images/banner1.jpg"></div>-->
+            <!--<div><img src="images/banner2.jpg"></div>-->
+            <!--<div><img src="images/banner3.jpg"></div>-->
+            <!--<div><img src="images/banner4.jpg"></div>-->
+        </div>
+        <ul class="focusList">
+            <!--<li class="selected"></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+        </ul>
+        <a class="left" href="javascript:void 0"></a>
+        <a class="right" href="javascript:void 0"></a>
+    </div>
+    <div class="banner">
+        <div class="bannerInner">
+            <!--<div><img src="images/banner1.jpg"></div>-->
+            <!--<div><img src="images/banner2.jpg"></div>-->
+            <!--<div><img src="images/banner3.jpg"></div>-->
+            <!--<div><img src="images/banner4.jpg"></div>-->
+        </div>
+        <ul class="focusList">
+            <!--<li class="selected"></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+            <!--<li></li>-->
+        </ul>
+        <a class="left" href="javascript:void 0"></a>
+        <a class="right" href="javascript:void 0"></a>
+    </div>
+</body>
+</html>
+<script src="js/utils2.0.js"></script>
+<script src="js/animate.js"></script>
+<!--<script src="js/banner.js"></script>-->
+<script src="js/bannerClass.js"></script>
+<script>
+    var banners = utils.getElesByClass('banner'); //[banner,banner,banner]
+//    for(var i=0; i<banners.length; i++){
+//        new Banner(banners[i],'data'+(i+1)+'.txt',1000*(i+1));
+//    }
+    var banner1 = new Banner(banners[0],'data1.txt',2000);
+    console.dir(banner1);
+</script>

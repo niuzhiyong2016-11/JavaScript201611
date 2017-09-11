@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function sum(n){
+        //var num = 2
+        return function (m){
+            console.log(m + ++n);
+        }
+    }
+    var res1 = sum(2);
+    res1(); // NaN
+    sum(2)(2);// 5
+    var res2 = sum(3);
+    res2(3);
+    res1(2); //
+
+    // nan 5 7
+    // undefined3 5 7
+
+</script>

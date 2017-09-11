@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
+<script>
+    var lis = document.getElementsByTagName('li');
+    for(var i=0; i<lis.length; i++){
+        lis[i].index = i;
+        lis[i].onclick = function (){
+            alert("我是页面内第" + (this.index+1) + "个li");
+        }
+    }
+</script>

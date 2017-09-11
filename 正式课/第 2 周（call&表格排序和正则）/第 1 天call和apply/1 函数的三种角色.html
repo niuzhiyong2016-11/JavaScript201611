@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //console.log(this); //window
+    function Fn(){
+        console.log('fn');
+    }
+    //Fn.aa = 1000;
+    console.log(Fn.prototype);
+    //console.log(Fn instanceof Function); //true
+    /*
+    *   函数的三种角色： 1 普通函数
+    *                   2 构造函数(类）
+    *                   3 也是Function这个函数类的一个实例
+    *                   ps: 只要是实例那么必然天生自带的属性__proto__指向自己所属函数Function这个类的原型
+    *                   Fn.__proto__ === Function.prototype
+    *                   ps: 那么通过Fn这个函数就可以调用Function的原型上prototype上的方法.
+    *                   ps: Function.prototype的原型是一个匿名空函数
+    *
+    *
+    * */
+
+    console.dir(Function.prototype);
+    console.log(Fn.call); //
+    console.log(Fn.__proto__.call);
+    console.log((function (){}).call);
+    console.log(Array.call);
+    console.log([].push.call())
+    var ary = [1,2,3];
+    ary.push(4);
+    var obj = {
+        haha:function (){}
+    }
+    obj.haha.call()
+</script>

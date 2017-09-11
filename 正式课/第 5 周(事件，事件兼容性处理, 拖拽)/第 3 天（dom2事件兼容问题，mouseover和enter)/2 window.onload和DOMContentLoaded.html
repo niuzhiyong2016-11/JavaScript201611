@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+</body>
+</html>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function (){ // 比较常用的
+        // 当网页内所有的元素和资源全部加载成功之后触发。
+        // img.src资源   video audio
+        console.log('onload');
+    }
+    window.addEventListener('DOMContentLoaded',function (){
+        //  网页内只要dom结构加载完成之后就可以了 => 只要是标签已经渲染结束就已经触发了
+        //  这个只能使用DOM2 绑定
+        console.log('DOMContentLoaded');
+    });
+   /* $(function (){
+        // 写jQ一般都是获取dom元素的操作比较多。不妨在写jq代码最外写一个这样的函数
+        //  jQ代码......
+        console.log('$');
+    });*/
+
+    $(document).ready(function (){
+        // 和$(function (){})差不多
+        console.log('ready');
+    });
+
+
+
+</script>
+

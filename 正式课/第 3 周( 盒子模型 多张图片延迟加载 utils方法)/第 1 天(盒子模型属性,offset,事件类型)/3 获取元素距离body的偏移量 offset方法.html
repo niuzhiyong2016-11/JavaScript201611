@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 300%;
+        }
+
+        #div1 { /*hack: 针对不同的浏览器写不同的样式 * / ..*/
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: lightgreen;
+            margin: 50px auto;
+            padding: 100px;
+            border: 10px solid #000;
+        }
+
+        #div2 {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: lightcoral;
+            padding: 100px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</div>
+<script>
+    /*
+    *   offset: 无论元素的offsetParent是谁。都要获取元素距离body的偏移量。
+    *
+    *   比如 ： 如果元素的父节点不存在定位属性，那么直接offsetLeft的值距离body的偏移，但是如果元素父节点存在定位属性，那么offsetLeft是获取距离父级offsetParent的偏移
+    * */
+    var div3 = document.getElementById('div3');
+
+    //从这开始都是针对div3这个元素的操作
+    var pinkBox = div3.offsetParent; //由于粉色盒子(div2)有定位属性所以div3的offsetParent就是div2
+    div3.offsetLeft; //div3距离div2的偏移量
+
+    pinkBox/*di2,pinkBox*/.clientLeft; //div3的offsetParent的左边框
+    pinkBox.offsetLeft; //粉色盒子距离粉色盒子的offsetParent的偏移量
+
+    var pinkBoxOffsetParent = pinkBox.offsetParent;
+    pinkBoxOffsetParent.clientLeft;
+    pinkBoxOffsetParent.offsetLeft;
+
+    // 只要存在offsetParent就需要把offsetParent的左边框(clientLeft)和左偏移量(offsetLeft)累加 => 当offsetParent为body的时候。就不存在。 body.offsetParent = null;
+
+    function offset(ele) { //ele就是要获取距离body偏移量的元素
+        // 这里面的代码就直接针对ele就可以。=> 写方法的是也可以把ele想象成距离的div3
+        var l = null; //
+        var t = null;  //此时我还不知道值为多少，就是要在t或者l上累加
+        l += ele.offsetLeft; //先把自己的偏移量累加上
+        t += ele.offsetTop;
+        var offsetPar = ele.offsetParent; //ele的offsetParent要么存在定位属性的祖先元素，即使不存在定位的祖先元素那么也能获取到body
+        while (offsetPar) {  // 只要offsetPar存在就需要把offsetPar的边框和偏移量累加
+            l += offsetPar.clientLeft + offsetPar.offsetLeft;
+            t += offsetPar.clientTop + offsetPar.offsetTop;
+            offsetPar = offsetPar.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+</script>
+</body>
+</html>

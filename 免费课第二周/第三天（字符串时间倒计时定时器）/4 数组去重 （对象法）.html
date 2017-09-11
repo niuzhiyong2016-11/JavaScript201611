@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //这个去重是有bug的。因为引用数组类型是不能作为对象的属性名字的。
+    var ary = [1,2,3,4,3,4];
+    var obj = {}; //现在里面一组属性都没有
+    //obj = {1 : 1,2 : 2 ,3 : 3, 4:4 }
+    for(var i=0; i<ary.length; i++){
+        var cur = ary[i]; //cur分别代表1，2，3，4.....项
+        if(obj[cur] == cur){ //只要这个判断成立说明这个cur作为属性名字和属性值曾经出现过。也就是在数组中是重复的。那么我就要在数组中删掉。只要删掉数组项需要注意塌陷的问题
+            ary.splice(i,1);
+            i--;
+            continue; //下一次循环继续。当前项重复了，还要比较下一项
+        }
+        obj[cur] = cur; //把数组的项目当作属性名和属性值添加给obj
+    }
+    console.log(ary);
+
+    /*
+    *   debugger的时候，可以选中变量，并且右键addtowatch添加监控。实时查看变量的值得变化
+    *
+    * */
+
+
+
+
+
+    var obj = {
+        2 : 2
+    };
+/*
+    obj[2] = 2;
+    obj.aaa = 2;
+    obj[2] = 2;
+*/
+
+
+
+
+
+</script>

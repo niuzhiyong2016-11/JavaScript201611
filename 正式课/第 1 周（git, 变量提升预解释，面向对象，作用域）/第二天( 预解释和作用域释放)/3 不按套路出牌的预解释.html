@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   1 预解释根本就不理会等号右面，即使是一个实名函数。那么这个函数名字也不会被预解释
+    * */
+    console.log(f); //undefined
+    //console.log(fn); //
+    var f = function fn(){ //函数表达式,这个函数名字fn不会被预解释。那么这个函数名字也就不用写了。
+        console.log('ok');
+    }
+
+
+    /*
+    *   2  var obj = {name : 'zhufeng'}   'name' in obj => true
+    *      in运算符是判断一个属性是否属于一个对象 => 属性名字必须是字符串
+    *      ps: 全局变量也是window的一个属性  'setInterval' in window ?
+    *
+    *      预解释不理会条件 => 放到判断或者循环都会被预解释。只要不放到函数里就可以
+    * */
+    //console.log('num' in window);
+    console.log(num); // undefined
+    if(!'num' in window){ // 这个条件在预解释阶段就已经是false了
+        //for(var i=0; i<3; i++){}
+        var num = 100;
+    }
+    console.log(num); // undefined
+
+
+    /*
+    *  3 自运行函数的函数名字是不会被预解释的,那么这个函数名字就没用了。自运行函数一般不写函数名字
+    *
+    * */
+    //console.log(sum); // Error
+    ;(function sum(){
+        var obj = {};
+        console.log(obj);
+    })();
+
+    /*
+    *   4 如果函数中有return
+    *           return后面的函数即使有名字也不会被预解释  fn
+    *           return下面的函数虽然不会被执行到但是是会被预解释的  fx
+    *
+    *           ps: 跟预解释没关系。return后面如果是一个函数的执行(自运行函数和实名函数执行)那么要等这个函数执行完的返回结果再return出去 => 先执行后return
+    *
+    * */
+    function foo(){
+        //console.log(fn);
+        console.log(fx);
+        fx(); //只要这个代码可以能执行到就可以了
+        return function fn(){ //return后面的函数是当作整体返回的。即使有函数名字也不会被预解释
+        }
+        alert(); //不执行
+        function fx(){
+            console.log('fx');
+        } //这个fx的位置虽然不会被执行到。但是会被预解释的
+    }
+    foo(); // 1 形参赋值  2 预解释  3 逐行执行
+
+    ////////////////////////////////////////////////////////////////
+    function fun(){
+        return (function (){
+            console.log('我是reutrn后面的自运行函数里的代码');
+        })()  // reutrn 后面的函数如果是一个函数执行(是函数执行)那么需要等这个函数执行完的结果留下来在return出去 => fun函数的运行返回值是等着自运行函数执行结果。而自运行函数中没有写return。默认返回undefined。所以fun的return的值就是自运行函数留下来的undefined。而外面的res还接受这fun的返回值。所以res也是undefined
+    }
+    var res  = fun();
+    console.log(res); //undefined
+
+
+
+    /*
+    *   5 如果函数名和变量名字重名，那么在预解释阶段以最后一个函数为准。从变量赋值那一行往下开始fn就开始是变量赋的那个值了。
+    *
+    * */
+
+    fn(); // 2
+    function fn(){ console.log(1) }
+    fn(); // 2
+    var fn = 5; // 不会被预解释了，因为这个fn已经在上面的函数预解释过程中已经声明过了就不用重复声明了
+    fn(); // error
+    function fn(){ console.log(2) } // 在预解释的最后阶段fn代表的是最后一个函数
+    fn(); //
+
+
+
+
+
+
+
+
+</script>

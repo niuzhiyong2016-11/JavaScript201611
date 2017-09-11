@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *    引用数据类型赋值过程:
+    *       1 先开辟一个新的堆内存空间
+    *       2 把属性名字和属性值当作字符串存入到这个内存中
+    *       3 (最后一步)把这个空间地址赋值给变量 => 在这个步骤之前变量变量的值都是在预解释阶段赋值的undefined
+    *
+    * */
+    var obj = {
+        name : 'zhufeng',
+        age : 30,
+        fn : function (){}//,
+        //haha : obj.name // undefined.name
+    }
+    // Cannot read property 'name' of undefined 这样的报错跟这个属性没关系，去找这个属性是属于谁的
+
+    fnn();
+    function fnn(){
+        console.log(1);
+        console.log(fnn); //在预解释阶段fn就已经有值了，就是fn这个函数的引用地址。
+    }
+
+    var ary = [1,2,3];
+    function fn(ary){
+        ary[ary.length] = 4;
+        ary = ary.splice(0);
+        ary[ary.length] = 5;
+        console.log(ary);
+    }
+    fn(ary);
+    console.log(ary);
+
+
+
+
+</script>

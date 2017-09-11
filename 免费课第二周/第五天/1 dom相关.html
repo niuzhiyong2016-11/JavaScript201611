@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="div1">
+            <p></p>
+            <p></p>
+            <!---->
+            <span></span>
+            <span></span>
+            <img src="" alt=""/>
+            <!---->
+            <p></p>
+            <p></p>
+        </div>
+    </body>
+</html>
+<script>
+    var div1 = document.getElementById('div1');
+    //获取元素的常用方法
+
+    // 1 document.getElementById('id') 通过id获取元素，返回值一个dom对象。在整个document内是唯一的。所以只有document才可以使用这个方法
+    document.getElementById('div2'); // 页面内不存在的id返回null
+
+    // 2 context.getElementsByTagName()  context这个是上下文。把context可以理解是一个范围 , 获取回来的是一组元素。即使只有一个也需要通过索引0来获取
+
+    // 3 context.getElementsByClassName() 通过类名获取元素，同样也是把context理解为在哪个范围内获取。获取回来的也是一组元素。这个方法在ie低版本不兼容。
+
+    // 4 document.getElementsByName() 一般应用于表单元素， name这个属性如果给div等非表单元素虽然不起作用，但是在标准浏览器内也是可以通过name来获取的
+
+    // 5 document.documentElement ==> html元素   这是一种特殊获取方式
+
+    // 6 document.body  ==> body元素
+
+    // 7 document.documentElement.clientWidth || document.body.clientWidth
+    // 8 document.documentElement.clientHeight || document.body.clientHeight
+
+    // 9 document.querySelector("#id")
+
+    // 以下两个方法不兼容，一般应用于移动端开发
+    // 10 document.querySelectorAll("#id li")
+    // document.querySelectorAll('input[type=radio]')  所有的表单元素中过滤出是radio的
+
+
+
+    // 元素的创建，增加，修改，删除等
+    // 创建
+    var p = document.createElement('p'); //创建一个p段落元素
+
+    // 增加
+    document.body.appendChild(p); //把p添加到body里面的最末尾处。appendChild永远都是由父元素来添加子元素的
+
+    var img = document.createElement('img');
+
+    document.body.insertBefore(img,p); // 把img标签插入到p元素前面。和appendChild一样也是由父元素来调用的
+
+    // removeChild 删除元素
+
+    document.body.removeChild(img); // 删除元素，同样需要父亲节点来调用
+
+    // 替换元素  replaceChild
+    var video = document.createElement('video'); // 视频  h5
+    var audio = document.createElement('audio'); // 音频  h5
+
+    //document.body.replaceChild(video,img); //是使用video把img替换掉。注意下参数的位置 。同样也是由父元素来调用
+
+    // cloneNode()  克隆元素
+    video.cloneNode(true); // 参数是一个布尔值。默认是false，如果是true那么是带着子孙后代元素一起克隆
+
+    // 节点： 元素 文本 换行 注释 等 都可以叫做节点 => 节点不一定元素
+
+    // 描述节点关系的属性
+
+    // parentNode  包含着元素的父元素
+    // body.parentNode => html
+    // html.parentNode => document
+    // document.parentNode => null
+
+    // childNodes 所有的子节点(这里面有 元素 注释 文本 换行 等)
+    // children   所有的元素子节点(全是元素)  不兼容
+    // childNodes和children都是一个集合，也就是一个有length和索引的类数组
+
+    // previousSibling 上一个哥哥几点
+    // previousElementSibling 上一个元素哥哥节点  不兼容
+    // prevEleSibling / previousElementSibling 如果不存在是null
+
+    // nextSibling 下一个弟弟节点
+    // nextElementSibling 下一个元素弟弟节点  不兼容 如果不存在也是null
+
+    // firstChild  第一个子节点
+    // fistElementChild  第一个元素子节点 不兼容
+
+    // lastChild  最后一个子节点
+    // lastElementChild 最后一个元素子节点 不兼容
+
+    /**
+     * @param ele 获取的就是ele的元素子节点。这个在执行的时候赋值为哪个元素就是获取哪个元素的所有元素子节点
+     */
+
+    /*             元素         文本       注释
+    *  nodeType      1           3          8
+    *
+    *  nodeName   大写的标签名   #text     #comment
+    *
+    *  nodeValue    null        文本内容    注释内容
+    *
+    * */
+    children(div1,'p'); //我要获取div1的所有元素子节点的标签名字为p的,先获取所有的元素子节点，然后把不是p的删掉
+    function children(ele,tagName){ //如果tagName这个位置需要的是一个标签名字。
+        //在childNodes里面过滤出来是元素的就可以了 => 如何判断一个节点是不是元素？ 那么通过节点类型来判断。 nodeType = 1
+        var childs = ele.childNodes; //先拿元素子节点，然后循环过滤
+        var ary = [];
+        for(var i=0; i<childs.length; i++){
+            //把符合条件的放到数组中
+            if(childs[i].nodeType == 1){
+                ary.push(childs[i]); //哪个判断过了就放到这个容器中
+            }
+        }
+        //ary = [p,p,span,img,p,p]
+        //       0 1  2
+        if(typeof tagName == 'string'){ //说明tagName是一个字符串不是undefined  "p"
+            for(var i=0; i<ary.length; i++){ //仍然需要把每一个ary里的元素都判断一次，是否是你传进来标签名字，如果不是就删啦
+                if(ary[i].nodeName !== tagName.toUpperCase()){ //保证都是大写的
+                    ary.splice(i,1); //splice会产生数组塌陷问题，所以在做循环的时候要注意好
+                    i--; //只要i--一次然后紧接着i++这样就相当于原地没动
+                }
+            }
+        }
+        return ary; //需要留下符合条件的所有元素子节点
+    }
+
+
+    // setAttribute('属性名',"属性值");  通过setAttribute设置的属性都设置到行内
+    // getAttribute('属性名');  获取行内属性的值
+    // removeAttribute('属性名'); 移除这个行内属性
+
+    document.body.setAttribute('school','zhufeng');
+    console.log(document.body.getAttribute('school'));
+    document.body.removeAttribute('school');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

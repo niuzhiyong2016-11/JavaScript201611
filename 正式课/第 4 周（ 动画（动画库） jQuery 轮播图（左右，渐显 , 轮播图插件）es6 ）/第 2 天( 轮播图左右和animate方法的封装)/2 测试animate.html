@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script src="animate.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+//    animate(div1,{left : 800,width:150,opacity: 0.5},2000,function (){
+//        animate(this,{top : 400,opacity : 1},1000,function (){
+//            animate(this,{left : 0},500,function (){
+//                animate(this,{top : 0},500,function (){
+//                    alert('我又回来了');
+//                })
+//            });
+//        });
+//    });
+
+    animate(div1,{left:500},2000,1,function (){
+        this.innerHTML = '吃饭';
+    });
+
+    animate(div1,{
+        target: adf,
+        duration : 3000,
+        callback : function(){}
+
+
+    })
+</script>

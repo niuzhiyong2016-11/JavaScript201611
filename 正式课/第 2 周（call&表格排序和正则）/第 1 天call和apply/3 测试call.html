@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   call用法:
+    *       1 fn1.call(fn2) => 最后是fn1执行
+    *       2 fn1.call.call.call.call(fn2) => 最后就是fn2执行。如果fn2没有传一个函数那么就报错
+    *
+    * */
+    function fn1() {
+        console.log(1)
+    }
+
+    function fn2() {
+        console.log(2)
+    }
+
+    /*
+        function fn(){
+            this();
+            //fn2();
+        }
+
+        fn1.call(fn2); // 1
+        fn.call(fn2); // 2
+        fn1.call.call.call(5); // 2
+    */
+
+    Function.prototype.call = function (obj) {
+        console.log(this); //fn1 , fn2
+        console.log(obj); // null , document.body
+        //我要把this(fn1和fn2)中的this修改成obj
+        this(); // fn1() fn2() //fn2()
+        // ps: call方法中最后其实有一个this()的过程
+    };
+
+    //fn1.call(null);
+    //fn2.call(document.body);
+    /*call本身也是一个函数，call本身也FUnction的一个实例*/
+    (fn1.call.call).call(fn2); //
+    ([].push.call.call).call(fn2); //
+    Function.prototype.call.call(fn2);
+    //fn1.call.call.call(document.body); //
+    //Function.prototype();
+    //(function (){})();
+</script>
+</body>
+</html>

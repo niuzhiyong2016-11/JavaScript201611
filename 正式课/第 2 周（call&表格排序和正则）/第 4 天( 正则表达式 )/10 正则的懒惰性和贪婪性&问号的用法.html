@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   懒惰性: 尽可能少的去捕获次数 => 全文g可以改变懒惰性
+    *   贪婪性: 每次尽可能多的去捕获 => 在量词"+"后面添加一个问号就会每次尽可能少的去匹配
+    *
+    * */
+    var reg = /\d+?/g;
+    var str = 'zhufeng2015peixun2016';
+    var res = reg.exec(str);
+    console.log(res); //['2015',index:7,input:str]
+    /*
+    *   问号的用法:
+    *       1 量词: 用来修饰前面的元字符出现0-1次
+    *       2 破坏贪婪性: 放在量词后面可以每次尽可能少的去匹配
+    *       3 ?: (?:\d|X) => 这个小括号只是处理"|"或者符可能出现的问题，但是并不想捕获这一组。 在分组小括号前面添加?:可以取消这个分组。只匹配不捕获
+    *
+    * */
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /*reset.css*/
+        .box{
+            width: 400px;
+            height: 100px;
+            border: 5px solid #ccc;
+            background: lightpink;
+            font-family: microsoft yahei;
+            text-align: center;
+            margin: 40px auto;
+            line-height: 100px;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            -webkit-user-select: none;/*点击不选中文字*/
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">J89k</div>
+</body>
+</html>
+<script>
+    var box = document.getElementsByClassName('box')[0];
+    function fn(){
+        // innerHTML box里面所有的html代码
+        console.log(typeof box.innerHTML); //string => 所以才可以做拼接字符串然后再重新赋值回去
+        var strRange = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; //这个字符串就是验证码的取值范围。
+        //一个是62个字符，所以只从0到61
+        //Math.round(Math.random()*(m-n)+n)
+        Math.round(Math.random()*61) //获取0-61之间的随机整数,如果把这个0-61之间的随机数作为索引值。那么通过这个索引值拿出来的字符也是随机字符。然后把4个随机字符累加在一起就是一个4位的随机字符串。然后在赋值给box.innerHTML
+        var codeHtml = ""; //
+        // while循环也可以做得到。可以判断codeHtml的length作为循环的条件，只要长度不够4个那么就继续循环下去
+        for(var i=0; i<4; i++){
+            var ran = Math.round(Math.random()*61); //先获取0-61之间的随机数
+            //然后通过随机索引获取字符 charAt(索引)
+            var ranChar =   strRange.charAt(ran); //通过随机索引获取的随机字符
+            // codeHtml : "a"  ranChar: 'A'
+            if( codeHtml.toLowerCase().indexOf(ranChar.toLowerCase()) === -1 ){ //判断是否出现过重新的字符，如果是重复的那么就不累加. 由于大小写也不能重复。那么我们每次新拿来的随机字符需要去和已经拼接好的字符去做判断，判断是否在里面出现过.需要转换下大小写
+                codeHtml += ranChar; // 'a8Q7'
+            }else{
+                //拿来了一个重复字符，虽然不能累加上。但是浪费一次循环。我们需要把这个循环i--一次
+                i--;
+            }
+        }
+        box.innerHTML = codeHtml; //把拼接好的字符串重新赋值回去
+    }
+
+    fn(); //这行代码是给刷新用的
+
+    // 给box绑定点击事件，每次点击的时候还需要更换验证码
+
+    box.onclick = fn; //这行代码是给点击用的
+
+    /*
+    *   绑定事件的本质:
+    *       1 box.onclick = function (){}  就是把一个函数赋值(是赋值)给box的onclick属性
+    *       2 我们知道函数是一个引用数据类型的，引用数据类型其实就是一个地址。我们也知道函数名字存放的就是那个函数的引用地址。
+    *       3 box.onclick = fn;   如果fn能代表一个函数，那么这也是把函数赋值给box的onclick属性。那么就是绑定事件
+    * */
+
+
+
+
+</script>

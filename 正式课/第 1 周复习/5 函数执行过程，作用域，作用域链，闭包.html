@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+
+    console.log(total); // undefined
+    var total = 0;
+
+    function sum(n1,n2){
+        console.log(total); // undefined => 在sum执行的过程中打印的
+        //var total = n1 + n2; //
+         total = n1 + n2; //
+        cosole.log(total); // 3
+    }
+
+    sum(1,2); // 如果把sum中total前面的var去掉，那么在执行sum的过程中，在自己私有作用域内没有total的变量。那么去上一级作用域把全局的total的值从0修改为n1+n2的值3了
+
+    console.log(total); // 0
+
+    /*
+    *   函数的执行过程： 先需要开辟一个新的栈内存 => 形成一个新的私有作用域，函数的形参相当于定义在函数体内的私有变量
+    *       1 形参赋值 => 如果实参是引用数据类型，是把实参所代表的引用地址赋值给形参一份
+    *       2 预解释函数体内带var和function的 => 预解释只发生在当前作用域，也就是你正在执行的这个函数所产生的那个作用域
+    *       3 代码执行
+    *
+    * */
+
+    /*
+    *   私有和全局作用域:
+    *       1 私有作用域可以理解为是有函数体包含的。私有作用域内的变量就是私有变量
+    *       2 全局作用域可以理解是没有函数包含的作用域。全部变量就是直接暴露的script标签中的变量或者函数
+    *
+    *
+    * */
+
+</script>

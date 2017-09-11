@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文档操作</title>
+</head>
+<body>
+    <div id="div1">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    // append方法： 添加子元素到末尾
+    // $('完整的标签')不是来获取元素的，是创建一个元素
+    var $span = $('<span></span>');  //新创建一个span标签
+    $('#div1').append($span); // appendChild
+    // appendTo: 和append相反
+    $span.appendTo($('#div1'));  // 把span添加到div1中
+    // wrap : 在外层嵌套一个包裹元素
+    $('#div1').wrap('<h3></h3>');
+    // unwrap() : 删除包裹
+    $('#div1').unwrap();
+
+    // replaceAll() 替换节点
+
+    // remove() 删除节点
+    //$('#div1').remove();
+    // clone() 克隆节点
+    $('#div1').clone();
+
+    // insertAfter()
+    // insertBefore()
+    // before() 在匹配元素前面插入内容
+    $('#div1').before('<b></b>');
+    // after()
+</script>

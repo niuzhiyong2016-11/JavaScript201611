@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    // 1 单例模式 => 命名空间 => nameSpace
+    var tianxi = {
+        eat : function (){
+            tianxi.drink();
+            this.drink();
+        },
+        drink : function (){
+
+        }
+    };
+    tianxi.eat();
+
+
+    // 2 工厂模式 => 函数 => 就是专门生产对象 => 函数的封装
+    function Factory(x,y){
+        var obj = {};
+        //向这个对象添加属性或者方法
+        obj.x = x;
+        obj.y = y;
+        return obj;
+    }
+
+    // 3 构造函数模式(类) => 类  实例 => 类泛指的是一类事物，而实例是特指某一个具体的事物 => 每个人都是人类的一个实例
+    // Array Number String Boolean Object Function RegExp Date ...HTMLDivElement.....
+    function FE(money,computer){ //由于内置类不够用，需要我们人为构造一个类。 ps: 构造的类首字母一般大写
+        this.money = money; //this.money是添加到实例上的属性
+        this.computer = computer;
+        this.writeJs = function (){
+            //writeJs每个fe必备技能。对于这种每个实例必须要有方法，我们不妨设置能公有方法。当实例new出来的那一刻天生自带这个方法 => 原型
+        }
+        //return []; //返回一个引用数据类型会破坏实例的默认返回动作
+    }
+    FE(); // 普通函数
+    new FE(); //当作一个类来执行
+    FE instanceof Function; //instanceof 判断一个实例是否属于一个类,任何一个函数(构造函数，匿名函数，自运行函数，实名函数)都是Function这个函数类的实例
+
+    // 4 原型模式
+    function Table(width,height,color){
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        //一般情况下属性都是私有的，而功能和方法都是公有
+    }
+    Table.prototype.fnEat = function (){ //每个桌子都具备一个功能，可以用来吃饭
+        //在原型上添加的方法就是公有方法的位置。在Table.prototype类的原型上的方法可以通过实例的__proto__属性来获取到。
+        // 只要函数定义结束就会天生自带一个属性叫做prototype，这个属性的值仍然是一个对象数据类型的。也天生自带两个属性，其中一个是constructor，值就是类本身. Table.prototype.constructor === Table; 另外一个属性叫做__proto__，(任何一个引用数据类型都存在这个属性),这个属性的值无论存在哪个引用数据类型身上，永远都指向自己所属类的原型   new Table().__proto__ === Table.prototype;
+        // ps: Object这个类是所有引用数据类型的基类 => 所有的引用数据类型都是Object这个类的一个实例。所以任何一个引用数据类型都可以通过__proto__属性来调用Object.prototype原型上的方法。实例在调用方法的时候__proto__属性可以省略。如果有私有先使用私有，如果没有向上查找
+        // Table是一个函数，也是一个引用数据类型。那么就必然存在__proto__属性，这个属性的值就指向函数所属类的原型  Function.prototype 。那么函数也可以调用Function原型上的方法
+    }
+
+    // 数组的方法也是定义在Array这个类的原型上的。那么原型上方法中的this是谁呢? => 实例
+    Array.prototype.quchong = function (){
+        console.log(this);
+        // 由于这个方法一般是有数组实例(也就是任何一个数组) [1,2].quchong()来调用。在执行的时候"."前面就是那个实例本身。所以原型函数中的this一般都是实例本身
+        return this; //this就是实例，那么也就是去重之后那个数组。那么这个函数运行完的结果就是留下一个数组，只要是数组就可以继续调用任何数组原型上的方法。=> 链式调用写法最核心原因 => jQuery
+    }
+
+
+
+</script>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // 21 12 24 1986 02 10 821x
+    var reg = /^\d{17}(\d|x)$/i;
+    // ignoreCase 忽略大小写
+    // multii 多行匹配
+    // global 全文全局匹配
+    //console.log(reg.test('21122419860210821X'));
+    var reg = /^\d{6}(\d{4})(\d{2})(\d{2})\d{3}(?:\d|X)$/;
+    var res = reg.exec('211224198602108210');
+    console.log(res);
+</script>
+</body>
+</html>

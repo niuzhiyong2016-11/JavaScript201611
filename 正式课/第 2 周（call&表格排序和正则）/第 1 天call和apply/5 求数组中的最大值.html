@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var ary = [3, 1, 6, 2, 4, 5];
+    // 1 排序 然后取头或者尾就可以了
+    ary.sort(function (a, b) {
+        return b - a
+    });
+    //console.log(ary[0]);
+
+    // 2 假设
+    var max = ary[0];
+    for (var i = 1; i < ary.length; i++) {
+        if (ary[i] > max) {
+            max = ary[i];
+        }
+    }
+    console.log(max);
+
+    // 3 利用apply的传参方式来巧用Math.max方法
+    Math.max(1, 4, 3, 2, 5); //5
+    console.log(Math.max.apply(null, ary)); //[3,1,6,2,4,5];
+
+    // 4 利用eval
+    var ary = [3, 1, 6, 2, 4, 5, 4, 3];
+    Math.max(ary.join());
+    //var res = Math.max('3,1,5,2,4,5');
+    var res = Math.max(eval(ary.join())); //
+    console.log(res);
+    console.log(eval('Math.max(' + ary.join() + ')'));
+</script>
+</body>
+</html>

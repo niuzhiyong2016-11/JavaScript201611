@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM滚动事件</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 300%;
+            _overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px; background: red;"></div>
+</body>
+</html>
+<script src="wheel.js"></script>
+<script>
+    var div1 = document.getElementById('div1');
+    addWheelEventListener(div1,function (isDown,e){
+        if(isDown){
+            this.style.height = this.offsetHeight + 10 + 'px';
+        }else{
+            this.style.height = this.offsetHeight - 10 + 'px';
+        }
+    })
+</script>
+<!--
+<script>
+    window.onscroll = function (){
+
+    } // 给浏览器绑定的滚动条事件，当页面高度超出了窗口的高度滚动的时候就可以触发。 回到顶部，图片延迟加载
+
+//    document.body.onmousewheel = function (){ // ie&chrome
+//        console.log(1111);
+//    }
+
+    //DOMContentLoaded
+//    document.body.addEventListener('DOMMouseScroll',function(){ //firefox
+//       console.log(1);
+//    });
+    var div1 = document.getElementById('div1');
+    // 由于ff和 chrome&ie对dom的滚轮事件绑定方式不同
+    // Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0
+    if(window.navigator.userAgent.indexOf('Firefox') !== -1){ // firefox
+        /*document*//*div1*/document.addEventListener('DOMMouseScroll',fn);
+    }else{ // ie & chrome
+        /*document*//*div1*/document.onmousewheel = fn;
+    }
+    function fn(e){ // 这个fn就是我在鼠标滚动的时候要执行的事件
+        e = e || window.event;
+        // 既然是滚轮事件那么一定是要判断下滚动的方向(上/下)
+        //console.log(e.wheelDelta); // -120/120  下： -120  上: 120  chrome/ie
+        //console.log(e.detail); //   3/-3           下：3    上: -3  firefox
+        var isDown = null;
+        // e.wheelDelta在firefox里是undefined
+        if(e.wheelDelta){ // 如果这个属性存在当前浏览器是ie/chrome
+            isDown = e.wheelDelta < 0 /*? true : false*/;
+        }else{ // firefox  判断的是e.detail
+            isDown = e.detail > 0;
+        }
+        // 经过上面的代码isDown这个变量必然会保存一个true/false的布尔值。那么为true的时候就是像下的
+        console.log(isDown); // 向下滚动的时候在什么浏览器里都是true
+        if(isDown){ // 向下滚轮我让这个盒子长高
+            div1.style.height = div1.offsetHeight + 10 + 'px';
+        }else{
+            div1.style.height = div1.offsetHeight - 10 + 'px';
+        }
+
+        // 当一个bug觉得都特别合理的时候，不妨使用下阻止默认行为.
+        e.preventDefault ? e.preventDefault() : e.returnValue = false; //如果把事件绑定给document那么只要出现滚动条，那么当鼠标滚动的时候是有默认行为的滚动操作。
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+</script>-->

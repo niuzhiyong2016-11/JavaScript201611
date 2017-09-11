@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    *   实例创建方式: 1 第一个参数是一个字符串(字面量创建方式两个斜杠中间的部分)
+    *               2 第二个参数就是修饰符 "i" / "m" / "g"
+    *               ps: 只要在正则表达式中需要变量，那么只能使用实例的创建方式
+    *               3 : 如果用实例的创建方式，使用特殊元字符，比如\d那么需要在第一个参数字符串中"\\d" ，因为\本身在字符串中也有特殊含义,比如 "\n" 是换行
+    *
+    * */
+    var ary = [1, 2, 3];
+    var ary1 = new Array(1, 2, 3);
+
+    // 字面量
+    var name = 'zhufeng';
+    var reg = /name/; //   /zhufeng/
+    console.log(reg.test('name123123'));
+
+    // 实例
+    var reg1 = new RegExp('name' + name, "i"); // 第一个参数: 'namezhufeng' /namezhufeng/
+    console.log(reg);
+    console.log(reg1);
+
+    var str = 'abcd';
+    for (var i = 0; i < str.length; i++) {
+        console.log(new RegExp(str.charAt(i))); // /a/ /b/  /c/  /d/
+    }
+
+    var reg = new RegExp('\\d', "g"); // /\d/g
+
+    console.log(reg.test('1'));
+</script>
+</body>
+</html>

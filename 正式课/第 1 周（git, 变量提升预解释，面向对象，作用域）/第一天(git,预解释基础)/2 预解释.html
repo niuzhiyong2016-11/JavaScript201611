@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    /*
+    *   变量提升： 变量提前声明
+    *   预解释: 在浏览器解析js的时候，在代码执行之前就会先把带var和function都会提前声明。但是带var的只是声明了并没有赋值。默认会赋值一个undefined值。而函数不仅仅声明还会把函数的引用地址赋值给函数名。ps: 变量只声明不赋值，函数既声明又赋值
+    *
+    * */
+    console.log(num); // undefined
+    console.log(obj); // undefined
+    console.log(fn); // 函数打印的是函数本身
+    /*
+    *   内存分两种: 1 堆内存 => 存值 （任何一个引用数据类型都是堆内存）
+    *              2  栈内存 => 运行环境(代码运行的时候就会产生一个栈内存) => 只要代码运行就需要给代码提供一个运行环境,这个运行环境我们还可以叫做作用域。只要浏览器刷新就需要提供一个默认的最大的运行环境。我们把这个最大的环境叫做全局作用域。用window表示
+    *
+    * */
+
+
+
+    var num = 10;
+    var obj = { name : 'tianxi' };
+    function fn(){
+        console.log(1);
+    }
+
+    console.log(num); //10
+    console.log(obj); //
+    console.log(fn); // 打印的是函数名字所代表的函数
+
+
+
+
+</script>

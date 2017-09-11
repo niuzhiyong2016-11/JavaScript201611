@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    console.log(fn); //
+    console.log(num); //undefined
+    var num = 10;
+    //console.log(x);
+    function fn(x){
+        console.log(x);
+        console.log(num); //
+        var num = 11;
+        console.log('fn');
+    }
+    fn();
+    /*
+    *   作用域: 只要有代码执行我们就要给代码提供运行环境，也就是作用域。
+    *   window: 只要页面刷新就会提供一个全局作用域window，在预解释阶段只会把window作用域内带var和function的预解释。只要是函数包起来的变量或者函数在全局阶段的预解释是不理会的。
+    *   全局变量和私有变量: 定义在全局作用域内的变量是全局变量，定义在函数内的变量叫做私有变量。
+    *   ps: 全局变量任何位置都可以访问到，从而使不安全的。私有变量除了函数体内部外界是不能访问的。那么相对比较是安全的
+    *   ps: 形参相当于在函数体内定义的私有变量
+    *
+    *
+    *
+    *
+    * */
+
+
+
+</script>

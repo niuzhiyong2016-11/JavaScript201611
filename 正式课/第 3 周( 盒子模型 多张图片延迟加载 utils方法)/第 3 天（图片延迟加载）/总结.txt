@@ -1,0 +1,21 @@
+1 utils : listToArray jsonParse getRandom win offset getCss setCss
+2 单张图片延迟 为什么要做图片延迟加载?
+             什么时候做？
+             如何判断一张图片是否已经进入到浏览器的窗口内?
+
+             创建一张临时图片 1 2new
+             tempImg.src = .... img.getAttribute()
+             tempImg.onload
+             tempImg.isLoaded(你喜欢什么都ok)
+4 304 200 500 404 ... 缓存 cache  network(控制台)  network里的type(js/img/xhr/css)
+5 多张图片延迟加载
+            meta:vp     viewprot  device-width scale .....
+            nth-child(n)  odd even 奇数 偶数
+            注意路径问题
+            获取数据 ajax
+            绑定数据 bindData  拼接字符串
+            单张加载函数
+            多张加载函数 => 单张函数是在这里调用的。
+            淡入效果  fadeIn => 定时器，定时器保存在哪?
+
+

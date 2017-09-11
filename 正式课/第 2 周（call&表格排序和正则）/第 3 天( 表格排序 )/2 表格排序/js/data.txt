@@ -1,0 +1,10 @@
+[
+    {"name":"郭煜","sex":1,"age":15,"height":175,"weight":75},
+    {"name":"李海军","sex":1,"age":20,"height":178,"weight":65},
+    {"name":"姜福林","sex":1,"age":24,"height":179,"weight":85},
+    {"name":"袁奇","sex":0,"age":18,"height":172,"weight":55},
+    {"name":"王晓娜","sex":0,"age":19,"height":171,"weight":45},
+    {"name":"孔艳","sex":0,"age":20,"height":165,"weight":55},
+    {"name":"王诗朝","sex":1,"age":21,"height":180,"weight":78},
+    {"name":"郭宝杰","sex":1,"age":23,"height":182,"weight":70}
+]

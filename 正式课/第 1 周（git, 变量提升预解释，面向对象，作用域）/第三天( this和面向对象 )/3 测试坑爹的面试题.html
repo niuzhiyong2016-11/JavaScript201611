@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var num = 10; // window.num = 10  12 14
+    var obj = {
+        num : 1, // 3
+        fn : (function (){
+            this.num += 2;
+            num--; // num = num - 1
+            var num = 5; // num = 5 7 9   如果这个var没有呢？
+            return function (n){
+                this.num += 2;
+                num += 2;
+                console.log(n + num); // 10
+            }
+        })()
+    };
+    var f = obj.fn;
+    f(3);
+    obj.fn();
+    console.log(window.num,obj.num);
+    // 10 NaN 14 3
+</script>

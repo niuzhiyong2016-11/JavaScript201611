@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body, div, span, img {
+            margin: 0;
+            padding: 0;
+            font-family: "microsoft yahei";
+        }
+
+        #box {
+            width: 150px;
+            height: 150px;
+            margin: 150px auto;
+            box-shadow: 3px 3px 10px #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+            vertical-align: top;
+            border: none;
+        }
+
+        #box span {
+            position: absolute;
+            left: -150px;
+            top: 0;
+            display: block;
+            width: 150px;
+            height: 150px;
+            background: #19ba94;
+            opacity: 0.5;
+            filter: alpha(opacity=70);
+            cursor: pointer;
+            color: #fff;
+            font-size: 30px;
+            line-height: 150px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="logou.png" alt="">
+    <span>易企秀</span>
+</div>
+</body>
+</html>
+<script src="utils2.0.js"></script>
+<script src="animate.js"></script>
+<script>
+    var box = document.getElementById('box');
+    var span = box.getElementsByTagName('span')[0];
+    box.onmouseenter = function (e) {
+        /*var s = e.fromElement || e.relatedTarget; // 判断一下这个关联元素是不是box的子元素
+        if(box.contains(s)){
+            return;
+        }*/
+        // 当鼠标刚刚悬停在box那一刻
+        var res = direction(this, e); // 左:0, 下 ： 1，右: 2，上：3
+
+        switch (res) {
+            case 0 :
+                utils.css(span, {left: -150, top: 0});
+                break;
+            case 1:
+                utils.css(span, {left: 0, top: 150});
+                break;
+            case 2:
+                utils.css(span, {left: 150, top: 0});
+                break;
+            case 3:
+                utils.css(span, {left: 0, top: -150});
+                break;
+        }
+        animate(span,{left : 0, top : 0},500);
+    }
+    box.onmouseleave = function (e){
+        /*var s = e.toElement || e.relatedTarget;
+        //console.log(s);
+        //var s = e.fromElement || e.relatedTarget; // 判断一下这个关联元素是不是box的子元素
+        if(box.contains(s)){
+            return;
+        }*/
+
+        var res = direction(this, e);
+        switch (res){
+            case 0:
+                animate(span,{left: -150, top: 0},500);
+                break;
+            case 1 :
+                animate(span,{left: 0, top: 150},500);
+                break;
+            case 2 :
+                animate(span,{left: 150, top: 0},500);
+                break;
+            case 3 :
+                animate(span,{left: 0, top: -150},500);
+                break;
+        }
+    }
+
+
+    function direction(box, e) { // 这个函数负责返回一个方向。根据y和x的坐标来通过Math.atan2方法返回一个弧度值，然后再把弧度值转化成角度值。然后再根据角度来判断属于哪个方向。
+        // 弧度 radian  1rad
+        // 角度  angle  1ang
+        var x = e.pageX - box.offsetLeft - box.offsetWidth / 2;
+        var y = box.offsetTop + box.offsetHeight / 2 - e.pageY;
+        // x和y就是鼠标悬停在box那一刻的坐标
+        // 根据坐标算弧度
+        var rad = Math.atan2(y, x);
+        var ang = rad * 180 / Math.PI;
+        // 角度已经算出来了。 这个角度的区间值[-180,180]
+        // 先累加一个180这样区间就变成[0,360]
+        // 然后除以90这样变成[0,4]
+        // 我们先四舍五入之后取整数
+        // 最后%4这样从左面进入无论是0还是4,%4之后都是0
+        // left : 0 , bottom : 1, right : 2 , top : 3
+        return Math.round((ang + 180) / 90) % 4;
+    }
+
+    // 能不能多写几个盒子，然后把这个效果封装成一个构造函数，以后在new实例的时候把盒子当作参数传入到构造函数中就可以了
+    // 关联元素
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var utils = {
+        getElesByClass : function (){
+            this.hasClass();
+        },
+        hasClass : function (){
+
+        }
+    };
+    utils.hasClass();
+
+    var utilsNew = (function (){
+        var isStandBrowser = !!window.getComputedStyle;
+        // isStandBrowser 在标准浏览器是true，在非标准浏览器是false
+
+        function getElesByClass(){
+            this.hasClass(); //
+        }
+
+        function hasClass(){
+
+        }
+        function addClass(){}
+        function children(ele){
+            if(isStandBrowser){
+                return ele.children;
+            }
+            //.....
+        }
+        return {
+            getElesByClass : getElesByClass
+        }
+    })();
+
+    utilsNew.getElesByClass();// this => utilsNew
+    utilsNew.hasClass();
+    //utilsNew.addClass();
+
+
+
+    ;(function (){
+        function listToArray(){}
+        function jsonParse(){}
+        window.utils = {
+            listToArray : listToArray,
+            jsonParse : jsonParse
+        }
+        //window.data;
+    })();
+    utils.listToArray();
+
+
+
+
+
+</script>

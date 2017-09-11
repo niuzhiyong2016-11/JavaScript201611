@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *   git: 版本管理工具
+    *       1   去www.github.com注册一个账号
+    *           点击signup
+    *           userName 用户名
+    *           Email Address 邮箱地址和密码
+    *           点击 create an account 创建一个账号
+    *           和更新课件没有关系。。。
+    *
+    *       2 回家更新课件的步骤:
+    *           1 新建一个文件夹
+    *           2 然后进入这个文件夹，右键打开git bash
+    *           3 输入命令： git clone 地址(群公告)
+    *           4 在刚刚新建的这个文件夹内就可以看到仓库和代码了
+    *       3 从第二天后每天更新课件，需要进入到包含.git隐藏文件夹也就是JavaScript201611这个文件夹里面，右键打开git bash输入命令git pull origin master就可以更新到每天新增加的内容了
+    *
+    *
+    *       4 如何把本地文件提交到github上的远程仓库中
+    *           1 git add -A(添加所有文件) -A也可以直接写文件名字。就是指定这一次要提交哪个文件
+    *           2 git commit -m"这一次提交完成了哪个需求或者描述下修改了什么"
+    *           3 git push origin master 才是真正把本地文件推送到远程仓库，在推送的过程中需要输入用户名和密码
+    *           ps: git commit 执行完这个命令之后就会在本地生成一个版本号，并且对应着这次commit的信息。用来记录提交这次版本号做了什么。为了以后出现问题能快速定位到没有问题的版本。并且迅速恢复
+    * */
+
+    /*
+    *   如何把一个本地文件夹直接推送到远程仓库中
+    *       1 先把本地文件夹初始化成一个git仓库 ,在文件夹内执行git init => 如果初始化成功之后文件夹内会有一个.git隐藏文件
+    *       2 让本地仓库和远程仓库主动连接  git remote add origin 地址
+    *       3 git fetch -v查看是否连接成功   From : http://...字样
+    *       4 在推送文件之前先git pull origin master
+    *       5 git add -A/指定的文件名字需要后缀名
+    *       6 git commit -m"这次提交的相关信息" => 这次提交是为了做什么
+    *       7 git push origin master 推送
+    *
+    *   如何忽略文件不推送到远程仓库中去:
+    *       1 需要建立一个叫做.gitignore的一个文本文件(需要另存为才可以建)
+    *       2 把要忽略的文件名字(包含后缀名)直接写到.gitignore中
+    *       3 提交推送的时候就会忽略列表内的所有文件。比如使用webstorm的是会默认产生一个.idea的文件夹。
+    *
+    *
+    * */
+
+
+
+
+
+
+</script>

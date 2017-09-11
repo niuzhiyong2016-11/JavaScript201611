@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 300%;
+        }
+
+        #div1 { /*hack: 针对不同的浏览器写不同的样式 * / ..*/
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: lightgreen;
+            margin: 50px auto;
+            padding: 100px;
+            border: 10px solid #000;
+        }
+
+        #div2 {
+            width: 300px;
+            height: 300px;
+            background: lightcoral;
+            padding: 100px;
+            box-sizing: border-box; /*css属性,这个属性padding的时候就不用主动再去width上减掉padding*/
+            /*border: 5px solid #000;*/
+            /* border-left: 10px solid #000;
+             border-top: 5px solid #000;*/
+            overflow: auto;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div id="div2" haha="aaa" class="c1 c2 c3">
+        <!--<div id="div3"></div>-->
+        记习近平出席金砖国家领导人第八次会晤记习近平出席金砖国家领导人第八次会晤记习近平出席金砖国家领导人第八次会晤记习近平出席金砖国家领导人第八次会晤记习近平出席金砖国家领导人第八次会晤记习近平出席
+    </div>
+</div>
+<script>
+    /*
+    *   js中的盒子模型:
+    *       clientWidth: 内容区域的宽度   width + 左右padding
+    *       clientHeight: 内容区域的高度  height + 上下padding
+    *       clientLeft: 盒子左边框的宽度   border-left
+    *       clientTop: 盒子上边框的宽度   border-top
+    *
+    *       offsetWidth: 盒子的内容宽度+左右边框 width+左右padding+左右border
+    *       offsetHeight: 盒子的内容高度+上下边框  height+上下padding+上下border
+    *       offsetParent: 盒子的父级参照物： offsetParent是谁要取决于是否存在position属性.(relative,absolute,fixed).如果父元素没有定位属性，就继续到上一级元素去查找定位属性，如果查找到body还没有，那么offsetParent就默认为body
+    *       document.body.offsetParent = null;
+    *       parentNode : parentNode是谁?? 和offsetParent的区别
+    *       offsetLeft: 盒子外边框距离offsetParent内边框的水平偏移量  X轴
+    *       offsetTop: 盒子上边框距离offsetParent内边框的垂直偏移量  Y轴
+    *
+    *       下边框 = offsetHeight - clientHeight - clientTop
+    *
+    *
+    *       scrollWidth :  内容区域宽度 + 左padding   content + padding-left
+    *       scrollHeight : 内容区域的高度+上padding   content + padding-top
+    *       ps: 如果内容没有超出那么scrollWidth/scrollHeight和clientWidth/clientHeight相等
+    *       scrollTop : 滚动条滚出去的高度  overflow: auto;
+    *       scrollLeft : 滚动条滚出去的宽度
+    *
+    *
+    *
+    *       ps: 所有的盒子模型属性，只有scrollTop和scrollLeft支持人为赋值，并且这个值范围最小值一定是0.最大值取决于当前的样式
+    *
+    * */
+    var div1 = document.getElementById('div1');
+    var div2 = document.getElementById('div2');
+    var div3 = document.getElementById('div3');
+    console.dir(div2);
+    div2.innerHTML;
+    div2.className;
+    //console.log(div2.outerHTML);
+
+    console.log(div2.clientWidth);
+    console.log(div2.clientHeight);
+    console.log(div2.offsetWidth);
+    console.log(div2.offsetHeight);
+    console.log(div2.scrollWidth); //
+    console.log(div2.scrollHeight); //
+
+    console.log(div2.scrollLeft);
+    console.log(div2.scrollTop);
+
+    div2.onscroll = function () {
+        console.log(this.scrollTop);
+    }
+
+    /*window.setInterval(function () {
+        document.documentElement.scrollTop += 1;
+        document.body.scrollTop += 1;
+        console.log(document.documentElement.scrollTop || document.body.scrollTop)
+    }, 20);*/
+
+    //回到顶部的原理就是用定时器不断的操作scrollTop的值
+</script>
+</body>
+</html>

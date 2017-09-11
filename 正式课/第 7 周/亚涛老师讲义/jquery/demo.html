@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>
+    <script>
+        window.name = 'global';
+        $.ajax({
+            async: true,
+            beforeSend: function () {
+                console.log('beforeSend');
+            },
+            cache: false,
+            complete: function () {
+                console.log('complete');
+                console.log('name is: ', this.name);
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            context: {name: 'local'},
+            data: {a: 1, b: 2, 中文: '北京'},
+            dataType: 'json',
+            error: function (err) {
+                console.log('error:', err)
+            },
+            headers: {abc: 123},
+            method: 'get',
+            processData: true,
+            success: function (data) {
+                // data为经过dataType格式化之后的响应主体
+                console.log('success:', data)
+            },
+            timeout: 3000,
+            url: './info1.json'
+        });
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

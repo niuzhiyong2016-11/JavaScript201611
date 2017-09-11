@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+     *   1 typeof 'number' 'boolean' 'string' 'object' 'undefined' 'function'
+     *       缺点：不能很好的区分引用数据类型，引用数据类型都返回 'object'
+     *   2 instanceof 判断一个实例是否属于一个类
+     *       缺点：只能用在引用数据类型，对于基本数据类型是不准确的
+     *       [] instanceof Array   true
+     *       [] instanceof Object   true
+     *       9 instanceof Number   false
+     *       new Number instanceof Number   true
+     *   3 constructor
+     *       缺点：constructor属性是定义在类的原型上的。原型都可以被修改，那么constructor必然也有可能被修改。 f.constructor => Object
+     *   4 Object.prototype.toString.call([]) => "[object Object]"
+     *      第一个小写的object代表的是数据类型
+     *      第二个Object是所属的类
+     *      就是让call的第一个参数去借用Object.prototype.toString方法
+     * */
+
+    /*Object.prototype.toString = function (){
+        console.log(this); //只要把这里的this换成一个数组
+        // 这里无论操作this怎么样，都是对我这个数组的操作
+    };*/
+    ({name: 'zhufneg'}).toString.call([1, 2]); // toString这个函数中的this就是这个空对象{}
+    Object.prototype.toString.call("");
+    //"[object String]"
+    Object.prototype.toString.call(null);
+    //"[object Null]"
+    Object.prototype.toString.call(undefined);
+    //"[object Undefined]"
+    Object.prototype.toString.call(true);
+    //"[object Boolean]"
+    Object.prototype.toString.call(/6/);
+    //"[object RegExp]"
+    Object.prototype.toString.call(document.body);
+    //"[object HTMLBodyElement]"
+</script>
+</body>
+</html>

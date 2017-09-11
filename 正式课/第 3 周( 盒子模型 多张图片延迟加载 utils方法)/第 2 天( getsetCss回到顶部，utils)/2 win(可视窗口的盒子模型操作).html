@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 300%;
+            background:-webkit-linear-gradient(top,lightblue,lightcoral,lightgreen);
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // scrollTop scrollLeft只有这两个支持我们赋值
+    // 需求: win方法如果传一个参数，那么我是来获取盒子模型属性值的，如果两个参数那么我是来设置这个盒子模型属性的（虽然只有scrollTop和scrollLeft支持）
+    function win(attr,val){ //负责处理浏览器可视窗口(html||body)
+        // 我们经常会根据参数是否传值做不同相对应的操作。这样我们定义的函数就变得灵活了
+        if(typeof val != 'undefined'){
+            document.documentElement[attr] = val; // html
+            document.body[attr] = val; //body
+            //return;
+        }
+        return document.documentElement[attr]||document.body[attr];
+    }
+
+    win('scrollTop',1000); //设置窗口的scrollTop的值为1000
+    win('scrollTop'); //要求获取html/body的scrollTop的值
+</script>

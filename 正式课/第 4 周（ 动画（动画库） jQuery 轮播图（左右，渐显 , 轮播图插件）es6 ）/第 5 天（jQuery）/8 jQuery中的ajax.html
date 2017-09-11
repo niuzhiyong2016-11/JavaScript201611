@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="jquery-1.11.3.js"></script>
+<script>
+    // ajax
+    $.ajax({
+        type : 'get',
+        url : 'data.txt',
+        async : false,
+        dataType : 'json',
+        success : function (data){
+            // data就是xhr.responseText
+            // 数据获取成功之后要做的事....
+        },
+        error : function (){
+
+        }
+    });
+    /*jQuery.ajax();
+
+    function jQuery(){
+        return this;
+    }
+
+    jQuery.ajax = function (obj){
+
+    }
+    jQuery.prototype.ajax = function (){
+
+    }
+    */
+
+
+</script>
