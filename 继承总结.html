@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>继承总结</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+     *
+     *  1、原型继承："A(构造函数)的原型"指向另"B(构造函数)的实例" -> B.prototype = new A();
+     *
+     *      把A(构造函数)的私有方法和公有方法变成"B(构造函数)实例的公有方法"
+     *
+     */
+    //    function A() {
+    //        this.x = 100;
+    //    }
+    //    A.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //
+    //    function B() {
+    //        this.y = 200;
+    //    }
+    //
+    //    B.prototype = new A(); //核心代码
+    //    B.prototype.constructor = B;
+    //
+    //    var a = new A();
+    //    var b = new B();
+    //
+    //    b.getX();
+    //    console.log(a);
+    //    console.log(b);
+
+    /*
+     *
+     *  2、call继承：在D(构造函数)中执行 C.call(this);
+     *
+     *      把"C(构造函数)的私有方法"变成"D(构造函数)实例的私有方法"
+     *
+     */
+    //    function C() {
+    //        this.x = 100;
+    //    }
+    //    C.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //
+    //    function D() {
+    //        this.y = 200;
+    //        C.call(this);
+    //    }
+    //
+    //    var c = new C();
+    //    var d = new D();
+    //
+    //    console.log(c);
+    //    console.log(d);
+
+    /*
+     *
+     *  3、组合继承：原型继承 + call继承
+     *
+     *      由于"原型继承"是把"E(构造函数)的私有方法和公有方法"全部都变成了F(构造函数)的公有方法；"call继承"把"E(构造函数)的私有方法"变成"F(构造函数)的私有方法"。 组合在一起"F(构造函数)的公有方法"中多了一套"E(构造函数)的私有方法",但是调用时优先使用"私有方法",即使"公有方法"上还有一个相同的，那么也不会出现问题。
+     *
+     */
+    function E() {
+        this.x = 100;
+    }
+    E.prototype.getX = function () {
+        console.log(this.x);
+    };
+    function F() {
+        this.y = 200;
+        E.call(this);//call继承实现
+    }
+    F.prototype = new E();//原型继承实现
+    F.prototype.constructor = F;
+
+    var e = new E();
+    var f = new F();
+
+    console.log(e);
+    console.log(f);
+
+    /*
+     *
+     *  4、冒充对象继承：在H(构造函数)中遍历G(构造函数)的一个实例。并且把所有遍历出的属性和方法，分别添加给H(构造函数)的实例。
+     *
+     *      如果在遍历过程中不使用"hasOwnProperty"或"propertyIsEnumerable"方法过滤出"G(构造函数)的公有方法"，那么就是把"G(构造函数)的私有方法和公有方法"都变成"H(构造函数)的私有方法",都是添加到"H(构造函数)实例上的私有方法"
+     *
+     */
+    //    function G() {
+    //        this.x = 100;
+    //    }
+    //    G.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //
+    //    function H() {
+    //        this.y = 200;
+    //        var g = new G();//创建G的一个实例
+    //        for (var key in g) {//遍历实例的每一项
+    //            if (key.hasOwnProperty(g)) {
+    //                this[key] = g[key];
+    //            }
+    //        }
+    //    }
+    //
+    //    var g = new G();
+    //    var h = new H();
+    //
+    //    console.dir(g);
+    //    console.dir(h);
+
+    /*
+     *
+     *  5、中间继承：__proto__这个属性在IE6-8不兼容。
+     *
+     */
+    //    function M() {
+    //        this.x = 100;
+    //    }
+    //    M.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //
+    //    function N() {
+    //        this.y = 200;
+    //    }
+    //
+    //    N.prototype.__proto__ = M.prototype;
+    //
+    //    var m = new M();
+    //    var n = new N();
+    //
+    //    console.dir(m);
+    //    console.dir(n);
+
+    /*
+     *
+     *  6、Object.xxx  Object.prototype.xxx 不兼容。
+     *
+     *  Object.create(obj); 作用: Object.create本身是一个方法，需要一个对象(obj)参数。返回一个类的实例，并且这个类的原型是传进来的obj参数
+     *
+     */
+    //    function X() {
+    //        this.x = 100;
+    //    }
+    //    X.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //
+    //    function Y() {
+    //        this.y = 200;
+    //    }
+    //
+    //    //    Y.prototype=Object.create(X.prototype);
+    //    Y.prototype = create(X.prototype);
+    //
+    //    var x = new X();
+    //    var y = new Y();
+    //
+    //    console.dir(x);
+    //    console.dir(y);
+    //
+    //    //实现兼容性
+    //    function create(obj) {
+    //        function Class() {
+    //
+    //        }
+    //
+    //        Class.prototype = obj;
+    //        return new Class();
+    //    }
+</script>
+</body>
+</html>
