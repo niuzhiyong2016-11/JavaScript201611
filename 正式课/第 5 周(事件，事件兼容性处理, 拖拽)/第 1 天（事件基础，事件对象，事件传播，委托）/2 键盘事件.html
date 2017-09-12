@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>键盘事件</title>
 </head>
 <body>
-    <input type="text" id="input" value="" placeholder="请输入">
-</body>
-</html>
+<input type="text" id="input" value="" placeholder="请输入">
 <script>
     // 事件对象： 只在真正绑定给事件的函数才有
 
     var input = document.getElementById('input');
+
     //input.onkeydown = function (){}
-    function fn(e){
+    function fn(e) {
         b(e);
-        function b(a){
+
+        function b(a) {
             console.log(a);
         }
     }
+
     input.onkeyup = fn;
-    input.onkeyup = function (e){
-        //cossole.log(e);
+    input.onkeyup = function (e) {
+        //console.log(e);
         //fn(e);
-        e = e||window.event;
+        e = e || window.event;
         console.log(e.keyCode);
         // 13回车
-        if(e.keyCode == 13){
+        if (e.keyCode === 13) {
             window.location.reload(); //刷新页面
             window.location.href = 'http://www.baidu.com'; //跳转
         }
@@ -46,6 +47,7 @@
     *       space : 32
     *       backSpace : 8
     *
-    *
     * */
 </script>
+</body>
+</html>
