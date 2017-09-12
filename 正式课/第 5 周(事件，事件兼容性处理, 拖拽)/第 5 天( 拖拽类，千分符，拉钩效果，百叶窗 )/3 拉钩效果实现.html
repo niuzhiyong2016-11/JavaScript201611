@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -49,8 +49,6 @@
     <img src="logou.png" alt="">
     <span>易企秀</span>
 </div>
-</body>
-</html>
 <script src="utils2.0.js"></script>
 <script src="animate.js"></script>
 <script>
@@ -78,9 +76,9 @@
                 utils.css(span, {left: 0, top: -150});
                 break;
         }
-        animate(span,{left : 0, top : 0},500);
+        animate(span, {left: 0, top: 0}, 500);
     }
-    box.onmouseleave = function (e){
+    box.onmouseleave = function (e) {
         /*var s = e.toElement || e.relatedTarget;
         //console.log(s);
         //var s = e.fromElement || e.relatedTarget; // 判断一下这个关联元素是不是box的子元素
@@ -89,21 +87,21 @@
         }*/
 
         var res = direction(this, e);
-        switch (res){
+        switch (res) {
             case 0:
-                animate(span,{left: -150, top: 0},500);
+                animate(span, {left: -150, top: 0}, 500);
                 break;
             case 1 :
-                animate(span,{left: 0, top: 150},500);
+                animate(span, {left: 0, top: 150}, 500);
                 break;
             case 2 :
-                animate(span,{left: 150, top: 0},500);
+                animate(span, {left: 150, top: 0}, 500);
                 break;
             case 3 :
-                animate(span,{left: 0, top: -150},500);
+                animate(span, {left: 0, top: -150}, 500);
                 break;
         }
-    }
+    };
 
 
     function direction(box, e) { // 这个函数负责返回一个方向。根据y和x的坐标来通过Math.atan2方法返回一个弧度值，然后再把弧度值转化成角度值。然后再根据角度来判断属于哪个方向。
@@ -127,3 +125,5 @@
     // 能不能多写几个盒子，然后把这个效果封装成一个构造函数，以后在new实例的时候把盒子当作参数传入到构造函数中就可以了
     // 关联元素
 </script>
+</body>
+</html>

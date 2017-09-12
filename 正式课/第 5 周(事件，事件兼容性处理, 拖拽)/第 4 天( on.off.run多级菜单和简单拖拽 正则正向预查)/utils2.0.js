@@ -3,6 +3,7 @@
  * */
 var utils = (function () {
     var isStanderBrowser = !!window.getComputedStyle;
+
     function listToArray(likeAry) {
         try {
             return Array.prototype.slice.call(likeAry);
@@ -14,9 +15,11 @@ var utils = (function () {
             return ary;
         }
     }
+
     function jsonParse(jsonStr) {
         return 'JSON' in window ? JSON.parse(jsonStr) : eval('(' + jsonStr + ')');
     }
+
     function getRandom(n, m) {
         n = Number(n);
         m = Number(m);
@@ -30,6 +33,7 @@ var utils = (function () {
         }
         return Math.round(Math.random(m - n) + n);
     }
+
     function offset(ele) {
         var l = null;
         var t = null;
@@ -47,6 +51,7 @@ var utils = (function () {
         }
         return {left: l, top: t};
     }
+
     function win(attr, val) {
         if (typeof val !== 'undefined') {
             document.documentElement[attr] = val;
@@ -54,6 +59,7 @@ var utils = (function () {
         }
         return document.documentElement[attr] || document.body[attr];
     }
+
     function children(ele, tagName) {
         var ary = [];
         if (isStanderBrowser) {
@@ -76,6 +82,7 @@ var utils = (function () {
         }
         return ary;
     }
+
     function prev(ele) {
         if (isStanderBrowser) {
             return ele.previousElementSibling;
@@ -86,6 +93,7 @@ var utils = (function () {
         }
         return pre;
     }
+
     function next(ele) {
         if (isStanderBrowser) {
             return ele.nextElementSibling;
@@ -96,6 +104,7 @@ var utils = (function () {
         }
         return next;
     }
+
     function prevAll(ele) {
         var ary = [];
         var pre = ele.previousSibling;
@@ -107,6 +116,7 @@ var utils = (function () {
         }
         return ary;
     }
+
     function nextAll(ele) {
         var ary = [];
         var next = this.next(ele);
@@ -117,6 +127,7 @@ var utils = (function () {
         }
         return ary;
     }
+
     function firstEleChild(ele) {
         if (isStanderBrowser) {
             return ele.firstElementChild;
@@ -124,6 +135,7 @@ var utils = (function () {
         var allEleChilds = this.children(ele);
         return allEleChilds.length > 0 ? allEleChilds[0] : null;
     }
+
     function lastEleChild(ele) {
         if (isStanderBrowser) {
             return ele.lastElementChild;
@@ -131,9 +143,11 @@ var utils = (function () {
         var allEleChilds = this.children(ele);
         return allEleChilds.length > 0 ? allEleChilds[allEleChilds.length - 1] : null;
     }
+
     function siblings(ele) {
         return this.prevAll(ele).concat(this.nextAll(ele));
     }
+
     function sibling(ele) {
         var ary = [];
         var prev = this.prev(ele);
@@ -142,27 +156,34 @@ var utils = (function () {
         next ? ary.push(next) : void 0;
         return ary;
     }
+
     function index(ele) {
         return this.prevAll(ele).length;
     }
+
     function append(ele, container) {
         container.appendChild(ele);
     }
+
     function prepend(ele, container) {
         var first = this.firstEleChild(container);
         first ? container.insertBefore(ele, first) : container.appendChild(ele);
     }
+
     function insertBefore(oldEle, newEle) {
         oldEle.parentNode.insertBefore(newEle, oldEle);
     }
+
     function insertAfter(oldEle, newEle) {
         var next = this.next(oldEle);
         next ? oldEle.parentNode.insertBefore(newEle, next) : oldEle.parentNode.appendChild(newEle);
     }
+
     function hasClass(ele, strClass) {
         var reg = new RegExp('(^| +)' + strClass + '( +|$)');
         return reg.test(ele.className); // true/false
     }
+
     function addClass(ele, strClass) {
         var strClassAry = strClass.replace(/^ +| +$/g, '').split(/ +/);
 
@@ -173,6 +194,7 @@ var utils = (function () {
             }
         }
     }
+
     function removeClass(ele, strClass) {
         var strClassAry = strClass.replace(/^ +| +$/g, '').split(/ +/);
         for (var i = 0; i < strClassAry.length; i++) {
@@ -183,6 +205,7 @@ var utils = (function () {
             }
         }
     }
+
     function getElesByClass(strClass, context) { //通过类名获取元素
         context = context || document;
         if (isStanderBrowser) {
@@ -228,6 +251,7 @@ var utils = (function () {
         }
         return val;
     }
+
     function setCss(attr, val) {
         if (attr == 'opacity') {
             this.style.opacity = val;
@@ -247,15 +271,16 @@ var utils = (function () {
         }
         this.style[attr] = val;
     }
-    function setGroupCss(obj){ //设置一组样式
+
+    function setGroupCss(obj) { //设置一组样式
         // obj没有传参数，obj就是一个undefined。
         obj = obj || [];
-        if((obj).toString() == '[object Object]'){
+        if ((obj).toString() == '[object Object]') {
             // 如果这个条件符合那么obj必然是{a:1}的对象
             // {width : 100,height : 200}
-            for(var key in obj){
-                if(obj.hasOwnProperty(key)){ //保证是私有属性
-                    setCss.call(this,key,obj[key]);
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) { //保证是私有属性
+                    setCss.call(this, key, obj[key]);
                     //setCss(ele,'width',100);
                     //setCss(ele,'height',200);
                 }
@@ -263,73 +288,73 @@ var utils = (function () {
         }
     }
 
-    function css(ele){
+    function css(ele) {
         // 如果第二个参数是字符串，那么需要判断第三个参数有没有。如果有那么就是设置样式。如果没有就是获取样式
         // 如果第二个参数是一个对象，那么是来设置批量样式的
         var secondParam = arguments[1];
         var thirdParam = arguments[2]; //undefined
-        if(typeof secondParam == 'string'){
-            if(typeof thirdParam !== 'undefined'){
-                setCss(ele,secondParam,thirdParam);
+        if (typeof secondParam == 'string') {
+            if (typeof thirdParam !== 'undefined') {
+                setCss(ele, secondParam, thirdParam);
                 return;
             }
-            return getCss(ele,secondParam);
+            return getCss(ele, secondParam);
         }
         // 必须保证toString不能报错
         secondParam = secondParam || [];
-        if((secondParam).toString() == '[object Object]'){
-            setGroupCss(ele,secondParam);
+        if ((secondParam).toString() == '[object Object]') {
+            setGroupCss(ele, secondParam);
         }
     }
-    
-    function css(ele){
+
+    function css(ele) {
         var secondParam = arguments[1];
         var thirdParam = arguments[2]; //undefined
         var paramAry = listToArray(arguments).slice(1);
-        if(typeof secondParam == 'string'){
-            if(typeof thirdParam !== 'undefined'){
+        if (typeof secondParam == 'string') {
+            if (typeof thirdParam !== 'undefined') {
                 //setCss.apply(ele,[secondParam,thirdParam]);
-                setCss.apply(ele,paramAry);
+                setCss.apply(ele, paramAry);
                 return;
             }
             //return getCss.apply(ele,[secondParam]);
-            return getCss.apply(ele,paramAry);
+            return getCss.apply(ele, paramAry);
         }
         secondParam = secondParam || [];
-        if((secondParam).toString() == '[object Object]'){
+        if ((secondParam).toString() == '[object Object]') {
             //setGroupCss.apply(ele,[secondParam]);
-            setGroupCss.apply(ele,paramAry);
+            setGroupCss.apply(ele, paramAry);
         }
     }
 
     return {
-        listToArray : listToArray,
-        jsonParse : jsonParse,
-        getRandom : getRandom,
-        win : win,
-        offset : offset,
-        children : children,
-        prev : prev,
-        next : next,
-        prevAll : prevAll,
-        nextAll : nextAll,
-        siblings : siblings,
-        sibling : sibling,
-        index : index,
-        append : append,
-        prepend : prepend,
-        insertBefore : insertBefore,
-        insertAfter : insertAfter,
-        firstEleChild : firstEleChild,
-        lastEleChild : lastEleChild,
-        addClass : addClass,
-        removeClass : removeClass,
-        hasClass : hasClass,
+        listToArray: listToArray,
+        jsonParse: jsonParse,
+        getRandom: getRandom,
+        win: win,
+        offset: offset,
+        children: children,
+        prev: prev,
+        next: next,
+        prevAll: prevAll,
+        nextAll: nextAll,
+        siblings: siblings,
+        sibling: sibling,
+        index: index,
+        append: append,
+        prepend: prepend,
+        insertBefore: insertBefore,
+        insertAfter: insertAfter,
+        firstEleChild: firstEleChild,
+        lastEleChild: lastEleChild,
+        addClass: addClass,
+        removeClass: removeClass,
+        hasClass: hasClass,
         //getCss : getCss,
         //setCss : setCss,
         //setGroupCss : setGroupCss,
-        css : css,
-        getElesByClass : getElesByClass
+        css: css,
+        getElesByClass: getElesByClass
     }
 })();
 

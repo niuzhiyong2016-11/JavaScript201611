@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>dom2事件兼容问题</title>
     <style>
-        #div1{
+        #div1 {
             width: 100px;
             height: 100px;
             background: red;
@@ -12,47 +12,77 @@
     </style>
 </head>
 <body>
-    <div id="div1"></div>
-</body>
-</html>
+<div id="div1"></div>
 <script>
     var div1 = document.getElementById('div1');
 
-//    div1.addEventListener('click',fn1,false);
-//    //div1.addEventListener('click',fn1,false);
-//    div1.addEventListener('click',fn2,false);
-//    div1.addEventListener('click',fn3,false);
-//    div1.addEventListener('click',fn4,false);
-//    div1.addEventListener('click',fn5,false);
-//    div1.addEventListener('click',fn6,false);
-//    div1.addEventListener('click',fn7,false);
-//    div1.addEventListener('click',fn8,false);
-//    div1.addEventListener('click',fn9,false);
-//    div1.addEventListener('click',fn10,false);
-//    div1.addEventListener('keyup',fn10,false);
-    div1.attachEvent('onclick',fn1);
+    //    div1.addEventListener('click',fn1,false);
+    //    //div1.addEventListener('click',fn1,false);
+    //    div1.addEventListener('click',fn2,false);
+    //    div1.addEventListener('click',fn3,false);
+    //    div1.addEventListener('click',fn4,false);
+    //    div1.addEventListener('click',fn5,false);
+    //    div1.addEventListener('click',fn6,false);
+    //    div1.addEventListener('click',fn7,false);
+    //    div1.addEventListener('click',fn8,false);
+    //    div1.addEventListener('click',fn9,false);
+    //    div1.addEventListener('click',fn10,false);
+    //    div1.addEventListener('keyup',fn10,false);
+    div1.attachEvent('onclick', fn1);
     //div1.attachEvent('onclick',fn1);
-    div1.attachEvent('onclick',fn2);
-    div1.attachEvent('onclick',fn3);
-    div1.attachEvent('onclick',fn4);
-    div1.attachEvent('onclick',fn5);
-    div1.attachEvent('onclick',fn6);
-    div1.attachEvent('onclick',fn7);
-    div1.attachEvent('onclick',fn8);
-    div1.attachEvent('onclick',fn9);
-    div1.attachEvent('onclick',fn10);
+    div1.attachEvent('onclick', fn2);
+    div1.attachEvent('onclick', fn3);
+    div1.attachEvent('onclick', fn4);
+    div1.attachEvent('onclick', fn5);
+    div1.attachEvent('onclick', fn6);
+    div1.attachEvent('onclick', fn7);
+    div1.attachEvent('onclick', fn8);
+    div1.attachEvent('onclick', fn9);
+    div1.attachEvent('onclick', fn10);
     // 移除
-    div1.detachEvent('onclick',fn5);
-    function fn1(){  console.log(1); console.log(this == window); }
-    function fn2(){  console.log(2) }
-    function fn3(){  console.log(3) }
-    function fn4(){  console.log(4) }
-    function fn5(){  console.log(5) }
-    function fn6(){  console.log(6) }
-    function fn7(){  console.log(7) }
-    function fn8(){  console.log(8) }
-    function fn9(){  console.log(9) }
-    function fn10(){  console.log(10) }
+    div1.detachEvent('onclick', fn5);
+
+    function fn1() {
+        console.log(1);
+        console.log(this == window);
+    }
+
+    function fn2() {
+        console.log(2)
+    }
+
+    function fn3() {
+        console.log(3)
+    }
+
+    function fn4() {
+        console.log(4)
+    }
+
+    function fn5() {
+        console.log(5)
+    }
+
+    function fn6() {
+        console.log(6)
+    }
+
+    function fn7() {
+        console.log(7)
+    }
+
+    function fn8() {
+        console.log(8)
+    }
+
+    function fn9() {
+        console.log(9)
+    }
+
+    function fn10() {
+        console.log(10)
+    }
+
     //  addEventListener   removeEventListener
     //  attachEvent    detachEvent
 
@@ -67,3 +97,5 @@
     *
     * */
 </script>
+</body>
+</html>
