@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>定时器</title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     // 定时器： js中负责在单位的时间间隔内重复执行1次多次函数
 
@@ -32,17 +30,17 @@
     *
     *
     * */
-    var timer1 = window.setTimeout(function (){
+    var timer1 = window.setTimeout(function () {
         console.log('setTimeout');
-    },500);
+    }, 500);
 
-    var timer2 = window.setInterval(function (){
+    var timer2 = window.setInterval(function () {
         console.log('setInterval');
-    },1000);
+    }, 1000);
 
-    var timer3 = window.setTimeout(function (){
+    var timer3 = window.setTimeout(function () {
 
-    },2000);
+    }, 2000);
 
     //window.clearTimeout(timer1); //这个可以清空第一个定时器
     //window.clearInterval(2); // 可以清掉第二个定时器
@@ -52,9 +50,9 @@
     //console.log(timer2); // 2
     //console.log(timer3); // 3
 
-    for(var i=0; i<100000; i++){
+    for (var i = 0; i < 100000; i++) {
         console.log(i);
     }
-
-
 </script>
+</body>
+</html>
