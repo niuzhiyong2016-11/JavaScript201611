@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>函数</title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     /*
     *   田   121170784 run  18800019819 30
@@ -35,21 +33,23 @@
     *       1 "number"  2 "string"  3"boolean" 4 "object" 5"undefined" 6 "function"
     *
     * */
-    function sum(){
+    function sum() {
         var num1 = 1;
         var num2 = 2;
         console.log(num1 + num2);
     }
+
     //sum(); //函数的执行 3
 
     //由于sum只能每次打印3.  引入参数的概念
 
-    function sum(num1,num2){ //定义了两个参数:
+    function sum(num1, num2) { //定义了两个参数:
         // num1和num2由于放到形参的位置就相当于已经声明过的了
         console.log(num1); // 1
         console.log(num2); // undefined 未定义
         console.log(num1 + num2); //没有报错：num1/num2未定义
     }
+
     //sum(1,2); // 3
     //sum(7,8); // 15
 
@@ -57,15 +57,15 @@
     //sum(1); // NaN   1 + undefined
 
     //我们要做一个判断，如果在求和的时候，参数没有传那么我就加了
-    function sum(num1,num2){
+    function sum(num1, num2) {
         //debugger; //当代码运行到这一行的时候就会停在这了。如果想往下执行需要人工执行,我们使用debugger的时候需要注意要提前把控制台打开。
         // F11 逐行执行
         // F8 跳出断点
         var total = 0; //基数，累加的时候向基数上累加
-        if(typeof num1 !== "undefined"){ //不等于   如果num1不等于undefined那么就是传值了
+        if (typeof num1 !== "undefined") { //不等于   如果num1不等于undefined那么就是传值了
             total += num1;  // total = total + num1;
         }
-        if(typeof num2 !== 'undefined'){
+        if (typeof num2 !== 'undefined') {
             total += num2;
         }
         console.log(total); //
@@ -75,24 +75,24 @@
 
     // 如何查看代码的执行顺序，需要在js中添加断点   debugger断点调试
     // sum函数已经可以对没有传参数这个问题处理了,但是不能处理数字和字符串累加的问题，变成拼接字符串了，我们需要判断实参是不是一个有效数字，有效数字我才累加
-    function sum(num1,num2){
+    function sum(num1, num2) {
         var total = 0;
-        if(typeof num1 !== 'undefined'){
+        if (typeof num1 !== 'undefined') {
             //判断传的值是不是一个有效数字
-            if(!isNaN(num1)){ // 5
+            if (!isNaN(num1)) { // 5
                 total += Number(num1);
                 //total += num1/1;
             }
         }
-        if(typeof num2 !== 'undefined'){
-            if(!isNaN(num2)){
+        if (typeof num2 !== 'undefined') {
+            if (!isNaN(num2)) {
                 total += Number(num2);
                 //total += num2*1;
             }
         }
         //console.log(total); //这个只是在控制台打印看一看
-
     }
+
     /*
     *   字符串和数字在运算的时候： 除了加法是拼接字符串，其他的- '*' '/'都会把字符串强制转化为数字
     * */
@@ -101,7 +101,7 @@
 
     //但是不能求任意个数的和还是不行的，参数个数的没有办法定义了...
 
-    function sum(){ //没有办法确定参数的个数就不写了,那么如何拿到这些参数呢?
+    function sum() { //没有办法确定参数的个数就不写了,那么如何拿到这些参数呢?
         console.log(arguments); // arguments没有定义过，也没有在形参位置出现过，如果打印的时候没有报错，就说明这是内置的.
         //arguments[0];
         // arguments => [1,5,8,9]
@@ -111,11 +111,11 @@
         // arguments[3] = 9
         //只要要把1,5,8,9累加上就达到效果了
         var total = null; // 使用null累加没有问题,Number(null) = 0;
-        for(var i=0; i<arguments.length; i++){ // 4
+        for (var i = 0; i < arguments.length; i++) { // 4
             // 执行的时候循环体内的i分别等于0,1,2，3
             //arguments[i] 可以分别拿到每一个实参,把这些如果能累加在一起就可以求任意多个数的和了
             // 当一个参数都没有传的时候arguments.length属性是0.那么循环一次都不会执行,那么就不用判断是否传参的问题了
-            if(!isNaN( arguments[i] )){ // arguments[i]就是原来的num1和num2
+            if (!isNaN(arguments[i])) { // arguments[i]就是原来的num1和num2
                 total += Number(arguments[i]);
             }
         }
@@ -123,16 +123,16 @@
 
         return total;
         alert("tiankun"); //reutrn下面的代码就不执行了
-
     }
-    var res = sum(1,5,8,'9','7px'); //传了三个实参,这个函数执行完留下的结果我只看sum函数中是否有return。如果有那么就留下来return后面的值。如果没有。。。。
+
+    var res = sum(1, 5, 8, '9', '7px'); //传了三个实参,这个函数执行完留下的结果我只看sum函数中是否有return。如果有那么就留下来return后面的值。如果没有。。。。
     //以上这种写法： res这个变量就等着sum函数执行完(是函数执行完留下的结果，其实就是sum中reutrn后面的值)留下的结果。
     console.log(res); // 在控制台中查看sum求和函数求出来的和
 
     //到现在为止我们可以求任意多个数的和了
 
 
-    var obj = {name : 'tianxi'};
+    var obj = {name: 'tianxi'};
     console.log(obj.age); //undefined
 
     /*
@@ -143,28 +143,26 @@
     *
     *
     * */
-    function a(){
-/*
-        if(如果你的用户名是空的){
-            reutrn； 我就不让你往下执行
-        }
-*/
+    function a() {
+        /*
+            if(如果你的用户名是空的){
+                reutrn； 我就不让你往下执行
+            }
+        */
     }
 
-
-
-    function sum(n1,n2,n3,n4){
+    function sum(n1, n2, n3, n4) {
         console.log(arguments); //[1,2,3,4]
         console.log(arguments[0]);
         var total = 0; //和
         var chengji = 1; // 积
-        for(var i=0; i<arguments.length; i++){
-            if(!isNaN( arguments[i] )){
+        for (var i = 0; i < arguments.length; i++) {
+            if (!isNaN(arguments[i])) {
                 total += Number(arguments[i]);
                 chengji *= Number(arguments[i]);
             }
         }
-        return { t : total, ji : chengji  }
+        return {t: total, ji: chengji}
         return total;
         return chengji;
         // 我需要返回两个或者两个以上的值，
@@ -172,59 +170,47 @@
         alert();
     }
 
-    var res = sum(1,2,3,4);
+    var res = sum(1, 2, 3, 4);
     console.log(res.t); //10
 
     //自运行函数
-    (function fn(){
+    (function fn() {
         console.log('ok');
     })();
     //都是自运行函数
-    +function (){ console.log(1) }();
-    -function (){ console.log(1) }();
-    !function (){ console.log(1) }();
-    ~function (){ console.log(1) }();
+    +function () {
+        console.log(1)
+    }();
+    -function () {
+        console.log(1)
+    }();
+    !function () {
+        console.log(1)
+    }();
+    ~function () {
+        console.log(1)
+    }();
 
-    //
     /*[]  function fn(){}*/
 
     var obj = { //  xxxfff000
-        name : 'tianxi',
-        age : 30,
-        x : [1,2,3,4,5,56,6,7,8,{a : []}]
-    }
+        name: 'tianxi',
+        age: 30,
+        x: [1, 2, 3, 4, 5, 56, 6, 7, 8, {a: []}]
+    };
     obj.haha = 'hehe';
     var obj2 = obj;
 
-    var f = function (){}; //函数表达式
+    var f = function () {
+
+    }; //函数表达式
     //自运行函数可以没有名字，因为自运行函数不用存地址。声明和运行时一起的。
 
     //自运行同样可以传参数
-    ;(function tx(a,b,c){
-        console.log(a,b,c);
+    (function tx(a, b, c) {
+        console.log(a, b, c);
         arguments; //[1,2,3]
-    })(1,2,3);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    })(1, 2, 3);
 </script>
+</body>
+</html>

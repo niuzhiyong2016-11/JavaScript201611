@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>数组</title>
 </head>
 <body>
-</body>
-</html>
+
 <script>
     /*
     *   length属性 ： 数组天生自带的属性，记录的是当前这个数组里有多少项
@@ -15,12 +14,12 @@
     *   ary[ary.length] : 向数组的末尾添加一项
     * */
     // Array 数组
-    var ary = ['a','b','c']; //声明一个数组  ES5
+    var ary = ['a', 'b', 'c']; //声明一个数组  ES5
     //let ary = []; // ES6声明一个数组
     //console.dir(ary);
     //ary.length--;
     //ary.length++;
-    ary[ary.length-1] = 'cc'; // ary[2] = 'cc';
+    ary[ary.length - 1] = 'cc'; // ary[2] = 'cc';
     ary[ary.length] = 'dd'; // 向数组的末尾增加一项 => 就是一个赋值过程
     ary[7] = 'tt'; // 这种跳跃式添加中间缺少的项是用undefined补齐的
     console.dir(ary);
@@ -41,8 +40,8 @@
     // 3 返回值是数组的新长度
     // 4 原有数组改变(增加了项目)
     // ps: 如果在末尾增加多项那么就在参数位置用逗号隔开
-    var ary = ['a','b','c'];
-    var res = ary.push('d','e'); //我要把d添加到ary数组的末尾
+    var ary = ['a', 'b', 'c'];
+    var res = ary.push('d', 'e'); //我要把d添加到ary数组的末尾
     console.log(ary);
     console.log(res); //我查看push方法运行结束之后的结果
 
@@ -51,8 +50,8 @@
     // 2 参数是要增加的数组项目，如果是多个用","隔开
     // 3 数组的新长度
     // 4 原有数组改变
-    var ary = [1,2,3];
-    var res = ary.unshift(-1,0);
+    var ary = [1, 2, 3];
+    var res = ary.unshift(-1, 0);
     console.log(ary);
     console.log(res); // 查看返回值
 
@@ -61,7 +60,7 @@
     // 2 不用参数，就是删除最后一个
     // 3 返回值是删除的最后一项(可不是新长度)
     // 4 原有数组改变
-    var ary = ['x','y','z'];
+    var ary = ['x', 'y', 'z'];
     var res = ary.pop();
     console.log(ary);
     console.log(res);
@@ -72,7 +71,7 @@
     // 3 返回值是删除的第一项
     // 4 原有数组改变
 
-    var ary = ['l','m','n'];
+    var ary = ['l', 'm', 'n'];
     var res = ary.shift();
     console.log(ary);
     console.log(res);
@@ -89,7 +88,7 @@
     // push => splice(ary.length,0,'tianxi')
     // 3 返回值是删除的数组项目组合成新数组
     // 4 原有数组改变
-    var ary = ['a','b','c','d'];
+    var ary = ['a', 'b', 'c', 'd'];
     //删除之后留下a和d
     //var res = ary.splice(1,2);
     //var res = ary.splice(1,0);
@@ -97,7 +96,7 @@
     //var res = ary.splice(1,2,'zhufeng','peixun','tianxi');
     //var res = ary.splice(1,0,'tianxi'); //从索引1开始没有删除项，然后添加"tianxi"字符串，添加的位置是索引之前.
     //var res = ary.splice(0,0,'tianxi');
-    var res = ary.splice(ary.length,0,'tianxi'); //模拟push由于splice的添加从操作是默认添加到前面的。所以模拟push需要把索引+1。也就是ary.length
+    var res = ary.splice(ary.length, 0, 'tianxi'); //模拟push由于splice的添加从操作是默认添加到前面的。所以模拟push需要把索引+1。也就是ary.length
     console.log(ary); //
     console.log(res); //
     //console.log(ary === res); // false
@@ -111,7 +110,7 @@
     // 3 返回值是新复制的数组
     // 4 原有数组不改变
 
-    var ary = ['a','b','c','d','e'];
+    var ary = ['a', 'b', 'c', 'd', 'e'];
     //要求复制['b','c','d']
     //var res = ary.slice(1,4);
     //var res = ary.slice(0);
@@ -121,7 +120,7 @@
     console.log(ary == res);
     //如何查看数组到底有多少个方法
     console.log(Array.prototype);
-    var ary = [1,2,3,4,5,6];
+    var ary = [1, 2, 3, 4, 5, 6];
     //我要数组的第2项到第5项
     //ary.slice(1,5);
     //ary[ary.length] = 4;
@@ -129,7 +128,7 @@
     //ary.splice(ary.length,0,4);
     ary.unshift(0);
     ary.shift();
-    ary.splice(1,2);
+    ary.splice(1, 2);
 
     // 拼接
     // concat
@@ -140,8 +139,8 @@
     *   4 原有数组不变
     *
     * */
-    var ary1 = [1,2];
-    var ary2 = [3,4];
+    var ary1 = [1, 2];
+    var ary2 = [3, 4];
     //var res = ary1.concat(ary2,[5,6],7,8,true);
     var res = ary1.concat(); //如果concat没有参数或者参数是空数组也可以达到克隆数组的目的
     console.log(res);
@@ -157,7 +156,7 @@
     *   eval: 可以把字符串当做js代码运行 ,去掉引号的作用   eval('1+2+3') => 6
     *
     * */
-    var ary  = [1,2,3];
+    var ary = [1, 2, 3];
     //ary.toString(); //"1,2,3"
     //var res = ary.join(",");
     //var res = ary.join(" "); // "1 2 3"
@@ -174,7 +173,7 @@
     *   3 返回值是经过倒序过后的原有数组(记住是原有数组)
     *   4 原有数组顺序改变
     * */
-    var ary = [5,4,3,2,1];
+    var ary = [5, 4, 3, 2, 1];
     var res = ary.reverse();
     console.log(res);
     console.log(ary);
@@ -190,11 +189,11 @@
     *   4 原有数组顺序改变
     *
     * */
-    var ary = [4,10,30,2,5];
-    var res = ary.sort( function(a,b){ //冒泡排序的思想
-        console.log(a,b); //分别都是代表数组里的项目
-        return a-b;
-    } ); //升序
+    var ary = [4, 10, 30, 2, 5];
+    var res = ary.sort(function (a, b) { //冒泡排序的思想
+        console.log(a, b); //分别都是代表数组里的项目
+        return a - b;
+    }); //升序
     //var res = ary.sort( function (a,b){ return b-a; }); //降序
     console.log(res);
     console.log(ary);
@@ -210,7 +209,7 @@
     *   4 原有数组不变
     *
     * */
-    var ary = ['a','b','c','c'];
+    var ary = ['a', 'b', 'c', 'c'];
     var res = ary.indexOf('c'); // indexOf是第一次出现的索引位置
     var res = ary.lastIndexOf('c'); // lastIndexOf是最后一次出现的索引位置
     //var res = ary.indexOf('d');
@@ -224,8 +223,8 @@
     *  3 返回值是undefined。只是遍历数组没有必要返回任何值
     *  4 原有数组不变
     * */
-    var ary = ['x','y','z'];
-    var res = ary.forEach(function (item,index,ary){
+    var ary = ['x', 'y', 'z'];
+    var res = ary.forEach(function (item, index, ary) {
         //console.log(item);
         //console.log(index);
         //ary[index]
@@ -241,28 +240,23 @@
     *   4 原有数组不变
     * */
 
-    var ary = ['a','b','c'];
-    var res = ary.map(function (item,index,ary){
-         //传进来的这个参数函数执行的次数和数组的长度是相同的
-        return 100
-        return item+index;
+    var ary = ['a', 'b', 'c'];
+    var res = ary.map(function (item, index, ary) {
+        //传进来的这个参数函数执行的次数和数组的长度是相同的
+        return 100;
+        return item + index;
         //      'a' + 0  => "a0"
         //      'b' + 1 => 'b1'
         //      'c' + 2 => 'c2'
     });
     console.log(res); //['a0','b1','c2']
 
-    for(var i=0; i<ary.length; i++){ //for
+    for (var i = 0; i < ary.length; i++) { //for
         console.log(ary[i]);
     }
-    for(var key in ary){ // for in也可以遍历数组
+    for (var key in ary) { // for in也可以遍历数组
         console.log(ary[key]);
     }
-
-
-
-
-
-
-
 </script>
+</body>
+</html>
