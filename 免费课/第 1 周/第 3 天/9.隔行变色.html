@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #box {
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid red;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        li {
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+        }
+
+        .bg1 {
+            background: plum;
+        }
+
+        .bg2 {
+            background: orange;
+        }
+
+        /*li:hover{*/
+        /*background: yellow;*/
+        /*}*/
+        .bg3 {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+        <li>item 5</li>
+        <li>item 6</li>
+        <li>item 7</li>
+        <li>item 8</li>
+        <li>item 9</li>
+        <li>item 10</li>
+        <li>item 11</li>
+        <li>item 12</li>
+    </ul>
+</div>
+<!--ul>li{item $}*12-->
+<script>
+    //奇数行 设置一个class=‘bg1’
+    //    偶数行 设置一个class=‘bg2’
+
+    //    1、获取要操作的元素
+    var box = document.getElementById('box');
+    var lis = box.getElementsByTagName('li');
+    console.log(lis);//类数组
+    console.log(typeof lis);//object
+    //    console.log(lis[0])
+
+    //    奇数行  索引偶数  class=‘bg1’
+    //    偶数行  索引奇数  class=‘bg2’
+    for (var i = 0; i < lis.length; i++) {
+//        lis[i]
+//        区分索引为奇数还是偶数
+//        %  模 取余数
+//        6%2  6除以2的余数  0
+        if (i % 2 == 0) {
+//            索引为偶数 的li
+            lis[i].className = 'bg1';
+            lis[i].zf = 'bg1';
+        } else {
+            lis[i].className = 'bg2';
+            lis[i].zf = 'bg2';
+        }
+
+//        鼠标移入 onmouseover
+        lis[i].onmouseover = function () {
+            this.className = 'bg3';
+        }
+//        鼠标移出  onmouseout
+        lis[i].onmouseout = function () {
+            this.className = this.zf;
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

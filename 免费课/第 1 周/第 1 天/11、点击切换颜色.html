@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        input{width: 200px;height: 50px;background-color: orange;}
+        div{border:1px solid black;width: 500px;height: 500px;}
+    </style>
+</head>
+<body>
+<input type="button" value="点击切换盒子颜色" id="btn"/>
+<div id="box"></div>
+<script>
+    var oBtn=document.getElementById("btn");
+    var oDiv=document.getElementById("box");
+    oBtn.onclick=function(){
+        var bg=oDiv.style.backgroundColor;
+        switch (bg){
+            case "red":
+                oDiv.style.backgroundColor="yellow";
+                break;
+            case "yellow":
+                oDiv.style.backgroundColor="green";
+                break;
+            default :
+                oDiv.style.backgroundColor="red";
+        }
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

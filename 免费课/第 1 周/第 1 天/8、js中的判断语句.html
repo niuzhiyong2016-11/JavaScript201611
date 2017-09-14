@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //if else ==>可以解决js中所有的判断
+    //三元运算符/三目运算符 ==》运用在简单的if else判断上
+    //switch 判断
+    //
+    /*if(条件1){//(条件1) 当这个括号内的代码判断为真的情况下
+        条件1成立执行的代码;//条件成立后要做些什么
+    }else if(条件2){
+        条件2成立执行的代码;
+    }else if(条件3){
+        条件3成立执行的代码;
+    }else if(条件4){
+        条件4成立执行的代码;
+    }...else{
+        以上条件都不成立执行的代码;
+    }*/
+    /*if(NaN==NaN){
+        console.log(9);
+    }else if("1"){
+        console.log(10);
+    }else{
+        console.log(2);
+    }*/
+    /*if(NaN==NaN){
+        console.log(9);
+    }else{
+        console.log(2);
+    }*/
+    //三元运算符改写
+    //条件?条件成立执行的代码:条件不成立执行的代码;
+    //NaN==NaN?console.log(9):console.log(2);
+    /*if(NaN==NaN){
+        console.log(9);
+    }
+    NaN==NaN?console.log(9):void (0);*/
+    //else中没有内容 我们需要在三元运算符上用void (0)占位
+
+    /*switch (value){//括号内的值和case后的值进行匹配 如果匹配成功就执行下个case下面的代码
+        case value1:
+            console.log(value1);
+            break;
+        case value2:
+            console.log(value2);
+            break;
+        ...
+        default://else{以上条件都不成立}
+            console.log(lastValue);
+    }*/
+    switch ("4"){//4===4  "4"===4
+        case 4:
+            console.log(4);
+            break;
+        case 3://4===3
+            console.log(3);
+            break;
+        case 0:
+            console.log(0);
+            break;
+        default :
+            console.log(1);
+    }
+    //"0"==0;--true 会进行数据类型的转化
+    //"0"===0;--false  三个等号两侧的值进行比较的时候，不会进行数据类型的转化（===的时候，等号两侧的数据类型必须一致）
+    //break 跳出
+    //当判断成立的时候，执行该条件后的代码，如果不加如break的话，条件成立后的代码都会执行一遍
+</script>
+<!--<a href="javascript:void(0);"></a>-->
+
+
+
+
+</body>
+</html>

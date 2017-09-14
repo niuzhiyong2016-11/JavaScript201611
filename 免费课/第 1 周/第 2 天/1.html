@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href=""/>
+</head>
+<body>
+1、js的引入方式
+1）行内式
+<div style="width: 100px;height: 100px;background: red" onclick="alert(123)"></div>
+
+onclick  点击的事件  alert  弹出一个层
+2）内嵌式
+<script>
+    alert('大家好！');
+</script>
+3)外链式
+<script src="index.js">
+    alert(123456);//肯定不执行
+</script>
+2、输出方式
+1） alert(要输出的内容)
+直接在浏览器中弹出一个层
+
+
+<div id="box" style="height: 100px;border: 1px solid yellow"></div>
+<script>
+    alert('hello');
+    document.write('第十一期css');
+    document.write('第十一期css');
+    document.write('第十一期css');
+    console.log('樊东来');
+
+    var str = '<h1>珠峰培训</h1>';
+//   声明一个变量  var
+//    var 变量名（变量） = 变量值;
+//    =  赋值操作
+
+//    在js里面 获取一个元素
+    var oDiv = document.getElementById('box');
+    oDiv.innerText = str;
+
+
+
+</script>
+
+
+2)document.write()
+直接在页面中显示
+3)console.log()
+在控制台中输出，一般用于调试
+4）innerHTML innerText 动态的向指定的元素中添加内容
+innerHTML 可以识别html标签
+
+3、js的命名规范
+1）js中严格区分大小写
+2）遵循驼峰命名法（匈牙利命名法）
+首字母小写，其余每个有意义的单词首字母大写
+oDiv  personImportInfo
+由数字、字母、_、$组成，不能以数字作为开头
+3）不能用关键字和保留字
+var
+
+<script>
+    var name = 'zfpx'
+//    var var = 123;
+</script>
+
+4、变量
+var 声明任何类型的变量
+var a = 123
+5、数据类型
+基本数据类型 number 数字、string 字符串、boolean 布尔、null 空、undefined 未定义
+引用数据类型：对象（[]、{}、/\d+/、时间、Math函数）、函数
+
+true false
+<script>
+    var num = 123456;
+    var str = '123中文zfpx';//字符串  不区分""  ''
+    var a = true;//布尔
+    var n = null;
+    var u = undefined;
+
+    var obj = {name:'zfpx'};
+    var ary = [1,2,3,'zfpx',function(){}];
+    var reg = /\d+/;
+
+    var fn  = function(){
+
+    };//函数
+
+
+</script>
+6、number
+包括：正数、负数、小数、0、NaN（not a number不是一个数）
+12.5  12  -12 0
+== 比较
+NaN==NaN  false(假  不相等)
+
+number中的方法：
+1、isNaN(); is not a number
+检测一个值是不是有效数字：不是一个有效数字 返回true，如果是一个有效数字 返回false
+isNaN('123');
+如果要检测的值是字符串，先转换为数字(Number())，再判断
+1)  Number('123')-->123 -->是有效数字 -->false
+
+2、Number('123');强制转换 将其他数据类型转化为number数字数据类型
+如果是字符串，只要有一个字符不是数字，直接返回NaN
+
+3、parseInt、parseFloat非强制转换
+parseInt('100px')  整数  从左到右一个一个的查找，是数字继续查找，如果遇到一个字符不是数字，就停止查找
+
+parseFloat  小数 可以多识别一个点 .
+
+Number('') -->0
+Number(false)  -->0
+Number(null) -->0
+
+<script>
+    var str = ''
+</script>
+
+7、boolean布尔
+包括：true（真） false（假）
+方法：
+!  取反：先转为布尔类型 再取反
+!!  相当于 Boolean()
+Boolean()  将其他数据类型转为布尔类型
+将任意的值转为布尔类型，只有0、NaN、''、null、undefined这五个值是false，其余都为true
+
+<script>
+    !1
+   // Boolean(1)-->true  -->取反  false
+    !'zfpx'
+    !''
+</script>
+
+8、对象数据类型
+<script>
+    var obj1 = {name:'zfpx',age:8};//字面量创建方式
+    var obj2 = new Object();//实例创建方式
+    //增加一组属性
+    obj2.name = 'css';
+    obj2['name'] = 'css';
+
+    console.log(obj2);
+
+    //修改属性名对应的属性值
+    obj2.name = 'js';
+    obj2['age'] = 8;
+    console.log(obj2);
+
+//    规定在对象中不可以出现重复的属性名，之前没有就是增加，之前有就是修改
+//   obj2  {name: "js", age: 8}
+//    获取属性名对应的属性值
+    console.log(obj2.age);
+    console.log(obj2['name']);
+    console.log(obj2);
+//     {name: "js", age: 8}
+//    删除
+//    假删除：直接赋值为null
+    obj2.age = null;
+    console.log(obj2);
+
+//    真删除:直接删除一组属性
+    delete obj2.age;
+    console.log(obj2);
+
+//    增加一组属性 1:2016
+//    obj2.1 = 2016;  错误的，属性名如果为数字，只能用[]的形式
+    obj2[1] = 2016;
+    console.log(obj2);
+
+</script>
+
+9、判断
+<script>
+
+    var a = Number('12px');
+    var b = parseInt('12px');
+
+//    a-->NaN   b-->12  NaN==12
+    if(a==b){
+        alert('相等')
+    }else{
+        alert('不相等');
+    }
+
+//    if,else if,else
+    /*if(条件1){
+        条件1成立执行的代码
+    }else if(条件2){
+        条件2成立执行的代码
+    }else if(条件3){
+        条件3成立执行的代码
+    }...
+    else{
+        以上都不成立执行else中的代码
+    }*/
+
+//    三元运算符 三目
+//    条件?条件成立执行的代码:条件不成立执行的代码
+
+//    true --成立
+//    可以是一个值，直接判断真假
+    if(1<0&&1<2){
+        alert(123);
+    }else{
+        alert(456);
+    }
+//    ||或者  只有一个条件为真 整体即为真
+//    &&并且  两个条件都为真  整体即为真
+
+    var a = 3;
+   /* if(a==1){
+        console.log('今天周一');
+    }else if(a==2){
+        console.log('今天周二');
+    }else if(a==3){
+        console.log('今天周三');
+    }else{
+        console.log('今天放假');
+    }*/
+    var a = '2';
+    switch (a){
+        case 1:
+            console.log('今天周一');
+            break;//阻断代码，只要遇到break 后面的代码不执行
+        case 2:
+            console.log('今天周二');
+//            break;
+        case 3:
+            console.log('今天周三');
+            break;
+        default :
+//             相当于else 以上条件都不成立执行的代码
+            console.log('今天放假');
+    }
+//    每个case的情况是===的比较
+
+//    == 比较，相同数据类型直接比较，不同数据类型 执行默认的数据类型之间的转换 1=='1'  true
+
+//    数字==字符串   字符串转为数字Number()
+
+//    ===严格比较 数据类型和值必须完全相同 返回true
+//    1==='1'    false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

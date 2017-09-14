@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        input{width: 200px;height: 50px;background-color: orange;}
+        div{border:1px solid black;width: 500px;height: 500px;}
+    </style>
+</head>
+<body>
+<input type="button" value="点击切换盒子颜色" id="btn"/>
+<div id="box" style="background-color: rgb(255, 255, 255);"></div>
+<script>
+    //操作谁选择谁（获取到要操作的元素）
+    //给input这个元素绑定一个点击事件
+    //每一次点击之后div背景颜色发生改变
+    var oBtn=document.getElementById("btn");
+    var oDiv=document.getElementById("box");
+    /*
+    * document 文档   划定范围
+    * get      获取
+    * Element  元素
+    * By       通过
+    * Id       idName
+    * 在整个文档下，通过idName获取一个元素
+    */
+    //console.log(oBtn);
+    //console.log(oDiv);
+
+    //oBtn.onclick//给有一个对象绑定事件
+    oBtn.onclick=function(){
+        //oBtn每一次点击都执行一这里面的代码
+        //oDiv.style.backgroundColor="red";
+        //向这个对象的行内添加一个css属性
+        //点击后如果div的颜色是白色，我就将颜色变为红色，再点击获取元素如果是红色，变黄色，....白色 红色 黄色
+        var bg=oDiv.style.backgroundColor;
+        console.log(bg);
+        if(bg==="rgb(255, 255, 255)"){
+            oDiv.style.backgroundColor="red";
+        }else if(bg==="red"){
+            oDiv.style.backgroundColor="yellow";
+        }else{
+            oDiv.style.backgroundColor="rgb(255, 255, 255)";
+        }
+        //rgb(255, 255, 255) === #ffffff 错误的
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

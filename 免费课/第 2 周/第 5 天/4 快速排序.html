@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary = [5,1,3,4,2]; // [3]
+    /*
+    *   快速排序的思想:
+    *       1 把数组的中间项拿出来，然后循环数组。把比中间项小的放在左面的数组，比中间项大的放到右面的数组。
+    *       2 在把左面的数组继续按照这样的思路拆分，右面的数组也按照这样的思路拆分。拆分到数组的长度是1或者是0的时候就不拆分了.
+    *       3 最后把这些拆分成1个或者空数组按照顺序拼接起来就可以
+    * */
+
+    function quickSort(ary){ // ary 就是要排序的数组
+        // 形参相当于声明在函数体内的变量
+        console.log(ary);
+        if(ary.length <= 1){
+            return ary;
+        }
+        var middleIndex = Math.floor(ary.length/2); //获取中间索引，必须保证是个整数。
+        // 通过索引获取中间项
+        var middleItem = ary.splice(middleIndex,1)[0]; //由于splice返回的是一个数组，即使只有一项也需要通过索引0来获取
+        var left = []; // 存放比中间项小的
+        var right = [];// 比中间项大的
+        for(var i=0; i<ary.length; i++){
+            ary[i] < middleItem ? left.push(ary[i]) : right.push(ary[i]);
+        }
+        return quickSort(left).concat(middleItem,quickSort(right)); //最后把所有拆分的数组拼接在一起
+    }
+    console.log(quickSort(ary));
+</script>

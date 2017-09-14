@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    //数字数据类型包括：正数 负数 小数 0 NaN*****
+    /*
+    1 1.1  -1.1  0  -12
+    NaN  not a number 不是一个有效数字
+    */
+    //怎样判断一个值是否为有效数字  isNaN(value);****
+    //isNaN 判断一个值不是有效数字 返回true  值如果是一个有效数字返回的值是false
+    //var num1="12.3b";
+    //console.log(isNaN(num1));
+    //isNaN在运行的时候，会先将其他数据类型转化为数字数据类型，再去判断
+    //将其他数据类型转化为数字数据类型：
+    //Number(value);---isNaN调用的是Number()
+    //Number转化后返回的值，要么是个数字 要么是NaN
+    //Number()强制转化
+    //console.log(Number(num1));
+
+    //非强制转化
+    //parseFloat(value);返回值 要么是有效数字 要么是NaN
+    //var num1=".2.6b3a";
+    //var num2="1.23b";
+    //var num="0.2";
+    //console.log(parseFloat(num1));
+
+    //parseInt(value);
+    //console.log(parseInt(num));
+    //都是从左到右依次将值转化为数字，遇到第一个非有效数字停止查找
+    //parseFloat：可以识别小数点****
+    //parseInt：只能识别整数****1
+    //var obj={name:"zhuf"};
+    //var ary=[1,2];
+    //var reg=/^$/;
+    //console.log(ary.toString());//先转化为字符串
+    //"1,2"
+    //Number(obj.toString());//调用Number()方法
+    //console.log(isNaN(obj));
+    //如果是判断一个对象是否为有效数字，那么先将对象转化为字符串，再将字符串转为数字********
+    //var ary=[1,2];
+    //console.log(typeof ary);
+    //typeof 判断数据的数据类型
+
+    //NaN永远不等于NaN*******
+    //Number("王");//NaN
+    //Number("老虎");//NaN
+    //在js中 == 代表比较
+
+    var str="12.3p";
+    //Number(str)-->NaN
+    if(Number(str)==12.3){
+        console.log("对啦");
+    }else if(Number(str)==NaN){
+        console.log("NaN");
+    }else{
+        console.log("以上都不对");
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+    * 在js中对象是由多组属性名和属性值组成的，我们将一对属性名和属性值叫做键值对，那么这些键值对是用来描述这个对象
+    *
+    */
+    var obj={
+        name:"珠峰培训",
+        age:"7岁",
+        1:"15012345598"
+    };
+    //获取对象中的属性--查
+    //console.log(obj.name);
+    //console.log(obj["1"]);
+    //如果属性名为数字，那么不能使用“ obj.1 ”的形式获取，只能使用["1"]这种形式
+
+    //修改对象中的属性值
+    /*obj["1"]=10086;
+    obj.age=7;
+    console.log(obj["1"]);
+    console.log(obj.age);
+    */
+
+    //新增一个属性
+    //obj["2"]=10010;
+    //console.log(obj);//Object {1: "15012345598", 2: 10010, name: "珠峰培训", age: "7岁"}
+
+    //删除属性
+    //delete obj.age; 将这个属性从这个对象中完全去除
+    //console.log(obj);//{1: "15012345598", name: "珠峰培训"}
+
+    //假删除  保留属性名，将属性值置空
+    //obj["1"]=null;
+    //console.log(obj);// {1: null, name: "珠峰培训", age: "7岁"}
+
+    //创建一个对象
+    //var obj={};//字面量创建方式
+    //var obj=new Object();//实例创建方式
+
+    /*var 耿大爷={
+        name:"耿银鹏",
+        age:"40岁",
+        height:"182cm",
+        width:"100kg",
+        like:"男"
+    }*/
+</script>
+</body>
+</html>

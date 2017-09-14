@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body id="body">
+<script type="text/javascript">
+    //js是什么？javascript缩写 js是一门运行在【客户端】的【面向对象和事件】【相对安全】的【轻量级】【脚本语言】（开发语言）
+    //js的组成：
+    //ECMAScript : js的API 预先规定了js的命名规范、数据类型、基本操作语句、关键字和保留字等等内容（预先规定了js的相关规则）
+    //版本5 版本6  es6是什么？版本6
+    //DOM：文档对象模型   js是操作dom对象的
+    //BOM：浏览器对象模型 js是操作bom对象的
+    /*var str="<div style='background-color:red;'>这是什么鬼东西</div>";
+    var oBody=document.getElementById("body");
+    oBody.innerHTML=str;*/
+    //http://www.w3school.com.cn/
+
+    //js的命名规范：
+    /*
+    * 1、严格区分大小写  test   Test
+    * 2、遵循驼峰命名法  第一个有意义的单词首字母小写，其余有意义的单词首字母大写   className
+    * 1)可以使用$ _ 数字 字母 单词组成名称 但是数字不能做首位 1Class（错误的），不能使用纯数字、汉字命名  _name  $name
+    * 3、不能使用js中规定的关键字和保留字作为名字
+    * var document  innerHTML
+    * 关键字：在js中有特殊意义的单词
+    * 保留字：未来有可能成为关键字的单词
+    */
+    //js的引入方式  html文件和js文件的交互
+    /*
+    * 1、行内式  将代码块直接写在标签内
+    * <div onclick="alert('xxxxx')"></div>
+    *2、内嵌式  将代码块写在script标签中
+    *3、外链式  引入一个外部的js文件 通过script标签的src属性引入文件
+    *
+    *先加载html结构（DOM元素），在利用js操作这些DOM元素，所以js代码我们一般放置在body结束标签附近（浏览器的运行机制是从上到下读取加载）
+    */
+
+    /*var str="<div style='background-color:red;'>这是什么鬼东西</div>";
+     var oBody=document.getElementById("body");
+     oBody.innerHTML=str;*/
+
+</script>
+<script src="index.js">
+    //js中不允许在引入式标签中放js代码块，这里面的代码块是不执行的
+</script>
+<div onclick="alert('我是一个div')">内容</div>
+    <!--onclick 点击事件-->
+    <!--alert 在浏览器的弹出框中弹出内容-->
+    <!--var str="<div style='background-color:red;'>这是什么鬼东西</div>";
+    var oBody=document.getElementById("body");
+    oBody.innerHTML=str;-->
+</body>
+</html>

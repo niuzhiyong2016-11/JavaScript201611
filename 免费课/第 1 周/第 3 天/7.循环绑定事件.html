@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box">
+    <input type="button" value="1"/>
+    <input type="button" value="2"/>
+    <input type="button" value="3"/>
+</div>
+
+<script>
+    //1、获取要操作的元素
+    var box = document.getElementById('box');
+    var inputs = box.getElementsByTagName('input');//一组元素
+
+//    点击每一个按钮时，弹出对应的索引
+
+    /*
+    * 元素.onclick = function(){
+    *
+    * }
+    * */
+
+    for(var i=0;i<inputs.length;i++){
+        console.log(inputs)
+        inputs[i].zfpx = i;
+//        inputs[i].zfpx
+        inputs[i].onclick = function(){
+            alert(this.zfpx);
+        }
+    }
+
+
+//    i=3
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    2、给每一个input绑定点击的事件
+//    onclick
+
+//    console.log(inputs);
+//    类数组
+//    console.log(typeof inputs);//'object'
+//    对象  key：value
+//    索引：代表元素的位置，索引都是从0开始的
+
+//    获取第一个input
+//    console.log(inputs[0]);
+
+//    获取每一个input
+//    inputs[索引]
+
+//    length  类数组的长度，代表有多少项
+
+  /*  console.log(inputs.length);//3
+    for(var i=0;i<inputs.length;i++){
+//        自定义属性
+//        console.log(typeof inputs[i]);//对象
+//        给每一个input 增加一组属性，属性名zfpx 属性值i
+        inputs[i].zfpx = i;
+//        inputs[0].zfpx = 0;
+//        inputs[1].zfpx = 1;
+//        inputs[2].zfpx = 2;
+
+
+//        inputs中的每一项
+        inputs[i].onclick = function(){
+//            3、点击时执行的操作
+//            this  操作谁就代表谁  当前操作的元素
+            alert(this.zfpx+1);
+        }
+    }
+
+//    for循环加载完 i=3*/
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

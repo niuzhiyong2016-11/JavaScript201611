@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #box{
+            width: 900px;
+            height: 270px;
+            border: 1px solid orange;
+            margin: 0 auto;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        li{
+            height: 30px;
+        }
+        li span{
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            text-align: center;
+        }
+        .bg1{
+            background: red;
+        }
+        .bg2{
+            background: orange;
+        }
+        .bg3{
+            background: plum;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+<!--
+    <ul>
+        <li>
+            <span>1 * 1 = 1</span>
+        </li>
+        <li>
+            <span>1 * 2 = 2</span>
+            <span>2 * 2 = 4</span>
+        </li>
+        <li>
+            <span>1 * 3 = 3</span>
+            <span>2 * 3 = 6</span>
+            <span>3 * 3 = 9</span>
+        </li>
+    </ul>
+    -->
+</div>
+<script>
+    //字符串拼接
+//    var str= '<h1>加油！！！</h1>';
+    var box = document.getElementById('box');
+//    innerHTML、innerText 向指定的元素中添加内容
+//    box.innerHTML = str;//可以识别html标签
+
+    var str = '';
+    str +='<ul>';
+//    i  行   j列
+        for(var i=1;i<=9;i++){
+            str +='<li>';
+//            第几行  就有几个span
+            for(var j=1;j<=i;j++){
+                str+='<span>';
+                   str+= i +' * ' +j + ' = ' + i*j
+//                i=1 j=1
+//                       1 * 1 = 1
+//                i=2 j=1
+//                       2 * 1 = 2
+                str+='</span>';
+            }
+
+
+            str +='</li>';
+        }
+
+    str +='</ul>';
+    box.innerHTML = str;
+
+
+//    console.log(str);
+    var lis = box.getElementsByTagName('li');
+    console.log(lis)
+    for(var i=0;i<lis.length;i++){
+        if(i%2==0){
+            lis[i].className = 'bg1';
+            lis[i].zf = 'bg1';
+        }else{
+            lis[i].className = 'bg2';
+            lis[i].zf = 'bg2';
+        }
+//        i%2==0?lis[i].className = 'bg1':lis[i].className = 'bg2';
+//        lis[i].className = 'bg'+ (i%2+1);
+
+
+        lis[i].onmouseover = function(){
+            this.className = 'bg3';
+        }
+
+//        鼠标移出
+        lis[i].onmouseout = function(){
+            this.className = this.zf;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
