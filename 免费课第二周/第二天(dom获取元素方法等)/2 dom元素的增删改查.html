@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-    <input type="text"/>
-    <div id="div1" class="c1" style=""  tian="xi" >
-        <!--span-->
-        <ul id="ul1">
-            <li>1</li>
-            <li id="li2">2</li>
-            <li>3</li>
-            <li>4</li>
-        </ul>
-
-    </div>
-</body>
-</html>
+<input type="text"/>
+<div id="div1" class="c1" style="" tian="xi">
+    <!--span-->
+    <ul id="ul1">
+        <li>1</li>
+        <li id="li2">2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
 <script>
     var div1 = document.getElementById('div1'); // 把div1获取到
     var ul1 = document.getElementById('ul1');
@@ -31,14 +28,14 @@
 
     // 2 insertBefore(要插入的元素,要插入到哪个元素的前面)
     var span = document.createElement('span');
-    div1.insertBefore(span,ul1); //把刚刚创建的span标签插入到ul1前面，并且只能是父级元素div1来执行
+    div1.insertBefore(span, ul1); //把刚刚创建的span标签插入到ul1前面，并且只能是父级元素div1来执行
 
     //删除页面内的dom元素   removeChild
     //div1.removeChild(ul1); //在div1内把ul移除掉
 
     //替换页面内的dom元素  replaceChild(新元素,替换哪个元素)
     var img = document.createElement('img');
-    div1.replaceChild(img,ul1);
+    div1.replaceChild(img, ul1);
 
     // 克隆节点   要克隆的元素.cloneNode(true) 如果参数是true意思是把所有的子孙后代都带着一起克隆
     // 克隆一个div1并且添加到body的末尾
@@ -55,6 +52,6 @@
     *   父亲.removeChild(孩子)
     *   需要克隆的元素.cloneNode(true)
     * */
-
-
 </script>
+</body>
+</html>

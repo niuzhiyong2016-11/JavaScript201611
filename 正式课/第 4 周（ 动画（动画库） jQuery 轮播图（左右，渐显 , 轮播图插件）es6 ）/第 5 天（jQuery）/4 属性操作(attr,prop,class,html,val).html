@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <div id="div1"></div>
-    <input type="text">
-    <input type="checkbox" name="hobby" checked>
+<div id="div1"></div>
+<input type="text">
+<input type="checkbox" name="hobby" checked>
 </body>
 </html>
 <script src="jquery-1.11.3.js"></script>
@@ -28,15 +28,15 @@
 
     // attr() 方法:  attribute  getAttribute setAttribute removeAttribute
     // attr方法我们一般用来操作自定义属性
-    $div1.attr('school','zhufeng'); // 设置属性
+    $div1.attr('school', 'zhufeng'); // 设置属性
     $div1.attr('school'); // 获取属性
     $div1.removeAttr('school'); // 删除属性
 
     // prop() 方法：property
     // prop方法一般用来操作原生自带属性，比如 src
     // checkbox表单元素checked。
-    $('input[type=checkbox]').prop('checked',true);
-    $('input[type=checkbox]').prop('checked',false);
+    $('input[type=checkbox]').prop('checked', true);
+    $('input[type=checkbox]').prop('checked', false);
 
 
 </script>

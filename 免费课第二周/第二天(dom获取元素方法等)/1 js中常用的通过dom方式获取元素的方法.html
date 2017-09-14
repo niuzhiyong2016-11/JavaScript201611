@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        #div1{
+        #div1 {
 
         }
-        #div1 p{
+
+        #div1 p {
 
         }
-        .ul{
+
+        .ul {
 
         }
-        div{
+
+        div {
 
         }
     </style>
 </head>
 <body>
-    <div id="div1">
-        <ul class="ul">
-            <li></li>
-            <li id="li2"></li>
-            <li></li>
-            <li></li>
-            <a href=""></a>
-        </ul>
-    </div>
-    <!--shift+enter直接换到下一行并且另起-->
-    <input type="text" name="name"/>
-    <input type="radio" name="sex"/>
-    <input type="checkbox" name="hobby"/>
-    <input type="checkbox" name="a"/>
-    <div id="div2" name="name">
-        <p></p>
-        <span></span>
-    </div>
-</body>
-</html>
+<div id="div1">
+    <ul class="ul">
+        <li></li>
+        <li id="li2"></li>
+        <li></li>
+        <li></li>
+        <a href=""></a>
+    </ul>
+</div>
+<!--shift+enter直接换到下一行并且另起-->
+<input type="text" name="name"/>
+<input type="radio" name="sex"/>
+<input type="checkbox" name="hobby"/>
+<input type="checkbox" name="a"/>
+<div id="div2" name="name">
+    <p></p>
+    <span></span>
+</div>
 <script>
     /*
         通过dom的方式获取回来的元素都是一个对象数据类型的.（不是只有{}才是对象，只要是一个对象数据类型甚至是引用数据类型都可以在身上添加属性。比如：在写选项卡的时候一定添加自定义属性并且保存着索引值  oLis[i].index = i ）
@@ -53,7 +54,7 @@
     * */
     var div1 = document.getElementById('div1'); //没有div2这个id所以返回null
     console.log(typeof div1); // object
-    if(div1){ //判断这个元素是否存在
+    if (div1) { //判断这个元素是否存在
         //如果元素存在我要怎么样。。。。
     }
     var li2 = document.getElementById('li2'); //
@@ -104,11 +105,12 @@
     *
     * */
     var a = null || 8; //或者这个运算符保证这个变量至少有一个值
-    function fn(x){
+    function fn(x) {
 
-        x =   x || 1;
+        x = x || 1;
         console.log(x);
     }
+
     fn(7);
 
     /*
@@ -118,17 +120,12 @@
     *   document.querySelectorAll() //获取全部
     *
     * */
-    var  div1 =  document.querySelector('#div1');
+    var div1 = document.querySelector('#div1');
     console.log(div1);
     var div1 = document.querySelectorAll('#div1 li');
     console.log(div1);
     var input = document.querySelectorAll('input[type=checkbox][name=hobby]');
     console.log(input);
-
-
-
-
-
-
-
 </script>
+</body>
+</html>
