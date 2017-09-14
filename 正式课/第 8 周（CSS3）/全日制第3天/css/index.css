@@ -1,0 +1,152 @@
+.header{
+    width: 100%;
+    height: 580px;
+    position: relative;
+}
+.banner{
+    width: 100%;
+    height: 580px;
+    background: #ff6a00;
+}
+.headerWrap{
+    width: 100%;
+    height: 89px;
+    background: url(../img/nav-b.png) repeat-x;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 555;
+}
+.headerCon{
+    width: 100%;
+}
+.logo{
+    float: left;
+    margin-top: 18px;
+}
+.logo img{
+    height: 100%;
+}
+.headerCon ul{
+    float: right;
+    line-height: 89px;
+}
+.headerCon ul li{
+    float: left;
+
+}
+.headerCon ul li a{
+    display: block;
+    padding: 0 30px;
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+    opacity: 0.7;
+}
+.headerCon ul li a span{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    background:rgba(0,0,0,0.1);
+    z-index: -1;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+}
+.headerCon ul li a:hover{
+    opacity: 1;
+}
+.headerCon ul li a:hover span{
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
+    -webkit-transition:0.2s;
+    transition:0.2s;
+}
+.list{
+    width: 100%;
+    padding-top: 30px;
+}
+.list ul{
+    width: 100%;
+    text-align: center;
+}
+.list ul li{
+    width: 23%;
+    display: inline-block;
+    vertical-align: top;
+}
+.list ul li span{
+    display: block;
+    width: 152px;
+    height: 124px;
+    margin:  0 auto;
+    background: url(../img/icon-24.png) no-repeat;
+}
+.list ul li span.pic1{
+    background-position: 0 -128px;
+}
+.list ul li span.pic2{
+    background-position: -300px -128px;
+}
+.list ul li span.pic3{
+    background-position: -604px -128px;
+}
+.list ul li h4{
+    font-size: 18px;
+    color: #ff6a00;
+    padding: 10px 0 0 0;
+}
+.list ul li p{
+    height: 24px;
+    color: #333;
+    padding: 5px 0;
+}
+.channel ul{
+    text-align: center;
+}
+.channel li{
+    display: inline-block;
+    max-width: 20%;/*li的宽度大于20%，则li宽度设置20%，如果小于20%，则显示成自身内容的宽度*/
+    margin: 0 1%;
+}
+.channel li img{
+    width: 100%;
+}
+
+@media all and (min-width: 1000px) {/*窗口宽度大于等于1000px*/
+    .headerCon{
+        width: 1000px;
+        margin: 0 auto;
+    }
+}
+@media all and (max-width: 760px){
+    .headerWrap{
+        height: 49px;
+    }
+    .logo{
+        height: 28px;
+        margin-top: 5px;
+    }
+    .headerCon ul{
+        display: none;
+    }
+    .list ul li span{
+        width: 76px;
+        height: 64px;
+        background-size:370px 126px;
+    }
+    .list ul li span.pic1{
+        background-position: 0 -64px;
+    }
+    .list ul li span.pic2{
+        background-position: -158px -64px;
+    }
+    .list ul li span.pic3{
+        background-position: -312px -64px;
+    }
+    .list ul li h4{
+        font-size: 16px;
+    }
+}

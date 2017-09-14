@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #menu {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+
+        #menu_list {
+            width: 42px;
+            height: 42px;
+            position: relative;
+            margin: 4px;
+        }
+
+        #menu_list img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
+        }
+
+        #home {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url(images/home.png);
+            transform: rotate(0deg);
+            transition: 0.5s;
+            -webkit-user-select: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="menu">
+    <div id="menu_list">
+        <img src="images/prev.png" alt=""/>
+        <img src="images/open.png" alt=""/>
+        <img src="images/clos.png" alt=""/>
+        <img src="images/full.png" alt=""/>
+        <img src="images/refresh.png" alt=""/>
+    </div>
+    <div id="home"></div>
+</div>
+</body>
+</html>
+<script>
+    var menuList = document.querySelector("#menu_list");
+    var oImgs = document.querySelectorAll("#menu_list>img");
+    var home = document.querySelector("#home");
+    function init() {
+        for (var i = 0; i < oImgs.length; i++) {
+            oImgs[i].style.transform = "scale(1) rotate(0deg)";
+            oImgs[i].addEventListener("click", imgFn, false);
+            (function (i) {
+                window.setTimeout(function () {
+                    var obj = getLR(i);
+                    oImgs[i].style.left = "-" + obj.l + "px";
+                    oImgs[i].style.top = "-" + obj.t + "px";
+                }, 100 * i)
+            })(i);
+
+        }
+    }
+    function imgFn() {
+        this.style.transform = "scale(2) rotate(0deg)";
+        this.style.opacity = 0.1;
+        var that = this;
+        setTimeout(function () {
+            imgEnd(that);
+        }, 200)
+
+    }
+    function imgEnd(that) {
+        that.style.transition = "0.1s ";
+        that.style.WebkitTransform = "scale(1) rotate(0deg)";
+        that.style.opacity = 1;
+        that.addEventListener("transitionend", function () {
+            this.style.transition = "";
+        })
+    }
+    function getLR(i) {
+        var deg = Math.PI * (22.5) / 180; //角度转弧度 π/180×角度
+        var r = 150;
+        return {
+            l: Math.round(Math.sin(deg * i) * r),
+            t: Math.round(Math.cos(deg * i) * r)
+        }
+    }
+
+    home.onclick = function () {
+        if (this.dataset.rotate == "on") {
+            this.style.transform = " rotate(0deg)";
+            this.dataset.rotate = "off";
+            [].slice.call(oImgs).forEach(function (item,index) {
+                item.style.transform = "scale(1) rotate(-360deg)";
+                if (item.timer) {
+                    clearTimeout(item.timer);
+                }
+                item.timer = window.setTimeout(function () {
+                    item.style.left = "0px";
+                    item.style.top = "0px";
+                }, 100)
+
+            })
+        } else {
+            this.style.transform = "rotate(360deg)";
+            this.dataset.rotate = "on";
+            init();
+
+        }
+    }
+
+
+</script>

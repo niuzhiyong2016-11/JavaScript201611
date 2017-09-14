@@ -1,0 +1,50 @@
+﻿HTML5+CSS3+JS进行的移动端页面开发
+
+HTML5新增的语义化标签（结构标签），表单种类，表单属性，全局属性
+语义化标签：用合理的标签做合理的事情
+section 一块区域
+header 页面或者区域的头部部分
+footer 页面或者区域的尾部部分
+article 完整的独立的区域 （强调独立性），一般情况下，表示文章部分
+nav    导航（习惯性用在主导航）
+aside  主体内容的辅助信息,表示无关内容,去掉与否对主体内容不会产生影响
+figure 配图区域
+figcaption 图题 （对图片的描述）
+main 主体部分
+
+IE浏览器条件注释
+lt 小于
+gt 大于
+lte 小于等于
+gte 大于等于
+
+表单种类
+search  键盘右下脚按钮从向右箭头变成搜索两个字
+tel 手机号码 数字键盘
+url  url地址
+email 邮箱地址
+number 数字输入框
+range 数值选择器 通过滑动来改变数值并且可以设置数值的范围
+color 颜色数值器
+datetime-local 日期和时间（本地时间）
+time 时间
+month 日期选择到月
+week  日期选择到周
+
+表单属性
+autocomplete 是否保存用户输入信息 on保存，off不保存
+autofocus 光标自动聚焦
+placeholder 在输入前提示用户输入信息
+required 必须输入内容
+form 保证表单元素可以放在任何位置
+formnovalidate  设置在submit类型的按钮上 不用验证直接可提交
+novalidate 设置上form标签上 不用验证直接可提交
+pattern 通过正则设置验证规则
+setCustomValidity() 可以更改系统自带的提示信息
+
+data-zf="peixun"
+console.log(oP.dataset.zf)
+contenteditable 内容可编辑
+
+
+

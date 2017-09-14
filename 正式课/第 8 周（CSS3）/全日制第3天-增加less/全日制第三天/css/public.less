@@ -1,0 +1,31 @@
+@percentage:100%;
+@color:#fff;
+@url:"../img";
+.box-shadow(@x:0,@y:0,@blur:0,@spread:0,@color:#000){
+  -webkit-box-shadow:@x @y @blur @spread @color;
+  -moz-box-shadow:@x @y @blur @spread @color ;
+  box-shadow: @x @y @blur @spread @color;
+}
+.transition(@property: all,@duration: 1s,@timing-function:ease,@delay:0s){
+  -webkit-transition:@arguments;
+  -moz-transition: @arguments;
+  -ms-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+.css3(@k,@v){
+  -o-@{k}:@v;
+  -ms-@{k}:@v;
+  -moz-@{k}:@v;
+  -webkit-@{k}:@v;
+  @{k}:@v;
+}
+
+.pos(@position:absolute,@left:0,@right:auto,@top:0,@bottom:auto,@zIndex:1){
+  position: @position;
+  left: @left;
+  right: @right;
+  top: @top;
+  bottom: @bottom;
+  z-index: @zIndex;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet/less" href="css/style.less"/>
+</head>
+<body>
+<div id="div1">珠峰培训 <span>1111</span></div>
+</body>
+</html>
+<script>
+    var less = {
+        env:"development",/*开发模式还是生产模式*/
+        poll:1000 /*在监视模式下，每两次请求之间的时间间隔(ms) */
+    }
+</script>
+<script src="js/less-2.5.3.min.js"></script>
+<script>
+    less.watch();//在监视模式下
+</script>

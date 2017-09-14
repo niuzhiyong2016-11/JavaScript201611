@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+      #div1,#div2{
+          height: 100px;
+          background-color: pink;
+          display: none;
+      }
+      #div2{
+          background-color: orange;
+      }
+
+      #body1 :target{
+            display: block;
+        }
+    </style>
+</head>
+<body id="body1">
+<a href="#div1">选项卡一</a>
+<a href="#div2">选项卡二</a>
+<div id="div1">div1</div>
+<div id="div2">div2</div>
+</body>
+</html>

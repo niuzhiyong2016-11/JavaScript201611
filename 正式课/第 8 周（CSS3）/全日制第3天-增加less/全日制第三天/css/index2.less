@@ -1,0 +1,58 @@
+@import (reference) "public.less";
+.header{
+  width: @percentage;
+  height: 580px;
+  position: relative;
+  .headerWrap{
+    width: @percentage;
+    height: 89px;
+    background: url("@{url}/nav-b.png") repeat-x;
+    .pos(@zIndex: 1111);
+
+  }
+}
+.headerCon{
+  width: 100%;
+  .logo{
+    float: left;
+    margin-top: 18px;
+  }
+  ul{
+    float: right;
+    line-height: 89px;
+    li{
+      float: left;
+      a{
+        display: block;
+        padding: 0 30px;
+        font-size: 18px;
+        color: #fff;
+        position: relative;
+        span{
+          width: @percentage;
+          height: @percentage;
+          .pos(@zIndex: -1);
+          background-color: rgba(0,0,0,0.1);
+         .css3(transform,scale(0,1))
+        }
+        &:hover{
+          span{
+           .css3(transform,scale(1,1));
+           .transition(@duration: 0.2s);
+          }
+        }
+      }
+    }
+  }
+}
+.banner{
+  height:580px;
+  background-color: #ff6a00;
+}
+@media screen and (min-width: 1000px){
+      .headerCon{
+        width: 1000px;
+        margin: 0 auto;
+      }
+
+}

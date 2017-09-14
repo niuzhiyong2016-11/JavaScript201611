@@ -1,0 +1,81 @@
+﻿在CSS2中所有的属性都是即时效果
+在css3中增加动画属性，可以实现动画效果
+1.transition属性
+   语法：当css属性值发生改变时，由起始值向结束值实现平滑过渡效果
+   特点：1.只有两种状态，一个起始值，一个结束值
+        2.动画执行时需要被触发的，通过伪类，js或者媒体查询等触发动画执行
+        （css属性值发生改变时，transition属性才会被触发）
+
+   transition细分属性
+   transition-property  过渡属性 (默认值是all)
+   transition-duration  动画执行的时间
+   transition-timing-function 动画运行的速度 ease(默认值，减速)  ease-in 加速 ease-out 减速 linear 匀速 ease-in-out 先加速后减速  cubic-bezier(.17,1.69,.54,-0.53) 贝塞尔曲线
+   transition-delay 延迟时间(0s)
+   简写写法：
+   transition：width 1s linear 1s;
+   如果只有属性不一样，后面的执行时间，运行速度，延迟时间都一样
+   transition:all 1s linear 1s;  all可以省略
+   transition:1s   1s指执行时间
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   transform变形属性 2D变形效果
+   rotate(0deg) 旋转 正->顺时针旋转 负->逆时针旋转
+   skew(x,y) 倾斜  x：正->水平往左倾斜 x：负->水平往右倾斜  y：正->垂直往下 负->垂直往上
+   scale(sx,sy) 缩放 默认值是1 <1缩小 >1放大
+   translate(tx,ty) 默认值是0 平移 水平方向 ：正->右 负->左  垂直方向： 正->下 负->上
+   变形的基准点
+   默认变形基准点是中心点
+   transform-origin  left,top,right,bottom |10px 10px
+   rotate,skew,scale可以改变,translate不能改变
+   四个变形方法结合在一起写，如果translate写在第一个位置上会改变其它变形方法的基准点
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    animation帧动画
+    弥补了过渡动画的缺陷
+    例如：可以设置任意状态，不需要触发条件，是立马执行
+    帧动画分为两步：
+     1.通过keyframes 动画名  设置动画的运动曲线
+     2.通过animation调用声明的关键帧
+     @keyframes move{
+        0%{   百分比可以理解成在一定时间时间内，设置某个时间点的样式
+          transform: translate(100px)   设置任意CSS样式
+        }
+        25%{
+           transform: translate(200px)
+        }
+        100%{
+            transform: translate(300px)
+        }
+     }
+
+    animation细分属性
+    animation-name 关键帧动画名称 (必写)
+    animation-duration 动画运行的时间 (必写)
+    animation-timing-function 动画运行的速度 ease(默认值)
+    animation-delay 延迟时间
+    animation-iteration-count 执行的次数 1|infinite(无限循环次)
+    animation-direction 执行的方向 normal(默认值)|reverse(反方向)|alternate(交替)|reverse-alternate(反方向交替)
+    animation-play-state 动画的状态 running 运行(默认值)|paused 停止
+    animation-fill-mode 动画结束后的状态 none(默认值)|backwards(起始状态)|forwards(最后一帧的状态)|both (根据方向的设置，可能是第一帧的状态或者最后一帧的状态)
+    animation简写写法
+    animation:move 1s linear 1s 1 reverse both;
+    animation:move 1s 1 both;有默认值的则不用再设置相同的值了
+
+`````````````````````````````````````````````````````````````````````````
+    3D变换
+    transform-style:flat|preserve-3d (3D空间展示)作用在变形元素的父标签
+    perspective：2000px 景深 （800px~2000px）近大远小的效果 设置祖先标签（包含父标签） 用户到Z轴平面的距离
+    transform:perspective(800px)   直接作用在变形元素上  有很多变形元素时，所有的效果都一致
+    perspective-origin:center 默认值是center
+
+    rotateX(45deg) 围着X轴翻转 前后翻转 正->前翻 负->后翻rotate3d(1,0,0,45deg)
+    rotateY(45deg) 围着Y轴翻转 左右翻转 正->往右 负->左翻rotate3d(0,1,0,45deg)
+    rotateZ(45deg) 效果和rotate()一样的，但是是在Z轴上旋转rotate3d(0,0,1,45deg)
+    rotate3d(rx,ry,rz,a) rx,ry,rz向量坐标 a角度
+
+    scaleZ(0.5)单独使用不起作用 必须配合着其他变形方法一起使用
+    scale3d(1,1,0.5)
+
+
+
+
+

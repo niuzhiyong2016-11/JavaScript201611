@@ -1,0 +1,88 @@
+﻿css2
+    关系选择器
+    E+F 相邻的弟弟节点
+    E~F 所有的弟弟节点
+
+css3 结构选择器
+    :nth-child(n) 获取第几个子元素
+    :nth-child(2n) ==>nth-child(even)
+    :nth-child(2n+1)==>nth-child(odd)
+    :nth-of-type  在同种类型中，获取第几个子元素
+    :first-child 第一个子元素
+    :first-of-type 同种类型中第一个子元素
+    :last-child 最后一个子元素
+    :last-of-type  同种类型中最后一个子元素
+    :only-child 只有一个子元素
+    :only-of-type 同种类型的元素只有一个
+    :empty 没有子元素（不能有文本，换行，空格）,注释可以
+
+    否定选择器（排除某些元素）
+    :not(选择器)  ul li:not(:first-child)
+
+    属性选择器
+    E[attr=val]
+    E[attr|=val] 只能是val或者是val-开头
+    E[attr*=val] 属性值中只要包含val即可
+    E[attr~=val] 属性值有多个，其中有一个是val
+    E[attr^=val] 以val开头
+    E[attr$=val] 以val结尾
+
+    目标伪类选择器
+    :target 匹配url指向的目标元素
+
+    伪元素在CSS3中用::before ::after 为了区分伪类和伪元素
+
+线性渐变
+linear-gradient
+渐变方向：沿着直线轴的方向
+第一个参数设置渐变方向 top left top left 45deg
+从第二个参数开始设置渐变颜色和位置(百分比或者固定值)
+两种颜色之间的区域称为渐变过渡区
+去掉渐变过渡区只需要对每个颜色设置起始位置和结束位置
+重复线性渐变
+repeating-linear-gradient
+
+径向渐变
+radial-gradient
+从“一个点”向多方向颜色渐变
+shape  ellipse circle
+at 关键词可以设置圆心的位置 top center|10px 10px
+100px 50px at center可以自己设置径向渐变的水平半径和垂直半径
+
+closest-corner 最近的角
+closest-side   最近的边
+farthest-corner 最远的角 （默认值）
+farthest-side  最远的边
+
+重复的径向渐变
+repeating-radial-gradient
+
+背景
+ background-origin 设置背景图从哪个区域开始显示
+     padding-box 从内边距开始显示 （默认值）
+     border-box 从边框区域开始显示
+     content-box 从内容区域开始显示
+  background-clip 从哪个区域往外裁剪
+      padding-box 从padding区域往外裁剪
+      border-box 从border区域往外裁剪 (默认值)
+      content-box 从内容区域往外裁剪
+
+  background-size 设置背景图的大小
+  100% 100%
+  10px 10px
+  contain 按照原来的比例收缩，背景图显示完整，但是不一定铺满整个容器
+  cover 按照原来的比例收缩，背景图不一定显示完整，但是一定是铺满整个容器
+
+box-shadow 默认外阴影，如果设置内阴影需要inset,内阴影方向和外阴影相反
+ 第一个参数：水平方向偏移 正->右 负->左
+ 第二个参数：垂直方向偏移 正->下 负->上
+ 第三个参数：模糊半径
+ 第四个参数：扩展半径
+ 第五个参数是颜色
+
+ 单阴影
+ 扩展半径 正->往外扩展 负->往内收缩
+ 多层阴影
+
+ 文本阴影 比盒子阴影少一个扩展半径
+ text-shadow

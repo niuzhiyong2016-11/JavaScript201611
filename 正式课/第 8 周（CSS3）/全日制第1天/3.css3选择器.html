@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            width: 400px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        ul li{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 16px;
+            background-color: orange;
+            display: inline-block;
+            margin: 10px;
+
+        }
+        .a1+li{/*相邻的弟弟节点*/
+
+        }
+        .a1~li{/*a1下的所有的弟弟节点*/
+
+        }
+        ul :nth-child(1){/*第一个子元素*/
+
+        }
+        ul :nth-child(even){/*偶数元素*/
+
+        }
+        ul :nth-child(odd){/*奇数元素*/
+
+        }
+        ul :nth-of-type(1){/*同种类型（标记名相同）中的第一个子元素*/
+
+        }
+        ul li:nth-child(2){/*先找到第二个子元素，再看这个元素的标记名是否是li*/
+
+        }
+        ul li:nth-of-type(2){
+            background-color: blue;
+        }
+
+        div :only-of-type{
+            background-color: pink;
+            text-decoration: underline;
+        }
+        div:empty{
+            height: 200px;
+            background: deepskyblue;
+        }
+        /*
+        nth-child  不分类型，直接找到第几个子元素
+        nth-of-type 先把子元素按照标记名分类，然后从同种类型的子元素里查找第几个子元素
+        */
+        /*查找到标记名是li标签的第二个子元素?*/
+
+        /*ul li:not(:first-child){*/
+            /*border-radius: 50%;*/
+        /*}*/
+
+        ul li[class$="zf"]{
+            border-radius: 50%;
+            background-color: red;
+        }
+        #div1{
+            height: 800px;
+            background: pink;
+        }
+        #div2{
+            height: 800px;
+            background: palegreen;
+        }
+        :target{/*对所有的目标元素都起作用*/
+
+        }
+        #div1:target{
+            background: orange;
+        }
+        #div2:target{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <!--<p>111</p>-->
+    <!--<p>2222</p>-->
+    <li>1</li>
+    <li class="zf zfpx pxzf">2</li>
+    <li class="zhufeng">3</li>
+    <li class="zf-px">4</li>
+    <li class="px zf">5</li>
+    <li class="zf">6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+</ul>
+
+<div id="div1">div1的内容</div>
+<div id="div2">div2的内容</div>
+<a href="#div1">定位div1元素上</a>
+<a href="#div2">定位div2元素上</a>
+</body>
+</html>

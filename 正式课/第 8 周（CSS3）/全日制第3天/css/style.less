@@ -1,0 +1,155 @@
+/*@color:red;
+#div1{
+  width: 200px;
+  height: 200px;
+  background-color: @color;
+  span{
+    color: green;
+  }
+  &:hover{
+    width: 400px;
+    .transition(width,1s,linear,0s);
+  }
+}
+
+.transition(@property,@duration,@timing-function,@delay){
+  -webkit-transition:@arguments;
+  -moz-transition: @arguments ;
+  -ms-transition: @arguments ;
+  -o-transition: @arguments ;
+  transition: @arguments ;
+}*/
+
+/*@fontSize:20px;
+@color:color;
+@url:"../image";
+@box:box;
+#div1{
+  font-size: @fontSize;
+  background-@{color}:red;
+  @{color}:green;
+  background-image:url("@{url}/a.jpg");
+
+}
+.@{box}{
+  background: pink;
+}*/
+
+
+/*
+.public(){/!*加上()后表示不在解析后的CSS文件中显示出来*!/
+  width: 200px;
+  height: 200px;
+}
+
+#div1{
+  .public;
+  background: orange;
+}
+*/
+
+.public{
+  width: 200px;
+  height: 200px;
+}
+/*第一种方式*/
+/*#div1{
+  &:extend(.public);/!*div1和public共用public里的代码   &表示父选择器*!/
+  background: orange;
+}*/
+/*第二种方式*/
+/*
+#div1:extend(.public){
+  background: orange;
+}
+*/
+
+/*命名空间和作用域*/
+//->LESS代码
+/*@color:red;
+.box {
+  width: 100px;
+  height: 100px;
+  @color:green;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .gray {
+    color: @color;
+  }
+  &:hover {
+    background: green;
+  }
+}*/
+
+/*函数*/
+.transition(@propery:all,@duration:1s,@timing-function:ease,@delay:0s){
+  -webkit-transition: @propery @duration @timing-function @delay;
+  -moz-transition: @propery @duration @timing-function @delay;
+  -ms-transition: @propery @duration @timing-function @delay;
+  -o-transition: @propery @duration @timing-function @delay;
+  transition: @propery @duration @timing-function @delay;
+}
+.box{
+  //.transition(width,1s,ease,1s);没有给初始值，调用时必须每个参数按照顺序设定
+  //.transition;
+  .transition(@propery: width,@delay: 1s);
+}
+
+
+.css3(@k,@v){
+  -o-@{k}:@v;
+  -ms-@{k}:@v;
+  -moz-@{k}:@v;
+  -webkit-@{k}:@v;
+  @{k}:@v;
+}
+.box2{
+  .css3(perpective,2000px);
+}
+/*函数可以设置返回值*/
+.average(@x,@y){
+  @result:@x+@y;
+}
+.box3{
+  .average(10,5);
+  padding:unit(@result,px);
+}
+
+.mixin(@a) when (@a<0){
+  background: orange;
+}
+.mixin(@a) when (@a>10){
+  background: green;
+}
+.mixin(@a) when (@a>0) and (@a<10){
+  background: deepskyblue;
+}
+#div1{
+  .mixin(5)
+}
+
+.columns(@n,@i:1) when(@i<=@n){
+  .a-@{i}{
+    width:@i*100%/@n;
+  }
+  .columns(@n,@i+1);
+}
+.columns(4);
+
+/*合并 +表示逗号 +_表示空格*/
+.box1{
+  box-shadow+: 1px 1px 2px orange;
+}
+.box2{
+  .box1;
+  box-shadow+: 2px 3px 2px green;
+}
+.box3{
+  transform+_: rotate(45deg);
+}
+.box4{
+  .box3;
+  transform+_: skew(15deg);
+}

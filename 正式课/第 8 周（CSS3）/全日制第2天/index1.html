@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #2192bc;
+        }
+
+        #box {
+            margin: 100px auto;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #2c9dc4 url(images/img1.png) no-repeat center center;
+            box-shadow: 0 0 0 30px transparent;
+            -webkit-transition: box-shadow 1s;
+            -moz-transition: box-shadow 1s;
+            -ms-transition: box-shadow 1s;
+            -o-transition: box-shadow 1s;
+            transition: box-shadow 1s;
+        }
+        
+        #box:hover {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div id="box"></div>
+
+</body>
+</html>

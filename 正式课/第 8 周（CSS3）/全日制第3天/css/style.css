@@ -1,0 +1,126 @@
+/*@color:red;
+#div1{
+  width: 200px;
+  height: 200px;
+  background-color: @color;
+  span{
+    color: green;
+  }
+  &:hover{
+    width: 400px;
+    .transition(width,1s,linear,0s);
+  }
+}
+
+.transition(@property,@duration,@timing-function,@delay){
+  -webkit-transition:@arguments;
+  -moz-transition: @arguments ;
+  -ms-transition: @arguments ;
+  -o-transition: @arguments ;
+  transition: @arguments ;
+}*/
+/*@fontSize:20px;
+@color:color;
+@url:"../image";
+@box:box;
+#div1{
+  font-size: @fontSize;
+  background-@{color}:red;
+  @{color}:green;
+  background-image:url("@{url}/a.jpg");
+
+}
+.@{box}{
+  background: pink;
+}*/
+/*
+.public(){/!*����()����ʾ���ڽ�������CSS�ļ�����ʾ����*!/
+  width: 200px;
+  height: 200px;
+}
+
+#div1{
+  .public;
+  background: orange;
+}
+*/
+.public {
+  width: 200px;
+  height: 200px;
+}
+/*��һ�ַ�ʽ*/
+/*#div1{
+  &:extend(.public);/!*div1��public����public���Ĵ���   &��ʾ��ѡ����*!/
+  background: orange;
+}*/
+/*�ڶ��ַ�ʽ*/
+/*
+#div1:extend(.public){
+  background: orange;
+}
+*/
+/*�����ռ���������*/
+/*@color:red;
+.box {
+  width: 100px;
+  height: 100px;
+  @color:green;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .gray {
+    color: @color;
+  }
+  &:hover {
+    background: green;
+  }
+}*/
+/*����*/
+.box {
+  -webkit-transition: width 1s ease 1s;
+  -moz-transition: width 1s ease 1s;
+  -ms-transition: width 1s ease 1s;
+  -o-transition: width 1s ease 1s;
+  transition: width 1s ease 1s;
+}
+.box2 {
+  -o-perpective: 2000px;
+  -ms-perpective: 2000px;
+  -moz-perpective: 2000px;
+  -webkit-perpective: 2000px;
+  perpective: 2000px;
+}
+/*�����������÷���ֵ*/
+.box3 {
+  padding: 15px;
+}
+#div1 {
+  background: deepskyblue;
+}
+.a-1 {
+  width: 25%;
+}
+.a-2 {
+  width: 50%;
+}
+.a-3 {
+  width: 75%;
+}
+.a-4 {
+  width: 100%;
+}
+/*�ϲ�*/
+.box1 {
+  box-shadow: 1px 1px 2px orange;
+}
+.box2 {
+  box-shadow: 1px 1px 2px orange, 2px 3px 2px green;
+}
+.box3 {
+  transform: rotate(45deg);
+}
+.box4 {
+  padding: 15px;
+  transform: rotate(45deg) skew(15deg);
+}

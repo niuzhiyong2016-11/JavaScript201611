@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--meta:vp-->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!--
+    width 布局视口（layout viewport） device-width 设备的宽度
+    user-scalable 是否允许用户缩放 yes|no
+    initial-scale 初始缩放值
+    maximum-scale 最大缩放值
+    minimum-scale 最小缩放值
+    -->
+    <style type="text/css">
+      /* html{
+           font-size: 20px;
+       }
+
+        #div1 p{
+            width: 20rem;
+            height: 20rem;
+            background: red;
+
+        }*/
+      #div1{
+          width: 200px;
+          height: 200px;
+      }
+
+        /*@media all and (orientation: portrait) {/!*竖向*!/
+            #div1{
+                background: red;
+            }
+        }
+        @media all and (orientation: landscape) {/!*横向*!/
+          #div1{
+              background: orange;
+          }
+      }*/
+       /* @media all and (max-width: 1000px){/!*显示区域的宽度小于等于1000px*!/
+          #div1{
+              background: red;
+          }
+        }
+      @media all and (min-width:480px) and (max-width: 999px){/!*显示区域的宽度大于等于480px并且小于等于999px*!/
+          #div1{
+              background: orange;
+          }
+      }
+        @media all and (max-width:479px) {
+            #div1{
+                background: pink;
+            }
+
+        }*/
+
+        @media all and (-webkit-device-pixel-ratio: 1){
+            #div1{
+                background: url(../@1x.png) no-repeat;
+            }
+        }
+      @media all and (-webkit-device-pixel-ratio: 2){
+          #div1{
+              /*background: url(../@2x.png) no-repeat;*/
+              background: pink;
+          }
+      }
+      @media all and (-webkit-device-pixel-ratio: 3){
+          #div1{
+              /*background: url(../@3x.png) no-repeat;*/
+              background: green;
+          }
+      }
+
+    </style>
+</head>
+<body>
+
+<div id="div1" style="font-size: 16px">
+    <p>珠峰培训</p>
+</div>
+
+</body>
+</html>

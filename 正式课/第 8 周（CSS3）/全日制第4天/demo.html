@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <style type="text/css">
+        #div1{
+            width: 0.86rem;
+            height: 0.86rem;
+            background: red;
+        }
+        /*
+        640设备上  图片的宽高86px 根元素字体大小设成100px
+        320设备上  图片的宽高43px 根元素字体大小是50px
+
+        640/320 = 100/50
+        */
+    </style>
+    <script>
+        //求各个设备的根元素字体大小
+        //参照640(desW)/320(winW) = 100/50(fs)
+        //各个设备宽度的缩放倍数 = 各个设备的根元素字体大小的缩放倍数
+        var desW = 640;//设计稿的宽度
+        var winW = document.documentElement.clientWidth;
+        //desW/winW = 100/fs;
+        document.documentElement.style.fontSize = winW/desW*100+"px"
+
+    </script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
