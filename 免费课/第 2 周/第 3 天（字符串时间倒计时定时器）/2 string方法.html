@@ -2,24 +2,23 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>String方法</title>
 </head>
 <body>
+
+<!--
+
+-->
 
 <script>
     /*
     *   String :
     *       length : 字符串的长度
     *       索引: 字符串也可以通过索引来获取具体的某一个字符
-    *
     * */
     var str = 'zhufengpeixun';
     console.log(str.length);
-    console.log(str[0]); //z
-
-    /*for(var i=0; i<str.length; i++){
-        console.log(str[i]);
-    }*/
+    console.log(str[0]);
 
     // 方法
 
@@ -37,28 +36,26 @@
 
     /*
     *   截取字符串
-    *   substr(n,m)  从开始截取m个字符,如果m参数没写那么截取到末尾
+    *   substr(n, m)  从索引n开始截取m个字符,如果m参数没写那么截取到末尾
     *
-    *   substring(n,m) 从索引n开始截取到索引m，但是不包含m。如果m参数没有那么默认截取到末尾
+    *   substring(n, m) 从索引n开始截取到索引m，但是不包含m。如果m参数没有那么默认截取到末尾
     *
-    *   slice(n,m) 用法和substring大致相同。slice支持负数索引.在截取的时候默认在负数索引值身上累加length
+    *   slice(n, m) 用法和substring大致相同。slice支持负数索引.在截取的时候默认在负数索引值身上累加length
     *
     * */
     var str = 'zhufengpeixun';
-    //var res = str.substr(3,4);
+    //var res = str.substr(3, 4);
     //var res = str.substr(3);
     var res = str.substring(3, 7);
-    //var res = str.substring(7,3);
+    //var res = str.substring(7, 3);
     var res = str.slice(-3, -1); // 10,12
     console.log(res);
 
 
-    // 转换大小写
-
     /*
+    *   转换大小写
     *   toUpperCase() 转化成大写
     *   toLowerCase() 转化成小写
-    *
     *
     * */
 
@@ -89,7 +86,7 @@
 
 
     /*
-    *   replace: 是用来替换字符串的   replace(old,new) 跟replaceChild的参数位置是相反的
+    *   replace: 是用来替换字符串的   replace(old, new) 跟replaceChild的参数位置是相反的
     *   ps: 使用replace方法，并不是操作原有字符串而是返回新的替换好的字符串。把这个新字符串赋值给原有字符串  =>    str = str.replace(old,new);
     *   ps: 如果第二个参数是函数，是使用这个函数的返回值(是返回值)来替换第一个参数所匹配到的字符
     *
