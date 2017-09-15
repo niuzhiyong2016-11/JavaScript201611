@@ -7,10 +7,20 @@
 <body>
 
 <!--
-
+    charAt split replace substr substring slice
+    match indexOf lastIndexOf startsWith endsWith trim
 -->
 
 <script>
+    var str = 'asdfgh';
+    console.log(str.startsWith('a')); //true
+    console.log(str.endsWith('h')); //true
+
+    var str = '   abc   ';
+    console.log(str.trim());
+    console.log(str.trimLeft());
+    console.log(str.trimRight());
+
     /*
     *   String :
     *       length : 字符串的长度
@@ -108,11 +118,12 @@
         // str: 原有字符串
         return '峰';
     });
-
-
     console.log(str);
 
     // match() 的参数也是一个正则。。。暂时不讲
+    var str = 'abcabcabcabcabcabc';
+    console.log(str.match(/abc/)); //["abc", index: 0, input: "abcabcabcabcabcabc"]
+    console.log(str.match(/abc/g)); //["abc", "abc", "abc", "abc", "abc", "abc"]
 </script>
 </body>
 </html>

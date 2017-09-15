@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>选项卡</title>
     <style>
-        *{ margin: 0; padding: 0; }
-        .tab{
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
             width: 360px;
             margin: 30px auto;
         }
-        .tab ul{
+
+        .tab ul {
             list-style: none;
         }
-        .tab ul:after{
+
+        .tab ul:after {
             content: "";
             clear: both;
             display: block;
         }
-        .tab ul li{
+
+        .tab ul li {
             float: left;
             width: 100px;
             height: 40px;
@@ -26,10 +33,12 @@
             background: #ccc;
             margin-right: 10px;
         }
-        .tab ul li.selected{
+
+        .tab ul li.selected {
             background: lightpink;
         }
-        .tab div{
+
+        .tab div {
             display: none;
             width: 360px;
             height: 200px;
@@ -37,51 +46,44 @@
             line-height: 200px;
             background: lightpink;
         }
-        .tab div.selected{
+
+        .tab div.selected {
             display: block;
         }
-
     </style>
 </head>
 <body>
-    <div class="tab">
-        <ul>
-            <li class="selected">图片</li>
-            <li>专栏</li>
-            <li>热点</li>
-        </ul>
-        <div class="selected">图片内容</div>
-        <div>专栏内容</div>
-        <div>热点内容</div>
-    </div>
-</body>
-</html>
+<div class="tab">
+    <ul>
+        <li class="selected">图片</li>
+        <li>专栏</li>
+        <li>热点</li>
+    </ul>
+    <div class="selected">图片内容</div>
+    <div>专栏内容</div>
+    <div>热点内容</div>
+</div>
 <script>
     var tab = document.getElementsByClassName('tab')[0];
     var lis = tab.getElementsByTagName('li');
     var divs = tab.getElementsByTagName('div');
-    for(var i=0; i<lis.length; i++){ //3
-        lis[i].zidingyishuxing = i;
-        //lis[0].zidingyishuxing = 0;
-        //lis[1].zidingyishuxing = 1;
-        //lis[2].zidingyishuxing = 2;
-        lis[i].onclick = function (){
-            //console.log(this); //点击哪个元素，那么this就是哪个
-            for(var j=0; j<lis.length; j++) {
+
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].index = i;
+        lis[i].onclick = function () {
+            for (var j = 0; j < lis.length; j++) {
                 lis[j].className = '';
                 divs[j].className = '';
             }
-            this.className = 'selected'; //这个属性是专门用来操作元素的class的
-            divs[/*需要this的索引*/this.zidingyishuxing].className = 'selected';
+            this.className = 'selected';
+            divs[this.index].className = 'selected';
         }
     }
-    //lis[0].onmouseover = function (){}
-    //lis[1].onmouseover = function (){}
-    //lis[2].onmouseover = function (){}
-
 
     /*
     *   自定义属性: 当一个值没有地方存储，或者存储不安全。不妨存储在自行身上
     *   this: 当事件被触发的那一刻，this就是触发事件的那个元素。把事件绑定给谁，谁就是this
     * */
 </script>
+</body>
+</html>

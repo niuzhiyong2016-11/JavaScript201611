@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     /*
     *   length: length属性是数组长度。
@@ -62,21 +60,22 @@
     *
     *               // return的值是否使用item或index都可以。return什么就把什么添加到map的返回值那个数组中
     *               return item+index
-    *           })
+    *           });
     *
     * */
-    var ary = [5,3,1,2,4];
+    var ary = [5, 3, 1, 2, 4];
 
-    ary.sort(function (a,b){
+    ary.sort(function (a, b) {
         // a,b代表就是比较时候的两项
-        return a-b; // 这才是是否换位置的根本，如果这个差是大于0那么就是换位置，否则就是原地不动
+        return a - b; // 这才是是否换位置的根本，如果这个差是大于0那么就是换位置，否则就是原地不动
     });
     console.log(ary);
 
-    var ary = [1,2,3];
-    var res = ary.map(function (item,index,ary){
-       return item*100;
+    var ary = [1, 2, 3];
+    var res = ary.map(function (item, index, ary) {
+        return item * 100;
     });
-    console.log(res); //[100,200,300]
-
+    console.log(res); //[100, 200, 300]
 </script>
+</body>
+</html>

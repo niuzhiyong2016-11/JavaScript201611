@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     var date = new Date(); //实例创建方式  字面量
+    alert(date instanceof Date);
     console.dir(date);
     console.log(typeof date); // object 这是一个对象数据类型的
     /*
@@ -32,7 +31,6 @@
 
     var date2 = new Date('2016/09/24 17:00:00'); //如果在new的过程中括号内添加了一个时间格式的字符串，那么就是把这个字符串转化成时间对象.然后就可以使用getFullYear()等方法了
     date2.getFullYear();
-
-
-
 </script>
+</body>
+</html>

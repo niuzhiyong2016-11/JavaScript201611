@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <div id="div1">
-            <p></p>
-            <p></p>
-            <!---->
-            <span></span>
-            <span></span>
-            <img src="" alt=""/>
-            <!---->
-            <p></p>
-            <p></p>
-        </div>
-    </body>
-</html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="div1">
+    <p></p>
+    <p></p>
+    <!---->
+    <span></span>
+    <span></span>
+    <img src="" alt=""/>
+    <!---->
+    <p></p>
+    <p></p>
+</div>
 <script>
     var div1 = document.getElementById('div1');
     //获取元素的常用方法
@@ -45,7 +43,6 @@
     // document.querySelectorAll('input[type=radio]')  所有的表单元素中过滤出是radio的
 
 
-
     // 元素的创建，增加，修改，删除等
     // 创建
     var p = document.createElement('p'); //创建一个p段落元素
@@ -55,7 +52,7 @@
 
     var img = document.createElement('img');
 
-    document.body.insertBefore(img,p); // 把img标签插入到p元素前面。和appendChild一样也是由父元素来调用的
+    document.body.insertBefore(img, p); // 把img标签插入到p元素前面。和appendChild一样也是由父元素来调用的
 
     // removeChild 删除元素
 
@@ -108,23 +105,23 @@
     *  nodeValue    null        文本内容    注释内容
     *
     * */
-    children(div1,'p'); //我要获取div1的所有元素子节点的标签名字为p的,先获取所有的元素子节点，然后把不是p的删掉
-    function children(ele,tagName){ //如果tagName这个位置需要的是一个标签名字。
+    children(div1, 'p'); //我要获取div1的所有元素子节点的标签名字为p的,先获取所有的元素子节点，然后把不是p的删掉
+    function children(ele, tagName) { //如果tagName这个位置需要的是一个标签名字。
         //在childNodes里面过滤出来是元素的就可以了 => 如何判断一个节点是不是元素？ 那么通过节点类型来判断。 nodeType = 1
         var childs = ele.childNodes; //先拿元素子节点，然后循环过滤
         var ary = [];
-        for(var i=0; i<childs.length; i++){
+        for (var i = 0; i < childs.length; i++) {
             //把符合条件的放到数组中
-            if(childs[i].nodeType == 1){
+            if (childs[i].nodeType === 1) {
                 ary.push(childs[i]); //哪个判断过了就放到这个容器中
             }
         }
         //ary = [p,p,span,img,p,p]
         //       0 1  2
-        if(typeof tagName == 'string'){ //说明tagName是一个字符串不是undefined  "p"
-            for(var i=0; i<ary.length; i++){ //仍然需要把每一个ary里的元素都判断一次，是否是你传进来标签名字，如果不是就删啦
-                if(ary[i].nodeName !== tagName.toUpperCase()){ //保证都是大写的
-                    ary.splice(i,1); //splice会产生数组塌陷问题，所以在做循环的时候要注意好
+        if (typeof tagName === 'string') { //说明tagName是一个字符串不是undefined  "p"
+            for (var i = 0; i < ary.length; i++) { //仍然需要把每一个ary里的元素都判断一次，是否是你传进来标签名字，如果不是就删啦
+                if (ary[i].nodeName !== tagName.toUpperCase()) { //保证都是大写的
+                    ary.splice(i, 1); //splice会产生数组塌陷问题，所以在做循环的时候要注意好
                     i--; //只要i--一次然后紧接着i++这样就相当于原地没动
                 }
             }
@@ -137,26 +134,9 @@
     // getAttribute('属性名');  获取行内属性的值
     // removeAttribute('属性名'); 移除这个行内属性
 
-    document.body.setAttribute('school','zhufeng');
+    document.body.setAttribute('school', 'zhufeng');
     console.log(document.body.getAttribute('school'));
     document.body.removeAttribute('school');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
+</body>
+</html>
