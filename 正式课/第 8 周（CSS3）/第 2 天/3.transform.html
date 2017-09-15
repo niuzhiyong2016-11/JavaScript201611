@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>transform</title>
     <style type="text/css">
-        .wrap{
+        .wrap {
             width: 200px;
             height: 200px;
             margin: 150px auto;
             border: 1px solid red;
         }
-        .item{
+
+        .item {
             width: 100%;
             height: 100%;
             background: red;
-
+            transition: transform 1s linear;
         }
-        .item:hover{
-            /*-webkit-transform:rotate(-45deg);*/
-            /*transform:rotate(-45deg);*/
-            /*transform:skew(30deg,30deg);*/
-            /*transform:scale(0.5,0.5);*/
-            /*transform: translate(-100px,-100px);*/
-            /*transform-origin:top ;*/
-            transform: translate(100px,0)  rotate(45deg);
-            transition:transform 1s linear;
+
+        .item:hover {
+            /*-webkit-transform: rotate(-45deg);*/
+            /*transform: rotate(45deg);*/
+            transform: skew(30deg, 0deg);
+            /*transform: scale(0.5, 1);*/
+            /*transform: translate(-100px, -100px);*/
+            /*transform-origin: top ;*/
+            /*transform: translate(100px, 0) rotate(45deg);*/
+            /*transition: transform 1s linear;*/
         }
     </style>
 </head>
