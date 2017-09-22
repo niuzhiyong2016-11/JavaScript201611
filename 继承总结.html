@@ -13,26 +13,27 @@
      *      把A(构造函数)的私有方法和公有方法变成"B(构造函数)实例的公有方法"
      *
      */
-    //    function A() {
-    //        this.x = 100;
-    //    }
-    //    A.prototype.getX = function () {
-    //        console.log(this.x);
-    //    };
-    //
-    //    function B() {
-    //        this.y = 200;
-    //    }
-    //
-    //    B.prototype = new A(); //核心代码
-    //    B.prototype.constructor = B;
-    //
-    //    var a = new A();
-    //    var b = new B();
-    //
-    //    b.getX();
-    //    console.log(a);
-    //    console.log(b);
+    function A() {
+        this.x = 100;
+    }
+
+    A.prototype.getX = function () {
+        console.log(this.x);
+    };
+
+    function B() {
+        this.y = 200;
+    }
+
+    B.prototype = new A(); //核心代码
+    B.prototype.constructor = B;
+
+    var a = new A();
+    var b = new B();
+
+    b.getX();
+    console.log(a);
+    console.log(b);
 
     /*
      *
@@ -66,24 +67,24 @@
      *      由于"原型继承"是把"E(构造函数)的私有方法和公有方法"全部都变成了F(构造函数)的公有方法；"call继承"把"E(构造函数)的私有方法"变成"F(构造函数)的私有方法"。 组合在一起"F(构造函数)的公有方法"中多了一套"E(构造函数)的私有方法",但是调用时优先使用"私有方法",即使"公有方法"上还有一个相同的，那么也不会出现问题。
      *
      */
-    function E() {
-        this.x = 100;
-    }
-    E.prototype.getX = function () {
-        console.log(this.x);
-    };
-    function F() {
-        this.y = 200;
-        E.call(this);//call继承实现
-    }
-    F.prototype = new E();//原型继承实现
-    F.prototype.constructor = F;
-
-    var e = new E();
-    var f = new F();
-
-    console.log(e);
-    console.log(f);
+    //    function E() {
+    //        this.x = 100;
+    //    }
+    //    E.prototype.getX = function () {
+    //        console.log(this.x);
+    //    };
+    //    function F() {
+    //        this.y = 200;
+    //        E.call(this);//call继承实现
+    //    }
+    //    F.prototype = new E();//原型继承实现
+    //    F.prototype.constructor = F;
+    //
+    //    var e = new E();
+    //    var f = new F();
+    //
+    //    console.log(e);
+    //    console.log(f);
 
     /*
      *
