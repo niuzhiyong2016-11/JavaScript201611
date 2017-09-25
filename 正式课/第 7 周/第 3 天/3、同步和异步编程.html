@@ -9,34 +9,34 @@
     //->同步和异步
 
     //同步:当前的事情没有做完,其他的事情都不能做
-    /*var xhr = new XMLHttpRequest;
-     xhr.open('get', 'json/data.json', false);
-     xhr.onreadystatechange = function () {
-     console.log(xhr.readyState);//->4
-     };
-     xhr.send(null);*/
+    var xhr = new XMLHttpRequest;
+    xhr.open('get', 'json/data.json', false);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);//->4
+    };
+    xhr.send(null);
 
     /*var xhr = new XMLHttpRequest;
-     xhr.open('get', 'json/data.json', false);
-     xhr.send(null);
-     xhr.onreadystatechange = function () {
-     console.log(xhr.readyState);
-     };*/
+    xhr.open('get', 'json/data.json', false);
+    xhr.send(null);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+    };*/
 
     //异步:当前的事情没有做完，其它的事情也可以去做
     /*var xhr = new XMLHttpRequest;
-     xhr.open('get', 'json/data.json', true);
-     xhr.onreadystatechange = function () {
-     console.log(xhr.readyState);//->2 3 4
-     };
-     xhr.send(null);*/
+    xhr.open('get', 'json/data.json', true);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);//->2 3 4
+    };
+    xhr.send(null);*/
 
     /*var xhr = new XMLHttpRequest;
-     xhr.open('get', 'json/data.json', true);
-     xhr.send(null);
-     xhr.onreadystatechange = function () {
-     console.log(xhr.readyState);//->2 3 4
-     };*/
+    xhr.open('get', 'json/data.json', true);
+    xhr.send(null);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);//->2 3 4
+    };*/
 
     //AJAX这个任务从SEND开始到状态为4才算结束
 
@@ -72,7 +72,7 @@
      console.log(n);*/
     //->虽然定时器规定是20ms后执行，但是到了时间需要看JS中干活的这个人有没有空闲时间，有空闲时间把定时器这件事做了，没有空闲时间定时器给我继续等着，什么时候忙完了，什么时候回来做
 
-    window.setTimeout(function () {
+    /*window.setTimeout(function () {
         console.log(1);
     }, 20);
     window.setTimeout(function () {
@@ -84,9 +84,7 @@
     for (var i = 0; i < 100000000; i++) {
 
     }
-    console.log(100);
-
-
+    console.log(100);*/
 </script>
 </body>
 </html>

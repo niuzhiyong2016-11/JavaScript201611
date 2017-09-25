@@ -8,20 +8,41 @@
 <script src="js/cookie.js"></script>
 <script src="js/md5.js"></script>
 <script>
-    /* cookieRender.set({
-     name: 'name',
-     value: '珠峰培训'
-     });*/
+    cookieRender.set({
+        name: 'name',
+        value: '珠峰培训'
+    });
 
 
-    /*cookieRender.set({
-     name: 'name',
-     value: '珠峰培训-周啸天'
-     });
+    cookieRender.set({
+        name: 'name',
+        value: '珠峰培训-周啸天'
+    });
 
-     console.log(cookieRender.get('name'));*/
+    console.log(cookieRender.get('name'));
 
     localStorage.setItem('pass', hex_md5('000000'));
+
+    (function (pro) {
+        function queryURLParameter() {
+            var obj = {};
+            var reg = /([^?&=#]+)=([^?&=#]+)/g;
+
+            this.replace(reg, function () {
+                console.log(arguments);
+                obj[arguments[1]] = arguments[2];
+            });
+
+            reg = /#([^?&+#]+)/;
+            if (reg.test(this)) {
+                obj['HASH'] = reg.exec(this)[1];
+            }
+
+            return obj;
+        }
+        pro.queryURLParameter = queryURLParameter;
+    })(String.prototype);
+    console.log('localhost:8080.index?name=nzy&age=1#video'.queryURLParameter());
 </script>
 </body>
 </html>

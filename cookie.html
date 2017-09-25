@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    function setCookie(name, value) {
+        document.cookie = name + '=' + value;
+    }
+
+    function getCookie(name) {
+        var cookies = document.cookie;
+        if (cookies) {
+            var result = cookies.match(new RegExp('(^|; )' + name + '=(\\w+)(; |$)'));
+        }
+        return result ? result[2] : null;
+    }
+
+    setCookie('name1', 'nzy1');
+    setCookie('name2', 'nzy2');
+    setCookie('name3', 'nzy3');
+    setCookie('name4', 'nzy4');
+    console.log(getCookie('name2'));
+    //window.open('welcome.html', '_self');
+</script>
+</body>
+</html>
