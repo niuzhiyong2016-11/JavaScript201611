@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        *{margin:0;padding:0;}
-        input{width: 200px;height: 50px;background-color: orange;}
-        div{border:1px solid black;width: 500px;height: 500px;}
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            width: 200px;
+            height: 50px;
+            background-color: orange;
+        }
+
+        div {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
 <input type="button" value="点击切换盒子颜色" id="btn"/>
 <div id="box"></div>
 <script>
-    var oBtn=document.getElementById("btn");
-    var oDiv=document.getElementById("box");
-    oBtn.onclick=function(){
-        var bg=oDiv.style.backgroundColor;
+    var oBtn = document.getElementById("btn");
+    var oDiv = document.getElementById("box");
+    oBtn.onclick = function () {
+        var bg = oDiv.style.backgroundColor;
+        console.log(bg);
         //console.log(bg);
-        if(bg==="red"){
-            oDiv.style.backgroundColor="yellow";
-        }else if(bg==="yellow"){
-            oDiv.style.backgroundColor="green";
-        }else{
-            oDiv.style.backgroundColor="red";
+        if (bg === "red") {
+            oDiv.style.backgroundColor = "yellow";
+        } else if (bg === "yellow") {
+            oDiv.style.backgroundColor = "green";
+        } else {
+            oDiv.style.backgroundColor = "red";
         }
     };
-
 </script>
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

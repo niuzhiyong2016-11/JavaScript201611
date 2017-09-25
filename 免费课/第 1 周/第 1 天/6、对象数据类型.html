@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -10,11 +10,11 @@
     * 在js中对象是由多组属性名和属性值组成的，我们将一对属性名和属性值叫做键值对，那么这些键值对是用来描述这个对象
     *
     */
-    var obj={
-        name:"珠峰培训",
-        age:"7岁",
-        1:"15012345598"
-    };
+    /*var obj = {
+        name: "珠峰培训",
+        age: "7岁",
+        1: "15012345598"
+    };*/
     //获取对象中的属性--查
     //console.log(obj.name);
     //console.log(obj["1"]);
@@ -40,16 +40,18 @@
     //console.log(obj);// {1: null, name: "珠峰培训", age: "7岁"}
 
     //创建一个对象
-    //var obj={};//字面量创建方式
-    //var obj=new Object();//实例创建方式
+    //var obj = {};//字面量创建方式
+    //var obj = new Object();//实例创建方式
 
-    /*var 耿大爷={
-        name:"耿银鹏",
-        age:"40岁",
-        height:"182cm",
-        width:"100kg",
-        like:"男"
-    }*/
+    var obj = {
+        name: "耿银鹏",
+        age: "40岁",
+        height: "182cm",
+        width: "100kg",
+        like: "男"
+    };
+    delete obj.age;
+    console.log(obj);
 </script>
 </body>
 </html>

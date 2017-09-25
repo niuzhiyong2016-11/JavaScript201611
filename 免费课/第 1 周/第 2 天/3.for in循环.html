@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 <script>
     //for in循环  主要循环对象的属性名
-//   key:value
+    //   key:value
     var obj = {
-        name:'zfpx',
-        age:8,
-        add:'北京',
-        1:2016,
-        3:10000
-    }
-    obj.name
-    obj['name']
-//    console.log(obj[1])
-//    var 属性名
-    for(var key in obj){
+        name: 'zfpx',
+        age: 8,
+        add: '北京',
+        1: 2016,
+        3: 10000
+    };
+    //    console.log(obj[1])
+    //    var 属性名
+    for (var key in obj) {
 //        console.log(key);//属性名
         //属性值
         console.log(obj[key]);
     }
 
-//    属性名的顺序：先输出属性名为数字的（按从小到大的顺序），然后按书写的顺序输出
-
-
-
-
-
-
-
-
-
+    //    属性名的顺序：先输出属性名为数字的（按从小到大的顺序），然后按书写的顺序输出
 </script>
-
 </body>
 </html>

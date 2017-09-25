@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -14,39 +14,32 @@
     //1、获取要操作的元素
     var box = document.getElementById('box');
     var inputs = box.getElementsByTagName('input');
-//    2、给每一个input绑定一个点击的事件
-//    元素.onclick = function(){
-//
-//     }
-//    onclick  点击
-//    onmouseover 鼠标移入的事件
-//    onmouseout  鼠标移出的事件
+    //    2、给每一个input绑定一个点击的事件
+    //    元素.onclick = function(){
+    //
+    //     }
+    //    onclick  点击
+    //    onmouseover 鼠标移入的事件
+    //    onmouseout  鼠标移出的事件
 
-//    console.log(inputs);//类数组
-//    console.log(typeof inputs);//object
-//    inputs[索引]  获取每一个input
-//    length：类数组的长度
-//    console.log(inputs.length)
+    //    console.log(inputs);//类数组
+    //    console.log(typeof inputs);//object
+    //    inputs[索引]  获取每一个input
+    //    length：类数组的长度
+    //    console.log(inputs.length)
 
-    for(var i=0;i<inputs.length;i++){
+    for (var i = 0; i < inputs.length; i++) {
 
 //        console.log(typeof inputs[i]);//object
 //        存储每一个input对应的索引
         inputs[i].zf = i;
 //        console.log(inputs[i].zf)
-        inputs[i].onclick = function(){
+        inputs[i].onclick = function () {
 //            点击时弹出对应的索引
 //            this 指的是当前操作的input
             alert(this.zf);
         }
     }
-//    i-->3
-
-
-
-
-
 </script>
-
 </body>
 </html>
