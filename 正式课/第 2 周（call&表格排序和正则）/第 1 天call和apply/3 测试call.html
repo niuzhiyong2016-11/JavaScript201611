@@ -33,19 +33,21 @@
     */
 
     Function.prototype.call = function (obj) {
-        console.log(this); //fn1 , fn2
-        console.log(obj); // null , document.body
+        //console.log(this); //fn1 , fn2
+        //console.log(obj); // null , document.body
         //我要把this(fn1和fn2)中的this修改成obj
         this(); // fn1() fn2() //fn2()
         // ps: call方法中最后其实有一个this()的过程
+        //console.log(this.toString());
+        //eval(this.toString().replace("this", obj));
     };
 
     //fn1.call(null);
     //fn2.call(document.body);
     /*call本身也是一个函数，call本身也FUnction的一个实例*/
     (fn1.call.call).call(fn2); //
-    ([].push.call.call).call(fn2); //
-    Function.prototype.call.call(fn2);
+    ([].push.call.call).call(fn2);
+    //Function.prototype.call.call(fn2);
     //fn1.call.call.call(document.body); //
     //Function.prototype();
     //(function (){})();

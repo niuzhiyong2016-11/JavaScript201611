@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常用正则</title>
+</head>
+<body>
+<!--
+    元字符：\d  \w  \s  .  \  ^  $  \b  \num => 引用第几个分组
+
+    量词：?  *  +  {n}  {n,}  {n,m}
+
+    或者：x|y  [xyz]  [^xyz]
+
+    正向预查：?=  ?!  只匹配不占位
+
+    负向预查：?<=  ?<!  只匹配不占位
+-->
+<script>
+    // ["bbcc", "b", "c", index: 1, input: "abbccd"]
+    console.log(/(\w)\1(\w)\2/.exec('abbccd'));
+</script>
+</body>
+</html>

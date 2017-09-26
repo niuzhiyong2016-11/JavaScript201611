@@ -29,11 +29,8 @@
 
     // 4 利用eval
     var ary = [3, 1, 6, 2, 4, 5, 4, 3];
-    Math.max(ary.join());
-    //var res = Math.max('3,1,5,2,4,5');
-    var res = Math.max(eval(ary.join())); //
-    console.log(res);
-    console.log(eval('Math.max(' + ary.join() + ')'));
+    var max = eval('Math.max(' + ary.join() + ')');
+    console.log(max);
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@
         fn: fn
     };
 
-    fn.call(obj);
+    //fn.call(obj);
     //obj.fn(); //这样执行函数中的this就是obj
 
     //obj.fn instanceof Function;
@@ -46,7 +46,7 @@
         console.log(num1 + num2);
     }
 
-    //sum(100,200); // 300
+    //sum(100, 200); // 300
 
     sum.call();
     /*
@@ -63,10 +63,12 @@
     })();
 
     function foo() {
+        a = 123;
         console.log(this);
     }
 
     foo(); //在严格模式下是undefined
+    alert(a); // Uncaught ReferenceError: a is not defined
 </script>
 </body>
 </html>

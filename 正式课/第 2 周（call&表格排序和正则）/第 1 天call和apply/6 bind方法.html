@@ -19,14 +19,15 @@
         console.log(num1 + num2);
     }
 
-    //sum.call(null,100,200); //300 => 函数执行已经结束了
-    //sum.apply(null,[100,200]); // 300 也执行结束了
+    //sum.call(null, 100,200); //300 => 函数执行已经结束了
+    //sum.apply(null, [100,200]); // 300 也执行结束了
 
     // call和apply再修改this的同时，也把函数执行了。但是我只想改this不想执行函数?
-    var res = sum.bind(document.body, 100, 200);
-    var res = sum.bind(document.body);
-    console.log(res === sum); // false res就是修改过this的新函数
-    res(300, 400); // 700
+    var res1 = sum.bind(document.body, 100, 200);
+    res1(300, 400);
+    var res2 = sum.bind(document.body);
+    res2(300, 400); // 700
+    //console.log(res === sum); // false res就是修改过this的新函数
 </script>
 </body>
 </html>

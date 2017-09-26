@@ -10,12 +10,12 @@
     //var str = 'abcdabcdabcdc';
     var str = 'aabbccdddc';
     var obj = {}; //一开始声明一个对象，属性名字和属性值来帮助保存那个字符出现的次数最多
-    for(var i=0; i<str.length; i++){
+    for (var i = 0; i < str.length; i++) {
         //debugger;
-        var curChar  = str[i]; // a b c d
-        if(obj[curChar] >= 1){
+        var curChar = str[i]; // a b c d
+        if (obj[curChar] >= 1) {
             obj[curChar] += 1;
-        }else{
+        } else {
             obj[curChar] = 1;
         }
         /* obj['a'] = 1;
@@ -28,8 +28,8 @@
 
     // {a: 2, b: 2, c: 3, d: 2}
     var max = 0; // 2
-    for(var key in obj){
-        if(obj[key] > max){
+    for (var key in obj) {
+        if (obj[key] > max) {
             max = obj[key];
         }
     }
@@ -37,37 +37,37 @@
 
     // 还需要把出现max次的属性获取到
     var ary = [];
-    for(var key in obj){
-        if(obj[key] == max){ //都是符合出现max次的那一组属性
+    for (var key in obj) {
+        if (obj[key] == max) { //都是符合出现max次的那一组属性
             ary.push(key);
         }
     }
     console.log(ary); //['c','d']
 
-    var str = '出现最多的是' + ary.join() + '出现'+max+'次';
+    var str = '出现最多的是' + ary.join() + '出现' + max + '次';
 
     // 出现最多的是c,d出现3次
 
     // 模拟打字机效果
     var ary = str.split('');
     // ["出", "现", "最", "多", "的", "是", "c", ",", "d", "出", "现", "3", "次"]
-    for(var i=0; i<ary.length; i++){
-        ;(function (i){ //这个闭包的作用就是保存i
-            window.setTimeout(function (){ //定时器是异步的，不会阻塞代码运行，要等所有这个for循环执行之后才能开始执行定时器。定时器开始执行的时刻i的值已经变成了最大值。
+    for (var i = 0; i < ary.length; i++) {
+        (function (i) { //这个闭包的作用就是保存i
+            window.setTimeout(function () { //定时器是异步的，不会阻塞代码运行，要等所有这个for循环执行之后才能开始执行定时器。定时器开始执行的时刻i的值已经变成了最大值。
                 document.body.innerHTML += ary[i];
-            },i*200);
+            }, i * 200);
         })(i);
 
     }
 
     var n = 0; // 1
-    var timer = window.setInterval(function (){
+    var timer = window.setInterval(function () {
         document.body.innerHTML += ary[n];
         n++;
-        if(n == ary.length){
+        if (n == ary.length) {
             window.clearInterval(timer);
         }
-    },200);
+    }, 200);
 
     /*
     *   只要页面内有一次出现，或者延迟等操作。一定要联想到定时器
