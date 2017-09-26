@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-</body>
-</html>
+
 <script>
     /*
     *   变量提升： 变量提前声明
@@ -21,20 +20,16 @@
     *              2  栈内存 => 运行环境(代码运行的时候就会产生一个栈内存) => 只要代码运行就需要给代码提供一个运行环境,这个运行环境我们还可以叫做作用域。只要浏览器刷新就需要提供一个默认的最大的运行环境。我们把这个最大的环境叫做全局作用域。用window表示
     *
     * */
-
-
-
     var num = 10;
-    var obj = { name : 'tianxi' };
-    function fn(){
+    var obj = {name: 'tianxi'};
+
+    function fn() {
         console.log(1);
     }
 
     console.log(num); //10
     console.log(obj); //
     console.log(fn); // 打印的是函数名字所代表的函数
-
-
-
-
 </script>
+</body>
+</html>
