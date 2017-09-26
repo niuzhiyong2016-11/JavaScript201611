@@ -38,23 +38,23 @@
             return; //有拦截代码的动作。
         }
         console.log(this.value); //
-    }
+    };
     input1.onfocus = function () {
         //console.log('恭喜你成为焦点了');
         console.log('congratulations you become focus man');
-    }
+    };
     input1.oninput = function () {
         console.log(this.value);
-    }
+    };
 
     var province = document.getElementById('province');
     province.onchange = function () {
         console.log(this.value); //虽然事件监听的是select但是this.value却是获取的option的value的值
-    }
+    };
 
     window.onresize = function () { // 当浏览器窗口大小改变的时候
         console.log('我是reresize事件触发的')
-    }
+    };
 
     window.onscroll = function () {
         console.log('我是onscroll事件触发的');

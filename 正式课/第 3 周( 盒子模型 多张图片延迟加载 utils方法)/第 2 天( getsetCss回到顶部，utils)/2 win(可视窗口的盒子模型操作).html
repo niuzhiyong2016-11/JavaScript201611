@@ -21,12 +21,12 @@
 <script>
     // scrollTop scrollLeft只有这两个支持我们赋值
     // 需求: win方法如果传一个参数，那么我是来获取盒子模型属性值的，如果两个参数那么我是来设置这个盒子模型属性的（虽然只有scrollTop和scrollLeft支持）
-    function win(attr, val) { //负责处理浏览器可视窗口(html||body)
+    function win(attr, val) { //负责处理浏览器可视窗口(html || body)
         // 我们经常会根据参数是否传值做不同相对应的操作。这样我们定义的函数就变得灵活了
         if (typeof val !== 'undefined') {
             document.documentElement[attr] = val; // html
             document.body[attr] = val; //body
-            //return;
+            // return;
         }
         return document.documentElement[attr] || document.body[attr];
     }

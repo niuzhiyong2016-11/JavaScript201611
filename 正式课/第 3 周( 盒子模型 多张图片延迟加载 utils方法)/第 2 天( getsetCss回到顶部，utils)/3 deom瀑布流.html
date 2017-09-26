@@ -43,40 +43,34 @@
 <ul></ul>
 <ul></ul>
 <script>
-    var uls = document.getElementsByTagName('ul'); // 类数组[ul,ul,ul]
-    // 向这3个ul中动态添加li标签 => create => append
-    var ulsAry = listToArray(uls); //类数组转化成数组只要一次就可以了。由于dom的映射关系所以数组中的ul和页面中的ul是联系在一起的。
-    //向页面中动态添加50个li
+    var uls = document.getElementsByTagName('ul');
+    var ulsAry = listToArray(uls);
+
     function appendLiToUl() {
         for (var i = 0; i < 50; i++) {
-            var li = liFactory(); // 每次函数执行完都会留下li。
-            // 问题又来了？？ 把li添加到哪个ul中？ 就添加到最矮的ul中？
-            //var ulsAry = listToArray(uls); // 为了排序先转数组[ul,ul,ul]，只要转一次数组就可以了。在这里转化了50次。
+            var li = liFactory();
             ulsAry.sort(function (ul1, ul2) {
                 return ul1.clientHeight - ul2.clientHeight;
             });
-            var shortUl = ulsAry[0]; // 最矮
-            shortUl.appendChild(li); // 添加到最矮的ul中
+            var shortUl = ulsAry[0];
+            shortUl.appendChild(li);
         }
     }
 
     appendLiToUl();
 
     window.onscroll = function () {
-        // 只要滚动条滚动就会触发这个事件, 滚动的时候需要判断滚出去的高度的值是否超出了内容的高度减去一个值。如果超出了那么需要继续创建50个。然后添加到页面中
-        var scrollTop = win('scrollTop'); //每次滚动的时候都需要重新获取已经浏览器滚出去的高度
+        var scrollTop = win('scrollTop');
         if (scrollTop > document.body.scrollHeight - 1000) {
-            //如果滚出去的高度超出了一个临界点，那么就再创建50个li
-            //body.scrollHeight就是body内容区域的高度。
-            appendLiToUl(); //
+            appendLiToUl();
         }
     };
 
-    function liFactory() { // 创建li的方法
-        var li = document.createElement('li'); //创建
-        li.style.height = getRandom(100, 200) + 'px'; //随机高度每次都是100-200
-        li.style.backgroundColor = "rgb(" + getRandom(0, 255) + "," + getRandom(0, 255) + "," + getRandom(0, 255) + ")"; // 随机背景色
-        return li; // 返回li
+    function liFactory() {
+        var li = document.createElement('li');
+        li.style.height = getRandom(100, 200) + 'px';
+        li.style.backgroundColor = "rgb(" + getRandom(0, 255) + "," + getRandom(0, 255) + "," + getRandom(0, 255) + ")";
+        return li;
     }
 
     function win(attr, val) {
@@ -87,7 +81,8 @@
         return document.documentElement[attr] || document.body[attr];
     }
 
-    function getRandom(n, m) { // 获取n到m之间的随机数
+    // 获取n到m之间的随机数
+    function getRandom(n, m) {
         n = Number(n);
         m = Number(m);
         if (isNaN(n) || isNaN(m)) {
