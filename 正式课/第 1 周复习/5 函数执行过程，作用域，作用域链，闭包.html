@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
-</body>
-</html>
-<script>
 
+<script>
     console.log(total); // undefined
     var total = 0;
 
-    function sum(n1,n2){
+    function sum(n1, n2) {
         console.log(total); // undefined => 在sum执行的过程中打印的
         //var total = n1 + n2; //
-         total = n1 + n2; //
+        total = n1 + n2; //
         cosole.log(total); // 3
     }
 
-    sum(1,2); // 如果把sum中total前面的var去掉，那么在执行sum的过程中，在自己私有作用域内没有total的变量。那么去上一级作用域把全局的total的值从0修改为n1+n2的值3了
+    sum(1, 2); // 如果把sum中total前面的var去掉，那么在执行sum的过程中，在自己私有作用域内没有total的变量。那么去上一级作用域把全局的total的值从0修改为n1+n2的值3了
 
     console.log(total); // 0
 
@@ -38,5 +36,6 @@
     *
     *
     * */
-
 </script>
+</body>
+</html>

@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
-
     var n = 0;
-    function fn(n){
+
+    function fn(n) {
         n++; // n => NaN
-        if(n < 10){
+        if (n < 10) {
             return fn();
-        }else{
+        } else {
             return n;
         }
     }
+
     var res = fn(n);
     console.log(res);
-
-
-
 </script>
+</body>
+</html>

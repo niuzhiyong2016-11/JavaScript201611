@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     /*
     *   函数执行的步骤： 只要有代码运行就需要提供一个运行环境。而这个运行环境我们又可以叫做作用域。这是一个栈内存
@@ -18,14 +16,16 @@
     * */
 
     var num = 100;
-    function fn(num){
+
+    function fn(num) {
         //console.log(num); // var num = 10;
         //var num = 1000; 这个var没用。因为这个私有变量和形参num是相同的。在形参赋值阶段就已经相当于声明过num了，并且还赋值了。所以在预解释阶段就没有必要重复声明num
         var total = 100;
-        return function (){
+        return function () {
             console.log(num);
         }
     }
+
     var res = fn(10);
     res(); // 100 10
     console.log(res); //functin (){ console.log(num) }
@@ -41,12 +41,7 @@
     *   闭包: 目的就是把一个变量保护起来，不受外界干扰。
     *         在函数执行的时候，会形成一个新的私有的作用域。并且这个作用域内的变量都是私有变量在外界是不能访问的。我们把这种私有作用域保护私有变量不收外界干扰的机制就叫做闭包。闭包是在函数执行的时候才会产生的！！！，不执行都没有私有作用域更谈不上闭包了。
     *
-    *
-    *
     * */
-
-
-
-
-
 </script>
+</body>
+</html>

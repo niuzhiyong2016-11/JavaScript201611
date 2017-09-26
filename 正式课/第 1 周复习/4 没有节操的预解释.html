@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     /*
     *    in 运算符
@@ -15,42 +13,48 @@
     *
     * */
     var oo = {
-        name : 'tianxi'
-    }
+        name: 'tianxi'
+    };
     console.log('name' in oo);
     console.log('getElementById' in document); //
     console.log('onclick' in document.body); //
-    console.log(document.body.onclick)//null = function (){}
-
+    console.log(document.body.onclick);//null = function (){}
 
 
     // 1 预解释只看等号左面的，即使等号右边是一个实名函数，那么这个函数名也不会被预解释
     console.log(fn); // undefined
     //console.log(foo); // 报错
-    var fn = function foo(){}; //由于这个函数不会被预解释，所以一般不写函数名字
+    var fn = function foo() {
+
+    }; //由于这个函数不会被预解释，所以一般不写函数名字
 
     // 2 预解释不理会条件
     console.log(num); //undefined
-    if(!('num' in window)){
+    if (!('num' in window)) {
         var num = 100; //全局变量都属于window对象的一个属性
     }
     console.log(num); //undefined
 
     // 3 自运行函数是不会被预解释的
     //console.log(sum);
-    (function sum(){})();
+    (function sum() {
+
+    })();
 
     // 4 函数中return后面即使是一个实名函数也不会被预解释,但是return下面的无论是函数还是变量都是会被预解释的。如果return后面是一个自运行函数(或者实名函数的执行)是先把这个函数执行完。然后再把这个执行完的结果作为return的返回值。
 
-    function sum(){
+    function sum() {
         //console.log(fx); // fx is node defined
         console.log(fy);
-        return (function fx(){
+        return (function fx() {
             //alert();
             return 5;
-        })()
-        function fy(){} //这个fy函数是会被预解释的
+        })();
+
+        function fy() {
+        } //这个fy函数是会被预解释的
     }
+
     var res = sum();
     console.log(res); // 我要查看sum这个函数运行完的返回值
 
@@ -58,14 +62,17 @@
     console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
     fxy();
-    function fxy(){ console.log(1) }
+    function fxy() {
+        console.log(1)
+    }
     fxy();
-    //var fxy = 5;
+    fxy();
+    function fxy() {
+        console.log(2)
+    }
+    var fxy = 5;
     var fxy = fxy;
     fxy(); // Error fxy is not a function
-    function fxy(){ console.log(2) }
-    fxy(); //
-
-
-
 </script>
+</body>
+</html>

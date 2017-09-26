@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        html,body{
+        html, body {
             width: 100%;
             height: 100%;
         }
@@ -12,8 +12,6 @@
 </head>
 <body>
 
-</body>
-</html>
 <script>
     // 内存释放其实就是内存没有被占用的时候，浏览器就会主动回收
     var obj = {};
@@ -29,12 +27,13 @@
     *
     *
     * */
-    function fn(n){
-         //var n = 5;
-        return function (){
+    function fn(n) {
+        //var n = 5;
+        return function () {
             console.log(++n);
         }
     }
+
     var f1 = fn(5);
     var f2 = fn(5);
     f1(); // 6
@@ -49,17 +48,16 @@
     f1(); //9
 
 
-
     // 2 内存不释放的第二种
     var body = document.body;
 
-   /* body.onclick = (function (){
-        var m = 0;
-        return function (){
-            console.log(++m);
-        }
-    })()
-*/
+    /* body.onclick = (function (){
+         var m = 0;
+         return function (){
+             console.log(++m);
+         }
+     })()
+ */
     //for(var i=0; i<3; i++){ }
 
 
@@ -77,16 +75,18 @@
     *
     * */
 
-    function foo(){
+    function foo() {
         var i = 98;
-        return function (){
+        return function () {
             //console.log(++i);
-            return function (){
+            return function () {
                 console.log(++i);
             }
         }
     }
+
     var res = foo()(); // 99
     res();
-
 </script>
+</body>
+</html>

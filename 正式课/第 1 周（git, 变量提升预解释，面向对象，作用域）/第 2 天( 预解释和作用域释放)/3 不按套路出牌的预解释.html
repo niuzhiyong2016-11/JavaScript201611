@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     /*
     *   1 预解释根本就不理会等号右面，即使是一个实名函数。那么这个函数名字也不会被预解释
     * */
     console.log(f); //undefined
     //console.log(fn); //
-    var f = function fn(){ //函数表达式,这个函数名字fn不会被预解释。那么这个函数名字也就不用写了。
+    var f = function fn() { //函数表达式,这个函数名字fn不会被预解释。那么这个函数名字也就不用写了。
         console.log('ok');
-    }
+    };
 
 
     /*
@@ -28,7 +26,7 @@
     * */
     //console.log('num' in window);
     console.log(num); // undefined
-    if(!'num' in window){ // 这个条件在预解释阶段就已经是false了
+    if (!'num' in window) { // 这个条件在预解释阶段就已经是false了
         //for(var i=0; i<3; i++){}
         var num = 100;
     }
@@ -40,7 +38,7 @@
     *
     * */
     //console.log(sum); // Error
-    ;(function sum(){
+    ;(function sum() {
         var obj = {};
         console.log(obj);
     })();
@@ -53,28 +51,29 @@
     *           ps: 跟预解释没关系。return后面如果是一个函数的执行(自运行函数和实名函数执行)那么要等这个函数执行完的返回结果再return出去 => 先执行后return
     *
     * */
-    function foo(){
+    function foo() {
         //console.log(fn);
         console.log(fx);
         fx(); //只要这个代码可以能执行到就可以了
-        return function fn(){ //return后面的函数是当作整体返回的。即使有函数名字也不会被预解释
-        }
+        return function fn() { //return后面的函数是当作整体返回的。即使有函数名字也不会被预解释
+        };
         alert(); //不执行
-        function fx(){
+        function fx() {
             console.log('fx');
         } //这个fx的位置虽然不会被执行到。但是会被预解释的
     }
+
     foo(); // 1 形参赋值  2 预解释  3 逐行执行
 
     ////////////////////////////////////////////////////////////////
-    function fun(){
-        return (function (){
+    function fun() {
+        return (function () {
             console.log('我是reutrn后面的自运行函数里的代码');
         })()  // reutrn 后面的函数如果是一个函数执行(是函数执行)那么需要等这个函数执行完的结果留下来在return出去 => fun函数的运行返回值是等着自运行函数执行结果。而自运行函数中没有写return。默认返回undefined。所以fun的return的值就是自运行函数留下来的undefined。而外面的res还接受这fun的返回值。所以res也是undefined
     }
-    var res  = fun();
-    console.log(res); //undefined
 
+    var res = fun();
+    console.log(res); //undefined
 
 
     /*
@@ -83,18 +82,17 @@
     * */
 
     fn(); // 2
-    function fn(){ console.log(1) }
+    function fn() {
+        console.log(1)
+    }
+
     fn(); // 2
     var fn = 5; // 不会被预解释了，因为这个fn已经在上面的函数预解释过程中已经声明过了就不用重复声明了
     fn(); // error
-    function fn(){ console.log(2) } // 在预解释的最后阶段fn代表的是最后一个函数
-    fn(); //
-
-
-
-
-
-
-
-
+    function fn() {
+        console.log(2)
+    } // 在预解释的最后阶段fn代表的是最后一个函数
+    fn();
 </script>
+</body>
+</html>

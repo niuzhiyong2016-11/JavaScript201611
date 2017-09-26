@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <style>
-        *{ margin: 0; padding: 0; }
-        .tab{
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
             width: 360px;
             margin: 30px auto;
         }
-        .tab ul{
+
+        .tab ul {
             list-style: none;
         }
-        .tab ul:after{
+
+        .tab ul:after {
             content: "";
             clear: both;
             display: block;
         }
-        .tab ul li{
+
+        .tab ul li {
             float: left;
             width: 100px;
             height: 40px;
@@ -26,10 +33,12 @@
             background: #ccc;
             margin-right: 10px;
         }
-        .tab ul li.selected{
+
+        .tab ul li.selected {
             background: lightpink;
         }
-        .tab div{
+
+        .tab div {
             display: none;
             width: 360px;
             height: 200px;
@@ -37,13 +46,14 @@
             line-height: 200px;
             background: lightpink;
         }
-        .tab div.selected{
+
+        .tab div.selected {
             display: block;
         }
-
     </style>
 </head>
 <body>
+
 <div class="tab">
     <ul>
         <li class="selected">图片</li>
@@ -54,23 +64,23 @@
     <div>专栏内容</div>
     <div>热点内容</div>
 </div>
-</body>
-</html>
+
 <script>
     var tab = document.getElementsByClassName('tab')[0];
     var lis = tab.getElementsByTagName('li');
     var divs = tab.getElementsByTagName('div');
-    for(var i=0; i<lis.length; i++){ // 3
-        (function (k){
-            // var i=0   i=1 i=2
-            lis[k].onclick = function (){
-                for(var j=0; j<lis.length; j++){
+    for (var i = 0; i < lis.length; i++) {
+        (function (k) {
+            lis[k].onclick = function () {
+                for (var j = 0; j < lis.length; j++) {
                     lis[j].className = "";
                     divs[j].className = "";
                 }
                 lis[k].className = 'selected';
                 divs[k].className = 'selected';
             }
-        })(i)
+        })(i);
     }
 </script>
+</body>
+</html>

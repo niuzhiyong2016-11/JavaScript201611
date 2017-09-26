@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 
-</body>
-</html>
 <script>
     //console.log(this); //window
-    function Fn(){
+    function Fn() {
         console.log('fn');
     }
+
     //Fn.aa = 1000;
     console.log(Fn.prototype);
     //console.log(Fn instanceof Function); //true
@@ -27,17 +26,21 @@
     *
     *
     * */
-
     console.dir(Function.prototype);
     console.log(Fn.call); //
     console.log(Fn.__proto__.call);
-    console.log((function (){}).call);
+    console.log((function () {
+
+    }).call);
     console.log(Array.call);
-    console.log([].push.call())
-    var ary = [1,2,3];
+    console.log([].push.call());
+    var ary = [1, 2, 3];
     ary.push(4);
     var obj = {
-        haha:function (){}
-    }
+        haha: function () {
+        }
+    };
     obj.haha.call()
 </script>
+</body>
+</html>
