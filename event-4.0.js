@@ -1,3 +1,10 @@
+/**
+ * 解决问题：
+ *   1、顺序问题
+ *   2、重复问题
+ *   3、this问题
+ *   4、'on'问题
+ */
 function on(ele, type, fn) {
     if (ele.addEventListener) {
         ele.addEventListener(type, fn, false);

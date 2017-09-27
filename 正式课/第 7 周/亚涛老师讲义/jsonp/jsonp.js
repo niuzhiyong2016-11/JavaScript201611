@@ -1,29 +1,29 @@
-/**
+ï»¿/**
  * Created by zhufengpeixun on 2016/11/20.
  */
 (function () {
     /**
      * jsonp
-     * @param requestURI jsonp½Ó¿ÚµØÖ·
-     * @param data ·¢ËÍµÄÊı¾İ
-     * @param query server¶¨ÒåºÃµÄÇëÇó²ÎÊı
-     * @param callback »Øµ÷º¯Êı
+     * @param requestURI jsonpæ¥å£åœ°å€
+     * @param data å‘é€çš„æ•°æ®
+     * @param query serverå®šä¹‰å¥½çš„è¯·æ±‚å‚æ•°
+     * @param callback å›è°ƒå‡½æ•°
      */
     function jsonp(requestURI, data, query, callback) {
-        // È«¾Öº¯ÊıÃû ·¢ËÍ¸ø·şÎñÆ÷
-        // È«¾Öº¯ÊıÌå ÓÃÀ´Ö´ĞĞ
+        // å…¨å±€å‡½æ•°å å‘é€ç»™æœåŠ¡å™¨
+        // å…¨å±€å‡½æ•°ä½“ ç”¨æ¥æ‰§è¡Œ
         var cbName = 'cb' + counter++;
-        // °ÑdataÆ´½Óµ½requestURIºó
+        // æŠŠdataæ‹¼æ¥åˆ°requestURIå
         requestURI = appendToURI(requestURI, data);
-        // ĞèÒª°ÑÇëÇó²ÎÊıºÍÈ«¾Öº¯ÊıÃûÆ´½Óµ½requestURIºó
+        // éœ€è¦æŠŠè¯·æ±‚å‚æ•°å’Œå…¨å±€å‡½æ•°åæ‹¼æ¥åˆ°requestURIå
         requestURI = appendToURI(requestURI, query + '=' + cbName);
 
-        // ¶¨ÒåÈ«¾Öº¯ÊıÌå
+        // å®šä¹‰å…¨å±€å‡½æ•°ä½“
         window[cbName] = function (data) {
             try {
                 callback(data);
             } finally {
-                // É¾³ıscriptºÍÈ«¾Öº¯Êı
+                // åˆ é™¤scriptå’Œå…¨å±€å‡½æ•°
                 script.parentNode.removeChild(script);
                 delete window[cbName];
             }
@@ -33,7 +33,7 @@
         var script = document.createElement('script');
         script.src = requestURI;
         //console.log(document.readyState);
-        // ½â¾ödomÃ»ÓĞ¼ÓÔØÍê³ÉµÄÇé¿öÏÂ bodyÎªnullµÄbug
+        // è§£å†³domæ²¡æœ‰åŠ è½½å®Œæˆçš„æƒ…å†µä¸‹ bodyä¸ºnullçš„bug
         if (document.readyState !== 'loading') {
             document.body.appendChild(script);
             return;
@@ -51,9 +51,9 @@
 
     }
 
-    // ¶¨Òå¼ÆÊıÆ÷£¬ÈÃÃ¿´Îurl¶¼²»Ò»Ñù£¬ ·ÀÖ¹»º´æ
+    // å®šä¹‰è®¡æ•°å™¨ï¼Œè®©æ¯æ¬¡urléƒ½ä¸ä¸€æ ·ï¼Œ é˜²æ­¢ç¼“å­˜
     var counter = 1;
-    // °ÑÊı¾İ¸ñÊ½»¯Îªquerystring¸ñÊ½
+    // æŠŠæ•°æ®æ ¼å¼åŒ–ä¸ºquerystringæ ¼å¼
     function param(data) {
         if (typeof data === 'string') {
             return data;
@@ -72,7 +72,7 @@
         return data.toString();
     }
 
-    // °ÑÇëÇó²ÎÊıÆ´½Óµ½urlÖĞ
+    // æŠŠè¯·æ±‚å‚æ•°æ‹¼æ¥åˆ°urlä¸­
     function appendToURI(url, data) {
         data = param(data);
         if (!data) {
