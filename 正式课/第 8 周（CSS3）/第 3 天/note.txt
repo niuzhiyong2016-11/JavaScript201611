@@ -19,7 +19,7 @@
   3.引入媒体查询（media）
     概念：在不同条件下设置不同的样式，从而使页面达到不同的渲染效果
     不同条件：根据设备特性设置不同的条件
-    @media  screen and (max-width:1000px){
+    @media screen and (max-width:1000px){
         css样式
     }
     type:媒体类型 主要可以设置 all (所有的设备) screen显示器 print 打印机

@@ -27,7 +27,6 @@
                 script.parentNode.removeChild(script);
                 delete window[cbName];
             }
-
         };
 
         var script = document.createElement('script');
@@ -42,17 +41,17 @@
         if (window.addEventListener) {
             window.addEventListener('load', function () {
                 document.body.appendChild(script);
-            }, false)
+            }, false);
         } else {
             window.attachEvent('onload', function () {
                 document.body.appendChild(script);
             });
         }
-
     }
 
     // 定义计数器，让每次url都不一样， 防止缓存
     var counter = 1;
+
     // 把数据格式化为querystring格式
     function param(data) {
         if (typeof data === 'string') {

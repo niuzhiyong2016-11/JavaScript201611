@@ -1,16 +1,16 @@
-/**
+ï»¿/**
  * Created by zhufengpeixun on 2016/11/20.
  */
-var http = require('http');//´´½¨http·şÎñÆ÷
+var http = require('http');//åˆ›å»ºhttpæœåŠ¡å™¨
 var fs = require('fs'); //=> fileStream
-var url = require('url');// °Ñurl¸ñÊ½Îª¶ÔÏó£¬·½±ã´¦Àí
-var path = require('path');// ´¦ÀíÂ·¾¶
-var querystring = require('querystring'); // ½«urlÖĞµÄÇëÇó²ÎÊı¸ñÊ½»¯Îª¶ÔÏó£¬·½±ã´¦Àí
+var url = require('url');// æŠŠurlæ ¼å¼ä¸ºå¯¹è±¡ï¼Œæ–¹ä¾¿å¤„ç†
+var path = require('path');// å¤„ç†è·¯å¾„
+var querystring = require('querystring'); // å°†urlä¸­çš„è¯·æ±‚å‚æ•°æ ¼å¼åŒ–ä¸ºå¯¹è±¡ï¼Œæ–¹ä¾¿å¤„ç†
 
 /**
- * ¶ÁÈ¡ÎÄ¼ş
- * @param path ÎÄ¼şÂ·¾¶
- * @param response httpÏìÓ¦
+ * è¯»å–æ–‡ä»¶
+ * @param path æ–‡ä»¶è·¯å¾„
+ * @param response httpå“åº”
  */
 function readFile(path, response) {
     fs.readFile(path, function (err, data) {
@@ -23,79 +23,80 @@ function readFile(path, response) {
         }
     });
 }
-// ¶¨ÒåÈ«¾Ö¸ùÄ¿Â¼
+
+// å®šä¹‰å…¨å±€æ ¹ç›®å½•
 var ROOT_PATH = path.resolve('../');
 var bottleList = [];
 var server = http.createServer(function (request, response) {
-    // Èç¹ûÓÃ»§ÇëÇóµÄÊÇ¸ùÄ¿Â¼¡°/¡± °ÑÆ¯Á÷Æ¿µÄÒ³Ãæ·µ»Ø¸øä¯ÀÀÆ÷
+    // å¦‚æœç”¨æˆ·è¯·æ±‚çš„æ˜¯æ ¹ç›®å½•â€œ/â€ æŠŠæ¼‚æµç“¶çš„é¡µé¢è¿”å›ç»™æµè§ˆå™¨
     var urlData = url.parse(request.url, true);
-    // ÅĞ¶ÏÓÃ»§ÊÇ·ñÇëÇóµÄÊÇ¸ùÄ¿Â¼
+    // åˆ¤æ–­ç”¨æˆ·æ˜¯å¦è¯·æ±‚çš„æ˜¯æ ¹ç›®å½•
     if (urlData.pathname === '/') {
-        // 1¡¢¶ÁÈ¡Æ¯Á÷Æ¿µÄhtml
-        // 2¡¢°ÑhtmlÄÚÈİ·µ»Ø¸øä¯ÀÀÆ÷
+        // 1ã€è¯»å–æ¼‚æµç“¶çš„html
+        // 2ã€æŠŠhtmlå†…å®¹è¿”å›ç»™æµè§ˆå™¨
         readFile('../bottle/bottle.html', response);
     } else if (urlData.pathname === '/throwBottle') {
         var data = '';
-        // ÕıÔÚ½ÓÊÜä¯ÀÀÆ÷·¢ËÍ¹ıÀ´µÄÊı¾İ
+        // æ­£åœ¨æ¥å—æµè§ˆå™¨å‘é€è¿‡æ¥çš„æ•°æ®
         request.on('data', function (chunk) {
             data += chunk;
         });
-        // ä¯ÀÀÆ÷ÇëÇó½ÓÊÕÍê³É
+        // æµè§ˆå™¨è¯·æ±‚æ¥æ”¶å®Œæˆ
         request.on('end', function () {
-            // ¸ñÊ½»¯ÇëÇóÖ÷Ìå
+            // æ ¼å¼åŒ–è¯·æ±‚ä¸»ä½“
             data = querystring.parse(data);
-            // ·µ»Ø¸øä¯ÀÀÆ÷200
+            // è¿”å›ç»™æµè§ˆå™¨200
             response.writeHead(200,
                 {'Content-Type': 'application/json'}
             );
-            // ÅĞ¶Ïä¯ÀÀÆ÷·¢ËÍµÄµÄ²ÎÊıÖĞÊÇ·ñÓĞcontent×Ö¶Î
+            // åˆ¤æ–­æµè§ˆå™¨å‘é€çš„çš„å‚æ•°ä¸­æ˜¯å¦æœ‰contentå­—æ®µ
             if (data.content) {
-                // °Ñ·¢ËÍ¹ıÀ´µÄÆ¯Á÷Æ¿ÄÚÈİ´æ´¢ÆğÀ´
+                // æŠŠå‘é€è¿‡æ¥çš„æ¼‚æµç“¶å†…å®¹å­˜å‚¨èµ·æ¥
                 bottleList.push(data.content);
-                // ·µ»Ø³É¹¦
+                // è¿”å›æˆåŠŸ
                 response.end('{"code":0}');
             } else {
-                // ·µ»ØÊ§°Ü
+                // è¿”å›å¤±è´¥
                 response.end('{"code":1}');
             }
 
         });
 
     } else if (urlData.pathname === '/getBottle') {
-        // ´ÓBottleListÖĞËæ»ú»ñÈ¡Ò»Ïî Éú³ÉËæ»úÏÂ±ê
+        // ä»BottleListä¸­éšæœºè·å–ä¸€é¡¹ ç”Ÿæˆéšæœºä¸‹æ ‡
         var index = Math.floor(Math.random() * bottleList.length);
-        // ¸ù¾İËæ»úÏÂ±ê »ñÈ¡Æ¯Á÷Æ¿ÄÚÈİ
+        // æ ¹æ®éšæœºä¸‹æ ‡ è·å–æ¼‚æµç“¶å†…å®¹
         var item = bottleList[index];
         response.writeHead(200, {'Content-Type': 'application/json'});
         var result = {
             code: 0,
             data: {content: ''}
         };
-        // ÓĞÆ¯Á÷Æ¿ÄÚÈİ
+        // æœ‰æ¼‚æµç“¶å†…å®¹
         if (item) {
             result.data.content = item;
         } else {
             result.code = 1;
         }
-        // ·µ»Ø¸øä¯ÀÀÆ÷
+        // è¿”å›ç»™æµè§ˆå™¨
         response.end(JSON.stringify(result));
     } else if (urlData.pathname === '/crossOrigin') {
         //response.end('hello cross origin');
         //response.end('console.log("hello cross origin")');
         // http://127.0.0.1:8080/crossOrigin?key=d
-        // »ñÈ¡ÇëÇó²ÎÊıÖĞµÄÄÇ¸ökey
+        // è·å–è¯·æ±‚å‚æ•°ä¸­çš„é‚£ä¸ªkey
         var key = urlData.query.key;
         //response.end('var ' + key + '="hello cross origin";');
-        response.end( key + '("hello cross origin");');
+        response.end(key + '("hello cross origin");');
         // =>d("hello cross origin");
     } else {
-        // ¸ù¾İ¸ùÄ¿Â¼½âÎöurlµÄpathname
+        // æ ¹æ®æ ¹ç›®å½•è§£æurlçš„pathname
         var _path = path.resolve(ROOT_PATH, urlData.pathname.slice(1));
         readFile(_path, response);
     }
 });
 
-// ¼àÌı¶Ë¿Ú
+// ç›‘å¬ç«¯å£
 server.listen(8080, '127.0.0.1', function () {
     console.log('server start successful');
 });

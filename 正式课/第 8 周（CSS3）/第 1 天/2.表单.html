@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -8,7 +8,7 @@
 <p>aaaa</p>
 <div>bbbbbb</div>
 <form id="form1">
-    <input type="email" name="email"  id="oText" required/>
+    <input type="email" name="email" id="oText" required/>
     <input type="submit" value="提交"/>
 </form>
 
@@ -22,7 +22,6 @@
     <option value="cccc"></option>
 </datalist>
 
-
 <details open>
     <summary>详细信息的标题</summary>
     <ul>
@@ -31,25 +30,25 @@
         <li>3333</li>
         <li>4444</li>
     </ul>
-
 </details>
-</body>
-</html>
+
 <script>
-    var oText  = document.querySelector("#oText");
-//    oText.oninput = function(){/*当输入时*/
-//        // this.validity.patternMismatch false是匹配 true是不匹配
-//        if(this.validity.patternMismatch){
-//            this.setCustomValidity("请至少输入两位数字")
-//        }else{
-//            this.setCustomValidity("");
-//        }
-//    }
+    var oText = document.querySelector("#oText");
+    //    oText.oninput = function(){/*当输入时*/
+    //        // this.validity.patternMismatch false是匹配 true是不匹配
+    //        if(this.validity.patternMismatch){
+    //            this.setCustomValidity("请至少输入两位数字")
+    //        }else{
+    //            this.setCustomValidity("");
+    //        }
+    //    }
     //验证不通过时会触发invalid事件
-    oText.addEventListener("invalid",fn,false);
-    function fn(){
+    oText.addEventListener("invalid", fn, false);
+
+    function fn() {
         console.log(this.validity.valueMissing);
     }
+
     //验证通过可以通过change事件判断
     /*
     * valid 验证不通过时返回false,
@@ -58,7 +57,7 @@
 
     var oP = document.querySelector("#p1");
     console.log(oP.dataset.zfPx);
-//    window.document.designMode ="on";/*全局设置，页面上任何内容都可以编辑*/
-
-
+    // window.document.designMode ="on";/*全局设置，页面上任何内容都可以编辑*/
 </script>
+</body>
+</html>

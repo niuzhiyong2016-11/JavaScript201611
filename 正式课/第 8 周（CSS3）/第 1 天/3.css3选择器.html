@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
     <style type="text/css">
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        ul{
+
+        ul {
             list-style: none;
             width: 400px;
             margin: 100px auto;
             text-align: center;
         }
-        ul li{
+
+        ul li {
             width: 50px;
             height: 50px;
             line-height: 50px;
@@ -25,39 +27,49 @@
             margin: 10px;
 
         }
-        .a1+li{/*相邻的弟弟节点*/
+
+        .a1 + li { /*相邻的弟弟节点*/
 
         }
-        .a1~li{/*a1下的所有的弟弟节点*/
+
+        .a1 ~ li { /*a1下的所有的弟弟节点*/
 
         }
-        ul :nth-child(1){/*第一个子元素*/
+
+        ul :nth-child(1) { /*第一个子元素*/
 
         }
-        ul :nth-child(even){/*偶数元素*/
+
+        ul :nth-child(even) { /*偶数元素*/
 
         }
-        ul :nth-child(odd){/*奇数元素*/
+
+        ul :nth-child(odd) { /*奇数元素*/
 
         }
-        ul :nth-of-type(1){/*同种类型（标记名相同）中的第一个子元素*/
+
+        ul :nth-of-type(1) { /*同种类型（标记名相同）中的第一个子元素*/
 
         }
-        ul li:nth-child(2){/*先找到第二个子元素，再看这个元素的标记名是否是li*/
+
+        ul li:nth-child(2) { /*先找到第二个子元素，再看这个元素的标记名是否是li*/
 
         }
-        ul li:nth-of-type(2){
+
+        ul li:nth-of-type(2) {
             background-color: blue;
         }
 
-        div :only-of-type{
+        div :only-of-type {
             background-color: pink;
             text-decoration: underline;
         }
-        div:empty{
+
+        div:empty {
             height: 200px;
             background: deepskyblue;
         }
+
         /*
         nth-child  不分类型，直接找到第几个子元素
         nth-of-type 先把子元素按照标记名分类，然后从同种类型的子元素里查找第几个子元素
@@ -65,28 +77,33 @@
         /*查找到标记名是li标签的第二个子元素?*/
 
         /*ul li:not(:first-child){*/
-            /*border-radius: 50%;*/
+        /*border-radius: 50%;*/
         /*}*/
 
-        ul li[class$="zf"]{
+        ul li[class$="zf"] {
             border-radius: 50%;
             background-color: red;
         }
-        #div1{
+
+        #div1 {
             height: 800px;
             background: pink;
         }
-        #div2{
+
+        #div2 {
             height: 800px;
             background: palegreen;
         }
-        :target{/*对所有的目标元素都起作用*/
+
+        :target { /*对所有的目标元素都起作用*/
 
         }
-        #div1:target{
+
+        #div1:target {
             background: orange;
         }
-        #div2:target{
+
+        #div2:target {
             background: #000;
         }
     </style>
