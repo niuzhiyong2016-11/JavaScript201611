@@ -9,8 +9,28 @@
 </head>
 <body>
 <input type="text" onblur="value=/^(\d|[1-9]\d+)(\.\d+)?$/.test(value)?value:''">
+<script src="jquery-1.11.3.js"></script>
 <script>
     var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?$/;
+
+    var mon = '1234567890';
+    mon = mon.replace(/\d(?!$)/g, function (item, index) {
+        if ((mon.length - 1 - index) % 3 === 0) {
+            return item + ',';
+        }
+        return item;
+    });
+    console.log(mon);
+
+    var ary = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+    //    var newAry = ary.filter(function (item, index) {
+    //        return ary.indexOf(item) === index;
+    //    });
+    //    console.log(newAry);
+
+    $.unique(ary);
+    console.log(ary);
+
 </script>
 </body>
 </html>

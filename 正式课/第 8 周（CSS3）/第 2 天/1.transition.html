@@ -9,37 +9,42 @@
             height: 200px;
             background: red;
 
-            -webkit-transition: all 1s linear;
+            /*-webkit-transition: all 1s linear;
             -moz-transition: all 1s linear;
             -ms-transition: all 1s linear;
             -o-transition: all 1s linear;
-            transition: all 1s linear;
+            transition: all 1s linear;*/
         }
-
-        /*  #div1:hover{
-              width: 400px;
-              height: 400px;
-              opacity: 0.5;
-              transition-property: width,height,opacity;
-              transition-duration: 1s,0.5s,1s;
-              -webkit-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53); /!*谷歌浏览器*!/
-              -moz-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);/!*火狐浏览器*!/
-              -ms-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);/!*IE浏览器*!/
-              -o-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);/!*欧朋浏览器*!/
-              transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);/!*标准写法*!/
-
-              /!*在移动端只需要写一下两个*!/
-              -webkit-transition-delay: 1s;
-              transition-delay: 1s;
-
-          }*/
 
         #div1:hover {
             width: 400px;
             height: 400px;
-            opacity: 0.2;
-            /*transition: width 1s linear, height 1s ease 0.5s, opacity 1s ease-in-out 1s;*/
+            opacity: 0.5;
+            transition-property: width, height, opacity;
+            transition-duration: 1s, 0.5s, 1s;
+
+            /*谷歌浏览器*/
+            -webkit-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);
+            /*火狐浏览器*/
+            -moz-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);
+            /*IE浏览器*/
+            -ms-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);
+            /*欧朋浏览器*/
+            -o-transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);
+            /*标准写法*/
+            transition-timing-function: cubic-bezier(.17, 1.69, .54, -0.53);
+
+            /*在移动端只需要写一下两个*/
+            -webkit-transition-delay: 1s;
+            transition-delay: 0s;
         }
+
+        /*#div1:hover {
+            width: 400px;
+            height: 400px;
+            opacity: 0.2;
+            !*transition: width 1s linear, height 1s ease 0.5s, opacity 1s ease-in-out 1s;*!
+        }*/
     </style>
 </head>
 <body>
@@ -48,7 +53,7 @@
     var oDiv = document.querySelector("#div1");
     oDiv.addEventListener("transitionend", function () {
         console.log(1);
-    }, false)
+    }, false);
 </script>
 </body>
 </html>
