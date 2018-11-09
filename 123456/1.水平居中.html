@@ -8,26 +8,65 @@
     <link rel="shortcut icon" href="" type="image/x-icon"/>
     <link rel="icon" href="" type="image/x-icon"/>
     <style type="text/css">
-       /* html标签 => 元素的分类 => display => inline-block => float => 消失 => position => 水平垂直 => css布局
-       居中: 文字  色块
-       */
-        /*.parent{width: 200px;height: 500px;padding:0 150px;background-color: #000}
-        .child{width: 200px;height: 200px;background-color:red;}*/
+        /* html标签 => 元素的分类 => display => inline-block => float => 消失 => position => 水平垂直 => css布局
+        居中: 文字  色块
+        */
+        /*.parent {
+            padding: 0 150px;
+            width: 200px;
+            height: 500px;
+            background-color: #000
+        }
 
-       /*.parent{width: 500px;height: 500px;background-color: #000;text-align: center}
-       .child{width: 200px;height: 200px;background-color:red;display:inline-block}*/
+        .child {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }*/
 
-       /*.parent{width: 500px;height: 500px;background-color: #000;position: relative}
-       .child{width: 200px;height: 200px;background-color:red;position: absolute;left:50%;transform: translateX(-100px)}*/
+        /*.parent {
+            width: 500px;
+            height: 500px;
+            background-color: #000;
+            text-align: center
+        }
 
+        .child {
+            display: inline-block
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }*/
 
-       .parent{width: 500px;height: 500px;background-color: #000;display: flex;justify-content: center}
-       .child{width: 200px;height: 200px;background-color:red;}
+        /*.parent {
+            position: relative
+            width: 500px;
+            height: 500px;
+            background-color: #000;
+        }
 
+        .child {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-100px);
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }*/
 
+        .parent {
+            display: flex;
+            width: 500px;
+            height: 500px;
+            justify-content: center
+            background-color: #000;
+        }
 
-
-
+        .child {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
     </style>
 </head>
 <body>

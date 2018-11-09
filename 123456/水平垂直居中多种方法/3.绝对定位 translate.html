@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>3.绝对定位 translate</title>
     <style>
-        .box{
+        .box {
             position: relative;
             width: 600px;
             height: 600px;
             background: #000;
         }
+
         .box1 {
-            width: 200px;
-            height: 200px;
-            background: red;
             position: absolute;
             top: 50%;
             left: 50%;
             /*通过坐标值来移动*/
             transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: red;
         }
     </style>
 </head>

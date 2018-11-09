@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
-    <style type="text/css">
+    <title>6.flex 居中</title>
+    <style>
         .box {
-            width: 500px;
-            height: 500px;
-            background-color: #000;
             /*弹性盒模型 flex 新版本的写法  参照参考手册*/
             display: flex;
             /*justify-content 实现水平居中效果 text-align:center*/
             justify-content: center;
             /*align-items 实现垂直居中效果 line-height*/
             align-items: center;
+            width: 500px;
+            height: 500px;
+            background-color: #000;
         }
 
         .box1 {
@@ -24,10 +24,8 @@
     </style>
 </head>
 <body>
-
 <div class="box">
     <div class="box1"></div>
 </div>
-
 </body>
 </html>

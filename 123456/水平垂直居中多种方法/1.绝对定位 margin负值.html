@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>1.绝对定位 margin负值</title>
     <style>
-        .box{
+        .box {
             position: relative;
             width: 600px;
             height: 600px;
             background: #000;
         }
-        .box1{
-            width:200px;
-            height: 200px;
-            background: red;
+
+        .box1 {
             position: absolute;
             top: 50%;
             left: 50%;
             /*通过margin值移动*/
             margin: -100px 0 0 -100px;
+            width: 200px;
+            height: 200px;
+            background: red;
         }
     </style>
 </head>
